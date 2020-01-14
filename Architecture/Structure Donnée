@@ -2,7 +2,7 @@
 Structure de données :
   Plateau :
   
-    - Tableau double dimension taille X x Y
+    - Tableau double dimension taille X x X
     - Tableau de type "case"
     
   Case : 
