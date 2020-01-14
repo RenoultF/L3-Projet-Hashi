@@ -1,0 +1,29 @@
+Structure de données :
+  Plateau :
+  
+    - Tableau double dimension taille X x Y
+    - Tableau de type "case"
+    
+  Case : 
+    - Position x(int)
+    - Position Y(int)
+   
+  Iles : 
+  
+     - valeur totale (int)
+     - Hérérite de cases
+     - Valeur restante(int)
+     
+  Pont :
+    
+    - Hérite de case
+    - direction(enum)
+    - nb_trait(int)
+    - Ile A (Ile)
+    - Ile B (Ile)
+     
+     
+
+
+
+Fonctionnement Programme :
