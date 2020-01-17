@@ -2,14 +2,21 @@
 Plateau :
 
   - Structure :
-    - tailleX compris entre 3 et +infini correspont à la longueur du plateau
-    - tailleY compris entre 3 et +infini correspont à la largeur du plateau
-    - nbIle compris entre 2 et +infini
+    - tailleX compris entre 3 et +infini, correspont à la longueur du plateau
+    - tailleY compris entre 3 et +infini, correspont à la largeur du plateau
+    - nbIle compris entre 2 et +infini, correspont au nombre d'ile dans le plateau
+    - tab[nbIle] contient les iles du plateau
+    - mat[tailleX][tailleY] contient les cases du plateau
+    - On retient tab et mat malgré la redondance d'informations(Les iles seront présentes dans les deux tableau) car mat sera utilisé pour la sérialisation, l'affichage et l'utilisation et tab sera utilisé pour la validation du plateau
 
   - Comportement :
     - estFini?() retourne vrai si le plateau est fini (Le plateau doit etre connexe et les iles doivent etre valides
     - estConnexe?() retourne vrai si les connexions entre les iles forment un graphe connexe
-
+    - afficheTerminal() affiche le plateau sur le terminal
+    - affiche() affiche le plateau
+    - getIles() : retourne les iles du plateau
+    
+   
 
 Ile :
 
@@ -19,6 +26,7 @@ Ile :
     - valVoisins[4] contient le nombre de pont vers un voisin (compris entre 0 et 2)
     - posX compris entre 0 et Plateau.tailleX -1 correspond à la position en abscisse de l'ile
     - posY compris entre 0 et Plateau.tailleY -1 correspond à la position en ordonnée de l'ile
+    - marque égal à true s'il à été parcouru dans un parcours de graphe(nécéssaire à Plateau.estConnexe?())
     
   
   - Comportement
