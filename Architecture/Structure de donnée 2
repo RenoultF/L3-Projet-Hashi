@@ -1,0 +1,27 @@
+
+Plateau :
+
+  - Structure :
+    - tailleX compris entre 3 et +infini correspont à la longueur du plateau
+    - tailleY compris entre 3 et +infini correspont à la largeur du plateau
+    - nbIle compris entre 2 et +infini
+
+  - Comportement :
+    - estFini?() retourne vrai si le plateau est fini (Le plateau doit etre connexe et les iles doivent etre valides
+    - estConnexe?() retourne vrai si les connexions entre les iles forment un graphe connexe
+
+
+Ile :
+
+  - Structure
+    - valeur compris entre 1 et 8 correspond au nombre de pont que doit possèder l'ile
+    - voisins[4] contient les voisins de l'ile (contient null si pas de voisins)
+    - valVoisins[4] contient le nombre de pont vers un voisin (compris entre 0 et 2)
+    - posX compris entre 0 et Plateau.tailleX -1 correspond à la position en abscisse de l'ile
+    - posY compris entre 0 et Plateau.tailleY -1 correspond à la position en ordonnée de l'ile
+    
+  
+  - Comportement
+    - estValide?() retourne vrai si la somme de valVoisins est égal à valeur
+    - chercheVoisins() retourne la liste des 4 voisins
+    - onClick() rajoute un pont entre cette ile et la prochaine ile sur laquelle on clickera si elles sont voisines
