@@ -18,4 +18,4 @@ Travail à réaliser :
 
   - Diagramme UML(Classe/Sequence) (Mano & Erwan & Florent)
   - Cahiers des charges(9h-10h, Andrew & Collins & Corentin, 10h-12h tout le monde)
-  - Diagram de gantt (Tout le monde)
+  - Diagramme de gantt (Tout le monde)
