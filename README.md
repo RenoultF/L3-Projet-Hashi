@@ -11,4 +11,11 @@ Travail à réaliser :
   - Fontionnement et logique du programme (Mano & Erwan & Florent)
   - Début de l'UML(diagramme de classe) (Mano & Erwan & Florent)
   
- 
+
+Séance du 24/01/2020
+
+Travail à réaliser :
+
+  - Diagramme UML(Classe/Sequence) (Mano & Erwan & Florent)
+  - Cahiers des charges(9h-10h, Andrew & Collins & Corentin, 10h-12h tout le monde)
+  - Diagram de gantt (Tout le monde)
