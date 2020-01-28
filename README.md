@@ -27,3 +27,12 @@ Travail à réaliser :
   - Finaliser cahier des charges
   - Mise au point, en accord sur la conception du projet
   - "Commencement" du code avec repartition des tâches
+
+
+Séance du 28/01/2020 (2h)
+
+Travail à réaliser : 
+  
+  - Rendre cahier des charges
+  - Joindre tous les diagrammes UML de conception
+  - 
