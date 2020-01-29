@@ -40,7 +40,7 @@ Séance du 29/01/2020 (3h)
 
 Travail à réaliser : 
   
-  - Division en 2 équipes GTK/Code ruby
+  - Division en 2 équipes GTK(Pitault A./Jolliet C./ORANSKYI A.) | Code ruby(Brabant M./Soares C./Serelle E./Renoult F)
   - Vu plus large et hypothèse sur les différentes classes et futur méthodes qui vont être crées (MAJ Diagramme de Classe)
   - Répartition de toutes les classe avec leur création suivant un ordre précis(cf Tableau de étapes)
   - Equipe GTK qui s'accomode avec GTK
