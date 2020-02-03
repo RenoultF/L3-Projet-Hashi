@@ -45,3 +45,11 @@ Travail à réaliser :
   - Répartition de toutes les classe avec leur création suivant un ordre précis(cf Tableau de étapes)
   - Equipe GTK qui s'accomode avec GTK
   - Commencement des différentes classes
+  
+  
+  Séance du 03/02/2020 (2h)
+
+Travail à réaliser : 
+  
+  - Equipe GTK : maitrise de GTK + Commencemencement de la réalisation des maquettes (cf Cahiers des charges).
+  - Equipe Codage : réalisation des différentes classes.
