@@ -2,18 +2,22 @@
                                                         % de finition des classes :
 
 Aide : 25%
-Compte : 0%
+Compte : 100%
 HighScore : 65%
 menu : 80 %
 
 Action : 0%
-Sauvegarde : 0%
+Sauvegarde : 100%
 Checkpoint : 0%
 Case :  100%
 
 Jeu : 0%
-Pont : 0%
+Pont : 80%
 Ile : 0%
 Grille : 0%
 
 BDD : 0%
+
+Test unitaire :
+
+Pont : 50%
