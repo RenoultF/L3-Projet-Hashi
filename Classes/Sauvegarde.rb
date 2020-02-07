@@ -13,7 +13,7 @@ class Sauvegarde < ActiveRecord::Base
 
 
     #@grille => Contient la grille que l'utilisateur a commencé à remplir
-    has_one :grille
+  #  has_one :grille
 
 
     #@compte => Contient le compte auquel appartient la sauvegarde
@@ -22,7 +22,7 @@ class Sauvegarde < ActiveRecord::Base
     #Cette méthode permet d'afficher une sauvegarde
     def to_s
 
-        return "#{@compte} : #{@grille}"
+        return "#{compte} : #{grille_id}"
 
     end
 

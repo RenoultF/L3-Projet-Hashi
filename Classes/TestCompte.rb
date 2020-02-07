@@ -15,7 +15,6 @@ Compte.has_many :sauvegardes
 Sauvegarde.belongs_to :compte
 
 compte = Compte.new(:pseudo => "toto")
-compte.pseudo = "polo"
 p compte
 print compte, "\n"
 
@@ -23,3 +22,13 @@ compte.save
 
 p compte
 print compte.pseudo, "\n"
+
+recupCompte = Compte.where(pseudo: "toto")
+
+recupCompte.each do |c|
+
+  p c
+  c.pseudo = "bonjour"
+  c.save
+
+end

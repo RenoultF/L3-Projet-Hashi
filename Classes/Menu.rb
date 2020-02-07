@@ -52,13 +52,26 @@ class Menu
         return choixDifficulte
     end
 
+    #Cette méthode permet de connaitre le compte associé à un unPseudo
+    #
+    #@param unPseudo Le pseudo du comptes
+    #
+    #@return Le compte qui correspond au unPseudo
+    #
+    #Si le compte n'existait pas alors un nouveau est crée et enregistré
     def seConnecter(unPseudo)
         @pseudo = unPseudo
-    
-        #TODO Mano
-        #SE CONNECTER BASE DE DONNEES
-        return @pseudo
-    
+
+        recupCompte = Compte.find_or_create_by pseudo: @pseudo
+
+        if(recupCompte == nil)
+
+          print "Le compte n'existait pas, il a été crée"
+
+        end
+
+        return recupCompte
+
     end
 
     def afficheRegle()
@@ -71,9 +84,3 @@ men = Menu.Creer()
 tabDim = Hash.new()
 tabDim=men.setTailleGrille(2)
 print(tabDim)
-
-
-
-
-    
-    

@@ -1,5 +1,11 @@
-class Case
-    
+
+require "active_record"
+
+
+class Case #< ActiveRecord::Base
+
+    #has_and_belongs_to_many :grilles
+
     private_class_method :new
     attr_reader :posX
     attr_reader :posY
@@ -21,6 +27,6 @@ class Case
     def afficheTerminal()
     end
 
-    def equals(case)
+    def equals(autre)
     end
 end

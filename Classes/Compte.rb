@@ -12,7 +12,6 @@ require "active_record"
 #@pseudo => Contient l'identifiant du compte
 class Compte < ActiveRecord::Base
 
-
     has_many :sauvegardes
 
     #Cette méthode permet d'afficher un compte

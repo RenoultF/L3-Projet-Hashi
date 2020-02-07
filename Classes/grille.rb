@@ -1,5 +1,8 @@
 class Grille
 
+    #has_and_belongs_to_many :cases
+
+
     @tailleX #taille x de la grille
     @tailleY #taille y de la grille
     @mat #matrice de type Case[taillex][tailleY]
@@ -42,7 +45,7 @@ class Grille
                     inc = 0
                 end
             end
-        end    
+        end
     end
 
     def equals()
@@ -56,9 +59,9 @@ class Grille
             end
         end
         return 1
-    end                    
-                    
-                
+    end
+
+
 
     def getGrille()
         return @mat
@@ -140,10 +143,3 @@ class Grille
         # faire
     end
 end
-
-
-        
-        
-        
-
-

@@ -41,7 +41,7 @@ class Pont < Case
 
     #Ce constructeur permett de créer un nouveau pont
     #
-    #@param posY La position sur l'axe des abscisse
+    #@param posX La position sur l'axe des abscisse
     #
     #@param posY La position sur l'axe des ordonnées
     #
@@ -93,11 +93,11 @@ class Pont < Case
 
             if(@valeur == 1)
 
-                return "| - "
+                return " - "
 
             elsif(@valeur == 2)
 
-                return "| = "
+                return " = "
 
             end
 
@@ -105,17 +105,17 @@ class Pont < Case
 
             if(@valeur == 1)
 
-                return "| ' "
+                return " ' "
 
             elsif(@valeur == 2)
 
-                return "| \" "
+                return " \" "
 
             end
 
         end
 
-        return "|   "
+        return "   "
 
     end
 
@@ -159,6 +159,8 @@ class Pont < Case
     #@param direction La direction dans laquelle ont veut augmenter le pont
     #
     #Si le pont que l'on augmente avait 2 trait alors le pont disparait
+    #
+    #@return true si la direction est la même que celle du pont, false sinon
     def augmenteValeur(direction)
 
         return modifValeur(direction , 1)

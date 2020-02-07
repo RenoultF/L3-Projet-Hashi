@@ -9,16 +9,16 @@ Menu : 80 %
 Action : 0%
 Sauvegarde : 69%
 Checkpoint : 70%
-Case :  100%
+Case :  20%
 
 Jeu : 0%
 Pont : 80%
 Ile : 55%
 Grille : 80%
 
-BDD : 69%
+BDD : 39%
 
 Test unitaire :
 
-TestPont : 69%
-TestCompte : 69%
+TestPont : 49%
+TestCompte : 89%
