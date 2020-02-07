@@ -4,7 +4,7 @@
 # Auteur Brabant Mano
 # Version 0.1 : Date : 07/02/2020
 
-load "Compte.rb"
+require "./Compte.rb"
 require "active_record"
 
 

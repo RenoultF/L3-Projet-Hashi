@@ -1,5 +1,8 @@
 
 
+##
+# Auteur Brabant Mano
+# Version 0.1 : Date : 07/02/2020
 
 load "Case.rb"
 
@@ -19,7 +22,6 @@ class Pont < Case
 
     #Cette constante représente le nombre maximum de ligne pour un pont
     MAX_LIGNE = 2
-
 
 
     include Comparable
@@ -68,19 +70,15 @@ class Pont < Case
     #@param autre L'autre pont à comparer
     def <=>(autre)
 
-      if(autre.instance_of? Pont)
+      if(@direction != autre.direction)
 
-        if(@direction != autre.direction)
+          return @direction <=> autre.direction
 
-            return @direction <=> autre.direction
+      end
 
-        end
+      if(@valeur != autre.valeur)
 
-        if(@valeur != autre.valeur)
-
-            return @valeur <=> autre.valeur
-
-        end
+          return @valeur <=> autre.valeur
 
       end
 
