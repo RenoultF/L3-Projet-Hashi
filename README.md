@@ -53,3 +53,13 @@ Travail à réaliser :
   
   - Equipe GTK : maitrise de GTK + Commencemencement de la réalisation des maquettes (cf Cahiers des charges).
   - Equipe Codage : réalisation des différentes classes.
+  
+  
+Séance du 07/02/2020 (3h)
+
+Travail à réaliser : 
+  
+  - Equipe GTK : On continue GTK avec quelque chose de fonctionnelle (ex : menu qui renvoie 1, 2 ou 3 suivant el choix (int)).
+  - Equipe Codage : On continue le codage des classes
+  
+  
