@@ -29,7 +29,7 @@ class Highscore
             puts "Impossible d'ajouter, nombre d'élements max atteint !\n\n"
         end
     end
-
+    #Marche pas
     def trie()
         @liste.sort_by {|score, pseudo| score}
         self.afficher
