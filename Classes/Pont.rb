@@ -6,9 +6,13 @@ load "Case.rb"
 #Cette classe représente les ponts du Hashi
 class Pont < Case
 
-    #Ces constantes représentent les direction que peut prendre un pont
+    #Cette constante représente l'une des directions que peut prendre un pont(Seulement quand valeur du pont = 0)
     NULLE = 0
+
+    #Cette constante représente l'une des directions que peut prendre un pont(Pont horizontal)
     HORIZONTAL = 1
+
+    #Cette constante représente l'une des directions que peut prendre un pont(Pont vertical)
     VERTICAL = 2
 
 
@@ -20,13 +24,13 @@ class Pont < Case
 
     include Comparable
 
-    #@valeur => Valeur du pont
+    #@valeur => Valeur du pont(nombre de trait)
     attr_reader :valeur
 
     #@direction => Direction du pont (NULLE, HORIZONTAL, VERTICAL)
     attr_reader :direction
 
-
+    #@surbrillance => Booléen pour l'affichage, si égal à true le pont sera affiché en surbrillance
     attr_accessor :surbrillance
 
 
@@ -34,8 +38,11 @@ class Pont < Case
     private_class_method :new
 
     #Ce constructeur permett de créer un nouveau pont
+    #
     #@param posY La position sur l'axe des abscisse
+    #
     #@param posY La position sur l'axe des ordonnées
+    #
     #@param grille La grille sur laquelle se trouve le pont
     def Pont.creer(posX, posY, grille)
 
@@ -52,13 +59,16 @@ class Pont < Case
 
         @direction = NULLE
 
-
     end
     #:doc:
 
 
     #Cette méthode permet de comparer des ponts entre-eux
+    #
+    #@param autre L'autre pont à comparer
     def <=>(autre)
+
+      if(autre.instance_of? Pont)
 
         if(@direction != autre.direction)
 
@@ -72,28 +82,30 @@ class Pont < Case
 
         end
 
-        return 0
+      end
+
+      return 0
 
     end
 
     #Cette méthode permet d'afficher le pont dans un terminal
     def to_s
 
-        if(@direction == HORIZONTAL) 
+        if(@direction == HORIZONTAL)
 
-            if(@valeur == 1) 
+            if(@valeur == 1)
 
                 return "| - "
 
-            elsif(@valeur == 2) 
+            elsif(@valeur == 2)
 
                 return "| = "
 
             end
 
-        elsif(@direction == VERTICAL) 
+        elsif(@direction == VERTICAL)
 
-            if(@valeur == 1) 
+            if(@valeur == 1)
 
                 return "| ' "
 
@@ -110,7 +122,7 @@ class Pont < Case
     end
 
 
-    #Cette méthode permet de modifier la valeur du pont
+
     private def modifValeur(direction, valeur)
 
         if(@direction != NULLE)
@@ -120,7 +132,7 @@ class Pont < Case
 
                 @valeur = (@valeur + valeur) % (MAX_LIGNE + 1)
 
-                if(@valeur == 0) 
+                if(@valeur == 0)
 
                     @direction = NULLE
 
@@ -144,20 +156,26 @@ class Pont < Case
 
     end
 
-    #Cette méthode permet d'augmenter la valeur du pont <br>
+    #Cette méthode permet d'augmenter la valeur du pont
+    #
+    #@param direction La direction dans laquelle ont veut augmenter le pont
+    #
     #Si le pont que l'on augmente avait 2 trait alors le pont disparait
     def augmenteValeur(direction)
 
         return modifValeur(direction , 1)
-        
+
     end
 
-    #Cette méthode permet de diminuer la valeur du pont <br>
+    #Cette méthode permet de diminuer la valeur du pont
+    #
+    #@param direction La direction dans laquelle ont veut diminuer le pont
+    #
+    #Si le pont que l'on diminue n'avait pas de trait alors un pont à deux trait apparait
     def diminueValeur(direction)
 
         return modifValeur(direction , MAX_LIGNE)
-        
+
     end
 
 end
-

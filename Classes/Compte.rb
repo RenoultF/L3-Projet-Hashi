@@ -1,6 +1,11 @@
 
+##
+# Auteur Brabant Mano
+# Version 0.1 : Date : 07/02/2020
 
-load "Sauvegarde.rb"
+#load "Sauvegarde.rb"
+require "active_record"
+
 
 #Cette classe représente les comptes utilisateurs
 class Compte < ActiveRecord::Base
@@ -20,7 +25,7 @@ class Compte < ActiveRecord::Base
     def initialize(pseudo)
 
         @pseudo = pseudo
-    
+
     end
     #:doc:
 
@@ -34,4 +39,3 @@ class Compte < ActiveRecord::Base
     end
 
 end
-
