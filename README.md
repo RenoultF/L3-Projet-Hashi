@@ -59,7 +59,7 @@ Séance du 07/02/2020 (3h)
 
 Travail à réaliser : 
   
-  - Equipe GTK : On continue GTK avec quelque chose de fonctionnelle (ex : menu qui renvoie 1, 2 ou 3 suivant el choix (int)).
+  - Equipe GTK : On continue GTK avec quelque chose de fonctionnelle (ex : menu qui renvoie 1, 2 ou 3 suivant le choix (int)).
   - Equipe Codage : On continue le codage des classes
   
   
