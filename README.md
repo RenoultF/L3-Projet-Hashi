@@ -1,6 +1,6 @@
 # L3-Projet-Hashi
 
-Séance du 14/01/2020 (3h)
+# Séance du 14/01/2020 (3h)
 
 Travail à réaliser :
 
@@ -12,7 +12,7 @@ Travail à réaliser :
   - Début de l'UML(diagramme de classe) (Mano & Erwan & Florent)
   
 
-Séance du 24/01/2020 (3h)
+# Séance du 24/01/2020 (3h)
 
 Travail à réaliser :
 
@@ -20,7 +20,8 @@ Travail à réaliser :
   - Cahiers des charges(9h-10h, Andrew & Collins & Corentin, 10h-12h tout le monde)
   - Diagramme de gantt (Tout le monde)
   
-Séance du 27/01/2020 (2h)
+  
+# Séance du 27/01/2020 (2h)
 
 Travail à réaliser :
 
@@ -29,14 +30,16 @@ Travail à réaliser :
   - "Commencement" du code avec repartition des tâches
 
 
-Séance du 28/01/2020 (2h)
+# Séance du 28/01/2020 (2h)
 
 Travail à réaliser : 
   
   - Rendre cahier des charges
   - Joindre tous les diagrammes UML de conception
+  
+  
 
-Séance du 29/01/2020 (3h)
+# Séance du 29/01/2020 (3h)
 
 Travail à réaliser : 
   
@@ -47,9 +50,21 @@ Travail à réaliser :
   - Commencement des différentes classes
   
   
-  Séance du 03/02/2020 (2h)
+  
+# Séance du 03/02/2020 (2h)
 
 Travail à réaliser : 
   
   - Equipe GTK : maitrise de GTK + Commencemencement de la réalisation des maquettes (cf Cahiers des charges).
   - Equipe Codage : réalisation des différentes classes.
+  
+  
+  
+# Séance du 07/02/2020 (3h)
+
+Travail à réaliser : 
+  
+  - Equipe GTK : On continue GTK avec quelque chose de fonctionnelle (ex : menu qui renvoie 1, 2 ou 3 suivant le choix (int)).
+  - Equipe Codage : On continue le codage des classes
+  
+  
