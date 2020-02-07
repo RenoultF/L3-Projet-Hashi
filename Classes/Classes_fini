@@ -2,12 +2,12 @@
                                                         % de finition des classes :
 
 Aide : 69%
-Compte : 100%
+Compte : 69%
 HighScore : 80%
 Menu : 80 %
 
 Action : 0%
-Sauvegarde : 100%
+Sauvegarde : 69%
 Checkpoint : 70%
 Case :  100%
 
@@ -16,8 +16,9 @@ Pont : 80%
 Ile : 55%
 Grille : 80%
 
-BDD : 0%
+BDD : 69%
 
 Test unitaire :
 
-TestPont : 50%
+TestPont : 69%
+TestCompte : 69%
