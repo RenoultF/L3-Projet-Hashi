@@ -9,7 +9,7 @@ class Sauvegarde < ActiveRecord::Base
 
 
     #@grille => Contient la grille que l'utilisateur a commencé à remplir
-    attr_reader :grille
+    has_one :grille
 
 
     #@compte => Contient le compte auquel appartient la sauvegarde
@@ -23,4 +23,3 @@ class Sauvegarde < ActiveRecord::Base
     end
 
 end
-

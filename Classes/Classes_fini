@@ -4,7 +4,7 @@
 Aide : 25%
 Compte : 100%
 HighScore : 65%
-menu : 80 %
+Menu : 80 %
 
 Action : 0%
 Sauvegarde : 100%
@@ -20,4 +20,4 @@ BDD : 0%
 
 Test unitaire :
 
-Pont : 50%
+TestPont : 50%
