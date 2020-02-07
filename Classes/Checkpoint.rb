@@ -7,7 +7,7 @@ class Checkpoint
     end
 
     def initialize(grille)
-        #indide = 
+        #indice = 
         @grille = grille
         @check = Array.new()
     end
