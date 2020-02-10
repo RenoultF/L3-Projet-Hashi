@@ -28,7 +28,7 @@ recupCompte = Compte.where(pseudo: "toto")
 recupCompte.each do |c|
 
   p c
-  c.pseudo = "bonjour"
-  c.save
 
 end
+
+p recupCompte.get(1)
