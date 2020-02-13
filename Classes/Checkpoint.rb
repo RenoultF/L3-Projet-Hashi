@@ -1,5 +1,5 @@
 class Checkpoint
-
+    #Valider le checkpoint
     private_class_method :new
 
     def Checkpoint.creer(grille)
@@ -12,9 +12,12 @@ class Checkpoint
         @check = Array.new()
     end
 
-    def valider()
+    def valider(grille)
         #retire les actions de la liste et les mets dans la liste d'action
         #de la grille (@check.shift pour prendre le premier element)
+        while !check.empty?
+            @grille.actions.push(@check.shift)
+        end
     end
 
     def supprimer_derniere_action()
