@@ -1,8 +1,4 @@
 class Highscore
-    #@liste Liste de tout les highscores de la carte / Besoin de stocker le score avec le pseudo ou reference au pseudo
-    #@max Maximum de la liste afin de pouvoir placer de nouvelles valeurs
-    #@grille La grille sur laquelle le joueur joue
-    #@compte Reference au compte du joueur
     private_class_method :new
 
     def Highscore.creation(grille)
@@ -55,14 +51,37 @@ class Highscore
 
         return @min
     end
-
+=begin
     def afficher()
         puts "      Highscore       \n\n"
-        i = 0
-        taille = 1
         @liste.each_pair do |key, value|
             print key 
             puts "=>" + value
+        end
+    end
+=end
+    def afficheToi()
+        puts "      Highscore       \n\n"
+        mini =  self.minimum()
+        maxi = self.maximum()
+        attente_key = Array.new
+        attente_value = Array.new
+        @liste.each_pair do |key, value|
+            if(key == maxi)
+                attente_key[0] = key
+                attente_value[0] = value
+            elsif(key == mini)
+                attente_key[2] = key
+                attente_value[2] = value
+            else
+                attente_key[1] = key
+                attente_value[1] = value
+            end
+        end 
+        x = 2
+        for i in 0..x
+            print attente_key[i]
+            puts " => " + attente_value[i]
         end
     end
 
@@ -90,6 +109,9 @@ tab.afficher
 tab.ajouter(1000, "Player 1")
 tab.ajouter(900, "Player 2")
 tab.ajouter(1100, "Player Test")
-tab.trie()
-tab.afficher
+#tab.trie()
+#tab.afficher
+tab.afficheToi()
+
+
 
