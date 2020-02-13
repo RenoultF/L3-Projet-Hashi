@@ -40,7 +40,7 @@ class Grille
             for j in (0..(@tailleY-1))
                 @mat[i][j].afficheToi()
                 inc += 1
-                if(inc % @tailleX == 0)
+                if(inc % (@tailleX -1) == 0)
                     print("\n")
                     inc = 0
                 end
@@ -115,7 +115,7 @@ class Grille
             yPetit+=1 #pour se placer sur le premier pont
             yGrand-=1 #pour se placer sur le dernier pont
             for i in (yPetit..yGrand)
-                if(@mat[@dernierIle.posX][i].instance_of Ile)
+                if(@mat[@dernierIle.posX][i].instance_of? Ile)
                     return false
                 end
             end
@@ -131,7 +131,7 @@ class Grille
             xPetit+=1 #pour se placer sur le premier pont
             xGrand-=1 #pour se placer sur le dernier pont
             for i in (xPetit..xGrand)
-                if(@mat[i][ile2.posY].instance_of Ile)
+                if(@mat[i][ile2.posY].instance_of? Ile)
                     return false
                 end
             end
@@ -140,6 +140,158 @@ class Grille
     end
 
     def montrePont()
-        # faire
+        #met en surbrillance les ponts qui sont relié
+        droite = false
+        gauche = false
+        haut = false
+        bas = false
+        directionEnCours = nil
+        
+        #en bas
+        if(@mat[@dernierIle.posX+1][@dernierIle.posY] instance_of? Pont)
+            directionEnCours = @mat[@dernierIle.posX+1][@dernierIle.posY].direction
+            for i in range (@dernierIle.posX .. tailleX)
+                if(@mat[@dernierIle.posX+i][@dernierIle.posY] instance_of? Ile)
+                    bas = true
+                    break
+                elsif(@mat[@dernierIle.posX+i][@dernierIle.posY] instance_of? Pont)
+                    if(directionEnCours != @mat[@dernierIle.posX+i][@dernierIle.posY].direction)
+                        bas = false
+                        break
+                    end
+                    #sinon est on est sur un bon pont
+                else
+                    #on est sur une case
+                    bas = false
+                    break
+                end
+            end
+        end
+
+        #en haut
+        if(@mat[@dernierIle.posX-1][@dernierIle.posY] instance_of? Pont)
+            directionEnCours = @mat[@dernierIle.posX-1][@dernierIle.posY].direction
+            for i in range (@dernierIle.posX .. 0)
+                if(@mat[@dernierIle.posX+i][@dernierIle.posY] instance_of? Ile)
+                    haut = true
+                    break
+                elsif(@mat[@dernierIle.posX+i][@dernierIle.posY] instance_of? Pont)
+                    if(directionEnCours != direction)
+                        haut = false
+                        break
+                    end
+                    #sinon est on est sur un bon pont
+                else
+                    #on est sur une case
+                    haut = false
+                    break
+                end
+            end
+        end
+
+        #a gauche
+        if(@mat[@dernierIle.posX][@dernierIle.posY-1] instance_of? Pont)
+            directionEnCours = @mat[@dernierIle.posX][@dernierIle.posY-1].direction
+            for i in range (@dernierIle.posY .. 0)
+                if(@mat[@dernierIle.posX][@dernierIle.posY+i] instance_of? Ile)
+                    gauche = true
+                    break
+                elsif(@mat[@dernierIle.posX][@dernierIle.posY+i] instance_of? Pont)
+                    if(directionEnCours != direction)
+                        gauche = false
+                        break
+                    end
+                    #sinon est on est sur un bon pont
+                else
+                    #on est sur une case
+                    gauche = false
+                    break
+                end
+            end
+        end
+
+        #a droite
+        if(@mat[@dernierIle.posX][@dernierIle.posY+1] instance_of? Pont)
+            directionEnCours = @mat[@dernierIle.posX][@dernierIle.posY+1].direction
+            for i in range (@dernierIle.posY .. tailleY)
+                if(@mat[@dernierIle.posX][@dernierIle.posY+i] instance_of? Ile)
+                    droite = true
+                    break
+                elsif(@mat[@dernierIle.posX][@dernierIle.posY+i] instance_of? Pont)
+                    if(directionEnCours != direction)
+                        droite = false
+                        break
+                    end
+                    #sinon est on est sur un bon pont
+                else
+                    #on est sur une case
+                    droite = false
+                    break
+                end
+            end
+        end
+
+        if(bas)
+            i=1
+            until(@mat[@dernierIle.posX+i][@dernierIle.posY] instance_of? Ile)
+                @mat[@dernierIle.posX+i][@dernierIle.posY].surbrillance = true
+                i+=1
+            end
+        end
+        if(haut)
+            i=-1
+            until(@mat[@dernierIle.posX+i][@dernierIle.posY] instance_of? Ile)
+                @mat[@dernierIle.posX+i][@dernierIle.posY].surbrillance = true
+                i-=1
+            end
+        end
+        if(gauche)
+            i=-1
+            until(@mat[@dernierIle.posX][@dernierIle.posY+i] instance_of? Ile)
+                @mat[@dernierIle.posX][@dernierIle.posY+i].surbrillance = true
+                i-=1
+            end
+        end
+        if(droite)
+            i=1
+            until(@mat[@dernierIle.posX][@dernierIle.posY+i] instance_of? Ile)
+                @mat[@dernierIle.posX][@dernierIle.posY+i].surbrillance = true
+                i+=1
+            end
+        end
+
     end
+
+    def valeurPont(ile1,ile2)
+        if(ile1.posX == ile2.posX)#horizontal
+            if(ile1.posY > ile2.posY)
+                if(@mat[ile2.posX][ile2.posY+1].direction == VERTICALE)
+                    return 0
+                else
+                    return @mat[ile2.posX][ile2.posY+1].valeur
+                end
+            else
+                if(@mat[ile1.posX][ile1.posY+1].direction == VERTICALE)
+                    return 0
+                else
+                    return @mat[ile1.posX][ile1.posY+1].valeur
+                end
+            end
+        else
+            if(ile1.posX > ile2.posX)#vertical
+                if(@mat[ile2.posX+1][ile2.posY].direction == HORIZONTALE)
+                    return 0
+                else
+                    return @mat[ile2.posX][ile2.posY+1].valeur
+                end
+            else
+                if(@mat[ile1.posX+1][ile1.posY].direction == HORIZONTALE)
+                    return 0
+                else
+                    return @mat[ile1.posX+1][ile1.posY].valeur
+                end
+            end
+        end
+    end
+
 end
