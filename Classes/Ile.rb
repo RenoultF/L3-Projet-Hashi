@@ -13,6 +13,10 @@ class Ile < Case
         
     end
 
+    def getValeur()
+        return @valeur
+    end
+
     def estValide?()
         if @nbPont == @valeur
             return true
