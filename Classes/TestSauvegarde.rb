@@ -13,18 +13,23 @@ load "ConnectSqlite3.rb"
 Compte.has_many :sauvegardes
 Sauvegarde.belongs_to :compte
 
-sauvegarde = Sauvegarde.new(:compte => Compte.new(:pseudo =>  "polo"))
+#Commande pour créer une nouvelle sauvegarde
+sauvegarde = Sauvegarde.creer("poto", nil)
 p sauvegarde
 print sauvegarde, "\n"
 
-sauvegarde.save
+
+if(!sauvegarde.save)
+
+  print sauvegarde.errors.messages, "\n"
+
+end
 
 p sauvegarde
 print sauvegarde, "\n"
 
-recupCompte = Compte.where(pseudo: "polo")
 
-recupSauvegarde = Sauvegarde.where(compte: recupCompte)
+recupSauvegarde = Sauvegarde.where(compte: Compte.where(pseudo: "toto"))
 
 recupSauvegarde.each do |s|
 

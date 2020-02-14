@@ -56,9 +56,7 @@ class Pont < Case
     def initialize(posX, posY, grille)
 
         super(posX, posY, grille)
-
         @valeur = 0
-
         @direction = NULLE
 
     end
@@ -68,6 +66,14 @@ class Pont < Case
     #Cette méthode permet de comparer des ponts entre-eux
     #
     #@param autre L'autre pont à comparer
+    #
+    #@return
+    #
+    #0 si les ponts sont égaux
+    #
+    #un nombre négatif si le premier pont est inférieur au deuxième
+    #
+    #un nombre positif si le premier pont est supérieur au deuxième
     def <=>(autre)
 
       if(@direction != autre.direction)
@@ -89,15 +95,17 @@ class Pont < Case
     #Cette méthode permet d'afficher le pont dans un terminal
     def to_s
 
+      ret = "   "
+
         if(@direction == HORIZONTAL)
 
             if(@valeur == 1)
 
-                return " - "
+                ret =  " - "
 
             elsif(@valeur == 2)
 
-                return " = "
+                ret =  " = "
 
             end
 
@@ -105,17 +113,17 @@ class Pont < Case
 
             if(@valeur == 1)
 
-                return " ' "
+                ret =  " ' "
 
             elsif(@valeur == 2)
 
-                return " \" "
+                ret =  " \" "
 
             end
 
         end
 
-        return "   "
+        return ret
 
     end
 
@@ -172,6 +180,8 @@ class Pont < Case
     #@param direction La direction dans laquelle ont veut diminuer le pont
     #
     #Si le pont que l'on diminue n'avait pas de trait alors un pont à deux trait apparait
+    #
+    #@return true si la direction est la même que celle du pont, false sinon
     def diminueValeur(direction)
 
         return modifValeur(direction , MAX_LIGNE)

@@ -2,9 +2,7 @@
 require "active_record"
 
 
-class Case #< ActiveRecord::Base
-
-    #has_and_belongs_to_many :grilles
+class Case
 
     private_class_method :new
     attr_reader :posX
