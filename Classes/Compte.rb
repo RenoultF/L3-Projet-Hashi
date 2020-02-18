@@ -18,6 +18,9 @@ class Compte < ActiveRecord::Base
 
     private_class_method :new
 
+    #Cette méthode permet de creer un nouveau compte
+    #
+    #@param pseudo Le pseudo du compte
     def Compte.creer(pseudo)
 
       new(:pseudo => pseudo)

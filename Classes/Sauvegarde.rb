@@ -27,16 +27,19 @@ class Sauvegarde < ActiveRecord::Base
 
     private_class_method :new
 
-    #Cette méthode permet de creer une nouvelle sauvegarder
+    #Cette méthode permet de sauvegarder une grille pour un compte
     #
     #@param compte Le compte auquel la sauvegarde est lié
     #
     #@param grille La grille auquel la sauvegarde est lié
-    def Sauvegarde.creer(compte, grille)
+    def Sauvegarde.sauvegarder(compte, grille)
 
-      new(:compte => Compte.find_or_create_by(pseudo: compte))
+      create(:compte => Compte.find_or_create_by(pseudo: compte))
 
     end
+
+
+    def Sauvegarde.liste(compte)
 
 
     #Cette méthode permet d'afficher une sauvegarde

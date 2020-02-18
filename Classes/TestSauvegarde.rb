@@ -14,7 +14,7 @@ Compte.has_many :sauvegardes
 Sauvegarde.belongs_to :compte
 
 #Commande pour créer une nouvelle sauvegarde
-sauvegarde = Sauvegarde.creer("poto", nil)
+sauvegarde = Sauvegarde.sauvegarder("poto", nil)
 p sauvegarde
 print sauvegarde, "\n"
 
