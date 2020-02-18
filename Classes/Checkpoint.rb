@@ -1,5 +1,5 @@
 class Checkpoint
-    #Valider le checkpoint
+
     private_class_method :new
 
     def Checkpoint.creer(grille)
@@ -7,17 +7,14 @@ class Checkpoint
     end
 
     def initialize(grille)
-        #indice = 
         @grille = grille
         @check = Array.new()
     end
 
-    def valider(grille)
+    def valider()
+        @longueurpileAvant = nil
         #retire les actions de la liste et les mets dans la liste d'action
         #de la grille (@check.shift pour prendre le premier element)
-        while !check.empty?
-            @grille.actions.push(@check.shift)
-        end
     end
 
     def supprimer_derniere_action()
@@ -25,23 +22,34 @@ class Checkpoint
     end
 
     def supprimer_checkpoint()
-        i = 0
         #Retire tout les elements sauf le dernier
-        while i <  @check.size #+ 2
-            @check.pop
-            i += 1
+        if(@longueurpileAvant != nil)
+            until(@longueurpileAvant<@grille.getAction().size())
+                @grille.removeAction()
+            end
+        else
+            puts("Checkpoints non utilisé")
         end
-        #Retire le dernier element
-        @check.pop
     end
 
-    def emettre(valeur)
-        @check.push(valeur)
+    def emettre()
+        @longueurpileAvant = @grille.getAction().size()
     end
 
     def afficher_stack()
         puts "#{@check}"
     end
+
+    def checkpointVide()
+        return @check.empty?
+    end
+
+    def getIndice()
+        return @indice
+    end
+
+
+
 
 end
 
