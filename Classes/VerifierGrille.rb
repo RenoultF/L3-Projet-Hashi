@@ -10,9 +10,11 @@ class VerifierGrille < Aide
         res = true
         grille.mat.each do |caseG|
           caseS = solution.mat[caseG.posX][caseG.posY]
-          if(!caseG == (caseS) && caseG.valeur > 0)
+          if(caseG.instance_of?(Pont) && caseS != caseG)
             res = false
-            caseG.surbrillance = true
+            if(caseG.valeur > 0)
+              caseG.surbrillance = true
+            end
           end
         end
         if(res)
