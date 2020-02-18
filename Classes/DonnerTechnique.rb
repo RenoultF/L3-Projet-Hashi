@@ -32,7 +32,9 @@ class DonnerTechnique < Aide
         when 10
             "Deux \"2\" adjacents ne peuvent pas être relié par un double pont. Un \"2\" ayant deux voisins dont un autre \"2\" est lié à son autre voisin."
         when 11
-            "Un \"2\" possédant 3 voisins dont deux \"1\" est forcément lié au 3eme voisin."
+            "Un \"2\" possédant 3 voisins dont deux \"1\" est lié au 3eme voisin."
+        when 12
+            "Un \"3\" possédant 3 voisins dont un \"1\" et un \"2\" est lié au 3eme voisin."
         when 177013
             "C'est l'histoire d'un têtard il croyait qu'il était tôt mais en fait il était tard."#wala c pa oam c manal
         end
@@ -51,16 +53,28 @@ class DonnerTechnique < Aide
               res = 2
             elsif(c.valeur == 8 && !VerifierGrille.verifierIle(c, solution))
               res = 3
-            elsif(c.lstVoisins.lenght == 1 && (c.valeur == 1 || c.valeur == 2) && !VerifierGrille.verifierIle(c, solution))
+            elsif(c.lstVoisins.length == 1 && (c.valeur == 1 || c.valeur == 2) && !VerifierGrille.verifierIle(c, solution))
               res = 4
-            elsif(c.valeur == 3 && c.lstVoisins.lenght == 2 && !VerifierGrille.estAPeuPresBienReliee(c, solution))
+            elsif(c.valeur == 3 && c.lstVoisins.length == 2 && !VerifierGrille.estAPeuPresBienReliee(c, solution))
               res = 5
-            elsif(c.valeur == 5 && c.lstVoisins.lenght == 3 && !VerifierGrille.estAPeuPresBienReliee(c, solution))
+            elsif(c.valeur == 5 && c.lstVoisins.length == 3 && !VerifierGrille.estAPeuPresBienReliee(c, solution))
               res = 6
-            elsif(c.valeur == 7 && c.lstVoisins.lenght == 4 && !VerifierGrille.estAPeuPresBienReliee(c, solution))
+            elsif(c.valeur == 7 && c.lstVoisins.length == 4 && !VerifierGrille.estAPeuPresBienReliee(c, solution))
               res = 7
             elsif(c.valeur == 6 && c.lstVoisins.include?(1) && !VerifierGrille.estAPeuPresBienReliee(c, solution))
               res = 8
+            elsif(c.valeur == 1 && c.lstVoisins.length == 2 && !VerifierGrille.verifierIle(c, solution))
+              res = 9
+            elsif(c.valeur == 1 && grille.valeurPont(c, c.lstVoisins.bsearch{|v| v.valeur == 1}) < 0)
+              res = 9
+            elsif(c.valeur == 2 && c.lstVoisins.length == 2 && !VerifierGrille.estAPeuPresBienReliee(c, solution))
+              res = 10
+            elsif(c.valeur == 2 && grille.valeurPont(c, c.lstVoisins.bsearch{|v| v.valeur == 2}) == 2)
+              res = 10
+            elsif(c.valeur == 2 && c.lstVoisins.length == 3 && c.lstVoisins.count{|v| v.valeur == 1} == 2 && grille.valeurPont(c, c.lstVoisins.bsearch{|v| v.valeur != 1}) == 0)
+              res = 11
+            elsif(c.valeur == 3 && c.lstVoisins.length == 3 && c.lstVoisins.include?(1) && c.lstVoisins.count{|v| v.valeur == 2} == 1 && grille.valeurPont(c, c.lstVoisins.bsearch{|v| v.valeur != 1 && v.valeur != 2}) == 0)
+              res = 12
             elsif(VerifierGrille.bTetard)
               res = 177013
             end
