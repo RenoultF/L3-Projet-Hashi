@@ -294,4 +294,21 @@ class Grille
         end
     end
 
+    def removeAction()
+        tab_action = Array.new()
+        if(!@actions.empty?)
+            tab_action = @actions.last().GetCoord()
+            x= tab_action[1]
+            y = tab_action[2]
+            direc = tab_action[3]
+            #si on veut enlever un pont
+            if(tab_action[0]== 0)
+                @mat[x][y].diminueValeur(direc)
+            else
+                @mat[x][y].augmenteValeur(direc)
+            end
+            @actions.pop
+        end
+    end
+
 end
