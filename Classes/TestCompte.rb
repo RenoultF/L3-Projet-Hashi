@@ -14,11 +14,11 @@ load "ConnectSqlite3.rb"
 Compte.has_many :sauvegardes
 Sauvegarde.belongs_to :compte
 
-compte = Compte.creer("toro")
+compte = Compte.creer("totogro")
 p compte
 print compte, "\n"
 
-if(!compte.save)
+if(!compte.sauvegarder())
 
   print compte.errors.messages, "\n"
 
@@ -27,12 +27,6 @@ end
 p compte
 print compte.pseudo, "\n"
 
-recupCompte = Compte.where(pseudo: "toto")
+recupCompte = Compte.recuperer("toto")
 
-recupCompte.each do |c|
-
-  p c
-
-end
-
-p recupCompte.to_a()[1]
+p recupCompte

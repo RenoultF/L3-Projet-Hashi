@@ -13,9 +13,9 @@ class Sauvegarde < ActiveRecord::Base
 
 
     #@grille => Contient la grille que l'utilisateur a commencé à remplir
-    #has_one :grille
+    has_one :grille
 
-    #validates :grille, presence: true, uniqueness: true
+    validates :grille, presence: true, uniqueness: true
 
 
 
@@ -27,19 +27,34 @@ class Sauvegarde < ActiveRecord::Base
 
     private_class_method :new
 
-    #Cette méthode permet de sauvegarder une grille pour un compte
+    #Cette méthode permet de creer une grille pour un compte
     #
     #@param compte Le compte auquel la sauvegarde est lié
     #
     #@param grille La grille auquel la sauvegarde est lié
-    def Sauvegarde.sauvegarder(compte, grille)
+    def Sauvegarde.creer(compte, grille)
 
-      create(:compte => Compte.find_or_create_by(pseudo: compte))
+      new(:compte => compte, :grille => grille)
 
     end
 
+    #Cette méthode permet d'enregistrer la sauvegarde
+    #
+    #@return true si la sauvegarde est efféctué, false sinon
+    def sauvegarder()
 
+      return self.save();
+
+    end
+
+    #Cette méthode permet de connaitre les sauvegardes d'un joueur
+    #
+    #@param compte Le compte du joueur
     def Sauvegarde.liste(compte)
+
+      return Sauvegarde.where(compte: compte).to_a()
+
+    end
 
 
     #Cette méthode permet d'afficher une sauvegarde

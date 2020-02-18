@@ -8,13 +8,14 @@ require "active_record"
 
 
 #Cette classe représente les comptes utilisateurs
-#
-#self.pseudo => Contient l'identifiant du compte
 class Compte < ActiveRecord::Base
 
     has_many :sauvegardes
 
-    validates :pseudo, presence: true, uniqueness: true
+    validates :name, presence: true, uniqueness: true
+
+    #@pseudo => Contient l'identifiant du compte
+    attr_reader :pseudo
 
     private_class_method :new
 
@@ -23,14 +24,41 @@ class Compte < ActiveRecord::Base
     #@param pseudo Le pseudo du compte
     def Compte.creer(pseudo)
 
-      new(:pseudo => pseudo)
+      new(pseudo)
+
+    end
+
+    def initialize(pseudo)
+
+      super(:name => pseudo)
+      @pseudo = pseudo
+
+    end
+
+    #Cette méthode permet de récuperer un compte dans la base de données
+    #
+    #@param pseudo Le pseudo du compte
+    def Compte.recuperer(pseudo)
+
+      return Compte.where(name: pseudo).to_a()[0];
+
+    end
+
+    #Cette méthode permet de sauvegarder le compte
+    #
+    #@return true si la sauvegarde est efféctué, false sinon
+    def sauvegarder()
+
+      self.name = @pseudo
+
+      return self.save();
 
     end
 
     #Cette méthode permet d'afficher un compte
     def to_s
 
-        return "<Compte> '#{self.pseudo}'"
+        return "<Compte> '#{@pseudo}'"
 
     end
 

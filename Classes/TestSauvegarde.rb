@@ -5,6 +5,7 @@
 
 
 load "Compte.rb"
+load "Grille.rb"
 load "Sauvegarde.rb"
 require "active_record"
 require "rubygems"
@@ -14,7 +15,8 @@ Compte.has_many :sauvegardes
 Sauvegarde.belongs_to :compte
 
 #Commande pour créer une nouvelle sauvegarde
-sauvegarde = Sauvegarde.sauvegarder("poto", nil)
+compte = Compte.recuperer("poto")
+sauvegarde = Sauvegarde.creer(compte, nil)
 p sauvegarde
 print sauvegarde, "\n"
 
