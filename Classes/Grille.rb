@@ -22,15 +22,14 @@ class Grille
     def initialize(laSauvegarde, laTailleX, laTailleY, laDifficulte)
         @tailleX = laTailleX
         @tailleY = laTailleY
-        if(laSauvegarde != nil){
+        if(laSauvegarde != nil)
             @mat = laSauvegarde.getGrille()
             @numGrille = laSauvegarde.getNumGrille()
-            @checkpoints = laSauvegarde.getCheckPoint();
-            @actions = laSauvegarde.getActions();
-        }
-        else{
+            @checkpoints = laSauvegarde.getCheckPoint()
+            @actions = laSauvegarde.getActions()
+        else
 
-        }
+        end
         @dernierIle = nil
     end
 
@@ -52,7 +51,7 @@ class Grille
         for i in (0..(@tailleX-1))
             for j in (0..(@tailleY-1))
                 if (@mat[i][j].instance_of? Pont)
-                    if(!((@mat[i][j].direction == @matSolution[i][j].direction) && (@mat[i][j].direction == @matSolution[i][j].direction))){
+                    if(!((@mat[i][j].direction == @matSolution[i][j].direction) && (@mat[i][j].direction == @matSolution[i][j].direction)))
                         return 0
                     end
                 end
@@ -148,13 +147,13 @@ class Grille
         directionEnCours = nil
         
         #en bas
-        if(@mat[@dernierIle.posX+1][@dernierIle.posY] instance_of? Pont)
+        if(@mat[@dernierIle.posX+1][@dernierIle.posY].instance_of? Pont)
             directionEnCours = @mat[@dernierIle.posX+1][@dernierIle.posY].direction
             for i in range (@dernierIle.posX .. tailleX)
-                if(@mat[@dernierIle.posX+i][@dernierIle.posY] instance_of? Ile)
+                if(@mat[@dernierIle.posX+i][@dernierIle.posY].instance_of? Ile)
                     bas = true
                     break
-                elsif(@mat[@dernierIle.posX+i][@dernierIle.posY] instance_of? Pont)
+                elsif(@mat[@dernierIle.posX+i][@dernierIle.posY].instance_of? Pont)
                     if(directionEnCours != @mat[@dernierIle.posX+i][@dernierIle.posY].direction)
                         bas = false
                         break
@@ -169,13 +168,13 @@ class Grille
         end
 
         #en haut
-        if(@mat[@dernierIle.posX-1][@dernierIle.posY] instance_of? Pont)
+        if(@mat[@dernierIle.posX-1][@dernierIle.posY].instance_of? Pont)
             directionEnCours = @mat[@dernierIle.posX-1][@dernierIle.posY].direction
             for i in range (@dernierIle.posX .. 0)
-                if(@mat[@dernierIle.posX+i][@dernierIle.posY] instance_of? Ile)
+                if(@mat[@dernierIle.posX+i][@dernierIle.posY].instance_of? Ile)
                     haut = true
                     break
-                elsif(@mat[@dernierIle.posX+i][@dernierIle.posY] instance_of? Pont)
+                elsif(@mat[@dernierIle.posX+i][@dernierIle.posY].instance_of? Pont)
                     if(directionEnCours != direction)
                         haut = false
                         break
@@ -190,13 +189,13 @@ class Grille
         end
 
         #a gauche
-        if(@mat[@dernierIle.posX][@dernierIle.posY-1] instance_of? Pont)
+        if(@mat[@dernierIle.posX][@dernierIle.posY-1].instance_of? Pont)
             directionEnCours = @mat[@dernierIle.posX][@dernierIle.posY-1].direction
             for i in range (@dernierIle.posY .. 0)
-                if(@mat[@dernierIle.posX][@dernierIle.posY+i] instance_of? Ile)
+                if(@mat[@dernierIle.posX][@dernierIle.posY+i].instance_of? Ile)
                     gauche = true
                     break
-                elsif(@mat[@dernierIle.posX][@dernierIle.posY+i] instance_of? Pont)
+                elsif(@mat[@dernierIle.posX][@dernierIle.posY+i].instance_of? Pont)
                     if(directionEnCours != direction)
                         gauche = false
                         break
@@ -211,13 +210,13 @@ class Grille
         end
 
         #a droite
-        if(@mat[@dernierIle.posX][@dernierIle.posY+1] instance_of? Pont)
+        if(@mat[@dernierIle.posX][@dernierIle.posY+1].instance_of? Pont)
             directionEnCours = @mat[@dernierIle.posX][@dernierIle.posY+1].direction
             for i in range (@dernierIle.posY .. tailleY)
-                if(@mat[@dernierIle.posX][@dernierIle.posY+i] instance_of? Ile)
+                if(@mat[@dernierIle.posX][@dernierIle.posY+i].instance_of? Ile)
                     droite = true
                     break
-                elsif(@mat[@dernierIle.posX][@dernierIle.posY+i] instance_of? Pont)
+                elsif(@mat[@dernierIle.posX][@dernierIle.posY+i].instance_of? Pont)
                     if(directionEnCours != direction)
                         droite = false
                         break
@@ -233,28 +232,28 @@ class Grille
 
         if(bas)
             i=1
-            until(@mat[@dernierIle.posX+i][@dernierIle.posY] instance_of? Ile)
+            until(@mat[@dernierIle.posX+i][@dernierIle.posY].instance_of? Ile)
                 @mat[@dernierIle.posX+i][@dernierIle.posY].surbrillance = true
                 i+=1
             end
         end
         if(haut)
             i=-1
-            until(@mat[@dernierIle.posX+i][@dernierIle.posY] instance_of? Ile)
+            until(@mat[@dernierIle.posX+i][@dernierIle.posY].instance_of? Ile)
                 @mat[@dernierIle.posX+i][@dernierIle.posY].surbrillance = true
                 i-=1
             end
         end
         if(gauche)
             i=-1
-            until(@mat[@dernierIle.posX][@dernierIle.posY+i] instance_of? Ile)
+            until(@mat[@dernierIle.posX][@dernierIle.posY+i].instance_of? Ile)
                 @mat[@dernierIle.posX][@dernierIle.posY+i].surbrillance = true
                 i-=1
             end
         end
         if(droite)
             i=1
-            until(@mat[@dernierIle.posX][@dernierIle.posY+i] instance_of? Ile)
+            until(@mat[@dernierIle.posX][@dernierIle.posY+i].instance_of? Ile)
                 @mat[@dernierIle.posX][@dernierIle.posY+i].surbrillance = true
                 i+=1
             end
