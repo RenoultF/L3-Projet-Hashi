@@ -5,10 +5,11 @@
 # Version 0.1 : Date : 07/02/2020
 
 require "./Compte.rb"
+require "./Grille.rb"
 require "active_record"
 
 
-#Cette classe permet de sauvegarder dans une base de données la progression d'un joueur sur une grille
+#Cette classe permet de sauvegarder dans une base de données la progression d'un joueur sur une grille et de faire des recherches sur les sauvegardes
 class Sauvegarde < ActiveRecord::Base
 
 
@@ -34,9 +35,36 @@ class Sauvegarde < ActiveRecord::Base
     #@param grille La grille auquel la sauvegarde est lié
     def Sauvegarde.creer(compte, grille)
 
-      new(:compte => compte, :grille => grille)
+      new(:compte => compte, :grille => YAML.dump(grille), :taille => grille.getTaille(), difficulte => grille.getDifficulte())
 
     end
+
+    #Cette méthode permet de connaitre les sauvegardes d'un joueur
+    #
+    #@param compte Le compte du joueur
+    #
+    #@return Le tableau des sauvegardes du compte
+    def Sauvegarde.liste(compte)
+
+      return Sauvegarde.where(compte: compte).to_a()
+
+    end
+
+    #Cette méthode permet de connaitre les sauvegardes d'un joueur
+    #
+    #@param compte Le compte du joueur
+    #
+    #@param taille La taille de la grille
+    #
+    #@param difficulte La difficulte de la grille
+    #
+    #@return Le tableau des sauvegardes du compte de taille et difficulte donné
+    def Sauvegarde.liste(compte, taille, difficulte)
+
+      return Sauvegarde.where(compte: compte, taille: taille, difficulte: difficulte).to_a()
+
+    end
+
 
     #Cette méthode permet d'enregistrer la sauvegarde
     #
@@ -47,20 +75,24 @@ class Sauvegarde < ActiveRecord::Base
 
     end
 
-    #Cette méthode permet de connaitre les sauvegardes d'un joueur
-    #
-    #@param compte Le compte du joueur
-    def Sauvegarde.liste(compte)
+    #Cette méthode permet de recuperer la grille de la sauvegarde
+    def getGrille()
 
-      return Sauvegarde.where(compte: compte).to_a()
+      return YAML.load(self.grille.sauvegarde)
 
     end
 
+    #Cette méthode permet de modifier la grille enregistrer
+    def setGrille(grille)
+
+      self.grille.sauvegarde = YAML.dump(grille)
+
+    end
 
     #Cette méthode permet d'afficher une sauvegarde
     def to_s
 
-        return "#{compte} : #{grille_id}"
+        return "#{self.compte} : #{self.grille_id}"
 
     end
 

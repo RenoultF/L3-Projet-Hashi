@@ -39,7 +39,7 @@ class Pont < Case
 
     private_class_method :new
 
-    #Ce constructeur permett de créer un nouveau pont
+    #Ce constructeur permet de créer un nouveau pont
     #
     #@param posX La position sur l'axe des abscisse
     #
@@ -52,6 +52,24 @@ class Pont < Case
 
     end
 
+    #Ce constructeur permet de créer un nouveau pont
+    #
+    #@param posX La position sur l'axe des abscisse
+    #
+    #@param posY La position sur l'axe des ordonnées
+    #
+    #@param grille La grille sur laquelle se trouve le pont
+    #
+    #@param direction La direction du pont
+    #
+    #@param valeur La taillee du pont
+    def Pont.creer(posX, posY, grille, direction, valeur)
+
+        new(posX, posY, grille, direction, valeur)
+
+    end
+
+
     #:nodoc:
     def initialize(posX, posY, grille)
 
@@ -60,7 +78,17 @@ class Pont < Case
         @direction = NULLE
 
     end
+
+
+    def initialize(posX, posY, grille, direction, valeur)
+
+        super(posX, posY, grille)
+        @valeur = valeur
+        @direction = direction
+
+    end
     #:doc:
+
 
 
     #Cette méthode permet de comparer des ponts entre-eux
@@ -128,7 +156,7 @@ class Pont < Case
     end
 
 
-
+    #:nodoc:
     private def modifValeur(direction, valeur)
 
         if(@direction != NULLE)
@@ -161,6 +189,8 @@ class Pont < Case
         end
 
     end
+    #:doc:
+
 
     #Cette méthode permet d'augmenter la valeur du pont
     #

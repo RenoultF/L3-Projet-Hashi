@@ -4,22 +4,22 @@
 # Version 0.1 : Date : 07/02/2020
 
 
-load "Compte.rb"
-load "Grille.rb"
-load "Sauvegarde.rb"
+require "./Compte.rb"
+require "./Grille.rb"
+require "./Sauvegarde.rb"
 require "active_record"
 require "rubygems"
-load "ConnectSqlite3.rb"
+require "./ConnectSqlite3.rb"
 
 Compte.has_many :sauvegardes
 Sauvegarde.belongs_to :compte
 
 #Commande pour créer une nouvelle sauvegarde
-compte = Compte.recuperer("poto")
+print "Donnez le nom de compte à récuperer : "
+compte = Compte.recuperer(gets.chomp)
 sauvegarde = Sauvegarde.creer(compte, nil)
 p sauvegarde
 print sauvegarde, "\n"
-
 
 if(!sauvegarde.save)
 
@@ -31,7 +31,7 @@ p sauvegarde
 print sauvegarde, "\n"
 
 
-recupSauvegarde = Sauvegarde.where(compte: Compte.where(pseudo: "toto"))
+recupSauvegarde = Sauvegarde.liste(Compte.recuperer(gets.chomp))
 
 recupSauvegarde.each do |s|
 

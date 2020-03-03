@@ -28,12 +28,14 @@ class Compte < ActiveRecord::Base
 
     end
 
+    #:nodoc:
     def initialize(pseudo)
 
       super(:name => pseudo)
       @pseudo = pseudo
 
     end
+    #:doc:
 
     #Cette méthode permet de récuperer un compte dans la base de données
     #

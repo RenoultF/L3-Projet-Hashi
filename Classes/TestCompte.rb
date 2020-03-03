@@ -5,16 +5,17 @@
 # Version 0.1 : Date : 07/02/2020
 
 
-load "Compte.rb"
-load "Sauvegarde.rb"
+require "./Compte.rb"
+require "./Sauvegarde.rb"
 require "active_record"
 require "rubygems"
-load "ConnectSqlite3.rb"
+require "./ConnectSqlite3.rb"
 
 Compte.has_many :sauvegardes
 Sauvegarde.belongs_to :compte
 
-compte = Compte.creer("totogro")
+print "Donnez le nom de compte à créer : "
+compte = Compte.creer(gets.chomp)
 p compte
 print compte, "\n"
 

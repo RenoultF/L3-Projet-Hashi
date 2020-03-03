@@ -6,7 +6,7 @@
 # Version 0.1 : Date : 07/02/2020
 
 
-load "Pont.rb"
+require "./Pont.rb"
 
 
 
