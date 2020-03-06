@@ -23,6 +23,7 @@ class Case
     end
 
     def afficheTerminal()
+      print " "
     end
 
     def equals(autre)

@@ -40,9 +40,21 @@ class Compte < ActiveRecord::Base
     #Cette méthode permet de récuperer un compte dans la base de données
     #
     #@param pseudo Le pseudo du compte
+    #
+    #@raiseException Si le compte n'existe pas
     def Compte.recuperer(pseudo)
 
-      return Compte.where(name: pseudo).to_a()[0];
+      compte = Compte.where(name: pseudo).to_a()[0];
+
+      if(compte == nil)
+
+        raise("Le compte n'existe pas")
+
+      else
+
+        return compte
+
+      end
 
     end
 

@@ -82,7 +82,7 @@ class Sauvegarde < ActiveRecord::Base
 
     end
 
-    #Cette méthode permet de modifier la grille enregistrer
+    #Cette méthode permet de modifier la grille enregistré
     def setGrille(grille)
 
       self.grille.sauvegarde = YAML.dump(grille)

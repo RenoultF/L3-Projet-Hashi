@@ -14,6 +14,8 @@ require "./ConnectSqlite3.rb"
 Compte.has_many :sauvegardes
 Sauvegarde.belongs_to :compte
 
+retry_count = 0
+
 print "Donnez le nom de compte à créer : "
 compte = Compte.creer(gets.chomp)
 p compte
@@ -28,6 +30,22 @@ end
 p compte
 print compte.pseudo, "\n"
 
-recupCompte = Compte.recuperer("toto")
+retry_count = 0
+begin
+
+  print "Donnez le nom de compte à recupérer : "
+  recupCompte = Compte.recuperer(gets.chomp)
+
+rescue
+
+  print "Ce compte n'existe pas \n"
+  if(retry_count < 3)
+    retry_count+=1
+    retry
+  else
+    print "Nombre maximum de retry atteint \n"
+  end
+
+end
 
 p recupCompte
