@@ -35,6 +35,27 @@ class Pont < Case
     #@surbrillance => Booléen pour l'affichage, si égal à true le pont sera affiché en surbrillance
     attr_accessor :surbrillance
 
+    #:nodoc:
+    def Pont.verifieDirection(direction)
+
+      case(direction)
+
+      when NULLE
+        return true
+
+      when HORIZONTAL
+        return true
+
+      when VERTICAL
+        return true
+
+      else
+        return false
+
+      end
+
+    end
+    #:doc:
 
 
     private_class_method :new
@@ -48,7 +69,7 @@ class Pont < Case
     #@param grille La grille sur laquelle se trouve le pont
     def Pont.creer(posX, posY, grille)
 
-        new(posX, posY, grille)
+        Pont.construit(posX, posY, grille, NULLE, 0)
 
     end
 
@@ -63,23 +84,22 @@ class Pont < Case
     #@param direction La direction du pont
     #
     #@param valeur La taillee du pont
-    def Pont.creer(posX, posY, grille, direction, valeur)
+    def Pont.construit(posX, posY, grille, direction, valeur)
 
-        new(posX, posY, grille, direction, valeur)
+        if((Pont.verifieDirection(direction)))
+
+          new(posX, posY, grille, direction, valeur)
+
+        else
+
+          new(posX, posY, grille, NULLE, 0)
+
+        end
 
     end
 
 
     #:nodoc:
-    def initialize(posX, posY, grille)
-
-        super(posX, posY, grille)
-        @valeur = 0
-        @direction = NULLE
-
-    end
-
-
     def initialize(posX, posY, grille, direction, valeur)
 
         super(posX, posY, grille)
@@ -95,7 +115,7 @@ class Pont < Case
     #
     #@param autre L'autre pont à comparer
     #
-    #@return
+    #@return :
     #
     #0 si les ponts sont égaux
     #
@@ -198,7 +218,7 @@ class Pont < Case
     #
     #Si le pont que l'on augmente avait 2 trait alors le pont disparait
     #
-    #@return true si la direction est la même que celle du pont, false sinon
+    #@return true si la valeur à été modifié, false sinon
     def augmenteValeur(direction)
 
         return modifValeur(direction , 1)
@@ -211,7 +231,7 @@ class Pont < Case
     #
     #Si le pont que l'on diminue n'avait pas de trait alors un pont à deux trait apparait
     #
-    #@return true si la direction est la même que celle du pont, false sinon
+    #@return true si la valeur à été modifié, false sinon
     def diminueValeur(direction)
 
         return modifValeur(direction , MAX_LIGNE)
