@@ -13,10 +13,16 @@ class Ile < Case
         
     end
 
+    ##
+    #Retourne la valeur de l'ile
+    #@return : la valeur de l'ile
     def getValeur()
         return @valeur
     end
 
+    ##
+    #Verifie si le nombre de pont vérifie la valeur de l'ile
+    #@return : vrai ou faux 
     def estValide?()
         if @nbPont == @valeur
             return true
@@ -28,10 +34,18 @@ class Ile < Case
     def affiche()
     end
 
+    ##
+    #Affichage de l'ile dans un terminal
     def afficheTerminal()
         return "(#{@valeur})"
     end
 
+    ##
+    #Methode Permettant de comparer deux iles entre elles
+    #@param : la deuxieme ile a comparer
+    #@return : 0 si la valeur des deux iles sont egales
+    #un nombre négatif si la premiere ile est inférieur a la deuxieme
+    #un nombre positif si la premiere ile est superieur a la deuxieme
     def <=>(ile)
         if(ile.instance_of? Ile)
             if(@valeur != ile.valeur)
