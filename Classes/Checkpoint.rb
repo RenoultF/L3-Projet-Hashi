@@ -1,191 +1,80 @@
-
-
-##
-# Auteur Brabant Mano
-# Version 0.1 : Date : 07/02/2020
-
-load "Case.rb"
-
-#Cette classe représente les ponts du Hashi
-class Pont < Case
-
-    #Cette constante représente l'une des directions que peut prendre un pont(Seulement quand valeur du pont = 0)
-    NULLE = 0
-
-    #Cette constante représente l'une des directions que peut prendre un pont(Pont horizontal)
-    HORIZONTAL = 1
-
-    #Cette constante représente l'une des directions que peut prendre un pont(Pont vertical)
-    VERTICAL = 2
-
-
-
-    #Cette constante représente le nombre maximum de ligne pour un pont
-    MAX_LIGNE = 2
-
-
-    include Comparable
-
-    #@valeur => Valeur du pont(nombre de trait)
-    attr_reader :valeur
-
-    #@direction => Direction du pont (NULLE, HORIZONTAL, VERTICAL)
-    attr_reader :direction
-
-    #@surbrillance => Booléen pour l'affichage, si égal à true le pont sera affiché en surbrillance
-    attr_accessor :surbrillance
-
-
+class Checkpoint
 
     private_class_method :new
 
-    #Ce constructeur permett de créer un nouveau pont
-    #
-    #@param posX La position sur l'axe des abscisse
-    #
-    #@param posY La position sur l'axe des ordonnées
-    #
-    #@param grille La grille sur laquelle se trouve le pont
-    def Pont.creer(posX, posY, grille)
-
-        new(posX, posY, grille)
-
+    def Checkpoint.creer(grille)
+        new(grille)
     end
 
-    #:nodoc:
-    def initialize(posX, posY, grille)
-
-        super(posX, posY, grille)
-        @valeur = 0
-        @direction = NULLE
-
-    end
-    #:doc:
-
-
-    #Cette méthode permet de comparer des ponts entre-eux
-    #
-    #@param autre L'autre pont à comparer
-    #
-    #@return
-    #
-    #0 si les ponts sont égaux
-    #
-    #un nombre négatif si le premier pont est inférieur au deuxième
-    #
-    #un nombre positif si le premier pont est supérieur au deuxième
-    def <=>(autre)
-
-      if(@direction != autre.direction)
-
-          return @direction <=> autre.direction
-
-      end
-
-      if(@valeur != autre.valeur)
-
-          return @valeur <=> autre.valeur
-
-      end
-
-      return 0
-
+    def initialize(grille)
+        @grille = grille
+        @check = Array.new()
     end
 
-    #Cette méthode permet d'afficher le pont dans un terminal
-    def to_s
-
-      ret = "   "
-
-        if(@direction == HORIZONTAL)
-
-            if(@valeur == 1)
-
-                ret =  " - "
-
-            elsif(@valeur == 2)
-
-                ret =  " = "
-
-            end
-
-        elsif(@direction == VERTICAL)
-
-            if(@valeur == 1)
-
-                ret =  " ' "
-
-            elsif(@valeur == 2)
-
-                ret =  " \" "
-
-            end
-
+    ##
+    #valide l'hypothese et l'ajoute dans la pile d'action
+    def valider()
+        @longueurpileAvant = nil
+        until checkpointVide()
+            @grille.actions.push(@check.shift)
         end
-
-        return ret
-
     end
 
+    ##
+    #Supprime a derniere action réalisée dans l'hypothese
+    def supprimer_derniere_action()
+        @check.pop
+    end
 
-
-    private def modifValeur(direction, valeur)
-
-        if(@direction != NULLE)
-
-            #On modifie la valeur du pont si la direection donné est la bonne
-            if(@direction == direction)
-
-                @valeur = (@valeur + valeur) % (MAX_LIGNE + 1)
-
-                if(@valeur == 0)
-
-                    @direction = NULLE
-
-                end
-
-                return true
-
+    ##
+    #Supprime l'hypothese entierement si pleine fait rien sinon
+    def supprimer_checkpoint()
+        #Retire tout les elements sauf le dernier
+        if(@longueurpileAvant != nil)
+            until(@longueurpileAvant<@grille.getAction().size())
+                @grille.removeAction()
             end
-
-            return false
-
-        #On crée un nouveau pont
-        elsif(@direction == NULLE)
-
-            @direction = direction
-            @valeur = valeur
-
-            return true
-
+        else
+            puts("Checkpoints non utilisé")
         end
-
     end
 
-    #Cette méthode permet d'augmenter la valeur du pont
-    #
-    #@param direction La direction dans laquelle ont veut augmenter le pont
-    #
-    #Si le pont que l'on augmente avait 2 trait alors le pont disparait
-    #
-    #@return true si la direction est la même que celle du pont, false sinon
-    def augmenteValeur(direction)
-
-        return modifValeur(direction , 1)
-
+    ##
+    #Permettre d'emettre une hypothese dans le checkpoint
+    def emettre()
+        @longueurpileAvant = @grille.getAction().size()
     end
 
-    #Cette méthode permet de diminuer la valeur du pont
-    #
-    #@param direction La direction dans laquelle ont veut diminuer le pont
-    #
-    #Si le pont que l'on diminue n'avait pas de trait alors un pont à deux trait apparait
-    #
-    #@return true si la direction est la même que celle du pont, false sinon
-    def diminueValeur(direction)
-
-        return modifValeur(direction , MAX_LIGNE)
-
+    ##
+    #Permet d'afficher l'hypothese
+    def afficher_stack()
+        puts "#{@check}"
     end
+
+    ##
+    #Verifie si le checkpoint est vide
+    def checkpointVide()
+        return @check.empty?
+    end
+
+    def getIndice()
+        return @indice
+    end
+
+
+
 
 end
+
+checkpoint = Checkpoint.creer()
+
+checkpoint.emettre(5)
+checkpoint.emettre(4)
+checkpoint.supprimer_derniere_action
+checkpoint.emettre(10)
+checkpoint.emettre(6)
+checkpoint.afficher_stack()
+
+checkpoint.supprimer_checkpoint
+
+checkpoint.afficher_stack()
