@@ -1,14 +1,17 @@
 require 'scanf'
+##
+#classe qui s'occupe du déroulement d'une partie
 class Jeu
 
     private_class_method :new
 
     @grille #la grille ou se deroule la partie
-    @grilleSolution
-    @tech
-    @verif
-    @checkPoint
+    @grilleSolution #la grille complétée
+    @tech #objet qui fournit des aides techniques
+    @verif # objet qui vérifie la grille
+    @checkPoint #objet qui gere les hypotheses
 
+    #:nodoc:
     def Jeu.creer()
         new()
     end
@@ -19,23 +22,50 @@ class Jeu
         @verif = new VerifierGrille
         @checkPoint = new CheckPoint(grille)
     end
+    #:doc
 
+    ##
+    #charge une grille pour une partie
+    #:arg: difficulte
+    #:arg: tailleGrille : Entier
+    #:arg: compte : Compte
+    #@return Grille
     def chargerGrille(difficulte, tailleGrille, compte)
         lst = Sauvegarde.liste(difficulte, tailleGrille, compte)
         i = Random.new
         Sauvegarde.getGrille(lst[i.random(lst.lenght)])
     end
 
+    ##
+    #algorithme du jeu
+    #:arg: grille : Grille
+    #:arg: compte : Compte
+    #@return win : Boolean
     def lanceToi(grille, compte)
         win = false
         while(!win)
             grille.afficheToi
             case action
             when 1
-                grille.setDernierIle(demandeCoord)
-                grille.createPont(demandeCoord)
+                tab1 = demandeCoord
+                grille.setDernierIle(tab1)
+                tab2 = demandeCoord
+                grille.createPont(tab2)
+                valeurPont = valeurPont(grille.mat[tab1[0], tab1[1]], grille.mat[tab2[0], tab2[1]])
+                if(tab1[0] == tab2[0])
+                  x = tab1[0]
+                  y = tab1[1]+1
+                elsif
+                  x = tab1[0]+1
+                  y = tab1[1]
+                end
+                if(valeurPont == 0)
+                  Action.new(grille.mat[x, y], grille, 0).empiler
+                elsif
+                  Action.new(grille.mat[x, y], grille, 1).empiler
+                end
             when 2
-                puts tech.demandeAide(@grille, @grilleSolution)
+                afficherAide(tech.demandeAide(@grille, @grilleSolution))
             when 3
                 @checkPoint.emettre
             when 4
@@ -46,22 +76,38 @@ class Jeu
                 @checkPoint.supprimer_checkpoint
             when 7
                 win = verif.demandeAide(@grille, @grilleSolution)
+            when 8
+                Sauvegarde.creer(compte, grille).sauvegarder()
             end
         end
     end
 
+    ##
+    #affichage de l'aide
+    #:arg: aide : String
+    def afficherAide(String aide)
+      puts aide
+    end
+
+    ##
+    #decide de l'action du joueur
+    #@return Entier
     def action
-        puts "1 : pose/supprime un pont"
-        puts "2 : demander une aide"
-        puts "3 : emetre hypothese"
-        puts "4 : valider hypothese"
-        puts "5 : retour arriere"
-        puts "6 : supprimer hypothese"
-        puts "7 : valider grille"
+        puts "1 : pose/supprime un pont\n"
+        puts "2 : demander une aide\n"
+        puts "3 : emetre hypothese\n"
+        puts "4 : valider hypothese\n"
+        puts "5 : retour arriere\n"
+        puts "6 : supprimer hypothese\n"
+        puts "7 : valider grille\n"
+        puts "8 : Sauvegarder la grille\n"
 
         str.scanf("%d")
     end
 
+    ##
+    #demande des coordonnées à l'utilisateur pour la sélection d'une case dans la grille
+    #@return Case
     def demandeCoord
         puts "Saisir coordonnées d'une ile :"
         puts "coordonnée en x : "
