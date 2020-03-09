@@ -89,9 +89,10 @@ class Grille2Essai
 
           end
 
-
         end
-        @dernierIle = nil
+
+        @dernierIle = @mat[0][0]
+
     end
 
     def afficheToi()
@@ -114,229 +115,144 @@ class Grille2Essai
       return 1
     end
 
+    def sortLimite(posX, posY)
+      if(posX < 0 || posY < 0 || posX >= @tailleX || posY >= @tailleY)
+        return true
+      end
+      return false
+    end
+
 
 
     def getGrille()
         return @mat
     end
 
-    def annuleCreatePont(petitPos, grandPos, direction)
-
-      for i in (petitPos..grandPos)
-
-        if(direction == Pont.HORIZONTAL)
-
-          @mat[@dernierIle.posX()][i].diminueValeur(Pont.HORIZONTAL)
-
-        elsif(direction == Pont.VERTICAL)
-
-          @mat[i][@dernierIle.posY()].diminueValeur(Pont.VERTICAL)
-
-        end
-
-
+    def getDifference(ile1, ile2)
+      if(ile1.posX() == ile2.posX()) #alors pont horizontal
+        direction = Pont::VERTICAL
+        petitPos = [ile2.posY(), ile1.posY()].min() + 1
+        grandPos = [ile2.posY(), ile1.posY()].max() - 1
+      elsif(ile1.posY() == ile2.posY()) #alors pont vertical
+        direction = Pont::HORIZONTAL
+        petitPos = [ile2.posX(), ile1.posX()].min() + 1
+        grandPos = [ile2.posX(), ile1.posX()].max() - 1
+      else
+        direction = Pont::NULLE
+        petitPos = 0
+        grandPos = 0
       end
+      return direction, petitPos, grandPos
+    end
 
+    def annuleCreatePont(petitPos, grandPos, direction)
+      for i in (petitPos..grandPos)
+        if(direction == Pont::HORIZONTAL)
+          @mat[@dernierIle.posX()][i].diminueValeur(Pont::HORIZONTAL)
+        elsif(direction == Pont::VERTICAL)
+          @mat[i][@dernierIle.posY()].diminueValeur(Pont::VERTICAL)
+        end
+      end
     end
 
     def createPont(ile2)
-        #savoir si c'est horizontal ou vertical :
-        if(@dernierIle.posX() == ile2.posX()) #alors pont horizontal
-
-          direction = Pont.HORIZONTAL
-          petitPos = min(ile2.posY(), @dernierIle.posY()) + 1
-          grandPos = max(ile2.posY(), @dernierIle.posY()) - 1
-
-        elsif(@dernierIle.posY() == ile2.posY()) #alors pont vertical
-
-          direction = Pont.VERTICAL
-          petitPos = min(ile2.posX(), @dernierIle.posX()) + 1
-          grandPos = max(ile2.posX(), @dernierIle.posX()) - 1
-
-        else
-
-          return false
-
-        end
-
+      direction, petitPos, grandPos = getDifference(@dernierIle, ile2)
+      if(direction == Pont::HORIZONTAL)
         for i in (petitPos..grandPos)
-
-          if(direction == Pont.HORIZONTAL)
-
-            if(@mat[@dernierIle.posX()][i].augmenteValeur(Pont.HORIZONTAL) == false)
-                annuleCreatePont(petitPos, i, Pont.HORIZONTAL)
-                return false
-            end
-
-          elsif(direction == Pont.VERTICAL)
-
-            if(@mat[i][@dernierIle.posY()].augmenteValeur(Pont.VERTICAL) == false)
-                annuleCreatePont(petitPos, i, Pont.VERTICAL)
-                return false
-            end
-
+          if(@mat[@dernierIle.posX()][i].augmenteValeur(Pont::HORIZONTAL) == false)
+            annuleCreatePont(petitPos, i, Pont::HORIZONTAL)
+            return false
           end
-
         end
-        return true
+      elsif(direction == Pont::VERTICAL)
+        for i in (petitPos..grandPos)
+          if(@mat[i][@dernierIle.posY()].augmenteValeur(Pont::VERTICAL) == false)
+            annuleCreatePont(petitPos, i, Pont::VERTICAL)
+            return false
+          end
+        end
+      elsif(direction == Pont::NULLE)
+        return false
+      end
+      return true
     end
 
     def estVoisin?(ile1, ile2)
-        if(ile1.posX == ile2.posX) #savoir s'il sont alignés horizontalement
-            if ile2.posY < ile1.posY
-                yPetit = ile2.posY
-                yGrand = ile1.posY
-            else
-                yPetit = ile1.posY
-                yGrand = ile2.posY
-            end
-            yPetit+=1 #pour se placer sur le premier pont
-            yGrand-=1 #pour se placer sur le dernier pont
-            for i in (yPetit..yGrand)
-                if(@mat[@dernierIle.posX][i].instance_of? Ile)
-                    return false
-                end
-            end
-            return true
-        else
-            if ile2.posx < ile1.posx
-                xPetit = ile2.posx
-                xGrand = ile1.posx
-            else
-                xPetit = ile1.posx
-                xGrand = ile2.posx
-            end
-            xPetit+=1 #pour se placer sur le premier pont
-            xGrand-=1 #pour se placer sur le dernier pont
-            for i in (xPetit..xGrand)
-                if(@mat[i][ile2.posY].instance_of? Ile)
-                    return false
-                end
-            end
-            return true
+
+      direction, petitPos, grandPos = getDiff(ile1, ile2)
+      if(direction == Pont::HORIZONTAL)
+        for i in (petitPos..grandPos)
+          if(@mat[ile1.posX()][i].instance_of? Ile)
+            return false
+          end
         end
+      elsif(direction == Pont::VERTICAL)
+        for i in (petitPos..grandPos)
+          if(@mat[i][ile2.posY()].instance_of? Ile)
+            return false
+          end
+        end
+      elsif(direction == Pont::NULLE)
+        return false
+      end
+      return true
     end
 
+
+    def annuleSurbrillancePont(petitPos, grandPos, direction)
+      for i in (petitPos..grandPos)
+        if(direction == Pont::HORIZONTAL)
+          @mat[@dernierIle.posX()][i].supprSurbrillance(Pont::HORIZONTAL)
+        elsif(direction == Pont::VERTICAL)
+          @mat[i][@dernierIle.posY()].supprSurbrillance(Pont::VERTICAL)
+        end
+      end
+    end
+
+    def surbrillancePont(ile2)
+      direction, petitPos, grandPos = getDifference(@dernierIle, ile2)
+      if(direction == Pont::HORIZONTAL)
+        for i in (petitPos..grandPos)
+          print @mat[@dernierIle.posX()][i], "\n"
+          if(@mat[@dernierIle.posX()][i].metSurbrillance(Pont::HORIZONTAL) == false)
+            annuleSurbrillancePont(petitPos, i, Pont::HORIZONTAL)
+            return false
+          end
+        end
+      elsif(direction == Pont::VERTICAL)
+        for i in (petitPos..grandPos)
+          print @mat[i][@dernierIle.posY()], "\n"
+          if(@mat[i][@dernierIle.posY()].metSurbrillance(Pont::VERTICAL) == false)
+            annuleSurbrillancePont(petitPos, i, Pont::VERTICAL)
+            return false
+          end
+        end
+      elsif(direction == Pont::NULLE)
+        return false
+      end
+      return true
+    end
+
+
+
+
     def montrePont()
-        #met en surbrillance les ponts qui sont relié
-        droite = false
-        gauche = false
-        haut = false
-        bas = false
-        directionEnCours = nil
 
-        #en bas
-        if(@mat[@dernierIle.posX+1][@dernierIle.posY].instance_of? Pont)
-            directionEnCours = @mat[@dernierIle.posX+1][@dernierIle.posY].direction
-            for i in range (@dernierIle.posX .. tailleX)
-                if(@mat[@dernierIle.posX+i][@dernierIle.posY].instance_of? Ile)
-                    bas = true
-                    break
-                elsif(@mat[@dernierIle.posX+i][@dernierIle.posY].instance_of? Pont)
-                    if(directionEnCours != @mat[@dernierIle.posX+i][@dernierIle.posY].direction)
-                        bas = false
-                        break
-                    end
-                    #sinon est on est sur un bon pont
-                else
-                    #on est sur une case
-                    bas = false
-                    break
-                end
-            end
-        end
+      if(@dernierIle.aVoisin(Ile::HAUT))
+        surbrillancePont(@dernierIle.getVoisin(Ile::HAUT))
+      end
 
-        #en haut
-        if(@mat[@dernierIle.posX-1][@dernierIle.posY].instance_of? Pont)
-            directionEnCours = @mat[@dernierIle.posX-1][@dernierIle.posY].direction
-            for i in range (@dernierIle.posX .. 0)
-                if(@mat[@dernierIle.posX+i][@dernierIle.posY].instance_of? Ile)
-                    haut = true
-                    break
-                elsif(@mat[@dernierIle.posX+i][@dernierIle.posY].instance_of? Pont)
-                    if(directionEnCours != direction)
-                        haut = false
-                        break
-                    end
-                    #sinon est on est sur un bon pont
-                else
-                    #on est sur une case
-                    haut = false
-                    break
-                end
-            end
-        end
+      if(@dernierIle.aVoisin(Ile::BAS))
+        surbrillancePont(@dernierIle.getVoisin(Ile::BAS))
+      end
 
-        #a gauche
-        if(@mat[@dernierIle.posX][@dernierIle.posY-1].instance_of? Pont)
-            directionEnCours = @mat[@dernierIle.posX][@dernierIle.posY-1].direction
-            for i in range (@dernierIle.posY .. 0)
-                if(@mat[@dernierIle.posX][@dernierIle.posY+i].instance_of? Ile)
-                    gauche = true
-                    break
-                elsif(@mat[@dernierIle.posX][@dernierIle.posY+i].instance_of? Pont)
-                    if(directionEnCours != direction)
-                        gauche = false
-                        break
-                    end
-                    #sinon est on est sur un bon pont
-                else
-                    #on est sur une case
-                    gauche = false
-                    break
-                end
-            end
-        end
+      if(@dernierIle.aVoisin(Ile::GAUCHE))
+        surbrillancePont(@dernierIle.getVoisin(Ile::GAUCHE))
+      end
 
-        #a droite
-        if(@mat[@dernierIle.posX][@dernierIle.posY+1].instance_of? Pont)
-            directionEnCours = @mat[@dernierIle.posX][@dernierIle.posY+1].direction
-            for i in range (@dernierIle.posY .. tailleY)
-                if(@mat[@dernierIle.posX][@dernierIle.posY+i].instance_of? Ile)
-                    droite = true
-                    break
-                elsif(@mat[@dernierIle.posX][@dernierIle.posY+i].instance_of? Pont)
-                    if(directionEnCours != direction)
-                        droite = false
-                        break
-                    end
-                    #sinon est on est sur un bon pont
-                else
-                    #on est sur une case
-                    droite = false
-                    break
-                end
-            end
-        end
-
-        if(bas)
-            i=1
-            until(@mat[@dernierIle.posX+i][@dernierIle.posY].instance_of? Ile)
-                @mat[@dernierIle.posX+i][@dernierIle.posY].surbrillance = true
-                i+=1
-            end
-        end
-        if(haut)
-            i=-1
-            until(@mat[@dernierIle.posX+i][@dernierIle.posY].instance_of? Ile)
-                @mat[@dernierIle.posX+i][@dernierIle.posY].surbrillance = true
-                i-=1
-            end
-        end
-        if(gauche)
-            i=-1
-            until(@mat[@dernierIle.posX][@dernierIle.posY+i].instance_of? Ile)
-                @mat[@dernierIle.posX][@dernierIle.posY+i].surbrillance = true
-                i-=1
-            end
-        end
-        if(droite)
-            i=1
-            until(@mat[@dernierIle.posX][@dernierIle.posY+i].instance_of? Ile)
-                @mat[@dernierIle.posX][@dernierIle.posY+i].surbrillance = true
-                i+=1
-            end
-        end
+      if(@dernierIle.aVoisin(Ile::DROITE))
+        surbrillancePont(@dernierIle.getVoisin(Ile::DROITE))
+      end
 
     end
 

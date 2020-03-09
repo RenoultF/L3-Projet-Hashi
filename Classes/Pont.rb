@@ -178,36 +178,37 @@ class Pont < Case
 
     #:nodoc:
     private def modifValeur(direction, valeur)
-
         if(@direction != NULLE)
-
             #On modifie la valeur du pont si la direection donné est la bonne
             if(@direction == direction)
-
                 @valeur = (@valeur + valeur) % (MAX_LIGNE + 1)
-
                 if(@valeur == 0)
-
                     @direction = NULLE
-
                 end
-
                 return true
-
             end
-
             return false
-
         #On crée un nouveau pont
         elsif(@direction == NULLE)
-
             @direction = direction
             @valeur = valeur
-
             return true
-
         end
+    end
 
+    private def modifSurbrillance(direction, valeur)
+      if(@direction != NULLE)
+        #On modifie la valeur du pont si la direection donné est la bonne
+        if(@direction == direction)
+          @surbrillance = valeur
+          return true
+        end
+        return false
+        #On crée un nouveau pont
+      elsif(@direction == NULLE)
+        @surbrillance = valeur
+        return true
+      end
     end
     #:doc:
 
@@ -235,6 +236,34 @@ class Pont < Case
     def diminueValeur(direction)
 
         return modifValeur(direction , MAX_LIGNE)
+
+    end
+
+
+
+    #Cette méthode permet d'augmenter la valeur du pont
+    #
+    #@param direction La direction dans laquelle ont veut augmenter le pont
+    #
+    #Si le pont que l'on augmente avait 2 trait alors le pont disparait
+    #
+    #@return true si la valeur à été modifié, false sinon
+    def metSurbrillance(direction)
+
+        return modifSurbrillance(direction , true)
+
+    end
+
+    #Cette méthode permet de diminuer la valeur du pont
+    #
+    #@param direction La direction dans laquelle ont veut diminuer le pont
+    #
+    #Si le pont que l'on diminue n'avait pas de trait alors un pont à deux trait apparait
+    #
+    #@return true si la valeur à été modifié, false sinon
+    def supprSurbrillance(direction)
+
+        return modifSurbrillance(direction , false)
 
     end
 

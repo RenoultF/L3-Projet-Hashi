@@ -17,3 +17,7 @@ res += " 4===4 "
 grille = Grille2Essai.creer(res, 7, 7, 0)
 
 grille.afficheToi()
+
+grille.montrePont()
+
+grille.afficheToi()
