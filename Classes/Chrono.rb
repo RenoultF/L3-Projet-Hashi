@@ -1,5 +1,5 @@
 ##
-# Auteur LeNomDeLEtudiant
+# Auteur JOLLIET Corentin
 # Version 0.1 : Date : Fri Mar 06 09:24:44 CET 2020
 #
 require 'gtk3'
@@ -39,6 +39,7 @@ class Chrono
 	end
 
 	def lancerChrono()
+	#Chrono sans arguments
 		self.activeChrono()
 		while( (@minutes < 59) && @active )
 			sleep(1)
@@ -48,6 +49,20 @@ class Chrono
 				@secondes = 0
 			end
 			puts self.afficherTps()
+		end
+	end
+
+	def lancerChrono(tps, chrono)
+	#Chrono avec arguments : Durée du Chrono, Label du Chrono
+		self.activeChrono()
+		while( @minutes < tps )
+			sleep(1)
+			@secondes += 1
+			if(@secondes >= 60)
+				@minutes += 1
+				@secondes = 0
+			end
+			chrono.set_text(self.afficherTps())
 		end
 	end
 
