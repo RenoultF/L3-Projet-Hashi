@@ -28,4 +28,9 @@ class Case
 
     def equals(autre)
     end
+
+
+    def to_s
+      " "
+    end
 end

@@ -10,7 +10,7 @@ class Ile < Case
         super(posX, posY, grille)
         @valeur = nbLien
         @nbPont = 0
-        
+
     end
 
     ##
@@ -22,7 +22,7 @@ class Ile < Case
 
     ##
     #Verifie si le nombre de pont vérifie la valeur de l'ile
-    #@return : vrai ou faux 
+    #@return : vrai ou faux
     def estValide?()
         if @nbPont == @valeur
             return true
@@ -53,6 +53,11 @@ class Ile < Case
             end
         end
         return 0
+    end
+
+
+    def to_s
+      "#{@valeur}"
     end
 
 end

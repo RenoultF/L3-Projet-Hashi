@@ -149,11 +149,11 @@ class Pont < Case
 
             if(@valeur == 1)
 
-                ret =  " - "
+                ret =  "-"
 
             elsif(@valeur == 2)
 
-                ret =  " = "
+                ret =  "="
 
             end
 
@@ -161,11 +161,11 @@ class Pont < Case
 
             if(@valeur == 1)
 
-                ret =  " ' "
+                ret =  "|"
 
             elsif(@valeur == 2)
 
-                ret =  " \" "
+                ret =  "\""
 
             end
 
