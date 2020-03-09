@@ -1,4 +1,9 @@
 require 'scanf'
+require "./Grille2Essai.rb"
+require "./Aide.rb"
+require "./Sauvegarde.rb"
+require "./Compte.rb"
+require "./Checkpoint.rb"
 ##
 #classe qui s'occupe du déroulement d'une partie
 class Jeu
@@ -11,16 +16,21 @@ class Jeu
     @verif # objet qui vérifie la grille
     @checkPoint #objet qui gere les hypotheses
 
-    #:nodoc:
-    def Jeu.creer()
-        new()
+    #Ce constructeur permet de creer un nouveau Jeu
+    #
+    #:arg: difficulte
+    #:arg: tailleGrille : Entier
+    #:arg: compte : Compte
+    def Jeu.creer(difficulte, tailleGrille, compte)
+        new(difficulte, tailleGrille, compte)
     end
 
-    def initialize(difficulte, tailleGrille,compte)
+    #:nodoc:
+    def initialize(difficulte, tailleGrille, compte)
         @grille = chargerGrille(mode, difficulte, tailleGrille,compte)
-        @tech = new DonnerTechnique
-        @verif = new VerifierGrille
-        @checkPoint = new CheckPoint(grille)
+        @tech = DonnerTechnique.new()
+        @verif = VerifierGrille.new()
+        @checkPoint = CheckPoint.creer(grille)
     end
     #:doc
 
@@ -33,7 +43,7 @@ class Jeu
     def chargerGrille(difficulte, tailleGrille, compte)
         lst = Sauvegarde.liste(difficulte, tailleGrille, compte)
         i = Random.new
-        Sauvegarde.getGrille(lst[i.random(lst.lenght)])
+        return lst[i.random(lst.lenght)].getGrille()
     end
 
     ##
@@ -85,7 +95,7 @@ class Jeu
     ##
     #affichage de l'aide
     #:arg: aide : String
-    def afficherAide(String aide)
+    def afficherAide(aide)
       puts aide
     end
 

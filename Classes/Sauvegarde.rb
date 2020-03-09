@@ -5,7 +5,7 @@
 # Version 0.1 : Date : 07/02/2020
 
 require "./Compte.rb"
-require "./Grille.rb"
+require "./Grille2Essai.rb"
 require "active_record"
 
 
@@ -14,7 +14,7 @@ class Sauvegarde < ActiveRecord::Base
 
 
     #@grille => Contient la grille que l'utilisateur a commencé à remplir
-    has_one :grille
+    #has_one :grille
 
     validates :grille, presence: true, uniqueness: true
 
@@ -35,7 +35,7 @@ class Sauvegarde < ActiveRecord::Base
     #@param grille La grille auquel la sauvegarde est lié
     def Sauvegarde.creer(compte, grille)
 
-      new(:compte => compte, :grille => YAML.dump(grille), :taille => grille.getTaille(), difficulte => grille.getDifficulte())
+      new(:compte => compte, :grille => YAML.dump(grille), :taille => grille.tailleX(), :difficulte => grille.difficulte())
 
     end
 
@@ -44,7 +44,7 @@ class Sauvegarde < ActiveRecord::Base
     #@param compte Le compte du joueur
     #
     #@return Le tableau des sauvegardes du compte
-    def Sauvegarde.liste(compte)
+    def Sauvegarde.nik(compte)
 
       return Sauvegarde.where(compte: compte).to_a()
 
@@ -78,7 +78,7 @@ class Sauvegarde < ActiveRecord::Base
     #Cette méthode permet de recuperer la grille de la sauvegarde
     def getGrille()
 
-      return YAML.load(self.grille.sauvegarde)
+      return YAML.load(self.grille)
 
     end
 
@@ -92,7 +92,7 @@ class Sauvegarde < ActiveRecord::Base
     #Cette méthode permet d'afficher une sauvegarde
     def to_s
 
-        return "#{self.compte} : #{self.grille_id}"
+        return "#{self.compte} : #{self.getGrille()}"
 
     end
 

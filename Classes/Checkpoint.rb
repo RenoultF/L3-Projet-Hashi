@@ -66,15 +66,15 @@ class Checkpoint
 
 end
 
-checkpoint = Checkpoint.creer()
+#checkpoint = Checkpoint.creer()
 
-checkpoint.emettre(5)
-checkpoint.emettre(4)
-checkpoint.supprimer_derniere_action
-checkpoint.emettre(10)
-checkpoint.emettre(6)
-checkpoint.afficher_stack()
+#checkpoint.emettre(5)
+#checkpoint.emettre(4)
+#checkpoint.supprimer_derniere_action
+#checkpoint.emettre(10)
+#checkpoint.emettre(6)
+#checkpoint.afficher_stack()
 
-checkpoint.supprimer_checkpoint
+#checkpoint.supprimer_checkpoint
 
-checkpoint.afficher_stack()
+#checkpoint.afficher_stack()

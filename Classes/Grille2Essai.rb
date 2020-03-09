@@ -18,8 +18,12 @@ class Grille2Essai
     @numGrille #numero de la grille
     @checkpoints #liste des différents chekcpoints
     @actions #pile des actions
-    @Sauvegarde #sauvegarde de la grille
+    @sauvegarde #sauvegarde de la grille
     @matSolution #matrice de la grille Solution
+    attr_reader :difficulte
+    attr_reader :tailleX
+
+
 
     private_class_method :new
 
