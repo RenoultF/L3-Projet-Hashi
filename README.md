@@ -74,4 +74,18 @@ Travail à réaliser :
   - Equipe GTK : On continue GTK avec toutes les interfaces à faire
   - Equipe Codage : On continue le codage des classes
   
-  
+ Séance du 09/03/2020
+Absences
+
+    Aucun
+
+Retard
+
+     Aucun
+
+Travail à réaliser :  
+
+    Equipe GTK : Adrien jeu, corentin jeu(finition du chronometre), andrew ecran de fin
+    Equipe Codage : Florent(test grille chargement entre txt et dans une variable @mat reproduction dans terminal)
+    mano et erwan correction bug class jeu
+    collin complement de ses classes
