@@ -35,6 +35,8 @@ class Chrono
 			@active = false
 		else
 			@active = true
+			@minutes = 0
+			@secondes = 0
 		end
 	end
 
@@ -42,27 +44,27 @@ class Chrono
 	#Chrono sans arguments
 		self.activeChrono()
 		while( (@minutes < 59) && @active )
+			puts self.afficherTps()
 			sleep(1)
 			@secondes += 1
 			if(@secondes >= 60)
 				@minutes += 1
 				@secondes = 0
 			end
-			puts self.afficherTps()
 		end
 	end
 
 	def lancerChrono(tps, chrono)
 	#Chrono avec arguments : Durée du Chrono, Label du Chrono
 		self.activeChrono()
-		while( (@minutes < tps) && @active )
+		while( (@minutes < tps) & @active )
+			chrono.set_label(self.afficherTps())
 			sleep(1)
 			@secondes += 1
 			if(@secondes >= 60)
 				@minutes += 1
 				@secondes = 0
 			end
-			chrono.set_text(self.afficherTps())
 		end
 	end
 
