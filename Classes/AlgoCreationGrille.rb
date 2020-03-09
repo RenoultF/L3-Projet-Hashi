@@ -5,6 +5,7 @@ def initialize(chaine, tailleX, tailleY, difficulte)
       raise("La taille n'est pas la bonne")
 
     end
+    @difficulte = difficulte
     i = 0
     j = 0
     @tailleX = tailleX
@@ -21,23 +22,23 @@ def initialize(chaine, tailleX, tailleY, difficulte)
       elsif(c = '|')
 
         @matSolution[i][j] = Pont.construit(i, j, self, Pont.VERTICAL, 1)
-        @mat[i][j] = Case.generer(i, j, self)
+        @mat[i][j] = Pont.creer(i, j, self)
 
 
       elsif(c = '"')
 
         @matSolution[i][j] = Pont.construit(i, j, self, Pont.VERTICAL, 2)
-        @mat[i][j] = Case.generer(i, j, self)
+        @mat[i][j] = Pont.creer(i, j, self)
 
       elsif(c = '-')
 
         @matSolution[i][j] = Pont.construit(i, j, self, Pont.HORIZONTAL, 1)
-        @mat[i][j] = Case.generer(i, j, self)
+        @mat[i][j] = Pont.creer(i, j, self)
 
       elsif(c = '=')
 
         @matSolution[i][j] = Pont.construit(i, j, self, Pont.HORIZONTAL, 2)
-        @mat[i][j] = Case.generer(i, j, self)
+        @mat[i][j] = Pont.creer(i, j, self)
 
       elsif(c = ' ')
 
