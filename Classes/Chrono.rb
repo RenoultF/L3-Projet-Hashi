@@ -55,7 +55,7 @@ class Chrono
 	def lancerChrono(tps, chrono)
 	#Chrono avec arguments : Durée du Chrono, Label du Chrono
 		self.activeChrono()
-		while( @minutes < tps )
+		while( (@minutes < tps) && @active )
 			sleep(1)
 			@secondes += 1
 			if(@secondes >= 60)
