@@ -68,41 +68,52 @@ class Ile < Case
       indice = 1
 
       if(direction == Ile::HAUT)
-        until(@grille.sortLimite(@posX, @posY - indice) or @grille.getGrille()[@posX][@posY - indice].estIle?())
-          indice += 1
-        end
-        posX = @posX
-        posY = @posY - indice
-      elsif(direction == Ile::BAS)
         until(@grille.sortLimite(@posX, @posY + indice) or @grille.getGrille()[@posX][@posY + indice].estIle?())
           indice += 1
         end
         posX = @posX
         posY = @posY + indice
-      elsif(direction == Ile::GAUCHE)
-        until(@grille.sortLimite(@posX - indice, @posY) or @grille.getGrille()[@posX - indice][@posY].estIle?())
+      elsif(direction == Ile::BAS)
+        until(@grille.sortLimite(@posX, @posY - indice) or @grille.getGrille()[@posX][@posY - indice].estIle?())
           indice += 1
         end
-        posX = @posX - indice
-        posY = @posY
-      elsif(direction == Ile::DROITE)
+        posX = @posX
+        posY = @posY - indice
+      elsif(direction == Ile::GAUCHE)
         until(@grille.sortLimite(@posX + indice, @posY) or @grille.getGrille()[@posX + indice][@posY].estIle?())
-          indice += 1
+        indice += 1
         end
         posX = @posX + indice
         posY = @posY
+      elsif(direction == Ile::DROITE)
+        until(@grille.sortLimite(@posX - indice, @posY) or @grille.getGrille()[@posX - indice][@posY].estIle?())
+        indice += 1
+        end
+        posX = @posX - indice
+        posY = @posY
       else
-        raise("Cette ile n'a pas de voisins")
+        raise("La direction n'est pas bonne")
       end
 
-      return @grille.getGrille()[posX][posY]
+      if(@grille.sortLimite(posX, posY))
+
+        raise("Cette ile n'a pas de voisins dans cette direction")
+
+      else
+
+        return @grille.getGrille()[posX][posY]
+
+      end
 
     end
 
-    def aVoisin(direction)
-
-      return getVoisin(direction).estIle?()
-
+    def aVoisin?(direction)
+      return true
+      begin
+        return getVoisin(direction).estIle?()
+      rescue
+        return false
+      end
     end
 
     def estIle?()

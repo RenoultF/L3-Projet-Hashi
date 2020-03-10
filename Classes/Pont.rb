@@ -143,7 +143,13 @@ class Pont < Case
     #Cette méthode permet d'afficher le pont dans un terminal
     def to_s
 
-      ret = "   "
+      ret = " "
+
+      if(@surbrillance)
+
+        return "P"
+
+      end
 
         if(@direction == HORIZONTAL)
 
@@ -197,6 +203,9 @@ class Pont < Case
     end
 
     private def modifSurbrillance(direction, valeur)
+      @surbrillance = valeur
+      return true
+=begin
       if(@direction != NULLE)
         #On modifie la valeur du pont si la direection donné est la bonne
         if(@direction == direction)
@@ -209,6 +218,7 @@ class Pont < Case
         @surbrillance = valeur
         return true
       end
+=end
     end
     #:doc:
 

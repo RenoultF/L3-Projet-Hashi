@@ -4,7 +4,7 @@ require "./Grille2Essai.rb"
 
 res = ""
 
-res += "4=5----"
+res += "4=5---2"
 res += "\"2\"1-2|"
 res += "\"\"\"  |1"
 res += "\"\"6==5 "

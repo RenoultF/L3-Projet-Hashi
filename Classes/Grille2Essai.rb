@@ -96,7 +96,7 @@ class Grille2Essai
     end
 
     def afficheToi()
-      @matSolution.each do |i|
+      @mat.each do |i|
         i.each do |j|
           print j
         end
@@ -223,16 +223,16 @@ class Grille2Essai
       puts direction, petitPos, grandPos
       if(direction == Pont::HORIZONTAL)
         for i in (petitPos..grandPos)
-          print @mat[i][@dernierIle.posY()], "\n"
           if(@mat[i][@dernierIle.posY()].metSurbrillance(Pont::HORIZONTAL) == false)
+            puts i
             annuleSurbrillancePont(petitPos, i, Pont::HORIZONTAL)
             return false
           end
         end
       elsif(direction == Pont::VERTICAL)
         for i in (petitPos..grandPos)
-          print @mat[@dernierIle.posX()][i], "\n"
           if(@mat[@dernierIle.posX()][i].metSurbrillance(Pont::VERTICAL) == false)
+            puts i
             annuleSurbrillancePont(petitPos, i, Pont::VERTICAL)
             return false
           end
@@ -248,24 +248,21 @@ class Grille2Essai
 
     def montrePont()
 
-      if(@dernierIle.aVoisin(Ile::HAUT))
-
-        print @dernierIle.getVoisin(Ile::HAUT).afficheInfo(), "\n"
-
+      if(@dernierIle.aVoisin?(Ile::HAUT))
         surbrillancePont(@dernierIle.getVoisin(Ile::HAUT))
       end
 
-      if(@dernierIle.aVoisin(Ile::BAS))
-        surbrillancePont(@dernierIle.getVoisin(Ile::BAS))
-      end
+    #  if(@dernierIle.aVoisin?(Ile::BAS))
+    #    surbrillancePont(@dernierIle.getVoisin(Ile::BAS))
+    #  end
 
-      if(@dernierIle.aVoisin(Ile::GAUCHE))
+      if(@dernierIle.aVoisin?(Ile::GAUCHE))
         surbrillancePont(@dernierIle.getVoisin(Ile::GAUCHE))
       end
 
-      if(@dernierIle.aVoisin(Ile::DROITE))
-        surbrillancePont(@dernierIle.getVoisin(Ile::DROITE))
-      end
+    #  if(@dernierIle.aVoisin?(Ile::DROITE))
+    #     surbrillancePont(@dernierIle.getVoisin(Ile::DROITE))
+    #  end
 
     end
 
