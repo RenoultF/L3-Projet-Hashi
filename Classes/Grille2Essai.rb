@@ -107,7 +107,7 @@ class Grille2Essai
     def equals()
       for i in (0..(@tailleX-1))
         for j in (0..(@tailleY-1))
-          if(@mat[i][j] != @matSolution[i][i])
+          if(@mat[i][j] != @matSolution[i][j])
             return 0
           end
         end
@@ -128,7 +128,13 @@ class Grille2Essai
         return @mat
     end
 
+
+
     def getDifference(ile1, ile2)
+
+      print ile1.afficheInfo(), "\n"
+      print ile2.afficheInfo(), "\n"
+
       if(ile1.posX() == ile2.posX()) #alors pont horizontal
         direction = Pont::VERTICAL
         petitPos = [ile2.posY(), ile1.posY()].min() + 1
@@ -145,28 +151,32 @@ class Grille2Essai
       return direction, petitPos, grandPos
     end
 
+
+
     def annuleCreatePont(petitPos, grandPos, direction)
       for i in (petitPos..grandPos)
         if(direction == Pont::HORIZONTAL)
-          @mat[@dernierIle.posX()][i].diminueValeur(Pont::HORIZONTAL)
+          @mat[i][@dernierIle.posY()].diminueValeur(Pont::HORIZONTAL)
         elsif(direction == Pont::VERTICAL)
-          @mat[i][@dernierIle.posY()].diminueValeur(Pont::VERTICAL)
+          @mat[@dernierIle.posX()][i].diminueValeur(Pont::VERTICAL)
         end
       end
     end
+
+
 
     def createPont(ile2)
       direction, petitPos, grandPos = getDifference(@dernierIle, ile2)
       if(direction == Pont::HORIZONTAL)
         for i in (petitPos..grandPos)
-          if(@mat[@dernierIle.posX()][i].augmenteValeur(Pont::HORIZONTAL) == false)
+          if(@mat[i][@dernierIle.posY()].augmenteValeur(Pont::HORIZONTAL) == false)
             annuleCreatePont(petitPos, i, Pont::HORIZONTAL)
             return false
           end
         end
       elsif(direction == Pont::VERTICAL)
         for i in (petitPos..grandPos)
-          if(@mat[i][@dernierIle.posY()].augmenteValeur(Pont::VERTICAL) == false)
+          if(@mat[@dernierIle.posX()][i].augmenteValeur(Pont::VERTICAL) == false)
             annuleCreatePont(petitPos, i, Pont::VERTICAL)
             return false
           end
@@ -178,17 +188,16 @@ class Grille2Essai
     end
 
     def estVoisin?(ile1, ile2)
-
-      direction, petitPos, grandPos = getDiff(ile1, ile2)
+      direction, petitPos, grandPos = getDifference(ile1, ile2)
       if(direction == Pont::HORIZONTAL)
         for i in (petitPos..grandPos)
-          if(@mat[ile1.posX()][i].instance_of? Ile)
+          if(@mat[i][ile1.posY()].estIle?())
             return false
           end
         end
       elsif(direction == Pont::VERTICAL)
         for i in (petitPos..grandPos)
-          if(@mat[i][ile2.posY()].instance_of? Ile)
+          if(@mat[ile1.posX()][i].estIle?())
             return false
           end
         end
@@ -202,27 +211,28 @@ class Grille2Essai
     def annuleSurbrillancePont(petitPos, grandPos, direction)
       for i in (petitPos..grandPos)
         if(direction == Pont::HORIZONTAL)
-          @mat[@dernierIle.posX()][i].supprSurbrillance(Pont::HORIZONTAL)
+          @mat[i][@dernierIle.posY()].supprSurbrillance(Pont::HORIZONTAL)
         elsif(direction == Pont::VERTICAL)
-          @mat[i][@dernierIle.posY()].supprSurbrillance(Pont::VERTICAL)
+          @mat[@dernierIle.posX()][i].supprSurbrillance(Pont::VERTICAL)
         end
       end
     end
 
     def surbrillancePont(ile2)
       direction, petitPos, grandPos = getDifference(@dernierIle, ile2)
+      puts direction, petitPos, grandPos
       if(direction == Pont::HORIZONTAL)
         for i in (petitPos..grandPos)
-          print @mat[@dernierIle.posX()][i], "\n"
-          if(@mat[@dernierIle.posX()][i].metSurbrillance(Pont::HORIZONTAL) == false)
+          print @mat[i][@dernierIle.posY()], "\n"
+          if(@mat[i][@dernierIle.posY()].metSurbrillance(Pont::HORIZONTAL) == false)
             annuleSurbrillancePont(petitPos, i, Pont::HORIZONTAL)
             return false
           end
         end
       elsif(direction == Pont::VERTICAL)
         for i in (petitPos..grandPos)
-          print @mat[i][@dernierIle.posY()], "\n"
-          if(@mat[i][@dernierIle.posY()].metSurbrillance(Pont::VERTICAL) == false)
+          print @mat[@dernierIle.posX()][i], "\n"
+          if(@mat[@dernierIle.posX()][i].metSurbrillance(Pont::VERTICAL) == false)
             annuleSurbrillancePont(petitPos, i, Pont::VERTICAL)
             return false
           end
@@ -239,6 +249,9 @@ class Grille2Essai
     def montrePont()
 
       if(@dernierIle.aVoisin(Ile::HAUT))
+
+        print @dernierIle.getVoisin(Ile::HAUT).afficheInfo(), "\n"
+
         surbrillancePont(@dernierIle.getVoisin(Ile::HAUT))
       end
 

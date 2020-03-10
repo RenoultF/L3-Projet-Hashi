@@ -267,4 +267,11 @@ class Pont < Case
 
     end
 
+
+    def estPont?()
+
+      return true
+
+    end
+
 end

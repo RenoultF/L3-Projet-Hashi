@@ -4,19 +4,22 @@ require "active_record"
 
 class Case
 
-    private_class_method :new
     attr_reader :posX
     attr_reader :posY
     attr_reader :grille
 
-    def Case.generer(x,y,gril)
-        new(x,y,gril)
+
+    private_class_method :new
+
+
+    def Case.generer(posX, posY, grille)
+        new(posX, posY, grille)
     end
 
-    def initialize(x,y,gril)
-        @posX = x
-        @posY = y
-        @grille = gril
+    def initialize(posX, posY, grille)
+        @posX = posX
+        @posY = posY
+        @grille = grille
     end
 
     def affiche()
@@ -32,5 +35,17 @@ class Case
 
     def to_s
       " "
+    end
+
+    def estIle?()
+
+      return false
+
+    end
+
+    def estPont?()
+
+      return false
+
     end
 end

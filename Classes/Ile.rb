@@ -44,7 +44,11 @@ class Ile < Case
     end
 
     def to_s()
-        return " #{@valeur.to_s} "
+        return "#{@valeur.to_s}"
+    end
+
+    def afficheInfo()
+        return @valeur, @posX, @posY
     end
 
     def afficheTerminal()
@@ -52,12 +56,10 @@ class Ile < Case
     end
 
     def <=>(ile)
-        if(ile.instance_of? Ile)
-            if(@valeur != ile.valeur)
-                return @valeur <=> ile.valeur
-            end
-        end
-        return 0
+      if(@valeur != ile.valeur)
+          return @valeur <=> ile.valeur
+      end
+      return 0
     end
 
 
@@ -66,25 +68,25 @@ class Ile < Case
       indice = 1
 
       if(direction == Ile::HAUT)
-        until(@grille.sortLimite(@posX, @posY - indice) or @grille.getGrille()[@posX][@posY - indice].instance_of? Ile)
+        until(@grille.sortLimite(@posX, @posY - indice) or @grille.getGrille()[@posX][@posY - indice].estIle?())
           indice += 1
         end
         posX = @posX
         posY = @posY - indice
       elsif(direction == Ile::BAS)
-        until(@grille.sortLimite(@posX, @posY + indice) or @grille.getGrille()[@posX][@posY + indice].instance_of? Ile)
+        until(@grille.sortLimite(@posX, @posY + indice) or @grille.getGrille()[@posX][@posY + indice].estIle?())
           indice += 1
         end
         posX = @posX
         posY = @posY + indice
       elsif(direction == Ile::GAUCHE)
-        until(@grille.sortLimite(@posX - indice, @posY) or @grille.getGrille()[@posX - indice][@posY].instance_of? Ile)
+        until(@grille.sortLimite(@posX - indice, @posY) or @grille.getGrille()[@posX - indice][@posY].estIle?())
           indice += 1
         end
         posX = @posX - indice
         posY = @posY
       elsif(direction == Ile::DROITE)
-        until(@grille.sortLimite(@posX + indice, @posY) or @grille.getGrille()[@posX + indice][@posY].instance_of? Ile)
+        until(@grille.sortLimite(@posX + indice, @posY) or @grille.getGrille()[@posX + indice][@posY].estIle?())
           indice += 1
         end
         posX = @posX + indice
@@ -99,9 +101,14 @@ class Ile < Case
 
     def aVoisin(direction)
 
-      return getVoisin(direction).instance_of? Ile
+      return getVoisin(direction).estIle?()
 
     end
 
+    def estIle?()
+
+      return true
+
+    end
 
 end
