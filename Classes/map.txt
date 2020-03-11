@@ -1,90 +1,294 @@
-___________________________
+7x7 facile
+4 = 5 - - - 2
+H 2 H 1 - 2 |
+H H H N N | 1
+H H 6 = = 5 N
+2 H H N N H N 
+N H 4 = 2 H N
+N 4 = = = 4 N
 
-7x7
-Facile
+2 - - - - - 3
+| 1 - 3 - 1 H
+| N N | N N H
+3 = = 7 = = 5
+N N N H 1 N |
+2 = = 4 | N |
+N 2 = = 4 - 2
 
-4=5---2
-"2"1-2|
-"""  |1
-""6==5
-2""  "
- "4=2"
- 4===4
+N 3 = = 6 = 4
+N | N N H N H
+2 | N N H N H
+H 5 = = 7 - 5
+H H N N H N H
+H 3 - - 3 N H
+3 - 2 - - - 3
+7x7 normal
+2 - 3 - - - 2
+| N | N N N |
+| N 5 = 3 N |
+| N H N | N |
+| N H N 3 N |
+1 N 2 N H N |
+N 1 - - 5 = 3
 
-___________________________
+3 = 5 - - - 2
+| N H 4 = 2 |
+| N H H N N |
+| N H 4 = = 4
+| N 4 - - 1 |
+1 N | N N N |
+N N 2 - 3 = 3
 
-7x7
-Normal
+2 - 4 = 6 = 3
+| N | N H N |
+1 N | N H N 2
+N N | N H N |
+3 = 7 = 4 N 2
+| N H N N N |
+2 - 4 - - - 2
+7x7 difficile
+N N 2 = = = 3
+1 - - 3 - 1 |
+N N N | N N |
+3 - - 5 - - 3
+H N N H N N |
+H 1 - 4 - 1 |
+4 = = = 2 N 1
 
-4=5=3 1
-" | | |
-2 | 3 |
-  | " |
-2 | 2 |
-" |   |
-3-3---2
+N N N N 1 - 3
+2 - 3 - - 2 H
+| N | 2 N | 3
+| N | H N | |
+2 N | 3 - 2 |
+| N | N N N |
+3 = 5 = 3 - 2
 
-____________________________
+3 - - - - - 3
+H N N N N N H
+5 = 4 - 4 = 5
+| N | N | N |
+| N | N | N |
+1 N 1 N 1 N |
+N N N N N N 1
+10x10 facile
+3 - 2 - - 3 = = = 4
+H 3 - 1 N N 4 = 2 H
+4 H N N N N H N N H
+H 5 - - - - 7 = = 5
+2 H N N N N H 2 N |
+N H N N 2 N H H N |
+N H N N H N H 4 = 3
+N 5 = = 4 N H N N N
+N | N N N N H N N N
+N 1 N N 1 - 4 - 1 N
 
-7x7
-Difficile
+2 - - - 4 = = = = 4
+| 3 - 2 | N N N N H
+| H N | | 2 = 4 N H
+| H N 1 | N N H N H
+| H N N | N 1 H N H
+| 5 = 2 | N | H N H
+| | N N | N | 4 = 6
+| 3 = = 5 N | N N H
+2 - - 1 H N | 2 = 4
+N 1 - - 4 - 2 N N N
 
-1-3-4-2
-  | " |
-  |1" 3
-2-2|" "
-|4=3" "
-1"  " "
- 3--5=4
+3 - - 3 - - - 4 - 3
+H N N | N 2 N H N H
+H N N | N H N H N H
+H N N | N 6 = 8 = 4
+H N N | N H N H 2 N
+H N N | N 4 = 5 H N
+H N N | N N N | H N
+6 = 3 | 1 - - 2 H N
+H N | 3 = 3 - - 3 N
+2 N 1 N N N N N N N
+10x10 normal
+N N N 2 = = = = = 3
+2 - - - - - 4 - 1 |
+| 3 = 4 N N H 3 - 3
+| | N H 2 N H H N |
+| | N H H N H H N |
+| | N H H N H H N |
+| 1 N H H N H H N |
+3 - - 3 H N H H N |
+| N N N H N H 2 N |
+1 N 1 - 4 - 4 - - 2
 
-____________________________
+1 - 2 - - - - - - 2
+N 4 = = = = = = 4 |
+N H 1 - - - - 3 H |
+N H N N N N N H H |
+N H N N N N N H H |
+N 5 = = = = = 5 H 3
+N | N N N N N | 3 H
+N | N 3 = 4 = 4 | H
+N | N | N N N | 1 H
+N 2 - 4 = = = 4 - 3
 
-10x10
-Facile
+1 - - 4 - - 2 N N N
+N N N H N N | N 1 N
+2 - 1 H 2 = 3 N | N
+| N N H N N N N | 1
+| 3 - 6 - - - - 4 |
+| H N H N N N N H |
+| 2 N H 1 - - - 3 |
+| N N 4 - - - - - 3
+| N N | N N N N N |
+3 = = 4 - - - 1 N 1
+10x10 difficile
+2 = 6 = = 4 - - - 2
+N N H 2 N | N N N |
+N N 2 H N | N 4 = 5
+2 - - 3 N | N H N H
+| 1 - - - 2 N H N H
+4 - - - - - - 7 = 6
+H 2 - 2 - - 2 H N H
+H | N | N N H H N 3
+2 | N 3 = = 4 H N |
+N 2 - - - - - 5 = 3
 
-3-----5==3
-"4=5=4"  |
-"" | ""  |
-"4 | ""  |
-"" | ""  |
-"" | ""  |
-"" | ""  |
-"2 | ""1-4
-"  | 2"  "
-4==4--4--3
+2 - - - - - - - - 2
+| N N N N N 2 - 1 |
+| N N N N N | N N |
+| 2 = = = = 5 = = 4
+| N N N N N N N N |
+4 - - - - - - 1 N |
+H 4 = 4 - - - - - 3
+H H N | N N N N N |
+H 2 N 1 N 1 - 2 - 2
+3 - - - - - - - 1 N
+
+1 N N 3 = = = 5 = 4
+| N N | N N N | 2 H
+| N N | 2 = = 3 H H
+| N N | N N N N H H
+| N N | N N N N H H
+3 - - 4 - - - 3 H H
+| 1 N | N 1 N H H H
+| | N | N | N H H H
+| 2 - 2 N 2 - 3 H 2
+3 = = = = = 4 = 4 N
+15x15 facile
+2 - 3 - - - - - - - - - 4 - 2
+| N | 1 N N N N N N N 2 H N |
+| N | | N N N N N N N H H N |
+| N | 4 - - - - - - 2 H H N |
+| N | H N N N N N N | H H N |
+| N | H N N N N 2 = 3 H 2 N |
+| N | H N N N N N N N H N N |
+| N | 4 - - - - - - - 7 = 4 |
+| N | | N N N N N N N H N H |
+| N 3 | 1 - 3 = = 3 N H N 3 |
+| N H | N N N N N | N H N | |
+| N H 4 - - - - 1 | N H N 3 |
+| N 2 H N 2 = = = 5 = 5 N H 1
+| 1 - 5 = = 2 N N N N | N H N
+2 - - - - - - - - - - 4 = 4 N
+
+N N N 1 - - - - - - 4 - - 3 N
+2 - 4 - - 4 = = 2 N H N N H N
+| N H 2 N | N 3 = = 4 N N H 1
+| N H H N | N | 2 = = = = 4 |
+| N H 3 - 6 = 5 - - - - - - 4
+| N H N N H N | N N N N N N H
+| N H N N H N | N N N N N N H
+| N H N N H N | N N N N N N H
+1 N H N N 2 N | N N N N N N H
+N N H N N N N | N N N N N N H
+2 = 6 - - - 1 | N N N N N N H
+N N | N N N N | N N N N N N H
+N N 3 = = 2 N | N N N N N N H
+N N N N N N N | N 2 = 4 = = 4
+N 1 - - - - - 3 - - 1 N N N N
+
+4 = = = = 4 = 6 = = = = = 4 N
+H N N N N N N H N N N N N H N
+H N N N 1 - - 5 = = 3 - 2 H N
+H N N N N N N N N N N N | 2 N
+3 - - - - - - - 5 = 2 N 2 - 1
+N N N N N N N N H N N N N N N
+4 = = = = = = = 8 = = 5 = 3 N
+H N N N N N N N H N 1 | N | N
+H N N 2 = = 4 N H N | | N | N
+5 = 4 = 2 N H N H N | | N | N
+| 1 - - - - 5 = 7 - 2 | N 1 N
+| N N N N N N N H N N 3 = = 3
+3 = = = = = = = 5 - 4 - - 1 |
+N N N N N N N N N N H N N N |
+N 1 - - - - - - - - 5 = = = 3
+15x15 normal
+N 2 = 4 - 1 N N N N N N N N N
+3 = 2 | 3 = 3 - - - - 3 = = 4
+| N N | | N N N N N N N N N H
+| N N | | 3 = = = = = = = 4 H
+3 = = 4 | | N N N N N N N H H
+N N N | 1 | N N N N N N N H H
+2 - 2 | N 2 - 3 = = = 2 N H H
+| N | 5 = = = = = = = = = 5 H
+| N | H N N N N N N N N N | H
+| N 1 H 2 = 3 - - - - - - 2 H
+| N N H N N N N N N N N N N H
+3 = = 6 - - - - - - - - - - 4
+N N N | N N N N N N N N N N |
+N 2 = 5 = = = = = = = = 2 N |
+2 = = = = = = = = = = = = = 3
+
+3 - - - - - - - - - - - - - 2
+H N 3 - - - - - - - - - - 1 |
+2 N H N N N N N N N N N N N |
+N N H 2 = = = = 3 - - - - - 3
+N N H N N N N N N N N N N N |
+3 - 6 = = = = = = = = = = = 4
+H N | N N N N N N 2 - - 3 N |
+H N | N N N N N N | N N H N |
+H N | N N N N N N | N N H N |
+H N 2 - - - - - - 3 N N H N |
+6 = = = 2 N N N N | N N H N 1
+H N N N N N N N N | N N 2 N N
+H N N N N N N N N | 2 = = = 4
+H N N N N N N N N 1 N N N N H
+3 - - - - - - - - - - - 3 = 4
+
+N 3 = = = 4 - 5 = 3 - 2 - 1 N
+2 | N N N | N H 3 - - - - - 2
+H | 1 - - 2 N H H N N N N N |
+H 1 N N N N N H 2 N N N N N |
+5 - - - - - - 5 - - - - - - 3
+H N 3 - - - 3 | 2 = = 5 - 1 |
+3 N H N N N H | N 2 N H N N |
+| N 6 = = 2 H | N H N H N N |
+2 N H N N N H | N 4 N 6 = 2 |
+| N H N N N H | N H N H N N |
+| N H N N N H | N H N H N N |
+| N H N N N 2 | N H N H N N |
+| N H N 1 - - 6 = 5 N H N N |
+| N H N N N N H N | N H N N |
+3 = 5 - - 2 - 5 = 5 = 4 N N 1
+15x15 difficile
+1 - - 2 - - - - 5 = = = 5 - 2
+N N 1 - - - - 2 H N N N H N |
+3 = = 3 - 1 N | H N 2 N H N |
+| 1 - - - - - 4 H N H N H N 1
+| N N N N N N H H N 4 N H N N
+5 = = 4 = = = 4 H N H N H N N
+H N N N N N N N H N H N H N 1
+5 - - - - - - - 3 N H N H N |
+H N N N N N N N N N H N H N |
+H N N N N N N N N N H N H N |
+H N N N N N N N N N H N H N |
+4 - - - - - - - - - 4 N H N |
+| N N N N N N N N N | N H N |
+3 = = = = = = 2 N N 1 N H N |
+N N N N N N N N N N N N 3 - 2
+
+N N 2 - 1 N N 1 - - 2 - - - 3
+2 N |
 
 
 
-___________________________
-
-10x10
-Normal
-
- 2--4---3
- |  " 2 "2
- 1  " " 2"
-    " 3--5
-    "    "
-1---7====5
-    "    |
-1 2=6----2
-|   |
-2---4=4=2
 
 
 
-____________________________
 
-10x10
-Difficile
 
-2----3=2
-|3=======3
-||     1 |
-|3-4=4 | |
-|| | " 3 |
-|| | " " |
-|| | " 3 |
-|| | 2 | 2
-|1 1   | |
-2------3-2
