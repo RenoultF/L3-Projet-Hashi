@@ -3,9 +3,6 @@ require "./Ile.rb"
 
 class Grille
 
-    #has_and_belongs_to_many :cases
-
-
     @tailleX #taille x de la grille
     @tailleY #taille y de la grille
     @mat #matrice de type Case[taillex][tailleY]
@@ -15,6 +12,11 @@ class Grille
     @actions #pile des actions
     @Sauvegarde #sauvegarde de la grille
     @matSolution #matrice de la grille Solution
+    attr_reader :difficulte
+    attr_reader :tailleX
+    attr_reader :actions
+    attr_reader :matSolution
+
 
     private_class_method :new
 
@@ -38,118 +40,193 @@ class Grille
         @dernierIle = nil
     end
 
-    def AfficheToi()
-        inc = 0
-        for i in (0..(@tailleX-1))
-            for j in (0..(@tailleY-1))
-                print("#{@matSolution[i][j]}")
-                inc += 1
-                if(inc % (@tailleX ) == 0)
-                    print("\n")
-                    inc = 0
-                end
-            end
+    #Cette méthode permet d'afficher la grille
+    def afficheToi()
+      @mat.each do |i|
+        i.each do |j|
+          print j
         end
-    end
-
-    def equals()
-        for i in (0..(@tailleX-1))
-            for j in (0..(@tailleY-1))
-                if (@mat[i][j].instance_of? Pont)
-                    if(!((@mat[i][j].direction == @matSolution[i][j].direction) && (@mat[i][j].direction == @matSolution[i][j].direction)))
-                        return 0
-                    end
-                end
-            end
-        end
-        return 1
+        print "\n"
+      end
     end
 
 
+    #Cette méthode permet de savoir si la grille est fini
+    #
+    #@return true si la grille est fini, false sinon
+    def fini?()
+      for i in (0..(@tailleX-1))
+        for j in (0..(@tailleY-1))
+          if(@mat[i][j] != @matSolution[i][j])
+            return 0
+          end
+        end
+      end
+      return 1
+    end
 
+    #Cette méthode permet de savoir si les coordonnees passés en parametre sont compris dans la grille
+    #
+    #@param posX La position sur l'axe des abscisse
+    #
+    #@param posY La position sur l'axe des ordonnées
+    def sortLimite?(posX, posY)
+      if(posX < 0 || posY < 0 || posX >= @tailleX || posY >= @tailleY)
+        return true
+      end
+      return false
+    end
+
+    #Cette méthode permet de recuperer la matrice de cases
+    #
+    #@return La matrice de cases
     def getGrille()
         return @mat
     end
 
+    #Cette méthode permet de recuperer une case de la grille
     def getCase(i, j)
         return @mat[i][j]
     end
 
+    #Cette méthode permet de modifier la derniere ile que l'on a touché
     def setDernierIle(ile1)
         @dernierIle = ile1
     end
 
-    def createPont(ile2)
-        #savoir si c'est Pont::HORIZONTAl ou Pont::VERTICAL :
-        if(@dernierIle.posX == ile2.posX) #alors pont Pont::HORIZONTAL
-            if ile2.posY < @dernierIle.posY
-                yPetit = ile2.posY
-                yGrand = @dernierIle.posY
-            else
-                yPetit = @dernierIle.posY
-                yGrand = ile2.posY
-            end
-            yPetit+=1 #pour se placer sur le premier pont
-            yGrand-=1 #pour se placer sur le dernier pont
-            for i in (yPetit..yGrand)
-                if(@mat[@dernierIle.posX][i].augmenteValeur(Pont::HORIZONTAL) == false)
-                    return false
-                end
-            end
-        else #alors Pont::VERTICAL
-            if ile2.posX < @dernierIle.posX
-                xPetit = ile2.posx
-                xGrand = @dernierIle.posx
-            else
-                xPetit = @dernierIle.posx
-                xGrand = ile2.posx
-            end
-            xPetit+=1 #pour se placer sur le premier pont
-            xGrand-=1 #pour se placer sur le dernier pont
-            for i in (xPetit..xGrand)
-                if(@mat[i][@dernierIle.posY].augmenteValeur(Pont::VERTICAL) == false)
-                    return false
-                end
-            end
-        end
-        @dernierIle = nil
-        return true
+    #Cette méthode permet de retourner la diffrence de position de deux iles
+    #
+    #@param ile1 La premiere ile (raise si ce n'est pas une ile)
+    #
+    #@param ile2 La deuxieme ile (raise si ce n'est pas une ile)
+    #
+    #@return direction, petitPos, grandPos
+    #
+    #direction : La direction des ponts qui pourrait relier les deux iles (Pont::NULLE si les iles ne sont pas voisines)
+    #
+    #petitPos La coordonnée du premier pont entre les deux iles
+    #
+    #grandPos La coordonnée du premier pont entre les deux iles
+    #
+    #petitPos et grandPos représentent une coordonnée en abscisse si le direction est horizontal, en ordonnées sinon
+    def getDifference(ile1, ile2)
+
+      if(!(ile1.estIle()))
+        raise("La case au coordonnée [" + ile1.posX() + ";" + ile1.posX() + "] n'est pas une ile")
+      end
+
+      if(!(ile2.estIle()))
+        raise("La case au coordonnée [" + ile2.posX() + ";" + ile2.posX() + "] n'est pas une ile")
+      end
+
+      print ile1.afficheInfo(), "\n"
+      print ile2.afficheInfo(), "\n"
+
+      if(ile1.posX() == ile2.posX()) #alors pont horizontal
+        direction = Pont::VERTICAL
+        petitPos = [ile2.posY(), ile1.posY()].min() + 1
+        grandPos = [ile2.posY(), ile1.posY()].max() - 1
+      elsif(ile1.posY() == ile2.posY()) #alors pont vertical
+        direction = Pont::HORIZONTAL
+        petitPos = [ile2.posX(), ile1.posX()].min() + 1
+        grandPos = [ile2.posX(), ile1.posX()].max() - 1
+      else
+        direction = Pont::NULLE
+        petitPos = 0
+        grandPos = 0
+      end
+      return direction, petitPos, grandPos
     end
 
-    def estVoisin?(ile1, ile2)
-        if(ile1.posX == ile2.posX) #savoir s'il sont alignés Pont::HORIZONTALment
-            if ile2.posY < ile1.posY
-                yPetit = ile2.posY
-                yGrand = ile1.posY
-            else
-                yPetit = ile1.posY
-                yGrand = ile2.posY
-            end
-            yPetit+=1 #pour se placer sur le premier pont
-            yGrand-=1 #pour se placer sur le dernier pont
-            for i in (yPetit..yGrand)
-                if(@mat[@dernierIle.posX][i].instance_of? Ile)
-                    return false
-                end
-            end
-            return true
-        else
-            if ile2.posx < ile1.posx
-                xPetit = ile2.posx
-                xGrand = ile1.posx
-            else
-                xPetit = ile1.posx
-                xGrand = ile2.posx
-            end
-            xPetit+=1 #pour se placer sur le premier pont
-            xGrand-=1 #pour se placer sur le dernier pont
-            for i in (xPetit..xGrand)
-                if(@mat[i][ile2.posY].instance_of? Ile)
-                    return false
-                end
-            end
-            return true
+    def annuleCreatePont(petitPos, grandPos, direction)
+      for i in (petitPos..grandPos)
+        if(direction == Pont::HORIZONTAL)
+          @mat[@dernierIle.posX()][i].diminueValeur(Pont::HORIZONTAL)
+        elsif(direction == Pont::VERTICAL)
+          @mat[i][@dernierIle.posY()].diminueValeur(Pont::VERTICAL)
         end
+      end
+    end
+
+
+    def createPont(ile2)
+      direction, petitPos, grandPos = getDifference(@dernierIle, ile2)
+      if(direction == Pont::HORIZONTAL)
+        for i in (petitPos..grandPos)
+          print @mat[@dernierIle.posX()][i]
+          if(@mat[@dernierIle.posX()][i].augmenteValeur(Pont::HORIZONTAL) == false)
+            annuleCreatePont(petitPos, i, Pont::HORIZONTAL)
+            return false
+          end
+        end
+      elsif(direction == Pont::VERTICAL)
+        for i in (petitPos..grandPos)
+          if(@mat[i][@dernierIle.posY()].augmenteValeur(Pont::VERTICAL) == false)
+            annuleCreatePont(petitPos, i, Pont::VERTICAL)
+            return false
+          end
+        end
+      elsif(direction == Pont::NULLE)
+        return false
+      end
+      return true
+    end
+
+
+
+    def estVoisin?(ile1, ile2)
+      direction, petitPos, grandPos = getDifference(ile1, ile2)
+      if(direction == Pont::HORIZONTAL)
+        for i in (petitPos..grandPos)
+          if(@mat[i][ile1.posY()].estIle?())
+            return false
+          end
+        end
+      elsif(direction == Pont::VERTICAL)
+        for i in (petitPos..grandPos)
+          if(@mat[ile1.posX()][i].estIle?())
+            return false
+          end
+        end
+      elsif(direction == Pont::NULLE)
+        return false
+      end
+      return true
+    end
+
+    def annuleSurbrillancePont(petitPos, grandPos, direction)
+      for i in (petitPos..grandPos)
+        if(direction == Pont::HORIZONTAL)
+          @mat[@dernierIle.posX()][i].supprSurbrillance(Pont::HORIZONTAL)
+        elsif(direction == Pont::VERTICAL)
+          @mat[i][@dernierIle.posY()].supprSurbrillance(Pont::VERTICAL)
+        end
+      end
+    end
+
+    def surbrillancePont(ile2)
+      direction, petitPos, grandPos = getDifference(@dernierIle, ile2)
+      puts direction, petitPos, grandPos
+      if(direction == Pont::HORIZONTAL)
+        for i in (petitPos..grandPos)
+          if(@mat[@dernierIle.posX()][i].metSurbrillance(Pont::HORIZONTAL) == false)
+            puts i
+            annuleSurbrillancePont(petitPos, i, Pont::HORIZONTAL)
+            return false
+          end
+        end
+      elsif(direction == Pont::VERTICAL)
+        for i in (petitPos..grandPos)
+          if(@mat[i][@dernierIle.posY()].metSurbrillance(Pont::VERTICAL) == false)
+            puts i
+            annuleSurbrillancePont(petitPos, i, Pont::VERTICAL)
+            return false
+          end
+        end
+      elsif(direction == Pont::NULLE)
+        return false
+      end
+      return true
     end
 
     def montrePont()
@@ -159,7 +236,7 @@ class Grille
         haut = false
         bas = false
         directionEnCours = nil
-        
+
         #en bas
         if(@mat[@dernierIle.posX+1][@dernierIle.posY].instance_of? Pont)
             directionEnCours = @mat[@dernierIle.posX+1][@dernierIle.posY].direction
@@ -360,7 +437,7 @@ class Grille
         end
 
         commencementRead = depart + ((taille+1) * (randMap-1))
-        
+
         print("commencement : #{commencementRead} \n")
         tailleFinal = taille
         i = 0
@@ -408,11 +485,11 @@ class Grille
                     else
                         Ile.creer(i, j, elem.to_i, self)
                     end
-                    
+
                 end)
                 i+=1
                 j=0
-                
+
             end
             tailleFinal-=1
             break if tailleFinal<=0

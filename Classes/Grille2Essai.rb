@@ -117,7 +117,7 @@ class Grille2Essai
       return 1
     end
 
-    def sortLimite(posX, posY)
+    def sortLimite?(posX, posY)
       if(posX < 0 || posY < 0 || posX >= @tailleX || posY >= @tailleY)
         return true
       end
@@ -143,11 +143,11 @@ class Grille2Essai
       print ile2.afficheInfo(), "\n"
 
       if(ile1.posX() == ile2.posX()) #alors pont horizontal
-        direction = Pont::VERTICAL
+        direction = Pont::HORIZONTAL
         petitPos = [ile2.posY(), ile1.posY()].min() + 1
         grandPos = [ile2.posY(), ile1.posY()].max() - 1
       elsif(ile1.posY() == ile2.posY()) #alors pont vertical
-        direction = Pont::HORIZONTAL
+        direction = Pont::VERTICAL
         petitPos = [ile2.posX(), ile1.posX()].min() + 1
         grandPos = [ile2.posX(), ile1.posX()].max() - 1
       else
@@ -163,27 +163,27 @@ class Grille2Essai
     def annuleCreatePont(petitPos, grandPos, direction)
       for i in (petitPos..grandPos)
         if(direction == Pont::HORIZONTAL)
-          @mat[i][@dernierIle.posY()].diminueValeur(Pont::HORIZONTAL)
+          @mat[@dernierIle.posX()][i].diminueValeur(Pont::HORIZONTAL)
         elsif(direction == Pont::VERTICAL)
-          @mat[@dernierIle.posX()][i].diminueValeur(Pont::VERTICAL)
+          @mat[i][@dernierIle.posY()].diminueValeur(Pont::VERTICAL)
         end
       end
     end
 
 
-=begin
     def createPont(ile2)
       direction, petitPos, grandPos = getDifference(@dernierIle, ile2)
       if(direction == Pont::HORIZONTAL)
         for i in (petitPos..grandPos)
-          if(@mat[i][@dernierIle.posY()].augmenteValeur(Pont::HORIZONTAL) == false)
+          print @mat[@dernierIle.posX()][i]
+          if(@mat[@dernierIle.posX()][i].augmenteValeur(Pont::HORIZONTAL) == false)
             annuleCreatePont(petitPos, i, Pont::HORIZONTAL)
             return false
           end
         end
       elsif(direction == Pont::VERTICAL)
         for i in (petitPos..grandPos)
-          if(@mat[@dernierIle.posX()][i].augmenteValeur(Pont::VERTICAL) == false)
+          if(@mat[i][@dernierIle.posY()].augmenteValeur(Pont::VERTICAL) == false)
             annuleCreatePont(petitPos, i, Pont::VERTICAL)
             return false
           end
@@ -194,43 +194,6 @@ class Grille2Essai
       return true
     end
 
-=end
-    def createPont(ile2)
-        #savoir si c'est Pont::HORIZONTAl ou Pont::VERTICAL :
-        if(@dernierIle.posX == ile2.posX) #alors pont Pont::HORIZONTAL
-            if ile2.posY < @dernierIle.posY
-                yPetit = ile2.posY
-                yGrand = @dernierIle.posY
-            else
-                yPetit = @dernierIle.posY
-                yGrand = ile2.posY
-            end
-            yPetit+=1 #pour se placer sur le premier pont
-            yGrand-=1 #pour se placer sur le dernier pont
-            for i in (yPetit..yGrand)
-                if(@mat[@dernierIle.posX][i].augmenteValeur(Pont::HORIZONTAL) == false)
-                    return false
-                end
-            end
-        else #alors Pont::VERTICAL
-            if ile2.posX < @dernierIle.posX
-                xPetit = ile2.posX
-                xGrand = @dernierIle.posX
-            else
-                xPetit = @dernierIle.posX
-                xGrand = ile2.posX
-            end
-            xPetit+=1 #pour se placer sur le premier pont
-            xGrand-=1 #pour se placer sur le dernier pont
-            for i in (xPetit..xGrand)
-                if(@mat[i][@dernierIle.posY].augmenteValeur(Pont::VERTICAL) == false)
-                    return false
-                end
-            end
-        end
-        @dernierIle = nil
-        return true
-    end
 
     def estVoisin?(ile1, ile2)
       direction, petitPos, grandPos = getDifference(ile1, ile2)
@@ -256,9 +219,9 @@ class Grille2Essai
     def annuleSurbrillancePont(petitPos, grandPos, direction)
       for i in (petitPos..grandPos)
         if(direction == Pont::HORIZONTAL)
-          @mat[i][@dernierIle.posY()].supprSurbrillance(Pont::HORIZONTAL)
+          @mat[@dernierIle.posX()][i].supprSurbrillance(Pont::HORIZONTAL)
         elsif(direction == Pont::VERTICAL)
-          @mat[@dernierIle.posX()][i].supprSurbrillance(Pont::VERTICAL)
+          @mat[i][@dernierIle.posY()].supprSurbrillance(Pont::VERTICAL)
         end
       end
     end
@@ -268,7 +231,7 @@ class Grille2Essai
       puts direction, petitPos, grandPos
       if(direction == Pont::HORIZONTAL)
         for i in (petitPos..grandPos)
-          if(@mat[i][@dernierIle.posY()].metSurbrillance(Pont::HORIZONTAL) == false)
+          if(@mat[@dernierIle.posX()][i].metSurbrillance(Pont::HORIZONTAL) == false)
             puts i
             annuleSurbrillancePont(petitPos, i, Pont::HORIZONTAL)
             return false
@@ -276,7 +239,7 @@ class Grille2Essai
         end
       elsif(direction == Pont::VERTICAL)
         for i in (petitPos..grandPos)
-          if(@mat[@dernierIle.posX()][i].metSurbrillance(Pont::VERTICAL) == false)
+          if(@mat[i][@dernierIle.posY()].metSurbrillance(Pont::VERTICAL) == false)
             puts i
             annuleSurbrillancePont(petitPos, i, Pont::VERTICAL)
             return false
@@ -291,27 +254,35 @@ class Grille2Essai
 
     def setDernierIle(ile1)
         @dernierIle = ile1
+        montrePont()
+        afficheToi()
     end
 
 
 
     def montrePont()
 
+      puts "allo ?"
+
       if(@dernierIle.aVoisin?(Ile::HAUT))
+        puts "En haut"
         surbrillancePont(@dernierIle.getVoisin(Ile::HAUT))
       end
 
-    #  if(@dernierIle.aVoisin?(Ile::BAS))
-    #    surbrillancePont(@dernierIle.getVoisin(Ile::BAS))
-    #  end
+      if(@dernierIle.aVoisin?(Ile::BAS))
+        puts "En bas"
+        surbrillancePont(@dernierIle.getVoisin(Ile::BAS))
+      end
 
       if(@dernierIle.aVoisin?(Ile::GAUCHE))
+        puts "A gauche"
         surbrillancePont(@dernierIle.getVoisin(Ile::GAUCHE))
       end
 
-    #  if(@dernierIle.aVoisin?(Ile::DROITE))
-    #     surbrillancePont(@dernierIle.getVoisin(Ile::DROITE))
-    #  end
+      if(@dernierIle.aVoisin?(Ile::DROITE))
+        puts "A droite"
+        surbrillancePont(@dernierIle.getVoisin(Ile::DROITE))
+      end
 
     end
 
