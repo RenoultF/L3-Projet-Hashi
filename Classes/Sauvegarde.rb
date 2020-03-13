@@ -38,7 +38,15 @@ class Sauvegarde < ActiveRecord::Base
     #@param grille La grille auquel la sauvegarde est lié
     def Sauvegarde.creer(compte, grille)
 
-      new(:compte => compte, :grille => YAML.dump(grille), :taille => grille.tailleX(), :difficulte => grille.difficulte(), :solution => YAML.dump(grille.matSolution))
+      if(Sauvegarde.find_by(compte: compte, solution: YAML.dump(grille.matSolution)) == nil)
+
+        new(:compte => compte, :grille => YAML.dump(grille), :taille => grille.tailleX(), :difficulte => grille.difficulte(), :solution => YAML.dump(grille.matSolution))
+
+      else
+
+        raise("Le compte a déjà une sauvegarde de cette grille")
+
+      end
 
     end
 

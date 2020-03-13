@@ -33,7 +33,7 @@ sauvegarde = Sauvegarde.creer(compte, Grille2Essai.creer(res, 7, 7, 0))
 p sauvegarde
 print sauvegarde, "\n"
 
-if(!sauvegarde.save)
+if(!sauvegarde.sauvegarder())
 
   print sauvegarde.errors.messages, "\n"
 
