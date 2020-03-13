@@ -52,7 +52,7 @@ class Checkpoint
 
 
 end
-
+=begin
 checkpoint = Checkpoint.creer()
 
 checkpoint.emettre(5)
@@ -65,3 +65,4 @@ checkpoint.afficher_stack()
 checkpoint.supprimer_checkpoint
 
 checkpoint.afficher_stack()
+=end

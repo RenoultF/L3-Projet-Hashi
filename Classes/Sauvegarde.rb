@@ -36,6 +36,8 @@ class Sauvegarde < ActiveRecord::Base
     #@param compte Le compte auquel la sauvegarde est lié
     #
     #@param grille La grille auquel la sauvegarde est lié
+    #
+    #@raise Si le compte possède déjà une sauvegarde de cette grille
     def Sauvegarde.creer(compte, grille)
 
       if(Sauvegarde.find_by(compte: compte, solution: YAML.dump(grille.matSolution)) == nil)
@@ -50,14 +52,14 @@ class Sauvegarde < ActiveRecord::Base
 
     end
 
-    #Cette méthode permet de creer une grille pour un compte
+    #Cette méthode permet de recuperer la sauvegarde d'un compte pour une grille
     #
     #@param compte Le compte auquel la sauvegarde est lié
     #
     #@param grille La grille auquel la sauvegarde est lié
     def Sauvegarde.recuperer(compte, grille)
 
-      return Sauvegarde.where(compte: compte).to_a()[0]
+      return Sauvegarde.find_by(compte: compte)
 
     end
 
@@ -66,7 +68,7 @@ class Sauvegarde < ActiveRecord::Base
     #@param compte Le compte du joueur
     #
     #@return Le tableau des sauvegardes du compte
-    def Sauvegarde.nik(compte)
+    def Sauvegarde.listeCompte(compte)
 
       return Sauvegarde.where(compte: compte).to_a()
 
@@ -97,26 +99,6 @@ class Sauvegarde < ActiveRecord::Base
 
     end
 
-
-    #Cette méthode permet d'enregistrer la sauvegarde
-    #
-    #@return true si la sauvegarde est efféctué, false sinon
-    def maj()
-
-      return self.update(:grille => self.grille)
-
-    end
-
-    #Cette méthode permet d'enregistrer la sauvegarde
-    #
-    #@return true si la sauvegarde est efféctué, false sinon
-    def remplace(grille)
-
-      Sauvegarde.find_by(:solution => YAML.load(self.grille)).delete()
-
-      return self.save()
-
-    end
 
     #Cette méthode permet de recuperer la grille de la sauvegarde
     def getGrille()
