@@ -99,8 +99,7 @@ class Jeu
             when 7
                 win = verif.demandeAide(@grille, @grilleSolution)
             when 8
-                puts Sauvegarde.creer(@compte, @grille).inspect()
-                Sauvegarde.creer(@compte, @grille).remplace()
+                Sauvegarde.recuperer(@compte, @grille).setGrille(@grille).sauvegarder()
             else
                 puts "puts"
             end

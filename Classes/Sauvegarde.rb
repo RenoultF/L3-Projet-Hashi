@@ -26,7 +26,7 @@ class Sauvegarde < ActiveRecord::Base
     validates :compte, presence: true
 
 
-    validates :solution, presence: true
+    validates :solution, presence: true, uniqueness: true
 
 
     private_class_method :new
@@ -49,7 +49,7 @@ class Sauvegarde < ActiveRecord::Base
     #@param grille La grille auquel la sauvegarde est lié
     def Sauvegarde.recuperer(compte, grille)
 
-      return Sauvegarde.where(compte: compte).to_a()
+      return Sauvegarde.where(compte: compte).to_a()[0]
 
     end
 
@@ -102,9 +102,9 @@ class Sauvegarde < ActiveRecord::Base
     #Cette méthode permet d'enregistrer la sauvegarde
     #
     #@return true si la sauvegarde est efféctué, false sinon
-    def remplace()
+    def remplace(grille)
 
-      Sauvegarde.find_by(:solution => YAML.dump(self.grille.matSolution())).delete()
+      Sauvegarde.find_by(:solution => YAML.load(self.grille)).delete()
 
       return self.save()
 
@@ -120,7 +120,9 @@ class Sauvegarde < ActiveRecord::Base
     #Cette méthode permet de modifier la grille enregistré
     def setGrille(grille)
 
-      self.grille.sauvegarde = YAML.dump(grille)
+      self.grille = YAML.dump(grille)
+
+      return self
 
     end
 
