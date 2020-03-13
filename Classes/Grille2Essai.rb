@@ -22,6 +22,8 @@ class Grille2Essai
     @matSolution #matrice de la grille Solution
     attr_reader :difficulte
     attr_reader :tailleX
+    attr_reader :actions
+    attr_reader :matSolution
 
 
 
@@ -130,6 +132,11 @@ class Grille2Essai
 
 
 
+    def getCase(i, j)
+        return @mat[i][j]
+    end
+
+
     def getDifference(ile1, ile2)
 
       print ile1.afficheInfo(), "\n"
@@ -164,7 +171,7 @@ class Grille2Essai
     end
 
 
-
+=begin
     def createPont(ile2)
       direction, petitPos, grandPos = getDifference(@dernierIle, ile2)
       if(direction == Pont::HORIZONTAL)
@@ -185,6 +192,44 @@ class Grille2Essai
         return false
       end
       return true
+    end
+
+=end
+    def createPont(ile2)
+        #savoir si c'est Pont::HORIZONTAl ou Pont::VERTICAL :
+        if(@dernierIle.posX == ile2.posX) #alors pont Pont::HORIZONTAL
+            if ile2.posY < @dernierIle.posY
+                yPetit = ile2.posY
+                yGrand = @dernierIle.posY
+            else
+                yPetit = @dernierIle.posY
+                yGrand = ile2.posY
+            end
+            yPetit+=1 #pour se placer sur le premier pont
+            yGrand-=1 #pour se placer sur le dernier pont
+            for i in (yPetit..yGrand)
+                if(@mat[@dernierIle.posX][i].augmenteValeur(Pont::HORIZONTAL) == false)
+                    return false
+                end
+            end
+        else #alors Pont::VERTICAL
+            if ile2.posX < @dernierIle.posX
+                xPetit = ile2.posX
+                xGrand = @dernierIle.posX
+            else
+                xPetit = @dernierIle.posX
+                xGrand = ile2.posX
+            end
+            xPetit+=1 #pour se placer sur le premier pont
+            xGrand-=1 #pour se placer sur le dernier pont
+            for i in (xPetit..xGrand)
+                if(@mat[i][@dernierIle.posY].augmenteValeur(Pont::VERTICAL) == false)
+                    return false
+                end
+            end
+        end
+        @dernierIle = nil
+        return true
     end
 
     def estVoisin?(ile1, ile2)
@@ -244,6 +289,10 @@ class Grille2Essai
     end
 
 
+    def setDernierIle(ile1)
+        @dernierIle = ile1
+    end
+
 
 
     def montrePont()
@@ -269,13 +318,13 @@ class Grille2Essai
     def valeurPont(ile1,ile2)
         if(ile1.posX == ile2.posX)#horizontal
             if(ile1.posY > ile2.posY)
-                if(@mat[ile2.posX][ile2.posY+1].direction == VERTICALE)
+                if(@mat[ile2.posX][ile2.posY+1].direction == Pont::VERTICAL)
                     return 0
                 else
                     return @mat[ile2.posX][ile2.posY+1].valeur
                 end
             else
-                if(@mat[ile1.posX][ile1.posY+1].direction == VERTICALE)
+                if(@mat[ile1.posX][ile1.posY+1].direction == Pont::VERTICAL)
                     return 0
                 else
                     return @mat[ile1.posX][ile1.posY+1].valeur
@@ -283,13 +332,13 @@ class Grille2Essai
             end
         else
             if(ile1.posX > ile2.posX)#vertical
-                if(@mat[ile2.posX+1][ile2.posY].direction == HORIZONTALE)
+                if(@mat[ile2.posX+1][ile2.posY].direction == Pont::HORIZONTAL)
                     return 0
                 else
                     return @mat[ile2.posX][ile2.posY+1].valeur
                 end
             else
-                if(@mat[ile1.posX+1][ile1.posY].direction == HORIZONTALE)
+                if(@mat[ile1.posX+1][ile1.posY].direction == Pont::HORIZONTAL)
                     return 0
                 else
                     return @mat[ile1.posX+1][ile1.posY].valeur

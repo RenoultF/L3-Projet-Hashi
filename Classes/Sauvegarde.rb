@@ -16,7 +16,7 @@ class Sauvegarde < ActiveRecord::Base
     #@grille => Contient la grille que l'utilisateur a commencé à remplir
     #has_one :grille
 
-    validates :grille, presence: true, uniqueness: true
+    validates :grille, presence: true
 
 
 
@@ -24,6 +24,9 @@ class Sauvegarde < ActiveRecord::Base
     belongs_to :compte
 
     validates :compte, presence: true
+
+
+    validates :solution, presence: true
 
 
     private_class_method :new
@@ -35,7 +38,18 @@ class Sauvegarde < ActiveRecord::Base
     #@param grille La grille auquel la sauvegarde est lié
     def Sauvegarde.creer(compte, grille)
 
-      new(:compte => compte, :grille => YAML.dump(grille), :taille => grille.tailleX(), :difficulte => grille.difficulte())
+      new(:compte => compte, :grille => YAML.dump(grille), :taille => grille.tailleX(), :difficulte => grille.difficulte(), :solution => YAML.dump(grille.matSolution))
+
+    end
+
+    #Cette méthode permet de creer une grille pour un compte
+    #
+    #@param compte Le compte auquel la sauvegarde est lié
+    #
+    #@param grille La grille auquel la sauvegarde est lié
+    def Sauvegarde.recuperer(compte, grille)
+
+      return Sauvegarde.where(compte: compte).to_a()
 
     end
 
@@ -71,7 +85,28 @@ class Sauvegarde < ActiveRecord::Base
     #@return true si la sauvegarde est efféctué, false sinon
     def sauvegarder()
 
-      return self.save();
+      return self.save()
+
+    end
+
+
+    #Cette méthode permet d'enregistrer la sauvegarde
+    #
+    #@return true si la sauvegarde est efféctué, false sinon
+    def maj()
+
+      return self.update(:grille => self.grille)
+
+    end
+
+    #Cette méthode permet d'enregistrer la sauvegarde
+    #
+    #@return true si la sauvegarde est efféctué, false sinon
+    def remplace()
+
+      self.delete(:solution => YAML.dump(self.grille.matSolution()))
+
+      return self.save
 
     end
 

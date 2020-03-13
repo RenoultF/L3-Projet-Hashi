@@ -17,4 +17,4 @@ res += " 4===4 "
 
 jeu = Jeu.creer(0, 7, Compte.recuperer(gets.chomp))
 
-print jeu
+jeu.lanceToi()

@@ -71,6 +71,10 @@ class Grille
         return @mat
     end
 
+    def getCase(i, j)
+        return @mat[i][j]
+    end
+
     def setDernierIle(ile1)
         @dernierIle = ile1
     end

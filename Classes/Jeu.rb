@@ -4,12 +4,16 @@ require "./Aide.rb"
 require "./Sauvegarde.rb"
 require "./Compte.rb"
 require "./Checkpoint.rb"
+require "./DonnerTechnique.rb"
+require "./VerifierGrille.rb"
+require "./Action.rb"
 ##
 #classe qui s'occupe du déroulement d'une partie
 class Jeu
 
     private_class_method :new
 
+    @compte #le compte Darcula
     @grille #la grille ou se deroule la partie
     @grilleSolution #la grille complétée
     @tech #objet qui fournit des aides techniques
@@ -27,10 +31,11 @@ class Jeu
 
     #:nodoc:
     def initialize(difficulte, tailleGrille, compte)
-        @grille = chargerGrille(difficulte, tailleGrille,compte)
+        @grille = chargerGrille(difficulte, tailleGrille, compte)
         @tech = DonnerTechnique.new()
         @verif = VerifierGrille.new()
-        @checkPoint = CheckPoint.creer(grille)
+        @checkPoint = Checkpoint.creer(@grille)
+        @compte = compte
     end
     #:doc
 
@@ -41,9 +46,14 @@ class Jeu
     #:arg: compte : Compte
     #@return Grille
     def chargerGrille(difficulte, tailleGrille, compte)
-        lst = Sauvegarde.liste(difficulte, tailleGrille, compte)
+        lst = Sauvegarde.liste(compte, tailleGrille, difficulte)
+        if(lst.count() == 0)
+
+            raise("Y a pas de sauvegarde")
+
+        end
         i = Random.new
-        return lst[i.random(lst.lenght)].getGrille()
+        return lst[i.rand(lst.count())].getGrille()
     end
 
     ##
@@ -51,31 +61,33 @@ class Jeu
     #:arg: grille : Grille
     #:arg: compte : Compte
     #@return win : Boolean
-    def lanceToi(grille, compte)
-        win = false
+    def lanceToi()
+        win = false #T'es mauvais Jack
         while(!win)
-            grille.afficheToi
+            @grille.afficheToi
             case action
             when 1
-                tab1 = demandeCoord
-                grille.setDernierIle(tab1)
-                tab2 = demandeCoord
-                grille.createPont(tab2)
-                valeurPont = valeurPont(grille.mat[tab1[0], tab1[1]], grille.mat[tab2[0], tab2[1]])
-                if(tab1[0] == tab2[0])
-                  x = tab1[0]
-                  y = tab1[1]+1
-                elsif
-                  x = tab1[0]+1
-                  y = tab1[1]
+                ile1 = demandeCoord
+                @grille.setDernierIle(ile1)
+                ile2 = demandeCoord
+                @grille.createPont(ile2)
+                valeurPont = @grille.valeurPont(ile1, ile2)
+                if(ile1.posX == ile2.posX)
+                  x = ile1.posX
+                  y = ile1.posY + 1
+                elsif(ile1.posY == ile2.posY)
+                  x = ile1.posX + 1
+                  y = ile1.posY
+                else
+                  puts "Vous etes teubé"
                 end
                 if(valeurPont == 0)
-                  Action.new(grille.mat[x, y], grille, 0).empiler
-                elsif
-                  Action.new(grille.mat[x, y], grille, 1).empiler
+               #   Action.new(@grille.getCase(x, y), @grille, 0).empiler
+                elsif(valeurPont != 0)
+               #   Action.new(@grille.getCase(x, y), @grille, 1).empiler
                 end
             when 2
-                afficherAide(tech.demandeAide(@grille, @grilleSolution))
+                afficherAide(@tech.demandeAide(@grille, @grilleSolution))
             when 3
                 @checkPoint.emettre
             when 4
@@ -87,7 +99,10 @@ class Jeu
             when 7
                 win = verif.demandeAide(@grille, @grilleSolution)
             when 8
-                Sauvegarde.creer(compte, grille).sauvegarder()
+                puts Sauvegarde.recuperer(@compte, @grille)[0].inspect()
+                Sauvegarde.creer(@compte, @grille).remplace()
+            else
+                puts "puts"
             end
         end
     end
@@ -112,7 +127,7 @@ class Jeu
         puts "7 : valider grille\n"
         puts "8 : Sauvegarder la grille\n"
 
-        str.scanf("%d")
+        return gets.chomp.to_i
     end
 
     ##
@@ -121,9 +136,9 @@ class Jeu
     def demandeCoord
         puts "Saisir coordonnées d'une ile :"
         puts "coordonnée en x : "
-        x.scanf("%d")
+        x = gets.chomp.to_i
         puts "coordonnée en y : "
-        y.scanf("%d")
-        return grille.mat[x][y]
+        y = gets.chomp.to_i
+        return @grille.getCase(x, y)
     end
 end

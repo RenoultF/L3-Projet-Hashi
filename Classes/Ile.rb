@@ -63,6 +63,8 @@ class Ile < Case
     end
 
 
+    #Cette méthode permet de retourner un voisin dans une direction
+    #
     def getVoisin(direction)
 
       indice = 1
