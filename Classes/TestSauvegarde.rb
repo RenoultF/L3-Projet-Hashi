@@ -48,5 +48,6 @@ recupSauvegarde = Sauvegarde.liste(Compte.recuperer(gets.chomp), 7, 0)
 recupSauvegarde.each do |s|
 
   s.getGrille().afficheToi()
+  puts "\n"
 
 end

@@ -27,7 +27,7 @@ class Jeu
 
     #:nodoc:
     def initialize(difficulte, tailleGrille, compte)
-        @grille = chargerGrille(mode, difficulte, tailleGrille,compte)
+        @grille = chargerGrille(difficulte, tailleGrille,compte)
         @tech = DonnerTechnique.new()
         @verif = VerifierGrille.new()
         @checkPoint = CheckPoint.creer(grille)
