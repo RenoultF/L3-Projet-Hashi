@@ -104,9 +104,9 @@ class Sauvegarde < ActiveRecord::Base
     #@return true si la sauvegarde est efféctué, false sinon
     def remplace()
 
-      self.delete(:solution => YAML.dump(self.grille.matSolution()))
+      Sauvegarde.find_by(:solution => YAML.dump(self.grille.matSolution())).delete()
 
-      return self.save
+      return self.save()
 
     end
 
