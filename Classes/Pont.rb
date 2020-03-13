@@ -147,37 +147,37 @@ class Pont < Case
 
       if(@surbrillance)
 
-        return "P"
+        ret = "P"
 
       end
 
-        if(@direction == HORIZONTAL)
+      if(@direction == HORIZONTAL)
 
-            if(@valeur == 1)
+        if(@valeur == 1)
 
-                ret =  "-"
+          ret =  "-"
 
-            elsif(@valeur == 2)
+        elsif(@valeur == 2)
 
-                ret =  "="
-
-            end
-
-        elsif(@direction == VERTICAL)
-
-            if(@valeur == 1)
-
-                ret =  "|"
-
-            elsif(@valeur == 2)
-
-                ret =  "\""
-
-            end
+          ret =  "="
 
         end
 
-        return ret
+      elsif(@direction == VERTICAL)
+
+        if(@valeur == 1)
+
+          ret =  "|"
+
+        elsif(@valeur == 2)
+
+          ret =  "\""
+
+        end
+
+      end
+
+      return ret
 
     end
 

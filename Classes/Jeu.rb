@@ -67,10 +67,14 @@ class Jeu
             @grille.afficheToi
             case action
             when 1
+              begin
                 ile1 = demandeCoord
                 @grille.setDernierIle(ile1)
                 ile2 = demandeCoord
                 @grille.createPont(ile2)
+              rescue => e
+                print e.message()
+              end
                 valeurPont = @grille.valeurPont(ile1, ile2)
                 if(ile1.posX == ile2.posX)
                   x = ile1.posX

@@ -70,50 +70,51 @@ class Ile < Case
       indice = 1
 
       if(direction == Ile::HAUT)
-        until(@grille.sortLimite(@posX, @posY + indice) or @grille.getGrille()[@posX][@posY + indice].estIle?())
+        until(@grille.sortLimite?(@posX - indice, @posY) || @grille.getGrille()[@posX - indice][@posY].estIle?())
           indice += 1
-        end
-        posX = @posX
-        posY = @posY + indice
-      elsif(direction == Ile::BAS)
-        until(@grille.sortLimite(@posX, @posY - indice) or @grille.getGrille()[@posX][@posY - indice].estIle?())
-          indice += 1
-        end
-        posX = @posX
-        posY = @posY - indice
-      elsif(direction == Ile::GAUCHE)
-        until(@grille.sortLimite(@posX + indice, @posY) or @grille.getGrille()[@posX + indice][@posY].estIle?())
-        indice += 1
-        end
-        posX = @posX + indice
-        posY = @posY
-      elsif(direction == Ile::DROITE)
-        until(@grille.sortLimite(@posX - indice, @posY) or @grille.getGrille()[@posX - indice][@posY].estIle?())
-        indice += 1
         end
         posX = @posX - indice
         posY = @posY
+      elsif(direction == Ile::BAS)
+        until(@grille.sortLimite?(@posX + indice, @posY) || @grille.getGrille()[@posX + indice][@posY].estIle?())
+          indice += 1
+        end
+        posX = @posX + indice
+        posY = @posY
+      elsif(direction == Ile::GAUCHE)
+        until(@grille.sortLimite?(@posX, @posY - indice) || @grille.getGrille()[@posX][@posY - indice].estIle?())
+        indice += 1
+        end
+        posX = @posX
+        posY = @posY - indice
+      elsif(direction == Ile::DROITE)
+        until(@grille.sortLimite?(@posX, @posY + indice) || @grille.getGrille()[@posX][@posY + indice].estIle?())
+        indice += 1
+        end
+        posX = @posX
+        posY = @posY + indice
       else
         raise("La direction n'est pas bonne")
       end
 
-      if(@grille.sortLimite(posX, posY))
+      if(@grille.sortLimite?(posX, posY))
 
         raise("Cette ile n'a pas de voisins dans cette direction")
 
       else
 
-        return @grille.getGrille()[posX][posY]
+        return @grille.getCase(posX, posY)
 
       end
 
     end
 
     def aVoisin?(direction)
-      return true
       begin
+        puts getVoisin(direction)
         return getVoisin(direction).estIle?()
-      rescue
+      rescue => e
+        puts e.message()
         return false
       end
     end
