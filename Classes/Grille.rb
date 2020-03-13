@@ -1,3 +1,6 @@
+require "./Pont.rb"
+require "./Ile.rb"
+
 class Grille
 
     #has_and_belongs_to_many :cases
@@ -15,20 +18,22 @@ class Grille
 
     private_class_method :new
 
-    def Grille.charger(laSauvegarde, laTailleX, laTailleY, laDifficulte)
-        new(laSauvegarde, laTailleX, laTailleY, laDifficulte)
+    def Grille.charger(laSauvegarde, laTailleX, laTailleY, laDifficulte, numGrilleTemp)
+        new(laSauvegarde, laTailleX, laTailleY, laDifficulte, numGrilleTemp)
     end
 
-    def initialize(laSauvegarde, laTailleX, laTailleY, laDifficulte)
+    def initialize(laSauvegarde, laTailleX, laTailleY, laDifficulte, numGrilleTemp)
         @tailleX = laTailleX
         @tailleY = laTailleY
+        @numGrille = numGrilleTemp
         if(laSauvegarde != nil)
             @mat = laSauvegarde.getGrille()
-            @numGrille = laSauvegarde.getNumGrille()
             @checkpoints = laSauvegarde.getCheckPoint()
             @actions = laSauvegarde.getActions()
         else
-
+            self.chargerMap(laDifficulte,@tailleX,numGrilleTemp)
+            @checkpoints = nil
+            @actions = nil;
         end
         @dernierIle = nil
     end
@@ -37,9 +42,9 @@ class Grille
         inc = 0
         for i in (0..(@tailleX-1))
             for j in (0..(@tailleY-1))
-                @mat[i][j].afficheToi()
+                print("#{@matSolution[i][j]}")
                 inc += 1
-                if(inc % (@tailleX -1) == 0)
+                if(inc % (@tailleX ) == 0)
                     print("\n")
                     inc = 0
                 end
@@ -66,9 +71,13 @@ class Grille
         return @mat
     end
 
+    def setDernierIle(ile1)
+        @dernierIle = ile1
+    end
+
     def createPont(ile2)
-        #savoir si c'est horizontal ou verticale :
-        if(@dernierIle.posX == ile2.posX) #alors pont horizontale
+        #savoir si c'est Pont::HORIZONTAl ou Pont::VERTICAL :
+        if(@dernierIle.posX == ile2.posX) #alors pont Pont::HORIZONTAL
             if ile2.posY < @dernierIle.posY
                 yPetit = ile2.posY
                 yGrand = @dernierIle.posY
@@ -79,11 +88,11 @@ class Grille
             yPetit+=1 #pour se placer sur le premier pont
             yGrand-=1 #pour se placer sur le dernier pont
             for i in (yPetit..yGrand)
-                if(@mat[@dernierIle.posX][i].augmenteValeur(HORIZONTALE) == false)
+                if(@mat[@dernierIle.posX][i].augmenteValeur(Pont::HORIZONTAL) == false)
                     return false
                 end
             end
-        else #alors verticale
+        else #alors Pont::VERTICAL
             if ile2.posX < @dernierIle.posX
                 xPetit = ile2.posx
                 xGrand = @dernierIle.posx
@@ -94,16 +103,17 @@ class Grille
             xPetit+=1 #pour se placer sur le premier pont
             xGrand-=1 #pour se placer sur le dernier pont
             for i in (xPetit..xGrand)
-                if(@mat[i][@dernierIle.posY].augmenteValeur(VERTICALE) == false)
+                if(@mat[i][@dernierIle.posY].augmenteValeur(Pont::VERTICAL) == false)
                     return false
                 end
             end
         end
+        @dernierIle = nil
         return true
     end
 
     def estVoisin?(ile1, ile2)
-        if(ile1.posX == ile2.posX) #savoir s'il sont alignés horizontalement
+        if(ile1.posX == ile2.posX) #savoir s'il sont alignés Pont::HORIZONTALment
             if ile2.posY < ile1.posY
                 yPetit = ile2.posY
                 yGrand = ile1.posY
@@ -262,29 +272,29 @@ class Grille
     end
 
     def valeurPont(ile1,ile2)
-        if(ile1.posX == ile2.posX)#horizontal
+        if(ile1.posX == ile2.posX)#Pont::HORIZONTAl
             if(ile1.posY > ile2.posY)
-                if(@mat[ile2.posX][ile2.posY+1].direction == VERTICALE)
+                if(@mat[ile2.posX][ile2.posY+1].direction == Pont::VERTICAL)
                     return 0
                 else
                     return @mat[ile2.posX][ile2.posY+1].valeur
                 end
             else
-                if(@mat[ile1.posX][ile1.posY+1].direction == VERTICALE)
+                if(@mat[ile1.posX][ile1.posY+1].direction == Pont::VERTICAL)
                     return 0
                 else
                     return @mat[ile1.posX][ile1.posY+1].valeur
                 end
             end
         else
-            if(ile1.posX > ile2.posX)#vertical
-                if(@mat[ile2.posX+1][ile2.posY].direction == HORIZONTALE)
+            if(ile1.posX > ile2.posX)#Pont::VERTICAL
+                if(@mat[ile2.posX+1][ile2.posY].direction == Pont::HORIZONTAL)
                     return 0
                 else
                     return @mat[ile2.posX][ile2.posY+1].valeur
                 end
             else
-                if(@mat[ile1.posX+1][ile1.posY].direction == HORIZONTALE)
+                if(@mat[ile1.posX+1][ile1.posY].direction == Pont::HORIZONTAL)
                     return 0
                 else
                     return @mat[ile1.posX+1][ile1.posY].valeur
@@ -310,4 +320,98 @@ class Grille
         end
     end
 
+    def chargerMap(difficulte,taille,randMap)
+        #Ouverture dufichier
+        @matSolution = []
+        @mat = []
+        text = File.open("map.txt").read
+        #on verifie qu'il n'est pas vide
+        if(text == nil)
+            puts "Attention le fichier d'ouverture est vide"
+            return nil;
+        end
+        text.gsub!(/\r\n/, "\n");
+        depart = 0
+        #endroit ou on va commencer à lire
+        case taille
+        when 7
+            depart = 1
+        when 10
+            depart = 73
+        when 15
+            depart = 172
+        else
+            puts "erreur dans la taille donnee"
+        end
+
+        case difficulte
+        when 1
+            depart += 0
+        when 2
+            depart += ((taille+1) * 3)
+        when 3
+            depart += (2*((taille+1) * 3))
+        else
+            puts "erreur dans la taille donnee"
+        end
+
+        commencementRead = depart + ((taille+1) * (randMap-1))
+        
+        print("commencement : #{commencementRead} \n")
+        tailleFinal = taille
+        i = 0
+        j = -1
+        #parcours du text par ligne
+        text.each_line do |ligne|
+            if(commencementRead>0)
+                commencementRead-=1
+                next
+            end
+            #on regarde bien si une ligne corresponde a la taille demandé
+            ligneTemp = ligne.split(' ')
+            if(ligneTemp.length == taille)
+                @matSolution.push(ligneTemp.map do |elem|
+                    j+=1
+                    case elem
+                    when '|'
+                        Pont.construit(i,j,self,Pont::VERTICAL,1)
+                    when 'H'
+                        Pont.construit(i,j,self,Pont::VERTICAL,2)
+                    when '-'
+                        Pont.construit(i,j,self,Pont::HORIZONTAL,1)
+                    when '='
+                        Pont.construit(i,j,self,Pont::HORIZONTAL,2)
+                    when 'N'
+                        Case.generer(i,j,self)
+                    else
+                        Ile.creer(i, j, elem.to_i, self)
+                    end
+                end)
+                j=-1
+                @mat.push(ligneTemp.map do |elem|
+                    j+=1
+                    case elem
+                    when '|'
+                        Pont.creer(i, j, self)
+                    when 'H'
+                        Pont.creer(i, j, self)
+                    when '-'
+                        Pont.creer(i, j, self)
+                    when '='
+                        Pont.creer(i, j, self)
+                    when 'N'
+                        Case.generer(i,j,self)
+                    else
+                        Ile.creer(i, j, elem.to_i, self)
+                    end
+                    
+                end)
+                i+=1
+                j=0
+                
+            end
+            tailleFinal-=1
+            break if tailleFinal<=0
+        end
+    end
 end
