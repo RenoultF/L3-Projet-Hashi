@@ -142,43 +142,24 @@ class Pont < Case
 
     #Cette méthode permet d'afficher le pont dans un terminal
     def to_s
-
       ret = " "
-
       if(@surbrillance)
-
         ret = "P"
-
       end
-
       if(@direction == HORIZONTAL)
-
         if(@valeur == 1)
-
-          ret =  "-"
-
+          ret = "-"
         elsif(@valeur == 2)
-
-          ret =  "="
-
+          ret = "="
         end
-
       elsif(@direction == VERTICAL)
-
         if(@valeur == 1)
-
-          ret =  "|"
-
+          ret = "|"
         elsif(@valeur == 2)
-
-          ret =  "\""
-
+          ret = "\""
         end
-
       end
-
       return ret
-
     end
 
 

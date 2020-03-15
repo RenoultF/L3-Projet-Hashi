@@ -106,7 +106,7 @@ class Grille2Essai
       end
     end
 
-    def equals()
+    def fini?()
       for i in (0..(@tailleX-1))
         for j in (0..(@tailleY-1))
           if(@mat[i][j] != @matSolution[i][j])
@@ -159,42 +159,6 @@ class Grille2Essai
     end
 
 
-
-    def annuleCreatePont(petitPos, grandPos, direction)
-      for i in (petitPos..grandPos)
-        if(direction == Pont::HORIZONTAL)
-          @mat[@dernierIle.posX()][i].diminueValeur(Pont::HORIZONTAL)
-        elsif(direction == Pont::VERTICAL)
-          @mat[i][@dernierIle.posY()].diminueValeur(Pont::VERTICAL)
-        end
-      end
-    end
-
-
-    def createPont(ile2)
-      direction, petitPos, grandPos = getDifference(@dernierIle, ile2)
-      if(direction == Pont::HORIZONTAL)
-        for i in (petitPos..grandPos)
-          print @mat[@dernierIle.posX()][i]
-          if(@mat[@dernierIle.posX()][i].augmenteValeur(Pont::HORIZONTAL) == false)
-            annuleCreatePont(petitPos, i, Pont::HORIZONTAL)
-            return false
-          end
-        end
-      elsif(direction == Pont::VERTICAL)
-        for i in (petitPos..grandPos)
-          if(@mat[i][@dernierIle.posY()].augmenteValeur(Pont::VERTICAL) == false)
-            annuleCreatePont(petitPos, i, Pont::VERTICAL)
-            return false
-          end
-        end
-      elsif(direction == Pont::NULLE)
-        return false
-      end
-      return true
-    end
-
-
     def estVoisin?(ile1, ile2)
       direction, petitPos, grandPos = getDifference(ile1, ile2)
       if(direction == Pont::HORIZONTAL)
@@ -215,76 +179,70 @@ class Grille2Essai
       return true
     end
 
+    def createPont(ile2)
+      parcours(@dernierIle, ile2, :augmenteValeur)
+    end
 
-    def annuleSurbrillancePont(petitPos, grandPos, direction)
-      for i in (petitPos..grandPos)
-        if(direction == Pont::HORIZONTAL)
-          @mat[@dernierIle.posX()][i].supprSurbrillance(Pont::HORIZONTAL)
-        elsif(direction == Pont::VERTICAL)
-          @mat[i][@dernierIle.posY()].supprSurbrillance(Pont::VERTICAL)
-        end
-      end
+    def supprimePont(ile2)
+      parcours(@dernierIle, ile2, :diminueValeur)
     end
 
     def surbrillancePont(ile2)
-      direction, petitPos, grandPos = getDifference(@dernierIle, ile2)
-      puts direction, petitPos, grandPos
+      parcours(@dernierIle, ile2, :metSurbrillance)
+    end
+
+    def eteintPont(ile2)
+      parcours(@dernierIle, ile2, :supprSurbrillance)
+    end
+
+    def parcours(ile1, ile2, methode)
+      direction, petitPos, grandPos = getDifference(ile1, ile2)
       if(direction == Pont::HORIZONTAL)
-        for i in (petitPos..grandPos)
-          if(@mat[@dernierIle.posX()][i].metSurbrillance(Pont::HORIZONTAL) == false)
-            puts i
-            annuleSurbrillancePont(petitPos, i, Pont::HORIZONTAL)
-            return false
-          end
-        end
+        return parcoursHorizontal(petitPos, grandPos, methode, direction)
       elsif(direction == Pont::VERTICAL)
-        for i in (petitPos..grandPos)
-          if(@mat[i][@dernierIle.posY()].metSurbrillance(Pont::VERTICAL) == false)
-            puts i
-            annuleSurbrillancePont(petitPos, i, Pont::VERTICAL)
-            return false
-          end
-        end
-      elsif(direction == Pont::NULLE)
-        return false
+        return parcoursVertical(petitPos, grandPos, methode, direction)
       end
-      return true
+    end
+
+    def parcoursVertical(petitPos, grandPos, methode, direction)
+      for i in (petitPos..grandPos)
+        @mat[i][@dernierIle.posY()].send(methode, direction)
+      end
+    end
+
+    def parcoursHorizontal(petitPos, grandPos, methode, direction)
+      for i in (petitPos..grandPos)
+        @mat[@dernierIle.posX()][i].send(methode, direction)
+      end
     end
 
 
+
     def setDernierIle(ile1)
-        @dernierIle = ile1
-        montrePont()
-        afficheToi()
+      effacePont()
+      @dernierIle = ile1
+      montrePont()
+      afficheToi()
     end
 
 
 
     def montrePont()
-
-      puts "allo ?"
-
-      if(@dernierIle.aVoisin?(Ile::HAUT))
-        puts "En haut"
-        surbrillancePont(@dernierIle.getVoisin(Ile::HAUT))
+      for direction in Ile::DIRECTIONS
+        if(@dernierIle.aVoisinDisponible?(direction))
+          surbrillancePont(@dernierIle.getVoisin(direction))
+        end
       end
-
-      if(@dernierIle.aVoisin?(Ile::BAS))
-        puts "En bas"
-        surbrillancePont(@dernierIle.getVoisin(Ile::BAS))
-      end
-
-      if(@dernierIle.aVoisin?(Ile::GAUCHE))
-        puts "A gauche"
-        surbrillancePont(@dernierIle.getVoisin(Ile::GAUCHE))
-      end
-
-      if(@dernierIle.aVoisin?(Ile::DROITE))
-        puts "A droite"
-        surbrillancePont(@dernierIle.getVoisin(Ile::DROITE))
-      end
-
     end
+
+    def effacePont()
+      for direction in Ile::DIRECTIONS
+        if(@dernierIle.aVoisinDisponible?(direction))
+          eteintPont(@dernierIle.getVoisin(direction))
+        end
+      end
+    end
+
 
     def valeurPont(ile1,ile2)
         if(ile1.posX == ile2.posX)#horizontal
