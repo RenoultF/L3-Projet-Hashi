@@ -1,9 +1,13 @@
 
+##
+# Auteur Brabant Mano
+# Version 2.0.1 : Date : 15/03/2020
 
 
 require "./Case.rb"
 require "./Ile.rb"
 require "./Pont.rb"
+require "./Pile.rb"
 
 
 
@@ -34,12 +38,12 @@ class Grille2Essai
     end
 
     def initialize(chaine, tailleX, tailleY, difficulte)
-
         if(chaine.length != tailleX * tailleY)
-
           raise("La taille n'est pas la bonne")
-
         end
+        puts "Creation !!!"
+        @actions = Pile.creer()
+        puts actions
         @difficulte = difficulte
         i = -1
         j = tailleY
@@ -48,53 +52,32 @@ class Grille2Essai
         @mat = Array.new(tailleX) { Array.new(tailleY) }
         @matSolution = Array.new(tailleX) { Array.new(tailleY) }
         chaine.each_char do |c|
-
           j += 1
           if(j >= tailleY)
-
             j = 0
             i += 1
-
           end
-
-
           if(c =~ /[1-8]/)
-
             @mat[i][j] = Ile.creer(i, j, c.ord() - '0'.ord(), self)
             @matSolution[i][j] = Ile.creer(i, j, c.ord() - '0'.ord(), self)
-
           elsif(c == '|')
-
             @matSolution[i][j] = Pont.construit(i, j, self, Pont::VERTICAL, 1)
             @mat[i][j] = Pont.creer(i, j, self)
-
-
           elsif(c == '"')
-
             @matSolution[i][j] = Pont.construit(i, j, self, Pont::VERTICAL, 2)
             @mat[i][j] = Pont.creer(i, j, self)
-
           elsif(c == '-')
-
             @matSolution[i][j] = Pont.construit(i, j, self, Pont::HORIZONTAL, 1)
             @mat[i][j] = Pont.creer(i, j, self)
-
           elsif(c == '=')
-
             @matSolution[i][j] = Pont.construit(i, j, self, Pont::HORIZONTAL, 2)
             @mat[i][j] = Pont.creer(i, j, self)
-
           elsif(c == ' ')
-
             @matSolution[i][j] = Case.generer(i, j, self)
             @mat[i][j] = Case.generer(i, j, self)
-
           end
-
         end
-
-        @dernierIle = @mat[0][0]
-
+        @dernierIle = nil
     end
 
     def afficheToi()
@@ -137,21 +120,53 @@ class Grille2Essai
     end
 
 
+
+    def addAction(ile1, ile2, methode)
+      @actions.empiler(Action2.creer(ile1, ile2, methode))
+    end
+
+    def undo()
+      if(!@actions.empty?())
+        action = @actions.depiler()
+        self.setDernierIle(action.ile1())
+        self.send(homologue(action.methode()), action.ile2())
+        action = @actions.depiler()
+      end
+    end
+
+    def homologue(methode)
+      if(methode == :createPont)
+        return :supprimePont
+      elsif(methode == :supprimePont)
+        return :createPont
+      else
+        raise("Je ne connais pas la methode")
+      end
+    end
+
+
+    def getDirection(ile1, ile2)
+      if(ile1.posX() == ile2.posX()) #alors pont horizontal
+        return Pont::HORIZONTAL
+      elsif(ile1.posY() == ile2.posY()) #alors pont vertical
+        return Pont::VERTICAL
+      else
+        return Pont::NULLE
+      end
+    end
+
+
     def getDifference(ile1, ile2)
 
-      print ile1.afficheInfo(), "\n"
-      print ile2.afficheInfo(), "\n"
+      direction = getDirection(ile1, ile2)
 
-      if(ile1.posX() == ile2.posX()) #alors pont horizontal
-        direction = Pont::HORIZONTAL
+      if(direction == Pont::HORIZONTAL)
         petitPos = [ile2.posY(), ile1.posY()].min() + 1
         grandPos = [ile2.posY(), ile1.posY()].max() - 1
-      elsif(ile1.posY() == ile2.posY()) #alors pont vertical
-        direction = Pont::VERTICAL
+      elsif(direction == Pont::VERTICAL) #alors pont vertical
         petitPos = [ile2.posX(), ile1.posX()].min() + 1
         grandPos = [ile2.posX(), ile1.posX()].max() - 1
       else
-        direction = Pont::NULLE
         petitPos = 0
         grandPos = 0
       end
@@ -160,69 +175,91 @@ class Grille2Essai
 
 
     def estVoisin?(ile1, ile2)
+      proc = Proc.new do |pont|
+        if(pont.estIle?())
+          return false
+        end
+      end
+      return parcoursPont(ile1, ile2, proc)
+    end
+
+    def createPont(ile2)
+      direction = getDirection(@dernierIle, ile2)
+      if(direction != Pont::NULLE)
+        self.addAction(@dernierIle, ile2, :createPont)
+      end
+      proc = Proc.new do |pont|
+        pont.augmenteValeur(direction)
+      end
+      return parcoursPont(@dernierIle, ile2, proc)
+    end
+
+    def supprimePont(ile2)
+      direction = getDirection(@dernierIle, ile2)
+      if(direction != Pont::NULLE)
+        self.addAction(@dernierIle, ile2, :supprimePont)
+      end
+      proc = Proc.new do |pont|
+        pont.diminueValeur(direction)
+      end
+      return parcoursPont(@dernierIle, ile2, proc)
+    end
+
+    def surbrillancePont(ile2)
+      direction = getDirection(@dernierIle, ile2)
+      proc = Proc.new do |pont|
+        pont.metSurbrillance(direction)
+      end
+      return parcoursPont(@dernierIle, ile2, proc)
+    end
+
+    def eteintPont(ile2)
+      direction = getDirection(@dernierIle, ile2)
+      proc = Proc.new do |pont|
+        pont.supprSurbrillance(direction)
+      end
+      return parcoursPont(@dernierIle, ile2, proc)
+    end
+
+    def parcoursPont(ile1, ile2, proc)
       direction, petitPos, grandPos = getDifference(ile1, ile2)
       if(direction == Pont::HORIZONTAL)
-        for i in (petitPos..grandPos)
-          if(@mat[i][ile1.posY()].estIle?())
-            return false
-          end
-        end
+        return parcoursPontHorizontal(petitPos, grandPos, proc)
       elsif(direction == Pont::VERTICAL)
-        for i in (petitPos..grandPos)
-          if(@mat[ile1.posX()][i].estIle?())
-            return false
-          end
-        end
-      elsif(direction == Pont::NULLE)
-        return false
+        return parcoursPontVertical(petitPos, grandPos, proc)
+      end
+    end
+
+    private def parcoursPontVertical(petitPos, grandPos, proc)
+      for i in (petitPos..grandPos)
+        proc.call(@mat[i][@dernierIle.posY()])
       end
       return true
     end
 
-    def createPont(ile2)
-      parcours(@dernierIle, ile2, :augmenteValeur)
-    end
-
-    def supprimePont(ile2)
-      parcours(@dernierIle, ile2, :diminueValeur)
-    end
-
-    def surbrillancePont(ile2)
-      parcours(@dernierIle, ile2, :metSurbrillance)
-    end
-
-    def eteintPont(ile2)
-      parcours(@dernierIle, ile2, :supprSurbrillance)
-    end
-
-    def parcours(ile1, ile2, methode)
-      direction, petitPos, grandPos = getDifference(ile1, ile2)
-      if(direction == Pont::HORIZONTAL)
-        return parcoursHorizontal(petitPos, grandPos, methode, direction)
-      elsif(direction == Pont::VERTICAL)
-        return parcoursVertical(petitPos, grandPos, methode, direction)
-      end
-    end
-
-    def parcoursVertical(petitPos, grandPos, methode, direction)
+    private def parcoursPontHorizontal(petitPos, grandPos, proc)
       for i in (petitPos..grandPos)
-        @mat[i][@dernierIle.posY()].send(methode, direction)
+        proc.call(@mat[@dernierIle.posX()][i])
       end
+      return true
     end
 
-    def parcoursHorizontal(petitPos, grandPos, methode, direction)
-      for i in (petitPos..grandPos)
-        @mat[@dernierIle.posX()][i].send(methode, direction)
-      end
-    end
 
 
 
     def setDernierIle(ile1)
-      effacePont()
+      puts "marque 1"
+      if(!@dernierIle.eql?(nil))
+        puts "marque 2"
+        effacePont()
+      end
+      puts "marque 3"
       @dernierIle = ile1
+      puts "marque 4"
       montrePont()
+      puts "marque 5"
       afficheToi()
+      puts "marque 6"
     end
 
 
@@ -245,52 +282,15 @@ class Grille2Essai
 
 
     def valeurPont(ile1,ile2)
-        if(ile1.posX == ile2.posX)#horizontal
-            if(ile1.posY > ile2.posY)
-                if(@mat[ile2.posX][ile2.posY+1].direction == Pont::VERTICAL)
-                    return 0
-                else
-                    return @mat[ile2.posX][ile2.posY+1].valeur
-                end
-            else
-                if(@mat[ile1.posX][ile1.posY+1].direction == Pont::VERTICAL)
-                    return 0
-                else
-                    return @mat[ile1.posX][ile1.posY+1].valeur
-                end
-            end
+      direction = getDirection(@dernierIle, ile2)
+      proc = Proc.new do |pont|
+        if(pont.direction() == direction)
+          return pont.valeur()
         else
-            if(ile1.posX > ile2.posX)#vertical
-                if(@mat[ile2.posX+1][ile2.posY].direction == Pont::HORIZONTAL)
-                    return 0
-                else
-                    return @mat[ile2.posX][ile2.posY+1].valeur
-                end
-            else
-                if(@mat[ile1.posX+1][ile1.posY].direction == Pont::HORIZONTAL)
-                    return 0
-                else
-                    return @mat[ile1.posX+1][ile1.posY].valeur
-                end
-            end
+          return 0
         end
-    end
-
-    def removeAction()
-        tab_action = Array.new()
-        if(!@actions.empty?)
-            tab_action = @actions.last().GetCoord()
-            x= tab_action[1]
-            y = tab_action[2]
-            direc = tab_action[3]
-            #si on veut enlever un pont
-            if(tab_action[0]== 0)
-                @mat[x][y].diminueValeur(direc)
-            else
-                @mat[x][y].augmenteValeur(direc)
-            end
-            @actions.pop
-        end
+      end
+      return parcoursPont(@dernierIle, ile2, proc)
     end
 
 end

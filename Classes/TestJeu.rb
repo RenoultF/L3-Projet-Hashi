@@ -23,7 +23,7 @@ begin
 
 rescue
 
-    puts "Ce compte n'existe pas"
+    puts "Le compte " + nomCompte + " n'existe pas"
     puts "Voulez vous le creer ? (O/n)"
     rep = gets.chomp
 

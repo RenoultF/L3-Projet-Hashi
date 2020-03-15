@@ -48,12 +48,13 @@ class Jeu
     def chargerGrille(difficulte, tailleGrille, compte)
         lst = Sauvegarde.liste(compte, tailleGrille, difficulte)
         if(lst.count() == 0)
-
             raise("Y a pas de sauvegarde")
-
         end
-        i = Random.new
-        return lst[i.rand(lst.count())].getGrille()
+        lst.each_with_index do |s, index|
+          print "\n", index, ":", "\n"
+          s.getGrille().afficheToi()
+        end
+        return lst[gets.chomp().to_i()].getGrille()
     end
 
     ##
@@ -65,31 +66,32 @@ class Jeu
         win = false #T'es mauvais Jack
         while(!win)
             @grille.afficheToi
-            case action
+            case action()
             when 1
               begin
-                ile1 = demandeCoord
+                ile1 = demandeCoord()
                 @grille.setDernierIle(ile1)
-                ile2 = demandeCoord
+                ile2 = demandeCoord()
+                puts ile1, ile2
                 @grille.createPont(ile2)
               rescue => e
-                print e.message()
+                puts e.trace()
               end
-                valeurPont = @grille.valeurPont(ile1, ile2)
-                if(ile1.posX == ile2.posX)
-                  x = ile1.posX
-                  y = ile1.posY + 1
-                elsif(ile1.posY == ile2.posY)
-                  x = ile1.posX + 1
-                  y = ile1.posY
-                else
-                  puts "Vous etes teubé"
-                end
-                if(valeurPont == 0)
+              #  valeurPont = @grille.valeurPont(ile1, ile2)
+              #  if(ile1.posX == ile2.posX)
+              #    x = ile1.posX
+              #    y = ile1.posY + 1
+              #  elsif(ile1.posY == ile2.posY)
+              #    x = ile1.posX + 1
+              #    y = ile1.posY
+              #  else
+              #    puts "Vous etes teubé"
+              #  end
+              #  if(valeurPont == 0)
                #   Action.new(@grille.getCase(x, y), @grille, 0).empiler
-                elsif(valeurPont != 0)
+              #  elsif(valeurPont != 0)
                #   Action.new(@grille.getCase(x, y), @grille, 1).empiler
-                end
+              #  end
             when 2
                 afficherAide(@tech.demandeAide(@grille, @grilleSolution))
             when 3
@@ -97,7 +99,7 @@ class Jeu
             when 4
                 @checkPoint.valider
             when 5
-                @checkPoint.supprimer_derniere_action
+                @grille.undo()
             when 6
                 @checkPoint.supprimer_checkpoint
             when 7
@@ -142,6 +144,9 @@ class Jeu
         x = gets.chomp.to_i
         puts "coordonnée en y : "
         y = gets.chomp.to_i
+        if(@grille.sortLimite?(x, y))
+          raise("Les coordonnée ne sont pas correctes")
+        end
         return @grille.getCase(x, y)
     end
 end

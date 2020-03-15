@@ -16,8 +16,10 @@ class Ile < Case
     #Cette constante représente l'une des directions dans laquelle peut se trouver un voisin
     GAUCHE = 3
 
+    #Cette constante représente l'ensemble des directions dans laquelle peut se trouver un voisin
     DIRECTIONS = [HAUT, DROITE, BAS, GAUCHE]
 
+    attr_reader :valeur
 
     include Comparable
     private_class_method :new
@@ -98,7 +100,7 @@ class Ile < Case
 
       if(@grille.sortLimite?(posX, posY))
 
-        raise("Cette ile n'a pas de voisins dans cette direction")
+        raise("Cette ile n'a pas de voisins dans cette direction : " + direction.to_s())
 
       else
 
