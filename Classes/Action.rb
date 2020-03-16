@@ -1,3 +1,4 @@
+#@Deprecated
 class Action
   #@pont
   attr:pont, false
