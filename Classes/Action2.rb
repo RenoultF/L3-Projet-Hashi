@@ -1,10 +1,15 @@
 
 #Cette classe représente les actions réalisé par le joueur (placer, retirer des ponts)
 class Action2
-  #@pont
-  attr:ile1, false
-  attr:ile2, false
-  attr:methode, false
+
+  #@ile1 => La première ile
+  attr_reader:ile1
+
+  #@ile2 => La deuxième ile
+  attr_reader:ile2
+
+  #@ile1 => La méthode utilisé
+  attr_reader:methode
 
   private_class_method :new
 

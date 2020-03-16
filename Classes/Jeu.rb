@@ -54,7 +54,11 @@ class Jeu
           print "\n", index, ":", "\n"
           s.getGrille().afficheToi()
         end
-        return lst[gets.chomp().to_i()].getGrille()
+        res = -1
+        while(res < 0 || res >= lst.length)
+          res = gets.chomp().to_i()
+        end
+        return lst[res].getGrille()
     end
 
     ##
@@ -75,7 +79,7 @@ class Jeu
                 puts ile1, ile2
                 @grille.createPont(ile2)
               rescue => e
-                puts e.trace()
+                puts e.message()
               end
               #  valeurPont = @grille.valeurPont(ile1, ile2)
               #  if(ile1.posX == ile2.posX)
@@ -101,10 +105,12 @@ class Jeu
             when 5
                 @grille.undo()
             when 6
-                @checkPoint.supprimer_checkpoint
+                @grille.redo()
             when 7
-                win = verif.demandeAide(@grille, @grilleSolution)
+                @checkPoint.supprimer_checkpoint
             when 8
+                win = @verif.demandeAide(@grille, @grilleSolution)
+            when 9
                 Sauvegarde.recuperer(@compte, @grille).setGrille(@grille).sauvegarder()
             else
                 puts "puts"
@@ -127,10 +133,11 @@ class Jeu
         puts "2 : demander une aide\n"
         puts "3 : emetre hypothese\n"
         puts "4 : valider hypothese\n"
-        puts "5 : retour arriere\n"
-        puts "6 : supprimer hypothese\n"
-        puts "7 : valider grille\n"
-        puts "8 : Sauvegarder la grille\n"
+        puts "5 : undo\n"
+        puts "6 : redo\n"
+        puts "7 : supprimer hypothese\n"
+        puts "8 : valider grille\n"
+        puts "9 : Sauvegarder la grille\n"
 
         return gets.chomp.to_i
     end
@@ -146,6 +153,9 @@ class Jeu
         y = gets.chomp.to_i
         if(@grille.sortLimite?(x, y))
           raise("Les coordonnée ne sont pas correctes")
+        end
+        if(!@grille.getCase(x, y).estIle?())
+          raise("La case n'est pas une ile")
         end
         return @grille.getCase(x, y)
     end

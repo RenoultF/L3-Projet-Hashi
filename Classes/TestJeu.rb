@@ -21,15 +21,15 @@ begin
   nomCompte = gets.chomp
   jeu = Jeu.creer(0, 7, Compte.recuperer(nomCompte))
 
-rescue
+rescue => e
 
-    puts "Le compte " + nomCompte + " n'existe pas"
+    puts e.message()
     puts "Voulez vous le creer ? (O/n)"
     rep = gets.chomp
 
     if(rep == "o" || rep == "O" || rep == "Oui" || rep == "OUI" || rep == "oui")
 
-      compte = Compte.creer(nomCompte).sauvegarder()
+      compte = Compte.creer(nomCompte)
       jeu = Jeu.creer(0, 7, Compte.recuperer(compte))
 
     elsif(rep == "n" || rep == "N" || rep == "Non" || rep == "NON" || rep == "non")

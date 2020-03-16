@@ -18,7 +18,7 @@ class Compte < ActiveRecord::Base
     attr_reader :pseudo
 
     private_class_method :new
- 
+
     #Cette méthode permet de creer un nouveau compte
     #
     #@param pseudo Le pseudo du compte
@@ -33,6 +33,7 @@ class Compte < ActiveRecord::Base
 
       super(:name => pseudo)
       @pseudo = pseudo
+      self.sauvegarder()
 
     end
     #:doc:
@@ -44,11 +45,11 @@ class Compte < ActiveRecord::Base
     #@raiseException Si le compte n'existe pas
     def Compte.recuperer(pseudo)
 
-      compte = Compte.where(name: pseudo).to_a()[0];
+      compte = Compte.find_by(name: pseudo);
 
       if(compte == nil)
 
-        raise("Le compte n'existe pas")
+        raise("Le compte " + pseudo + " n'existe pas")
 
       else
 

@@ -14,7 +14,7 @@ class Sauvegarde < ActiveRecord::Base
 
 
     #@grille => Contient la grille que l'utilisateur a commencé à remplir
-    #has_one :grille
+
 
     validates :grille, presence: true
 
@@ -26,7 +26,7 @@ class Sauvegarde < ActiveRecord::Base
     validates :compte, presence: true
 
 
-    validates :solution, presence: true, uniqueness: true
+    validates :solution, presence: true
 
 
     private_class_method :new
