@@ -110,7 +110,7 @@ class Pont < Case
     #:doc:
 
 
-
+    ##
     #Cette méthode permet de comparer des ponts entre-eux
     #
     #@param autre L'autre pont à comparer
@@ -133,7 +133,7 @@ class Pont < Case
     end
 
     #Cette méthode permet d'afficher le pont dans un terminal
-    def to_s
+    def to_s()
       ret = " "
       if(@surbrillance)
         ret = "P"
@@ -201,7 +201,7 @@ class Pont < Case
     #@return true si la valeur à été modifié, false sinon
     def augmenteValeur(direction)
 
-        return modifValeur(direction , 1)
+        return modifValeur(direction, 1)
 
     end
 
@@ -214,7 +214,7 @@ class Pont < Case
     #@return true si la valeur à été modifié, false sinon
     def diminueValeur(direction)
 
-        return modifValeur(direction , MAX_LIGNE)
+        return modifValeur(direction, MAX_LIGNE)
 
     end
 
@@ -229,7 +229,7 @@ class Pont < Case
     #@return true si la valeur à été modifié, false sinon
     def metSurbrillance(direction)
 
-        return modifSurbrillance(direction , true)
+        return modifSurbrillance(direction, true)
 
     end
 
@@ -242,7 +242,7 @@ class Pont < Case
     #@return true si la valeur à été modifié, false sinon
     def supprSurbrillance(direction)
 
-        return modifSurbrillance(direction , false)
+        return modifSurbrillance(direction, false)
 
     end
 

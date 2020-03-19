@@ -117,7 +117,7 @@ class Sauvegarde < ActiveRecord::Base
     end
 
     #Cette méthode permet d'afficher une sauvegarde
-    def to_s
+    def to_s()
 
         return "#{self.compte} : #{self.getGrille()}"
 

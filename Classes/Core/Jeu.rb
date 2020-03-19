@@ -15,7 +15,7 @@ require "../Core/Compte.rb"
 require "../Core/Action.rb"
 require "../Core/Hypothese.rb"
 ##
-#classe qui s'occupe du déroulement d'une partie
+#Cette classe permet de s'occuper du déroulement d'une partie
 class Jeu
 
     private_class_method :new

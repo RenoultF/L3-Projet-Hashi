@@ -157,12 +157,14 @@ class Grille
         return @mat[i][j]
     end
 
-
+    ##
+    #Cette méthode permet d'emmetre une nouvelle hypothèse (rangé dans la pile d'hypothèse)
     def creerHypothese()
       @checkpoints.empiler(Hypothese.creer(self))
     end
 
-
+    ##
+    #Cette méthode permet de valider la dernière hypothèse
     def valideHypothese()
       begin
         @checkpoints.depiler().grille
@@ -171,6 +173,8 @@ class Grille
       end
     end
 
+    ##
+    #Cette méthode permet de supprimer la dernière hypothèse et de revenir à l'état correspondant
     def supprimeHypothese(jeu)
       begin
         jeu.grille = @checkpoints.depiler().grille
@@ -181,6 +185,10 @@ class Grille
 
 
 
+    ##
+    #Méthode à appeler quand on appuie sur une ile
+    #
+    #@param ile L'ile sur laquelle on a cliqué
     def clickOnIle(ile)
 
       if(@dernierIle.eql?(nil))
@@ -414,18 +422,12 @@ class Grille
     #
     #@param ile1 La nouvelle ile
     def setDernierIle(ile1)
-      puts "marque 1.1"
       if(!@dernierIle.eql?(nil))
-        puts "marque 1.2"
         effacePont()
       end
-      puts "marque 1.3"
       @dernierIle = ile1
-      puts "marque 1.4"
       montrePont()
-      puts "marque 1.5"
       afficheToi()
-      puts "marque 1.6"
     end
 
     #Cette méthode permet de recuperer la dernière ile séléctionnée

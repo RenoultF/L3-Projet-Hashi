@@ -3,7 +3,7 @@
 # Auteur Brabant Mano
 # Version 0.1 : Date : 07/02/2020
 
-
+##
 #Cette classe représente une pile
 class Pile
 
@@ -11,6 +11,7 @@ class Pile
 
   private_class_method :new
 
+  ##
   #Ce constructeur permet de créer une nouvelle pile
   def Pile.creer()
     new()
@@ -23,28 +24,30 @@ class Pile
   #:doc:
 
   ##
-  #Cette méthode permet de d'empiler un element
+  #Cette méthode permet de d'empiler un élément
   #
-  #@param element L'element à empiler
+  #@param element L'élément à empiler
   def empiler(element)
     @actions.push(element)
-    puts element
     return self
   end
 
   ##
-  #Cette méthode permet de dépiler le dernier element
-  #@return L'action dépilée
+  #Cette méthode permet de dépiler le dernier élément
+  #
+  #@return L'élément dépilé
   def depiler
     if(self.empty?())
       raise("La pile est vide")
     else
-      ret = @actions.pop()
-      puts ret
-      return ret
+      return @actions.pop()
     end
   end
 
+  ##
+  #Cette méthode permet de savoir si la pile est vide ou non
+  #
+  #@return true si la pile est vide, false sinon
   def empty?()
     return @actions.empty?()
   end

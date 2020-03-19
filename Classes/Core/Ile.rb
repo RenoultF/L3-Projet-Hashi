@@ -6,6 +6,9 @@
 
 load "../Core/Case.rb"
 
+
+##
+#Cette classe représente les iles de la grille
 class Ile < Case
 
 
@@ -31,6 +34,7 @@ class Ile < Case
     include Comparable
     private_class_method :new
 
+    ##
     #Ce constructeur permet de créer une nouvelle ile
     #
     #@param posX La position en abscisse
@@ -52,6 +56,7 @@ class Ile < Case
     end
     #:doc:
 
+    ##
     #Cette méthode permet de recuperer le nombre de lien nécéssaire pour être valide
     #
     #@return Le nombre de lien nécéssaire pour être valide
@@ -59,11 +64,20 @@ class Ile < Case
         return @valeur
     end
 
-    #Cette méthode permet de savoir si une ile est connécté à autant de pont que son objectif
+    ##
+    #Cette méthode permet de recuperer le nombre de lien actuel
+    #
+    #@return Le nombre de lien actuel
+    def getNombrePont()
+        return @nbPont
+    end
+
+    ##
+    #Cette méthode permet de savoir si l'ile est connécté à autant de pont que son objectif
     #
     #@return true si l'ile est connécté à autant de pont que son objectif, false sinon
     def estValide?()
-        if @nbPont == @valeur
+        if getNombrePont() == getValeur()
             return true
         else
             return false
@@ -71,22 +85,31 @@ class Ile < Case
     end
 
     def to_s()
-        return "#{@valeur.to_s}"
+        return @valeur.to_s()
     end
 
     def afficheInfo()
         return @valeur, @posX, @posY
     end
 
-    def afficheTerminal()
-        return "(#{@valeur})"
+
+    ##
+    #Cette méthode permet de comparer des iles entre-elles
+    #
+    #@param autre L'autre ile à comparer
+    #
+    #@return :
+    #
+    #0 si les iles sont égalles
+    #
+    #un nombre négatif si la première ile est inférieure à la deuxième
+    #
+    #un nombre positif si la première ile est supérieure à la deuxième
+    def <=>(autre)
+      return @valeur <=> autre.valeur
     end
 
-    def <=>(ile)
-      return @valeur <=> ile.valeur
-    end
-
-
+    ##
     #Cette méthode permet de retourner un voisin dans une direction
     #
     #@param direction La direction dans laquelle on cherche le voisin
@@ -107,7 +130,11 @@ class Ile < Case
       end
     end
 
-    def aVoisin?(direction)
+  ##
+  #Cette méthode permet de savoir si l'ile a un voisin dans une direction
+  #
+  #@param direction La direction dans laquelle on cherche le voisin
+  def aVoisin?(direction)
       begin
         return getVoisin(direction).estIle?()
       rescue => e
@@ -136,18 +163,16 @@ class Ile < Case
     end
 
 
-
-    #Cette méthode permet de retourner un voisin dans une direction
+    ##
+    #Cette méthode permet de savoir si l'ile a un voisin disponible dans une direction (s'il n'a pas de pont qui les sépares)
     #
     #@param direction La direction dans laquelle on cherche le voisin
     def aVoisinDisponible?(direction)
       begin
         ile2 = self.getVoisin(direction)
-        ret = @grille.routeDisponible?(self, ile2)
-        puts "La ax"
-        return ret
+        return @grille.routeDisponible?(self, ile2)
       rescue => e
-        puts "Pas de chance :" + e.message()
+        puts e.message()
         return false
       end
     end

@@ -4,14 +4,14 @@
 # Version 0.1 : Date : 07/02/2020
 
 
-#Cette classe représente une pile
+#Cette classe représente une structure de donnée permettant de faire des udo et des redo
 class UndoRedo
 
-  #@indice => La position dans la pile
+  #@indice => La position dans la undoRedo
 
   private_class_method :new
 
-  #Ce constructeur permet de créer une nouvelle pile
+  #Ce constructeur permet de créer une nouvelle undoRedo
   def UndoRedo.creer()
     new()
   end
@@ -36,9 +36,10 @@ class UndoRedo
   end
 
   ##
-  #Cette méthode permet de dépiler le dernier element
-  #@return L'action dépilée
-  def undo
+  #Cette méthode permet de recupérer l'élément d'avant
+  #
+  #@return L'élément dépilée
+  def undo()
     if(@indice <= 0)
       raise("La undoRedo est vide")
     else
@@ -48,9 +49,10 @@ class UndoRedo
   end
 
   ##
-  #Cette méthode permet de dépiler le dernier element
-  #@return L'action dépilée
-  def redo
+  #Cette méthode permet de recupérer l'élément du dernier undo
+  #
+  #@return L'élément correspondant
+  def redo()
     if(@indice >= @nbElement)
       raise("Vous etes au bout de la undoRedo")
     else
