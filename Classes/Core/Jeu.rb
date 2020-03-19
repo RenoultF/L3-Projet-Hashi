@@ -13,6 +13,7 @@ require "../Core/Compte.rb"
 #require "../Core/DonnerTechnique.rb"
 #require "../Core/VerifierGrille.rb"
 require "../Core/Action.rb"
+require "../Core/Hypothese.rb"
 ##
 #classe qui s'occupe du déroulement d'une partie
 class Jeu
@@ -24,7 +25,9 @@ class Jeu
     @grilleSolution #la grille complétée
     @tech #objet qui fournit des aides techniques
     @verif # objet qui vérifie la grille
-    @checkPoint #objet qui gere les hypotheses
+    @checkpoints #objet qui gere les hypotheses
+
+    attr_accessor :grille
 
     #Ce constructeur permet de creer un nouveau Jeu
     #
@@ -39,6 +42,7 @@ class Jeu
     def initialize(difficulte, tailleGrille, compte)
         @grille = chargerGrille(difficulte, tailleGrille, compte)
         @compte = compte
+        @checkpoints = Pile.creer()
     end
     #:doc
 
@@ -76,13 +80,8 @@ class Jeu
             case action()
             when 1
               begin
-                ile1 = demandeCoord()
-                puts "marque 1"
-                @grille.setDernierIle(ile1)
-                puts "marque 2"
                 ile2 = demandeCoord()
-                puts ile1, ile2
-                @grille.createPont(ile2)
+                @grille.clickOnIle(ile2)
               rescue => e
                 puts "Erreur : " +  e.message()
               end
@@ -92,11 +91,19 @@ class Jeu
                 @grille.redo()
             when 4
                 Sauvegarde.recuperer(@compte, @grille).setGrille(@grille).sauvegarder()
+            when 5
+                @grille.creerHypothese()
+            when 6
+                @grille.valideHypothese()
+            when 7
+                @grille.supprimeHypothese(self)
             else
                 puts "puts"
             end
         end
     end
+
+
 
     ##
     #affichage de l'aide
@@ -113,6 +120,9 @@ class Jeu
         puts "2 : undo\n"
         puts "3 : redo\n"
         puts "4 : Sauvegarder la grille\n"
+        puts "5 : Creer hypothese\n"
+        puts "6 : Valider hypothese\n"
+        puts "7 : Supprimer hypothese\n"
         return gets.chomp.to_i
     end
 

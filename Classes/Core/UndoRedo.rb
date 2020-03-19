@@ -5,20 +5,22 @@
 
 
 #Cette classe représente une pile
-class Pile
+class UndoRedo
 
   #@indice => La position dans la pile
 
   private_class_method :new
 
   #Ce constructeur permet de créer une nouvelle pile
-  def Pile.creer()
+  def UndoRedo.creer()
     new()
   end
 
   #:nodoc:
   def initialize()
     @actions = Array.new()
+    @indice = 0
+    @nbElement = 0
   end
   #:doc:
 
@@ -27,21 +29,33 @@ class Pile
   #
   #@param element L'element à empiler
   def empiler(element)
-    @actions.push(element)
-    puts element
+    @actions.insert(@indice, element)
+    @indice += 1
+    @nbElement = @indice
     return self
   end
 
   ##
   #Cette méthode permet de dépiler le dernier element
   #@return L'action dépilée
-  def depiler
-    if(self.empty?())
-      raise("La pile est vide")
+  def undo
+    if(@indice <= 0)
+      raise("La undoRedo est vide")
     else
-      ret = @actions.pop()
-      puts ret
-      return ret
+      @indice -= 1
+      return @actions.at(@indice)
+    end
+  end
+
+  ##
+  #Cette méthode permet de dépiler le dernier element
+  #@return L'action dépilée
+  def redo
+    if(@indice >= @nbElement)
+      raise("Vous etes au bout de la undoRedo")
+    else
+      @indice += 1
+      return @actions.at(@indice - 1)
     end
   end
 

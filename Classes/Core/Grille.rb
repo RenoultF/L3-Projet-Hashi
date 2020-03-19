@@ -8,6 +8,8 @@ require "../Core/Case.rb"
 require "../Core/Ile.rb"
 require "../Core/Pont.rb"
 require "../Core/Pile.rb"
+require "../Core/UndoRedo.rb"
+require "../Core/Hypothese.rb"
 require "../Core/Action.rb"
 
 
@@ -64,8 +66,9 @@ class Grille
           raise("La taille n'est pas la bonne")
         end
         puts "Creation !!!"
-        @actions = Pile.creer()
+        @actions = UndoRedo.creer()
         puts actions
+        @checkpoints = Pile.creer()
         @difficulte = difficulte
         i = -1
         j = tailleY
@@ -152,6 +155,46 @@ class Grille
     #@return La case à la position [i][j]
     def getCase(i, j)
         return @mat[i][j]
+    end
+
+
+    def creerHypothese()
+      @checkpoints.empiler(Hypothese.creer(self))
+    end
+
+
+    def valideHypothese()
+      begin
+        @checkpoints.depiler().grille
+      rescue => e
+        puts e.message()
+      end
+    end
+
+    def supprimeHypothese(jeu)
+      begin
+        jeu.grille = @checkpoints.depiler().grille
+      rescue => e
+        puts e.message()
+      end
+    end
+
+
+
+    def clickOnIle(ile)
+
+      if(@dernierIle.eql?(nil))
+        puts "derniere ile == nil"
+        setDernierIle(ile)
+      elsif(!estVoisin?(@dernierIle, ile))
+        puts "pas voisins"
+        setDernierIle(ile)
+      else
+        puts "creation pont"
+        createPont(ile)
+      end
+
+
     end
 
     #Cette méthode permet d'ajouter une action à la pile d'action
