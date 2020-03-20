@@ -21,12 +21,7 @@ class Hypothese
   end
 
   #:nodoc:
-  def initialize(gril
-  ##
-  # Auteur Brabant Mano
-  # Version 0.1 : Date : 19/03/2020
-
-le)
+  def initialize(grille)
 
     @grille = YAML.load(YAML.dump(grille)) #copie profonde
 
