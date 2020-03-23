@@ -6,12 +6,12 @@
 
 
 require "../Core/Grille.rb"
-#require "../Core/Aide.rb"
+require "../Core/Aide.rb"
 require "../Core/Sauvegarde.rb"
 require "../Core/Compte.rb"
 #require "../Core/Checkpoint.rb"
-#require "../Core/DonnerTechnique.rb"
-#require "../Core/VerifierGrille.rb"
+require "../Core/DonnerTechnique.rb"
+require "../Core/VerifierGrille.rb"
 require "../Core/Action.rb"
 require "../Core/Hypothese.rb"
 ##
@@ -43,6 +43,8 @@ class Jeu
         @grille = chargerGrille(difficulte, tailleGrille, compte)
         @compte = compte
         @checkpoints = Pile.creer()
+        @verifGrille = VerifierGrille.creer(@grille)
+        @donnerTech = DonnerTechnique.creer(@grille)
     end
     #:doc
 
@@ -97,6 +99,10 @@ class Jeu
                 @grille.valideHypothese()
             when 7
                 @grille.supprimeHypothese(self)
+            when 8
+                @verifGrille.aider()
+            when 9
+                @donnerTech.aider()
             else
                 puts "puts"
             end
@@ -123,6 +129,8 @@ class Jeu
         puts "5 : Creer hypothese\n"
         puts "6 : Valider hypothese\n"
         puts "7 : Supprimer hypothese\n"
+        puts "8 : Verifier grille\n"
+        puts "9 : Donner technique\n"
         return gets.chomp.to_i
     end
 

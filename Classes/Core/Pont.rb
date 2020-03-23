@@ -32,8 +32,11 @@ class Pont < Case
     #@direction => Direction du pont (NULLE, HORIZONTAL, VERTICAL)
     attr_reader :direction
 
-    #@surbrillance => Booléen pour l'affichage, si égal à true le pont sera affiché en surbrillance
+    #@surbrillance => Booléen pour l'affichage, si égal à true le pont sera affiché en surbrillance verte
     attr_accessor :surbrillance
+
+    #@marque => Booléen pour l'affichage, si égal à true le pont sera affiché en surbrillance rouge
+    attr_accessor :marque
 
     #:nodoc:
     def Pont.verifieDirection(direction)
@@ -105,6 +108,8 @@ class Pont < Case
         super(posX, posY, grille)
         @valeur = valeur
         @direction = direction
+        @surbrillance = false
+        @marque = false
 
     end
     #:doc:
@@ -151,12 +156,16 @@ class Pont < Case
           ret = "\""
         end
       end
+      if(@marque)
+        ret = "R"
+      end
       return ret
     end
 
 
     #:nodoc:
     private def modifValeur(direction, valeur)
+        demarquer()
         if(@direction != NULLE)
             #On modifie la valeur du pont si la direection donné est la bonne
             if(@direction == direction)
@@ -243,6 +252,21 @@ class Pont < Case
     def supprSurbrillance(direction)
 
         return modifSurbrillance(direction, false)
+
+    end
+
+
+    def marquer()
+
+      @marque = true
+
+    end
+
+
+
+    def demarquer()
+
+      @marque = false
 
     end
 
