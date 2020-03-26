@@ -10,6 +10,9 @@ require "active_record"
 #Cette classe représente les comptes utilisateurs
 class Compte < ActiveRecord::Base
 
+
+  COMPTE_DEFAULT = "_DEFAULT"
+
   has_many :sauvegardes
 
   validates :name, presence: true, uniqueness: true
@@ -19,24 +22,59 @@ class Compte < ActiveRecord::Base
 
   private_class_method :new
 
+
+  def Compte.maj()
+
+    new(COMPTE_DEFAULT, "")
+
+  end
+
   #Cette méthode permet de créer un nouveau compte
   #
   #@param pseudo Le pseudo du compte
   def Compte.creer(pseudo)
 
-    new(pseudo)
+    if(pseudo == COMPTE_DEFAULT)
+      raise(pseudo + " : Ce nom n'est pas disponible")
+    end
+    new(pseudo, COMPTE_DEFAULT)
 
   end
 
   #:nodoc:
-  def initialize(pseudo)
+  def initialize(pseudo, pseudoInitialisation)
 
     super(:name => pseudo)
     @pseudo = pseudo
     self.sauvegarder()
+    self.initialiseSauvegarde(pseudoInitialisation)
 
   end
   #:doc:
+
+  ##
+  #Cette méthode permet de récuperer toutes les grilles de base
+  def initialiseSauvegarde(pseudoInitialisation)
+
+    if(pseudoInitialisation == "")
+
+      Grille.chargerGrilles().each do |g|
+
+        Sauvegarde.creer(self, g.sauvegarder())
+
+      end
+
+    end
+
+    sauvegardes = Sauvegarde.listeCompte(Compte.recuperer(pseudoInitialisation))
+
+    sauvegardes.each do |s|
+
+      Sauvegarde.creer(self, s.getGrille()).sauvegarder()
+
+    end
+
+  end
 
   #Cette méthode permet de récuperer un compte dans la base de données
   #

@@ -72,7 +72,7 @@ class Grille
         @difficulte = difficulte
         i = -1
         j = tailleY
-        @tailleX = tailleX
+        @tailleX = tailleX 
         @tailleY = tailleY
         @mat = Array.new(tailleX) { Array.new(tailleY) }
         @matSolution = Array.new(tailleX) { Array.new(tailleY) }
