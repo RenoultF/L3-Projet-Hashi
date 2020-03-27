@@ -44,6 +44,29 @@ class Grille
     attr_reader :matSolution
 
 
+    ##
+    #Cette méthode permet de retourner toutes les grilles d'un dossier
+    def Grille.chargerGrilles(dossier)
+
+
+      puts dossier
+
+      ret = Array.new()
+
+      Dir.each_child(dossier) do |fichier|
+
+        puts fichier
+
+        text = File.open(dossier + "/" + fichier).read
+        text.gsub!(/\r\n/, "\n");
+        ret.push(Grille.creer(text, 7, 7, 0))
+
+      end
+
+      return ret
+
+    end
+
 
     private_class_method :new
 
@@ -63,43 +86,44 @@ class Grille
     #:nodoc:
     def initialize(chaine, tailleX, tailleY, difficulte)
         if(chaine.length != tailleX * tailleY)
-          raise("La taille n'est pas la bonne")
+      #    raise("La taille n'est pas la bonne")
         end
         puts "Creation !!!"
         @actions = UndoRedo.creer()
-        puts actions
+        puts chaine
         @checkpoints = Pile.creer()
         @difficulte = difficulte
         i = -1
-        j = tailleY
-        @tailleX = tailleX 
+        j = -1
+        @tailleX = tailleX
         @tailleY = tailleY
         @mat = Array.new(tailleX) { Array.new(tailleY) }
         @matSolution = Array.new(tailleX) { Array.new(tailleY) }
-        chaine.each_char do |c|
-          j += 1
-          if(j >= tailleY)
-            j = 0
-            i += 1
-          end
-          if(c =~ /[1-8]/)
-            @mat[i][j] = Ile.creer(i, j, c.ord() - '0'.ord(), self)
-            @matSolution[i][j] = Ile.creer(i, j, c.ord() - '0'.ord(), self)
-          elsif(c == '|')
-            @matSolution[i][j] = Pont.construit(i, j, self, Pont::VERTICAL, 1)
-            @mat[i][j] = Pont.creer(i, j, self)
-          elsif(c == '"')
-            @matSolution[i][j] = Pont.construit(i, j, self, Pont::VERTICAL, 2)
-            @mat[i][j] = Pont.creer(i, j, self)
-          elsif(c == '-')
-            @matSolution[i][j] = Pont.construit(i, j, self, Pont::HORIZONTAL, 1)
-            @mat[i][j] = Pont.creer(i, j, self)
-          elsif(c == '=')
-            @matSolution[i][j] = Pont.construit(i, j, self, Pont::HORIZONTAL, 2)
-            @mat[i][j] = Pont.creer(i, j, self)
-          elsif(c == ' ')
-            @matSolution[i][j] = Case.creer(i, j, self)
-            @mat[i][j] = Case.creer(i, j, self)
+        chaine.each_line do |l|
+          i += 1
+          j = -1
+          l.split(' ') do |c|
+            print c
+            j += 1
+            if(c =~ /[1-8]/)
+              @mat[i][j] = Ile.creer(i, j, c.ord() - '0'.ord(), self)
+              @matSolution[i][j] = Ile.creer(i, j, c.ord() - '0'.ord(), self)
+            elsif(c == '|')
+              @matSolution[i][j] = Pont.construit(i, j, self, Pont::VERTICAL, 1)
+              @mat[i][j] = Pont.creer(i, j, self)
+            elsif(c == 'H')
+              @matSolution[i][j] = Pont.construit(i, j, self, Pont::VERTICAL, 2)
+              @mat[i][j] = Pont.creer(i, j, self)
+            elsif(c == '-')
+              @matSolution[i][j] = Pont.construit(i, j, self, Pont::HORIZONTAL, 1)
+              @mat[i][j] = Pont.creer(i, j, self)
+            elsif(c == '=')
+              @matSolution[i][j] = Pont.construit(i, j, self, Pont::HORIZONTAL, 2)
+              @mat[i][j] = Pont.creer(i, j, self)
+            elsif(c == 'N')
+              @matSolution[i][j] = Case.creer(i, j, self)
+              @mat[i][j] = Case.creer(i, j, self)
+            end
           end
         end
         @dernierIle = nil

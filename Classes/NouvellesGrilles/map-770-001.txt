@@ -1,0 +1,7 @@
+4 = 5 - - - 2
+H 2 H 1 - 2 |
+H H H N N | 1
+H H 6 = = 5 N
+2 H H N N H N
+N H 4 = 2 H N
+N 4 = = = 4 N

@@ -22,10 +22,24 @@ class Compte < ActiveRecord::Base
 
   private_class_method :new
 
+  def Compte.razAllCompte()
+
+    Compte.delete_all()
+
+  end
+
 
   def Compte.maj()
 
-    new(COMPTE_DEFAULT, "")
+    Sauvegarde.razAllSauvegarde()
+
+    Compte.razAllCompte()
+
+    default = new(COMPTE_DEFAULT)
+
+    grilles = Grille.chargerGrilles("../NouvellesGrilles")
+
+    Sauvegarde.creerAll(default, grilles)
 
   end
 
@@ -37,36 +51,29 @@ class Compte < ActiveRecord::Base
     if(pseudo == COMPTE_DEFAULT)
       raise(pseudo + " : Ce nom n'est pas disponible")
     end
-    new(pseudo, COMPTE_DEFAULT)
+    puts "allo ?"
+    new(pseudo)
 
   end
 
   #:nodoc:
-  def initialize(pseudo, pseudoInitialisation)
+  def initialize(pseudo)
 
     super(:name => pseudo)
     @pseudo = pseudo
     self.sauvegarder()
-    self.initialiseSauvegarde(pseudoInitialisation)
+    if(pseudo != COMPTE_DEFAULT)
+      self.initialiseSauvegarde()
+    end
 
   end
   #:doc:
 
   ##
   #Cette méthode permet de récuperer toutes les grilles de base
-  def initialiseSauvegarde(pseudoInitialisation)
+  def initialiseSauvegarde()
 
-    if(pseudoInitialisation == "")
-
-      Grille.chargerGrilles().each do |g|
-
-        Sauvegarde.creer(self, g.sauvegarder())
-
-      end
-
-    end
-
-    sauvegardes = Sauvegarde.listeCompte(Compte.recuperer(pseudoInitialisation))
+    sauvegardes = Sauvegarde.listeCompte(Compte.recuperer(COMPTE_DEFAULT))
 
     sauvegardes.each do |s|
 

@@ -29,6 +29,25 @@ class Sauvegarde < ActiveRecord::Base
     validates :solution, presence: true
 
 
+    def Sauvegarde.razAllSauvegarde()
+
+      Sauvegarde.delete_all()
+
+    end
+
+    def Sauvegarde.creerAll(compte, grilles)
+
+      puts compte
+
+      grilles.each do |g|
+
+        Sauvegarde.creer(compte, g).sauvegarder()
+
+      end
+
+    end
+
+
     private_class_method :new
 
     #Cette méthode permet de creer une grille pour un compte
