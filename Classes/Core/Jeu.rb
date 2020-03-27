@@ -14,6 +14,7 @@ require "../Core/DonnerTechnique.rb"
 require "../Core/VerifierGrille.rb"
 require "../Core/Action.rb"
 require "../Core/Hypothese.rb"
+require "../Core/Chrono.rb"
 ##
 #Cette classe permet de s'occuper du déroulement d'une partie
 class Jeu
@@ -45,6 +46,8 @@ class Jeu
         @checkpoints = Pile.creer()
         @verifGrille = VerifierGrille.creer(@grille)
         @donnerTech = DonnerTechnique.creer(@grille)
+        @chronoGrille = Chrono.new(@grille)
+        @threadChrono = Thread.new{@chronoGrille.lancerChrono()}
     end
     #:doc
 
