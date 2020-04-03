@@ -13,7 +13,7 @@ require "../Core/Action.rb"
 require "../Core/Hypothese.rb"
 require "../Core/Chrono.rb"
 
-class Jeu
+class JeuUI
 
 
     def initialize(mode, taille, difficulte,pseudo)
