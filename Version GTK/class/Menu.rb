@@ -1,4 +1,5 @@
 require 'gtk3'
+load 'Jeu.rb'
 
 class Menu
     # --- BUILDERS ---
@@ -48,7 +49,11 @@ class Menu
             @tgl1515 = @builder.get_object("tgl1515")
             @tglFacile = @builder.get_object("tglFacile")
             @tglNormal = @builder.get_object("tglNorma")
-            @tglDiff = @builder.get_object("tglDifficile")
+			@tglDiff = @builder.get_object("tglDifficile")
+			
+		# --- ENTRY
+			@pseudo = @builder.get_object("entryPseudo")
+		
 
         # --- SIGNAUX ---
             # --- WINDOWS ---
@@ -197,13 +202,9 @@ class Menu
 		}
     end
     
-    def changerFenetre()
-        @window.destroy()
-        @builderJeu = Gtk::Builder.new
-        @builderJeu.add_from_file("../glade/jeu.glade")
-        @window = @builderJeu.get_object("windowJeu")
-        @window.show()
-        Gtk.main()  
+	def changerFenetre()
+		@jeu = Jeu.new(@@mode, @@taille, @@difficulte,@pseudo) 
+        @window.destroy()        
     end
 end
 
