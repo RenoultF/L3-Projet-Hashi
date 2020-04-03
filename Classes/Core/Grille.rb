@@ -201,7 +201,7 @@ class Grille
         return @mat[i][j]
     end
 
-    #commentaires
+    #met a jour le temps que l'utilisateur à mis à finir la map
     def setTempsFin(minutes,secondes)
       @minutesFin = minutes
       @secondesFin =secondes
