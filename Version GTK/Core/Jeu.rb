@@ -15,6 +15,8 @@ require "../Core/VerifierGrille.rb"
 require "../Core/Action.rb"
 require "../Core/Hypothese.rb"
 require "../Core/Chrono.rb"
+
+require '../class/JeuUI.rb'
 ##
 #Cette classe permet de s'occuper du déroulement d'une partie
 class Jeu
@@ -27,6 +29,7 @@ class Jeu
     @tech #objet qui fournit des aides techniques
     @verif # objet qui vérifie la grille
     @checkpoints #objet qui gere les hypotheses
+    @jeuUI
 
     attr_accessor :grille
 
@@ -35,13 +38,14 @@ class Jeu
     #:arg: difficulte
     #:arg: tailleGrille : Entier
     #:arg: compte : Compte
-    def Jeu.creer(difficulte, tailleGrille, compte)
-        new(difficulte, tailleGrille, compte)
+    def Jeu.creer(difficulte, tailleGrille, compte, jeuUI)
+        new(difficulte, tailleGrille, compte, jeuUI)
     end
 
     #:nodoc:
-    def initialize(difficulte, tailleGrille, compte)
+    def initialize(difficulte, tailleGrille, compte, jeuUI)
         @grille = chargerGrille(difficulte, tailleGrille, compte)
+        @jeuUI = jeuUI
         @compte = compte
         @checkpoints = Pile.creer()
         @verifGrille = VerifierGrille.creer(@grille)
@@ -82,6 +86,7 @@ class Jeu
         win = false #T'es mauvais Jack
         while(!win)
             @grille.afficheToi
+            jeuUI.AfficherGrille()
             case action()
             when 1
               begin

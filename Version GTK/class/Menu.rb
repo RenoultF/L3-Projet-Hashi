@@ -1,5 +1,5 @@
 require 'gtk3'
-load 'Jeu.rb'
+load 'JeuUI.rb'
 
 class Menu
     # --- BUILDERS ---
@@ -203,8 +203,7 @@ class Menu
     end
     
 	def changerFenetre()
-		@jeu = Jeu.new(@@mode, @@taille, @@difficulte,@pseudo) 
-        @window.destroy()        
+		@jeu = JeuUI.new(@@mode, @@taille, @@difficulte,@pseudo,@window)       
     end
 end
 

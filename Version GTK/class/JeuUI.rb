@@ -1,6 +1,6 @@
 require 'gtk3'
 
-require './ConnectSqlite3.rb'
+require '../Core/ConnectSqlite3.rb'
 
 require "../Core/Grille.rb"
 require "../Core/Aide.rb"
@@ -12,13 +12,23 @@ require "../Core/VerifierGrille.rb"
 require "../Core/Action.rb"
 require "../Core/Hypothese.rb"
 require "../Core/Chrono.rb"
+require "../Core/Jeu.rb"
 
 class JeuUI
 
 
-    def initialize(mode, taille, difficulte,pseudo)
+    def initialize(mode, taille, difficulte,pseudo,window)
         @mode = mode
-        @taille = taille #1 = 7*7 /// 2 = 10*10 /// 3 = 15*15
+        case taille
+            when 1
+                @taille = 7
+            when 2
+                @taille = 10
+            when 3
+                @taille = 15        
+            else
+                puts "PROBLEME TAILLE"            
+        end
         @difficulte = difficulte
         @pseudo = pseudo.text()
         puts "Pseudo : #{@pseudo}";
@@ -28,31 +38,37 @@ class JeuUI
         # puts "Taille : #{@taille}";
         # puts "Difficulté : #{@difficulte}";
          
-
+        window.destroy()  
         # CREATION FENETRE 
         @builderJeu = Gtk::Builder.new
         @builderJeu.add_from_file("../glade/jeu.glade")
         @window = @builderJeu.get_object("windowJeu")
         @window.show()
 
-        @grille = chargerGrille(difficulte, tailleGrille, compte)
+        
+        @jeu = Jeu.creer(@difficulte,@taille,@compte,self)
+        self.AfficherGrille()
         @checkpoints = Pile.creer()
         @verifGrille = VerifierGrille.creer(@grille)
         @donnerTech = DonnerTechnique.creer(@grille)
         @chronoGrille = Chrono.new(@grille)
         @threadChrono = Thread.new{@chronoGrille.lancerChrono()}
         
-        self.AfficherGrille(@taille)
         Gtk.main() 
     end
 
-    def AfficherGrille(taille)
-        grilleJeux = builder.get_object("grilleJeux")
+    def AfficherGrille()
+        
+        grilleJeux = @builderJeu.get_object("grilleJeux")
 
-        (0..@grille.tailleX-1).each do |i|
-            (0..@pgrille.tailleY-1).each do |j|
-                temp = @grille.getCase(i,j).Gtk::Button.new("1")
-                grilleJeux.attach temp, j, i, 1, 1
+        (0..@jeu.grille.tailleX-1).each do |i|
+            (0..@jeu.grille.tailleY-1).each do |j|
+                # puts "taille X #{@jeu.grille.tailleX}"
+                # puts "taille Y #{@jeu.grille.tailleY}"
+                temp = @jeu.grille.getCase(i,j)
+                boutton = Gtk::Button.new(:label => "coucou", :use_underline => nil, :stock_id => nil)
+
+                grilleJeux.attach boutton, j, i, 1, 1
             end
         end
     end
