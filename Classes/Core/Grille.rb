@@ -27,6 +27,11 @@ class Grille
     @actions #pile des actions
     @sauvegarde #sauvegarde de la grille
     @matSolution #matrice de la grille Solution
+    @scoreCourant#score actuelle de la grille
+    @chronoGrille #chrono de la grille
+    @threadChrono #thread dans equel le chrono va tourner
+    @minutesFin #minutes a laquelle il a fini la map
+    @secondesFin #secondes a laquelle il a fini la map
 
     #@difficulte => La difficulté de la grille
     attr_reader :difficulte
@@ -97,6 +102,9 @@ class Grille
         j = -1
         @tailleX = tailleX
         @tailleY = tailleY
+        @ScoreCourant = 500 * tailleX
+        @minutesFin = nil
+        @secondesFin = nil
         @mat = Array.new(tailleX) { Array.new(tailleY) }
         @matSolution = Array.new(tailleX) { Array.new(tailleY) }
         chaine.each_line do |l|
@@ -193,6 +201,13 @@ class Grille
         return @mat[i][j]
     end
 
+    #met a jour le temps que l'utilisateur à mis à finir la map
+    def setTempsFin(minutes,secondes)
+      @minutesFin = minutes
+      @secondesFin =secondes
+    end
+
+
     #Cette méthode permet de recuperer une case de la grille solution
     #
     #@param i La position en abscisse
@@ -249,9 +264,16 @@ class Grille
       else
         puts "creation pont"
         createPont(ile)
+        self.modifScore(-100)
       end
 
 
+    end
+
+    #ajoute l'entier en parametre au score courant
+    #@param [val] la valeur a ajouter au score
+    def modifScore(val)
+      @ScoreCourant += val
     end
 
     #Cette méthode permet d'ajouter une action à la pile d'action
