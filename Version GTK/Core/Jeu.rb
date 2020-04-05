@@ -30,6 +30,7 @@ class Jeu
     @verif # objet qui vérifie la grille
     @checkpoints #objet qui gere les hypotheses
     @jeuUI
+    @scoreCourant
 
     attr_accessor :grille
 
@@ -38,19 +39,23 @@ class Jeu
     #:arg: difficulte
     #:arg: tailleGrille : Entier
     #:arg: compte : Compte
-    def Jeu.creer(difficulte, tailleGrille, compte, jeuUI)
-        new(difficulte, tailleGrille, compte, jeuUI)
+    def Jeu.creer(difficulte, tailleGrille, compte, jeuUI, labelChrono, labelScore)
+        new(difficulte, tailleGrille, compte, jeuUI, labelChrono, labelScore)
     end
 
     #:nodoc:
-    def initialize(difficulte, tailleGrille, compte, jeuUI)
+    def initialize(difficulte, tailleGrille, compte, jeuUI, labelChrono, labelScore)
+        @labelChrono = labelChrono
+        @labelScore = labelScore
         @grille = chargerGrille(difficulte, tailleGrille, compte)
         @jeuUI = jeuUI
         @compte = compte
+        @scoreCourant = 500 * tailleGrille
+        @labelScore.set_label(@scoreCourant.to_s)
         @checkpoints = Pile.creer()
         @verifGrille = VerifierGrille.creer(@grille)
         @donnerTech = DonnerTechnique.creer(@grille)
-        @chronoGrille = Chrono.new(@grille)
+        @chronoGrille = Chrono.new(self,  @labelChrono)
         @threadChrono = Thread.new{@chronoGrille.lancerChrono()}
     end
     #:doc
@@ -86,7 +91,7 @@ class Jeu
         win = false #T'es mauvais Jack
         while(!win)
             @grille.afficheToi
-            jeuUI.AfficherGrille()
+            @jeuUI.AfficherGrille()
             case action()
             when 1
               begin
@@ -95,6 +100,7 @@ class Jeu
               rescue => e
                 puts "Erreur : " +  e.message()
               end
+              self.modifScore(-100)
             when 2
                 @grille.undo()
             when 3
@@ -124,6 +130,11 @@ class Jeu
     #:arg: aide : String
     def afficherAide(aide)
       puts aide
+    end
+
+    def modifScore(val)
+        @scoreCourant += val
+        @labelScore.set_label(@scoreCourant.to_s)
     end
 
     ##
@@ -159,4 +170,6 @@ class Jeu
         end
         return @grille.getCase(x, y)
     end
+
+    
 end
