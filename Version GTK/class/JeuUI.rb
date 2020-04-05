@@ -45,31 +45,37 @@ class JeuUI
         @window = @builderJeu.get_object("windowJeu")
         @window.show()
 
+        #autre
+        @labelPseudo = @builderJeu.get_object("lbPseudo")
+        @labelPseudo.set_label("Joueur : "+ @pseudo)
+        @labelChrono = @builderJeu.get_object("chrono")
+        @labelScore = @builderJeu.get_object("lbVarScore")
         
-        @jeu = Jeu.creer(@difficulte,@taille,@compte,self)
-        self.AfficherGrille()
+        
+        @jeu = Jeu.creer(@difficulte,@taille,@compte,self,@labelChrono, @labelScore)
         @checkpoints = Pile.creer()
         @verifGrille = VerifierGrille.creer(@grille)
         @donnerTech = DonnerTechnique.creer(@grille)
-        @chronoGrille = Chrono.new(@grille)
-        @threadChrono = Thread.new{@chronoGrille.lancerChrono()}
+        #@chronoGrille = Chrono.new(@jeu)
+        #@threadChrono = Thread.new{@chronoGrille.lancerChrono()}
+        @threadJeu = Thread.new{@jeu.lanceToi()}
         
         Gtk.main() 
     end
 
     def AfficherGrille()
-        
-        grilleJeux = @builderJeu.get_object("grilleJeux")
 
+        grilleJeux = @builderJeu.get_object("grilleJeux")
         (0..@jeu.grille.tailleX-1).each do |i|
             (0..@jeu.grille.tailleY-1).each do |j|
                 # puts "taille X #{@jeu.grille.tailleX}"
                 # puts "taille Y #{@jeu.grille.tailleY}"
                 temp = @jeu.grille.getCase(i,j)
-                boutton = Gtk::Button.new(:label => "coucou", :use_underline => nil, :stock_id => nil)
+                boutton = Gtk::Button.new(:label => "1", :use_underline => nil, :stock_id => nil)
 
-                grilleJeux.attach boutton, j, i, 1, 1
+                grilleJeux.attach boutton, i, j, 1, 1
             end
         end
+        
     end
 end
