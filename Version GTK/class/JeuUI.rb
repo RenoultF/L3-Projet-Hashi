@@ -50,12 +50,44 @@ class JeuUI
         @labelPseudo.set_label("Joueur : "+ @pseudo)
         @labelChrono = @builderJeu.get_object("chrono")
         @labelScore = @builderJeu.get_object("lbVarScore")
-        
-        
+        #Creation du jeu
         @jeu = Jeu.creer(@difficulte,@taille,@compte,self,@labelChrono, @labelScore)
+        @grille = @jeu.grille
         @checkpoints = Pile.creer()
         @verifGrille = VerifierGrille.creer(@grille)
         @donnerTech = DonnerTechnique.creer(@grille)
+
+        #fonctions
+        @clickUndo = @builderJeu.get_object("btnRetourarr")
+        @clickUndo.signal_connect('clicked'){@grille.undo()}
+
+        @btnValid1 = @builderJeu.get_object("btnvalid1")
+        @btnValid1.signal_connect('clicked'){@grille.creerHypothese()}
+
+        @btnSuppr1 = @builderJeu.get_object("btnsup1")
+        @btnSuppr1.signal_connect('clicked'){@grille.supprimeHypothese(@jeu)}
+
+        @btnValid2 = @builderJeu.get_object("btnvalid2")
+        @btnValid2.signal_connect('clicked'){@grille.creerHypothese()}
+
+        @btnSuppr2 = @builderJeu.get_object("btnsup2")
+        @btnSuppr2.signal_connect('clicked'){@grille.supprimeHypothese(@jeu)}
+
+        @btnValid3 = @builderJeu.get_object("btnvalid3")
+        @btnValid3.signal_connect('clicked'){@grille.creerHypothese()}
+        
+        @btnSuppr3 = @builderJeu.get_object("btnsup3")
+        @btnSuppr3.signal_connect('clicked'){@grille.supprimeHypothese(@jeu)}
+
+        @btnSauvegarder = @builderJeu.get_object("btnsave")
+        @btnSauvegarder.signal_connect('clicked'){Sauvegarde.recuperer(@compte, @grille).setGrille(@grille).sauvegarder()}
+
+        @btnDonnerTech = @builderJeu.get_object("btnIndice")
+        @btnDonnerTech.signal_connect('clicked'){@donnerTech.aider()}
+
+        @btnVerif = @builderJeu.get_object("btnVerif")
+        @btnVerif.signal_connect('clicked'){@donnerTech.aider()}
+
         #@chronoGrille = Chrono.new(@jeu)
         #@threadChrono = Thread.new{@chronoGrille.lancerChrono()}
         @threadJeu = Thread.new{@jeu.lanceToi()}
@@ -66,13 +98,21 @@ class JeuUI
     def AfficherGrille()
 
         grilleJeux = @builderJeu.get_object("grilleJeux")
-        (0..@jeu.grille.tailleX-1).each do |i|
-            (0..@jeu.grille.tailleY-1).each do |j|
-                # puts "taille X #{@jeu.grille.tailleX}"
-                # puts "taille Y #{@jeu.grille.tailleY}"
-                temp = @jeu.grille.getCase(i,j)
+        (0..@grille.tailleX-1).each do |i|
+            (0..@grille.tailleY-1).each do |j|
+                # puts "taille X #{@grille.tailleX}"
+                # puts "taille Y #{@grille.tailleY}"
+                temp = @grille.getCase(i,j)
                 boutton = Gtk::Button.new(:label => "1", :use_underline => nil, :stock_id => nil)
-
+                if(temp.instance_of? Pont)
+                    #puts "C EST UN PONT"
+                elsif(temp.instance_of? Ile)
+                    #puts "C EST UNE ILE"
+                elsif(temp.instance_of? Case)
+                    #puts "C EST UNE CASE"
+                else
+                    #puts "PROBLEME INSTANCE"
+                end
                 grilleJeux.attach boutton, i, j, 1, 1
             end
         end
