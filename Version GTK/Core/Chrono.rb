@@ -4,30 +4,36 @@
 #
 require 'gtk3'
 
+
 class Chrono
 
 	@minutes
 	@secondes
 	@active
-	@grille
+	@jeuCourant
 
-	def initialize(grille)
+	def initialize(jeu, labelChrono)
 		@minutes = 0
 		@secondes = 0
-		@grille = grille
+		@jeuCourant = jeu
+		@labelChrono = labelChrono
 	end
 
 	def afficherTps()
 		if(@minutes < 10)
 			if(@secondes < 10)
-				return ("0#{@minutes}:0#{@secondes}")
+				@labelChrono.set_label(" 0#{@minutes}:0#{@secondes}")
+				#return ("0#{@minutes}:0#{@secondes}")
 			else
-				return("0#{@minutes}:#{@secondes}")
+				@labelChrono.set_label(" 0#{@minutes}:#{@secondes}")
+				#return("0#{@minutes}:#{@secondes}")
 			end
 		else if(@secondes < 10)
-				return("#{@minutes}:0#{@secondes}")
+				@labelChrono.set_label("#{@minutes}:0#{@secondes}")
+				#return("#{@minutes}:0#{@secondes}")
 			else
-				return("#{@minutes}:#{@secondes}")
+				@labelChrono.set_label("#{@minutes}:#{@secondes}")
+				#return(#{@minutes}:#{@secondes}"
 			end
 		end
 	end
@@ -52,20 +58,20 @@ class Chrono
 
 	def lancerChrono()
 	#Chrono sans arguments
-		self.activeChrono()
+		activeChrono()
 		while( (@minutes < 59) && @active )
-			print("Chrono : " + self.afficherTps()+"\n")
+			afficherTps()
 			sleep(1)
 			@secondes += 1
 			if(@secondes%10 == 0)
-				@grille.modifScore(-10)
+				@jeuCourant.modifScore(-50)
 			end
 			if(@secondes >= 60)
 				@minutes += 1
 				@secondes = 0
 			end
 		end
-		@grille.setTempsFin(@minutes, @secondes)
+		#@jeuCourant.setTempsFin(@minutes, @secondes)
 	end
 
 	def lancerChrono2(tps, chrono)
@@ -82,7 +88,7 @@ class Chrono
 		end
 	end
 
-end # Marqueur de fin de classe
+end	# Marqueur de fin de classe
 
 # Test Chrono
 # c = Chrono.new()
