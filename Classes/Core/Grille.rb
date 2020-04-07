@@ -48,7 +48,6 @@ class Grille
     #Cette méthode permet de retourner toutes les grilles d'un dossier
     def Grille.chargerGrilles(dossier)
 
-
       puts dossier
 
       ret = Array.new()
@@ -59,7 +58,7 @@ class Grille
 
         text = File.open(dossier + "/" + fichier).read
         text.gsub!(/\r\n/, "\n");
-        ret.push(Grille.creer(text, 7, 7, 0))
+        ret.push(Grille.creer(text))
 
       end
 
@@ -79,50 +78,55 @@ class Grille
     #@param tailleY Le nombre de cases en ordonnée
     #
     #@param difficulte La difficulté de la grille
-    def Grille.creer(chaine, tailleX, tailleY, difficulte)
-        new(chaine, tailleX, tailleY, difficulte)
+    def Grille.creer(chaine)
+        new(chaine)
     end
 
     #:nodoc:
-    def initialize(chaine, tailleX, tailleY, difficulte)
-        if(chaine.length != tailleX * tailleY)
-      #    raise("La taille n'est pas la bonne")
-        end
+    def initialize(chaine)
         puts "Creation !!!"
         @actions = UndoRedo.creer()
         puts chaine
         @checkpoints = Pile.creer()
-        @difficulte = difficulte
+        @score = 0
         i = -1
         j = -1
-        @tailleX = tailleX
-        @tailleY = tailleY
-        @mat = Array.new(tailleX) { Array.new(tailleY) }
-        @matSolution = Array.new(tailleX) { Array.new(tailleY) }
+
         chaine.each_line do |l|
-          i += 1
-          j = -1
-          l.split(' ') do |c|
-            print c
-            j += 1
-            if(c =~ /[1-8]/)
-              @mat[i][j] = Ile.creer(i, j, c.ord() - '0'.ord(), self)
-              @matSolution[i][j] = Ile.creer(i, j, c.ord() - '0'.ord(), self)
-            elsif(c == '|')
-              @matSolution[i][j] = Pont.construit(i, j, self, Pont::VERTICAL, 1)
-              @mat[i][j] = Pont.creer(i, j, self)
-            elsif(c == 'H')
-              @matSolution[i][j] = Pont.construit(i, j, self, Pont::VERTICAL, 2)
-              @mat[i][j] = Pont.creer(i, j, self)
-            elsif(c == '-')
-              @matSolution[i][j] = Pont.construit(i, j, self, Pont::HORIZONTAL, 1)
-              @mat[i][j] = Pont.creer(i, j, self)
-            elsif(c == '=')
-              @matSolution[i][j] = Pont.construit(i, j, self, Pont::HORIZONTAL, 2)
-              @mat[i][j] = Pont.creer(i, j, self)
-            elsif(c == 'N')
-              @matSolution[i][j] = Case.creer(i, j, self)
-              @mat[i][j] = Case.creer(i, j, self)
+          if(l.start_with?("#T"))
+            t = l.split(' ')
+            @tailleX = t[1].to_i()
+            @tailleY = t[2].to_i()
+            @mat = Array.new(@tailleX) { Array.new(@tailleY) }
+            @matSolution = Array.new(@tailleX) { Array.new(@tailleY) }
+          elsif(l.start_with?("#D"))
+            d = l.split(' ')
+            @difficulte = d[1]
+          else
+            i += 1
+            j = -1
+            l.split(' ') do |c|
+              print c
+              j += 1
+              if(c =~ /[1-8]/)
+                @mat[i][j] = Ile.creer(i, j, c.ord() - '0'.ord(), self)
+                @matSolution[i][j] = Ile.creer(i, j, c.ord() - '0'.ord(), self)
+              elsif(c == '|')
+                @matSolution[i][j] = Pont.construit(i, j, self, Pont::VERTICAL, 1)
+                @mat[i][j] = Pont.creer(i, j, self)
+              elsif(c == 'H')
+                @matSolution[i][j] = Pont.construit(i, j, self, Pont::VERTICAL, 2)
+                @mat[i][j] = Pont.creer(i, j, self)
+              elsif(c == '-')
+                @matSolution[i][j] = Pont.construit(i, j, self, Pont::HORIZONTAL, 1)
+                @mat[i][j] = Pont.creer(i, j, self)
+              elsif(c == '=')
+                @matSolution[i][j] = Pont.construit(i, j, self, Pont::HORIZONTAL, 2)
+                @mat[i][j] = Pont.creer(i, j, self)
+              elsif(c == 'N')
+                @matSolution[i][j] = Case.creer(i, j, self)
+                @mat[i][j] = Case.creer(i, j, self)
+              end
             end
           end
         end
@@ -137,14 +141,14 @@ class Grille
         print "Capacite residuelle : ", @dernierIle.getCapaciteResiduelle(), "\n"
         print "Nombre Pont : ", @dernierIle.getNombrePont().to_s(), "\n"
       end
-      print "    "
+      print "\t"
       for colonne in (0..tailleX-1)
         print colonne.to_s() + " "
       end
       print "\n"
       ligne = -1
       @mat.each do |i|
-        print (ligne+=1).to_s() + " : "
+        print (ligne+=1).to_s() + " :\t"
         i.each do |j|
           print j.to_s() + " "
         end
@@ -252,6 +256,10 @@ class Grille
       end
 
 
+    end
+
+    def modifScore(val)
+      @score += val
     end
 
     #Cette méthode permet d'ajouter une action à la pile d'action
