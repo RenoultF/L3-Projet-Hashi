@@ -305,6 +305,7 @@
                     <property name="margin_left">130</property>
                     <property name="margin_right">130</property>
                     <property name="invisible_char">●</property>
+                    <property name="input_purpose">name</property>
                   </object>
                   <packing>
                     <property name="expand">False</property>

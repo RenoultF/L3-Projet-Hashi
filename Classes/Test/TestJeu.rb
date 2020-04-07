@@ -23,7 +23,7 @@ begin
 
   print "Veuillez entrer le nom du compte : "
   nomCompte = gets.chomp
-  jeu = Jeu.creer(0, 7, Compte.recuperer(nomCompte))
+  jeu = Jeu.creer(0, 15, Compte.recuperer(nomCompte))
 
 rescue => e
 
@@ -34,7 +34,7 @@ rescue => e
     if(rep == "o" || rep == "O" || rep == "Oui" || rep == "OUI" || rep == "oui")
 
       compte = Compte.creer(nomCompte)
-      jeu = Jeu.creer(0, 7, Compte.recuperer(compte))
+      jeu = Jeu.creer(0, 15, compte)
 
     elsif(rep == "n" || rep == "N" || rep == "Non" || rep == "NON" || rep == "non")
 

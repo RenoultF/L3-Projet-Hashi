@@ -1,0 +1,9 @@
+#T 7 7
+#D 0
+N 3 = = 6 = 4
+N | N N H N H
+2 | N N H N H
+H 5 = = 7 - 5
+H H N N H N H
+H 3 - - 3 N H
+3 - 2 - - - 3
