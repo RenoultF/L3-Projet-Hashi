@@ -15,7 +15,6 @@ class Sauvegarde < ActiveRecord::Base
 
     #@grille => Contient la grille que l'utilisateur a commencé à remplir
 
-
     validates :grille, presence: true
 
 
@@ -25,8 +24,6 @@ class Sauvegarde < ActiveRecord::Base
 
     validates :compte, presence: true
 
-
-    validates :solution, presence: true
 
 
     def Sauvegarde.razAllSauvegarde()
@@ -59,9 +56,9 @@ class Sauvegarde < ActiveRecord::Base
     #@raise Si le compte possède déjà une sauvegarde de cette grille
     def Sauvegarde.creer(compte, grille)
 
-      if(Sauvegarde.find_by(compte: compte, solution: YAML.dump(grille.matSolution)) == nil)
+      if(Sauvegarde.recuperer(compte, grille) == nil)
 
-        new(:compte => compte, :grille => YAML.dump(grille), :taille => grille.tailleX(), :difficulte => grille.difficulte(), :solution => YAML.dump(grille.matSolution))
+        new(:compte => compte, :grille => YAML.dump(grille), :taille => grille.tailleX(), :difficulte => grille.difficulte())
 
       else
 
@@ -78,7 +75,19 @@ class Sauvegarde < ActiveRecord::Base
     #@param grille La grille auquel la sauvegarde est lié
     def Sauvegarde.recuperer(compte, grille)
 
-      return Sauvegarde.find_by(compte: compte)
+      liste = Sauvegarde.listeCompte(compte)
+
+      liste.each do |s|
+
+        if(s.getGrille().memeSolution(grille))
+
+          return s
+
+        end
+
+      end
+
+      return nil
 
     end
 

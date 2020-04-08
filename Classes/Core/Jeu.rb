@@ -47,7 +47,7 @@ class Jeu
         @verifGrille = VerifierGrille.creer(@grille)
         @donnerTech = DonnerTechnique.creer(@grille)
         @chronoGrille = Chrono.new(@grille)
-        @threadChrono = Thread.new{@chronoGrille.lancerChrono()}
+    #    @threadChrono = Thread.new{@chronoGrille.lancerChrono()}
     end
     #:doc
 
@@ -95,7 +95,11 @@ class Jeu
             when 3
                 @grille.redo()
             when 4
-                Sauvegarde.recuperer(@compte, @grille).setGrille(@grille).sauvegarder()
+              puts "_______________________"
+                Sauvegarde.recuperer(@compte, @grille).getGrille().afficheSolution()
+                puts @grille
+                puts Sauvegarde.recuperer(@compte, @grille).setGrille(@grille).sauvegarder()
+                puts "_______________________"
             when 5
                 @grille.creerHypothese()
             when 6

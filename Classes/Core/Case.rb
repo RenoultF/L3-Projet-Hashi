@@ -33,11 +33,21 @@ class Case
   end
   #:doc:
 
+  def clickOn()
+
+  end
+
 
   #Cette méthode permet de comparer deux cases
   #
   #@return 0 car on ne peut pas différencier deux cases
-  def <=>(casee)
+  def <=>(autre)
+    if(autre.estIle?())
+      return 1
+    end
+    if(autre.estPont?())
+      return -1
+    end
     return 0
   end
 

@@ -128,6 +128,9 @@ class Pont < Case
     #
     #un nombre positif si le premier pont est supérieur au deuxième
     def <=>(autre)
+      if(!autre.estPont?())
+        return 1
+      end
       if(@direction != autre.direction)
           return @direction <=> autre.direction
       end

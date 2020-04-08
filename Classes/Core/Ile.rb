@@ -97,6 +97,13 @@ class Ile < Case
     end
 
 
+    def clickOn()
+
+      @grille.clickOnIle(self)
+
+    end
+
+
 
     ##
     #Cette méthode permet de savoir si l'ile est connécté à autant de pont que son objectif
@@ -176,6 +183,9 @@ class Ile < Case
     #
     #un nombre positif si la première ile est supérieure à la deuxième
     def <=>(autre)
+      if(!autre.estIle?())
+        return 1
+      end
       if(@valeur != autre.valeur)
         return @valeur <=> autre.valeur
       end

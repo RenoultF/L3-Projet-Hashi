@@ -11,7 +11,7 @@ require "active_record"
 ActiveRecord::Base.establish_connection(
 
 	:adapter => "sqlite3",
-	:database => "../BDD/Base.sqlite",
+	:database => "../BDD/pif.db",
 	:timeout => 5000
 
 )

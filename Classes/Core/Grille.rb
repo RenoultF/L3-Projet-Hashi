@@ -27,6 +27,11 @@ class Grille
     @actions #pile des actions
     @sauvegarde #sauvegarde de la grille
     @matSolution #matrice de la grille Solution
+    @scoreCourant#score actuelle de la grille
+    @chronoGrille #chrono de la grille
+    @threadChrono #thread dans equel le chrono va tourner
+    @minutesFin #minutes a laquelle il a fini la map
+    @secondesFin #secondes a laquelle il a fini la map
 
     #@difficulte => La difficulté de la grille
     attr_reader :difficulte
@@ -43,6 +48,7 @@ class Grille
     #@matSolution => La matrice solution
     attr_reader :matSolution
 
+    include Comparable
 
     ##
     #Cette méthode permet de retourner toutes les grilles d'un dossier
@@ -136,11 +142,13 @@ class Grille
 
     #Cette méthode permet d'afficher les case de la grille
     def afficheToi()
+=begin
       if(!@dernierIle.eql?(nil))
         print "Nombre chemin disponible : ", @dernierIle.getNombreCheminDisponible(), "\n"
         print "Capacite residuelle : ", @dernierIle.getCapaciteResiduelle(), "\n"
         print "Nombre Pont : ", @dernierIle.getNombrePont().to_s(), "\n"
       end
+=end
       print "\t"
       for colonne in (0..tailleX-1)
         print colonne.to_s() + " "
@@ -155,6 +163,24 @@ class Grille
         print "\n"
       end
     end
+
+    def afficheSolution()
+      print "\t"
+      for colonne in (0..tailleX-1)
+        print colonne.to_s() + " "
+      end
+      print "\n"
+      ligne = -1
+      @matSolution.each do |i|
+        print (ligne+=1).to_s() + " :\t"
+        i.each do |j|
+          print j.to_s() + " "
+        end
+        print "\n"
+      end
+    end
+
+
 
     #Cette méthode permet de savoir si la grille est correcte
     #
@@ -186,6 +212,27 @@ class Grille
     end
 
 
+    def memeSolution(grille)
+
+      if(@tailleX != grille.tailleX)
+        return false
+      end
+
+      if(@tailleY != grille.tailleY)
+        return false
+      end
+
+      for i in (0..(@tailleX-1))
+        for j in (0..(@tailleY-1))
+          if(self.getCaseSolution(i, j) != grille.getCaseSolution(i, j))
+            return false
+          end
+        end
+      end
+      return true
+    end
+
+
     #Cette méthode permet de recuperer une case de la grille
     #
     #@param i La position en abscisse
@@ -196,6 +243,13 @@ class Grille
     def getCase(i, j)
         return @mat[i][j]
     end
+
+    #met a jour le temps que l'utilisateur à mis à finir la map
+    def setTempsFin(minutes,secondes)
+      @minutesFin = minutes
+      @secondesFin =secondes
+    end
+
 
     #Cette méthode permet de recuperer une case de la grille solution
     #
@@ -253,6 +307,7 @@ class Grille
       else
         puts "creation pont"
         createPont(ile)
+        self.modifScore(-100)
       end
 
 
