@@ -31,6 +31,9 @@ class Ile < Case
     #@valeur => Le nombre de lien que doit possèder l'ile pour être valide
     attr_reader :valeur
 
+    #@dernier => true si l'ile est la derniere ile séléctionnée
+    attr_accessor :dernier
+
     include Comparable
     private_class_method :new
 
@@ -53,6 +56,7 @@ class Ile < Case
         super(posX, posY, grille)
         @valeur = nbLien
         @nbPont = [0, 0, 0, 0]
+        @dernier = false
     end
     #:doc:
 
@@ -100,6 +104,12 @@ class Ile < Case
     def clickOn()
 
       @grille.clickOnIle(self)
+
+    end
+
+    def estDernierIle()
+
+      return @dernier
 
     end
 

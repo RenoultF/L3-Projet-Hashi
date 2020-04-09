@@ -1,4 +1,8 @@
 
+##
+# Auteur Brabant Mano
+# Version 0.1 : Date : 09/04/2020
+
 require '../Core/Compte.rb'
 require '../Core/Sauvegarde.rb'
 require '../Core/ConnectSqlite3.rb'
@@ -24,7 +28,7 @@ class Fenetre < Gtk::Window
 
     end
 
-    set_default_size 600, 600
+    set_default_size 100, 100
 
     set_window_position Gtk::WindowPosition::CENTER
 
@@ -42,6 +46,10 @@ class Fenetre < Gtk::Window
     @draw.signal_connect "button-press-event" do |widget, event|
       @draw.clickOn(widget, event)
     end
+
+    ##
+    # Auteur Brabant Mano
+    # Version 0.1 : Date : 07/02/2020
 
     @draw.add_events([:button_press_mask])
 

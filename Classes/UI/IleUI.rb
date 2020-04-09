@@ -1,4 +1,8 @@
 
+##
+# Auteur Brabant Mano
+# Version 0.1 : Date : 09/04/2020
+
 require "../Core/Ile.rb"
 
 require "../UI/CaseUI.rb"
@@ -25,7 +29,11 @@ class IleUI < CaseUI
 
     cr = window.create_cairo_context
 
-    cr.set_source_rgb(0, 255, 0)
+    if(@casee.estDernierIle())
+      cr.set_source_rgb(255, 0, 0)
+    else
+      cr.set_source_rgb(0, 255, 0)
+    end
     cr.circle(@taille * @casee.posY() + @taille/2, @taille * @casee.posX() + @taille/2, @taille/2)
     cr.stroke()
 

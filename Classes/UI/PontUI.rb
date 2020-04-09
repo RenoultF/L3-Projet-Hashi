@@ -1,4 +1,8 @@
 
+##
+# Auteur Brabant Mano
+# Version 0.1 : Date : 09/04/2020
+
 require "../Core/Pont.rb"
 
 require "../UI/CaseUI.rb"
@@ -14,10 +18,41 @@ class PontUI < CaseUI
   end
 
 
-  def draw(window)
+  def draw(window)#C'est pas joli, fait quelque chose
 
     cr = window.create_cairo_context
     cr.set_operator(Cairo::OPERATOR_OVER)
+
+
+    if(@casee.surbrillance)
+      cr.set_source_rgba(1, 0, 0, 0.4)
+
+
+      departY = @taille * @casee.posY()
+      departX = @taille * @casee.posX()
+
+
+      if(@casee.directionSurbrillance == Pont::VERTICAL)
+
+        tailleX = @taille
+        tailleY = @taille/2
+        departY += @taille/2 - tailleY/2
+
+      elsif(@casee.directionSurbrillance == Pont::HORIZONTAL)
+
+        tailleX = @taille/2
+        tailleY = @taille
+        departX += @taille/2 - tailleX/2
+
+      end
+
+
+      cr.rectangle(departY, departX, tailleY, tailleX)
+      cr.fill()
+    end
+
+    cr.set_source_rgba(0, 0, 1, 1)
+
 
 
     if(@casee.direction == Pont::HORIZONTAL)
@@ -32,8 +67,8 @@ class PontUI < CaseUI
 
     else
 
-      tailleX = @taille
-      tailleY = @taille
+      tailleX = 0
+      tailleY = 0
 
     end
 
@@ -41,16 +76,10 @@ class PontUI < CaseUI
     departX = @taille * @casee.posX() + tailleY/2
     departY = @taille * @casee.posY() + tailleX/2
 
-    arriveX = departX + tailleX
-    arriveY = departY + tailleY
-
-
-    cr.set_source_rgba(0, 0, 255, 255)
 
     if(@casee.valeur == 1)
 
       cr.rectangle(departY, departX, tailleY+2, tailleX+2)
-      cr.fill()
 
     elsif(@casee.valeur == 2)
 
@@ -59,26 +88,12 @@ class PontUI < CaseUI
       decalageY = tailleX/(@taille/tailleDecalage)
       decalageX = tailleY/(@taille/tailleDecalage)
 
-      cr.move_to(departY - decalageY, departX - decalageX)
-      cr.line_to(arriveY - decalageY, arriveX - decalageX)
-
-      cr.move_to(departY + decalageY, departX + decalageX)
-      cr.line_to(arriveY + decalageY, arriveX + decalageX)
-      cr.stroke()
-
-      cr.rectangle(@taille * @casee.posY(), @taille * @casee.posX(), tailleY, tailleX)
-      cr.fill()
+      cr.rectangle(departY - decalageY, departX - decalageX, tailleY+2, tailleX+2)
+      cr.rectangle(departY + decalageY, departX + decalageX, tailleY+2, tailleX+2)
 
     end
 
-    cr.stroke_preserve()
-
-
-    if(@casee.surbrillance)
-      cr.set_source_rgba(255, 0, 0, 128)
-      cr.rectangle(@taille * @casee.posY(), @taille * @casee.posX(), tailleY, tailleX)
-      cr.fill()
-    end
+    cr.fill()
 
 
 

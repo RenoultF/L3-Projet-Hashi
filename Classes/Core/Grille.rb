@@ -48,6 +48,7 @@ class Grille
     #@matSolution => La matrice solution
     attr_reader :matSolution
 
+
     include Comparable
 
     ##
@@ -298,6 +299,9 @@ class Grille
     #@param ile L'ile sur laquelle on a cliqué
     def clickOnIle(ile)
 
+      setDernierIle(ile)
+
+=begin
       if(@dernierIle.eql?(nil))
         puts "derniere ile == nil"
         setDernierIle(ile)
@@ -309,7 +313,7 @@ class Grille
         createPont(ile)
         self.modifScore(-100)
       end
-
+=end
     end
 
 
@@ -321,8 +325,81 @@ class Grille
 
       if(!@dernierIle.eql?(nil))
         if(pont.surbrillance())
-          #self.chercherVoisins(pont, pont.directionSurbrillance)
+          self.chercherVoisins(pont, pont.directionSurbrillance)
+        else
+          self.setDernierIle(nil)
         end
+      end
+
+    end
+
+
+
+    def chercherVoisins(pont, direction)
+
+      if(direction == Pont::HORIZONTAL)
+
+        i = pont.posX
+        j = pont.posY
+
+        puts "Ile droite", i, j
+
+        while(!(ileDroite = getCase(i, j)).estIle?())
+
+          j += 1
+          puts "Ile droite", i, j
+
+        end
+
+        j = pont.posY
+        puts "Ile gauche", i, j
+
+        while(!(ileGauche = getCase(i, j)).estIle?())
+
+          j -= 1
+          puts "Ile gauche", i, j
+
+        end
+
+        if(ileGauche == @dernierIle)
+          ile2 = ileDroite
+        else
+          ile2 = ileGauche
+        end
+
+        createPont(ile2)
+
+      elsif(direction == Pont::VERTICAL)
+
+        i = pont.posX
+        j = pont.posY
+        puts "Ile bas", i, j
+
+        while(!(ileBas = getCase(i, j)).estIle?())
+
+          i += 1
+          puts "Ile bas", i, j
+
+        end
+
+      i = pont.posX
+      puts "Ile haut", i, j
+
+        while(!(ileHaut = getCase(i, j)).estIle?())
+
+          i -= 1
+          puts "Ile haut", i, j
+
+        end
+
+        if(ileBas == @dernierIle)
+          ile2 = ileHaut
+        else
+          ile2 = ileBas
+        end
+
+        createPont(ile2)
+
       end
 
     end
@@ -560,10 +637,14 @@ class Grille
     def setDernierIle(ile1)
       if(!@dernierIle.eql?(nil))
         effacePont()
+        @dernierIle.dernier = false
       end
       @dernierIle = ile1
-      montrePont()
-      afficheToi()
+      if(!@dernierIle.eql?(nil))
+        montrePont()
+        afficheToi()
+        @dernierIle.dernier = true
+      end
     end
 
     #Cette méthode permet de recuperer la dernière ile séléctionnée

@@ -1,4 +1,8 @@
 
+##
+# Auteur Brabant Mano
+# Version 0.1 : Date : 09/04/2020
+
 
 require "../UI/GrilleUI.rb"
 
