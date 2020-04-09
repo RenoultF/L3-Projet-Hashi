@@ -43,7 +43,7 @@ class JeuUI
         @builderJeu = Gtk::Builder.new
         @builderJeu.add_from_file("../glade/jeu.glade")
         @window = @builderJeu.get_object("windowJeu")
-        @window.show()
+        
 
         #autre
         @labelPseudo = @builderJeu.get_object("lbPseudo")
@@ -52,7 +52,9 @@ class JeuUI
         @labelScore = @builderJeu.get_object("lbVarScore")
         #Creation du jeu
         @jeu = Jeu.creer(@difficulte,@taille,@compte,self,@labelChrono, @labelScore)
+        
         @grille = @jeu.grille
+        p ("grille = #{@grille}")
         @checkpoints = Pile.creer()
         @verifGrille = VerifierGrille.creer(@grille)
         @donnerTech = DonnerTechnique.creer(@grille)
@@ -91,31 +93,38 @@ class JeuUI
         #@chronoGrille = Chrono.new(@jeu)
         #@threadChrono = Thread.new{@chronoGrille.lancerChrono()}
         @threadJeu = Thread.new{@jeu.lanceToi()}
-        
+        @window.show_all()
         Gtk.main() 
     end
 
     def AfficherGrille()
-
         grilleJeux = @builderJeu.get_object("grilleJeux")
+        bouton = Gtk::Button.new(:label => " ")
         (0..@grille.tailleX-1).each do |i|
-            (0..@grille.tailleY-1).each do |j|
-                # puts "taille X #{@grille.tailleX}"
-                # puts "taille Y #{@grille.tailleY}"
+          (0..@grille.tailleY-1).each do |j|
+                bouton = Gtk::Button.new(:label => " ")
+                #puts "taille X #{@grille.tailleX}"
+                #puts "taille Y #{@grille.tailleY}"
                 temp = @grille.getCase(i,j)
-                boutton = Gtk::Button.new(:label => "1", :use_underline => nil, :stock_id => nil)
+                #boutton = Gtk::Button.new(:label => "COUCOU")
                 if(temp.instance_of? Pont)
+    
+                    bouton.set_label("#{temp.valeur.to_s}")
                     #puts "C EST UN PONT"
+                    #creation du bouton pont
                 elsif(temp.instance_of? Ile)
+                    bouton.set_label("#{temp.valeur.to_s}")
                     #puts "C EST UNE ILE"
                 elsif(temp.instance_of? Case)
+                    bouton.set_label("case")
                     #puts "C EST UNE CASE"
                 else
-                    #puts "PROBLEME INSTANCE"
+                    puts "PROBLEME INSTANCE"
                 end
-                grilleJeux.attach boutton, i, j, 1, 1
+
+            grilleJeux.attach bouton, i, j, 1, 1
             end
         end
-        
+        @window.show_all()
     end
 end

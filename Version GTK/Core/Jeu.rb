@@ -89,9 +89,10 @@ class Jeu
     #@return win : Boolean
     def lanceToi()
         win = false #T'es mauvais Jack
+        @jeuUI.AfficherGrille()
         while(!win)
             @grille.afficheToi
-            @jeuUI.AfficherGrille()
+            
             case action()
             when 1
               begin
@@ -100,7 +101,7 @@ class Jeu
               rescue => e
                 puts "Erreur : " +  e.message()
               end
-              self.modifScore(-100)
+              self.modifScore(-1000)
             when 2
                 @grille.undo()
             when 3
