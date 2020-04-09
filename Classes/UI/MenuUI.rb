@@ -17,9 +17,13 @@ class MenuUI < Gtk::Box
   attr_reader :choixDifficulte
   attr_accessor :difficulte
 
-  def initialize()
+  attr_reader :racine
+
+  def initialize(racine)
 
     super(:vertical, 10)
+
+    @racine = racine
 
     @choixNom = ChoixNomUI.new(self)
 
@@ -44,7 +48,7 @@ class MenuUI < Gtk::Box
 
   def valide(nomCompte, taille, difficulte)
 
-    self.parent.choisiGrille(nomCompte, taille, difficulte)
+    @racine.choisirGrille(nomCompte, taille, difficulte)
 
   end
 

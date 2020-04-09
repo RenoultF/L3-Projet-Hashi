@@ -7,9 +7,13 @@ class ChoixGrilleUI < Gtk::Box
 
   attr_reader :grilles
   attr_reader :window
-  def initialize()
+  attr_reader :racine
+
+  def initialize(racine)
 
     super(:vertical , 20)
+
+    @racine = racine
 
   end
 
@@ -26,7 +30,7 @@ class ChoixGrilleUI < Gtk::Box
       temp = GrilleUI.new(s.getGrille(), 40)
 
       temp.signal_connect "button-press-event" do |widget, event|
-        puts "Jeanne oscour : " + event.to_s()
+        self.grilleChoisi(temp.grille())
       end
 
       temp.add_events([:button_press_mask])
@@ -39,6 +43,13 @@ class ChoixGrilleUI < Gtk::Box
     self.add(@grilles)
 
     show_all
+
+  end
+
+
+  def grilleChoisi(grille)
+
+    @racine.commencerPartie(grille)
 
   end
 

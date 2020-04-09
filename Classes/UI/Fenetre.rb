@@ -24,7 +24,7 @@ class Fenetre < Gtk::Window
 
     end
 
-    set_default_size 800, 800
+    set_default_size 600, 600
 
     set_window_position Gtk::WindowPosition::CENTER
 

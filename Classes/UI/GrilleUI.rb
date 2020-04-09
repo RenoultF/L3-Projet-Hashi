@@ -40,13 +40,6 @@ class GrilleUI < Gtk::DrawingArea
       self.on_draw()
     end
 
-    self.signal_connect "button-press-event" do |widget, event|
-      self.clickOn(widget, event)
-    end
-
-    self.add_events([:button_press_mask])
-
-
   end
 
   def getCase(i, j)
@@ -84,6 +77,8 @@ class GrilleUI < Gtk::DrawingArea
         c.draw(self.window)
       end
     end
+
+    self.queue_draw()
 
   end
 

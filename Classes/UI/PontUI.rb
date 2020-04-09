@@ -75,7 +75,6 @@ class PontUI < CaseUI
 
 
     if(@casee.surbrillance)
-      puts "Bonjour : " + Cairo::OPERATOR_OVER.to_s()
       cr.set_source_rgba(255, 0, 0, 128)
       cr.rectangle(@taille * @casee.posY(), @taille * @casee.posX(), tailleY, tailleX)
       cr.fill()
