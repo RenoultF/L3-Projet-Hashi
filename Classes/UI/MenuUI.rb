@@ -25,9 +25,11 @@ class MenuUI < Gtk::Box
 
   def initialize(racine)
 
-    super(:vertical, 10)
+    super(:vertical, 0)
 
     @racine = racine
+
+    @titre = Gtk::Label.new("Bienvenue dans le Hashiparmenier")
 
     @choixNom = ChoixNomUI.new(self)
 
@@ -39,20 +41,26 @@ class MenuUI < Gtk::Box
 
     @valide = Gtk::Button.new(:label => "Valider")
     @valide.signal_connect "clicked" do
-      self.valide(@choixNom.text(), @taille, @difficulte)
+      self.valide(@choixNom.entry.text(), @taille, @difficulte)
     end
 
-    self.add(@choixNom)
-    self.add(@choixTaille)
-    self.add(@choixDifficulte)
-    self.add(@valide)
+    pack_start(@titre, :expand => true, :fill => true)
+    pack_start(@choixNom, :expand => true, :fill => true)
+    pack_start(@choixTaille, :expand => true, :fill => true)
+    pack_start(@choixDifficulte, :expand => true, :fill => true)
+    pack_start(@valide, :expand => true, :fill => true)
 
   end
 
 
   def valide(nomCompte, taille, difficulte)
 
-    self.ajouteLabel("Creation du compte")
+    puts "Paramètres menu"
+    print "Nom Compte : ", nomCompte, "\n"
+    print "Taille grille : ", taille, "\n"
+    print "Difficulte grille : ", difficulte, "\n"
+
+    ajouteLabel("Creation du compte")
 
     Thread.new{@racine.choisirGrille(nomCompte, taille, difficulte)}
 
@@ -60,9 +68,9 @@ class MenuUI < Gtk::Box
 
   def ajouteLabel(label)
 
-    self.add(Gtk::Label.new(label))
+    pack_start(Gtk::Label.new(label), :expand => true, :fill => true)
 
-    self.show_all
+    show_all
 
   end
 
@@ -77,7 +85,7 @@ class MenuUI < Gtk::Box
 
       puts e
 
-      self.add(Gtk::Label.new("Creation du compte"))
+      pack_start(Gtk::Label.new("Creation du compte"), :expand => true, :fill => true)
 
       self.show_all
 

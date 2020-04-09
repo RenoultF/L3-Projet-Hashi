@@ -22,35 +22,34 @@ class RacineUI < Gtk::Box
 
     super(:vertical, 10)
 
-    self.add(@menu = MenuUI.new(self))
-
+    @menu = MenuUI.new(self)
     @choix = ChoixGrilleScrollUI.new(ChoixGrilleUI.new(self))
+    @jeu = JeuUI.new(self)
 
-    self.add(@choix)
-    self.add(@jeu = JeuUI.new(self))
-    @menu.show_all
+    pack_start(@menu, :expand => true, :fill => true)
+
+    show_all
 
   end
 
 
-
   def choisirGrille(nomCompte, taille, difficulte)
 
-
     @choix.chargerGrille(nomCompte, taille, difficulte)
-    @menu.hide
-    @jeu.hide
-    @choix.show_all
+    pack_start(@choix, :expand => true, :fill => true)
+    remove(@menu)
+    remove(@jeu)
+    show_all
 
   end
 
   def commencerPartie(grille, nomCompte)
 
-
     @jeu.chargerGrille(grille, nomCompte)
-    @menu.hide
-    @choix.hide
-    @jeu.show_all
+    pack_start(@jeu, :expand => true, :fill => true)
+    remove(@menu)
+    remove(@choix)
+    show_all
 
   end
 

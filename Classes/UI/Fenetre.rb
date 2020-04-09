@@ -28,11 +28,11 @@ class Fenetre < Gtk::Window
 
     end
 
-    set_default_size 100, 100
+#    set_default_size 100, 100
 
     set_window_position Gtk::WindowPosition::CENTER
 
-    self.add(RacineUI.new())
+    add(RacineUI.new())
 
 =begin
     liste = Sauvegarde.liste(Compte.recuperer("polo"), 7, 0)

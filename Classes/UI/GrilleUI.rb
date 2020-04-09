@@ -11,10 +11,17 @@ require "../UI/PontUI.rb"
 require "gtk3"
 
 
+##
+#Cette classe permet d'afficher une grille de hashi
 class GrilleUI < Gtk::DrawingArea
 
   attr_accessor :grille
 
+  ##
+  #Ce constructeur permet de créer un nouveau afficheur de grille
+  #param :
+  # * grille La grille que l'on veut afficher
+  # * taille La taille des cases de la grille
   def initialize(grille, taille = 40)
 
     super()
@@ -23,7 +30,7 @@ class GrilleUI < Gtk::DrawingArea
     @mat = Array.new(@grille.tailleX()) { Array.new(@grille.tailleY()) }
     @taille = taille
 
-    self.init()
+    init()
 
 
     self.signal_connect "draw" do
@@ -32,7 +39,7 @@ class GrilleUI < Gtk::DrawingArea
 
   end
 
-  def init()
+  private def init()
 
     self.set_size_request(@grille.tailleY() * @taille, @grille.tailleX() * @taille)
 
@@ -61,28 +68,29 @@ class GrilleUI < Gtk::DrawingArea
 
   end
 
+  ##
+  #Cette méthode permet de retourner une case à une position donnée
+  #param :
+  # * i La position en abscisse
+  # * j La position en ordonnée
+  #return :
+  # * La case à la position [i][j]
   def getCase(i, j)
 
     return @mat[i][j]
 
   end
 
+  ##
+  #Cette méthode permet de savoir si une position donnée est dans les limites de la grille
+  #param :
+  # * i La position en abscisse
+  # * j La position en ordonnée
+  #return :
+  # * true si les coordonnées sont en dehors de la grille, false sinon
   def sortLimite?(i, j)
 
     return @grille.sortLimite?(i, j)
-
-  end
-
-  def clickOn(widget, event)
-
-    y = (event.x/@taille).to_i
-    x = (event.y/@taille).to_i
-
-    if(!sortLimite?(x, y))
-      getCase(x, y).clickOn()
-    end
-
-    self.queue_draw()
 
   end
 

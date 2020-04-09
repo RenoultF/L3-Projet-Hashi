@@ -13,9 +13,10 @@ class ChoixTailleUI < Gtk::Box
 
   def initialize(menu)
 
-    super(:horizontal, 10)
+    super(:vertical, 0)
 
     @menu = menu
+    @boutons = Gtk::Box.new(:horizontal, 0)
 
     for i in [7, 10, 15]
 
@@ -23,9 +24,17 @@ class ChoixTailleUI < Gtk::Box
       temp.signal_connect "clicked" do
         @menu.taille=i
       end
-      self.add(temp)
+      @boutons.pack_start(temp, :expand => true, :fill => true)
 
     end
+
+    temp = Gtk::Box.new(:vertical, 0)
+
+    temp.pack_start(Gtk::Label.new("Taille de la grille"), :expand => true, :fill => true)
+    temp.pack_start(@boutons, :expand => true, :fill => true)
+
+    pack_start(temp, :expand => true, :fill => true)
+
 
   end
 

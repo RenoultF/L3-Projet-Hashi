@@ -15,19 +15,27 @@ class ChoixDifficulteUI < Gtk::Box
 
   def initialize(menu)
 
-    super(:horizontal, 10)
+    super(:vertical, 0)
 
     @menu = menu
+    @boutons = Gtk::Box.new(:horizontal, 0)
 
-    for i in [0, 1, 2]
+    for i in [[0, 'Facile'], [1, 'Normal'], [2, 'Difficile']]
 
-      temp = Gtk::Button.new(:label => "#{i}")
+      temp = Gtk::Button.new(:label => "#{i[1]}")
       temp.signal_connect "clicked" do
-        @menu.difficulte=i
+        @menu.difficulte=i[0]
       end
-      self.add(temp)
+      @boutons.pack_start(temp, :expand => true, :fill => true)
 
     end
+
+    temp = Gtk::Box.new(:vertical, 0)
+
+    temp.pack_start(Gtk::Label.new("Difficulté de la grille"), :expand => true, :fill => true)
+    temp.pack_start(@boutons, :expand => true, :fill => true)
+
+    pack_start(temp, :expand => true, :fill => true)
 
   end
 

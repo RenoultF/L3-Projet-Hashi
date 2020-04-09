@@ -115,8 +115,6 @@ class PontUI < CaseUI
 
     cr.fill()
 
-
-
   end
 
 end
