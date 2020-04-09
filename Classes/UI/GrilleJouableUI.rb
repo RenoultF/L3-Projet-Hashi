@@ -7,12 +7,13 @@
 require "../UI/GrilleUI.rb"
 
 
-
+##
+#Cette classe repréésente une GrilleUI dans laquelle on peut jouer
 class GrilleJouableUI < GrilleUI
 
-  def initialize(grille, taille = 40, cameraX = 0)
+  def initialize(grille, taille = 40)
 
-    super(grille, taille, cameraX)
+    super(grille, taille)
 
     self.signal_connect "button-press-event" do |widget, event|
       self.clickOn(widget, event)

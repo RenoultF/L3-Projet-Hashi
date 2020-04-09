@@ -12,9 +12,23 @@ require "cairo"
 
 class IleUI < CaseUI
 
-  def initialize(ile, taille, cameraX)
+  private_class_method :new
 
-    super(ile, taille, cameraX)
+  ##
+  #Ce constructeur permet de créer un nouveau afficheur d'ile
+  #param :
+  # * ile L'ile à afficher
+  # * taille La taille d'une case (40 par defaut)
+  def IleUI.creer(ile, taille = 40)
+
+    new(ile, taille)
+
+  end
+
+  #:nodoc:
+  def initialize(ile, taille)
+
+    super(ile, taille)
 
     self.signal_connect "button-press-event" do
 
@@ -23,6 +37,7 @@ class IleUI < CaseUI
     end
 
   end
+  #:doc:
 
 
   def draw(window)

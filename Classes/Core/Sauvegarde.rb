@@ -34,8 +34,6 @@ class Sauvegarde < ActiveRecord::Base
 
     def Sauvegarde.creerAll(compte, grilles)
 
-      puts compte
-
       grilles.each do |g|
 
         Sauvegarde.creer(compte, g).sauvegarder()
@@ -58,7 +56,7 @@ class Sauvegarde < ActiveRecord::Base
 
       if(Sauvegarde.recuperer(compte, grille) == nil)
 
-        new(:compte => compte, :grille => YAML.dump(grille), :taille => grille.tailleX(), :difficulte => grille.difficulte())
+        new(:compte => compte, :grille => Marshal.dump(grille), :taille => grille.tailleX(), :difficulte => grille.difficulte())
 
       else
 
@@ -77,13 +75,7 @@ class Sauvegarde < ActiveRecord::Base
 
       liste = Sauvegarde.listeCompte(compte)
 
-      grille.afficheSolution()
-
       liste.each do |s|
-
-        puts "_________________________________________"
-
-        s.getGrille().afficheSolution()
 
         if(s.getGrille().memeSolution(grille))
 
@@ -137,14 +129,14 @@ class Sauvegarde < ActiveRecord::Base
     #Cette méthode permet de recuperer la grille de la sauvegarde
     def getGrille()
 
-      return YAML.load(self.grille)
+      return Marshal.load(self.grille)
 
     end
 
     #Cette méthode permet de modifier la grille enregistré
     def setGrille(grille)
 
-      self.grille = YAML.dump(grille)
+      self.grille = Marshal.dump(grille)
 
       return self
 

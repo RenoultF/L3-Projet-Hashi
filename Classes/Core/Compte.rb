@@ -51,7 +51,7 @@ class Compte < ActiveRecord::Base
     if(pseudo == COMPTE_DEFAULT)
       raise(pseudo + " : Ce nom n'est pas disponible")
     end
-    puts "allo ?"
+    puts "Création du compte #{pseudo}"
     new(pseudo)
 
   end
@@ -95,6 +95,28 @@ class Compte < ActiveRecord::Base
     if(compte == nil)
 
       raise("Le compte " + pseudo + " n'existe pas")
+
+    else
+
+      return compte
+
+    end
+
+  end
+
+
+  #Cette méthode permet de récuperer un compte dans la base de données
+  #
+  #@param pseudo Le pseudo du compte
+  #
+  #@raiseException Si le compte n'existe pas
+  def Compte.recuperer_ou_creer(pseudo)
+
+    compte = Compte.find_by(name: pseudo);
+
+    if(compte == nil)
+
+      Compte.creer(pseudo)
 
     else
 

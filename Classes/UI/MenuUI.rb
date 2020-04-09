@@ -52,7 +52,36 @@ class MenuUI < Gtk::Box
 
   def valide(nomCompte, taille, difficulte)
 
-    @racine.choisirGrille(nomCompte, taille, difficulte)
+    self.ajouteLabel("Creation du compte")
+
+    Thread.new{@racine.choisirGrille(nomCompte, taille, difficulte)}
+
+  end
+
+  def ajouteLabel(label)
+
+    self.add(Gtk::Label.new(label))
+
+    self.show_all
+
+  end
+
+
+  def creationRecuperationCompte(nomCompte)
+
+    begin
+
+      Compte.recuperer(nomCompte)
+
+    rescue => e
+
+      puts e
+
+      self.add(Gtk::Label.new("Creation du compte"))
+
+      self.show_all
+
+    end
 
   end
 

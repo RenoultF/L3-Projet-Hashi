@@ -15,14 +15,13 @@ class GrilleUI < Gtk::DrawingArea
 
   attr_accessor :grille
 
-  def initialize(grille, taille = 40, cameraX = 0)
+  def initialize(grille, taille = 40)
 
     super()
 
     @grille = grille
     @mat = Array.new(@grille.tailleX()) { Array.new(@grille.tailleY()) }
     @taille = taille
-    @cameraX = cameraX
 
     self.init()
 
@@ -41,11 +40,11 @@ class GrilleUI < Gtk::DrawingArea
       for j in 0..(@grille.tailleY()-1)
         c = @grille.getCase(i, j)
         if(c.estIle?())
-          @mat[i][j] = IleUI.new(c, @taille, @cameraX)
+          @mat[i][j] = IleUI.creer(c, @taille)
         elsif(c.estPont?())
-          @mat[i][j] = PontUI.new(c, @taille, @cameraX)
+          @mat[i][j] = PontUI.creer(c, @taille)
         else
-          @mat[i][j] = CaseUI.new(c, @taille, @cameraX)
+          @mat[i][j] = CaseUI.creer(c, @taille)
         end
 
       end
@@ -108,7 +107,7 @@ class GrilleUI < Gtk::DrawingArea
     cr = window.create_cairo_context
 
     cr.set_source_rgb(255, 255, 255)
-    cr.rectangle(0, 0, @taille * @grille.tailleY(), @taille * @grille.tailleX() + @cameraX)
+    cr.rectangle(0, 0, @taille * @grille.tailleY(), @taille * @grille.tailleX())
     cr.fill()
 
 

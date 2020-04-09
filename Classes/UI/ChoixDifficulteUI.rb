@@ -6,10 +6,12 @@
 
 require 'gtk3'
 
-
+##
+#Cette classe permet à l'utilisateur de choisir entre plusieurs difficulté
 class ChoixDifficulteUI < Gtk::Box
 
   attr_reader :menu
+
 
   def initialize(menu)
 

@@ -11,11 +11,28 @@ require "gtk3"
 
 class PontUI < CaseUI
 
-  def initialize(pont, taille, cameraX)
 
-    super(pont, taille, cameraX)
+
+  private_class_method :new
+
+  ##
+  #Ce constructeur permet de créer un nouveau afficheur de pont
+  #param :
+  # * casee La pont à afficher
+  # * taille La taille d'une case (40 par defaut)
+  def PontUI.creer(pont, taille = 40)
+
+    new(pont, taille)
 
   end
+
+  #:nodoc:
+  def initialize(pont, taille)
+
+    super(pont, taille)
+
+  end
+  #:doc:
 
 
   def draw(window)#C'est pas joli, fait quelque chose
@@ -46,9 +63,9 @@ class PontUI < CaseUI
 
       end
 
-
       cr.rectangle(departY, departX, tailleY, tailleX)
       cr.fill()
+
     end
 
     if(@casee.marque)

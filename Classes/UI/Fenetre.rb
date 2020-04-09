@@ -47,9 +47,6 @@ class Fenetre < Gtk::Window
       @draw.clickOn(widget, event)
     end
 
-    ##
-    # Auteur Brabant Mano
-    # Version 0.1 : Date : 07/02/2020
 
     @draw.add_events([:button_press_mask])
 
