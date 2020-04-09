@@ -16,7 +16,6 @@ class GrilleJouableUI < GrilleUI
 
     self.add_events([:button_press_mask])
 
-
   end
 
 end

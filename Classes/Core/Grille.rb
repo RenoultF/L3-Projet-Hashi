@@ -130,8 +130,8 @@ class Grille
                 @matSolution[i][j] = Pont.construit(i, j, self, Pont::HORIZONTAL, 2)
                 @mat[i][j] = Pont.creer(i, j, self)
               elsif(c == 'N')
-                @matSolution[i][j] = Case.creer(i, j, self)
-                @mat[i][j] = Case.creer(i, j, self)
+                @matSolution[i][j] = Pont.creer(i, j, self)
+                @mat[i][j] = Pont.creer(i, j, self)
               end
             end
           end
@@ -310,6 +310,20 @@ class Grille
         self.modifScore(-100)
       end
 
+    end
+
+
+    ##
+    #Méthode à appeler quand on appuie sur une ile
+    #
+    #@param ile L'ile sur laquelle on a cliqué
+    def clickOnPont(pont)
+
+      if(!@dernierIle.eql?(nil))
+        if(pont.surbrillance())
+          #self.chercherVoisins(pont, pont.directionSurbrillance)
+        end
+      end
 
     end
 

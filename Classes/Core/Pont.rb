@@ -35,6 +35,9 @@ class Pont < Case
     #@surbrillance => Booléen pour l'affichage, si égal à true le pont sera affiché en surbrillance verte
     attr_accessor :surbrillance
 
+    #@surbrillance => Booléen pour l'affichage, si égal à true le pont sera affiché en surbrillance verte
+    attr_accessor :directionSurbrillance
+
     #@marque => Booléen pour l'affichage, si égal à true le pont sera affiché en surbrillance rouge
     attr_accessor :marque
 
@@ -110,9 +113,18 @@ class Pont < Case
         @direction = direction
         @surbrillance = false
         @marque = false
+        @directionSurbrillance = NULLE
 
     end
     #:doc:
+
+
+
+    def clickOn()
+
+      @grille.clickOnPont(self)
+
+    end
 
 
     ##
@@ -192,12 +204,14 @@ class Pont < Case
         #On modifie la valeur du pont si la direection donné est la bonne
         if(@direction == direction)
           @surbrillance = valeur
+          @directionSurbrillance = direction
           return true
         end
         return false
         #On crée un nouveau pont
       elsif(@direction == NULLE)
         @surbrillance = valeur
+        @directionSurbrillance = direction
         return true
       end
     end
