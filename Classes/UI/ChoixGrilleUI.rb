@@ -34,7 +34,7 @@ class ChoixGrilleUI < Gtk::Box
       temp = GrilleUI.new(s.getGrille(), 40)
 
       temp.signal_connect "button-press-event" do |widget, event|
-        self.grilleChoisi(temp.grille())
+        self.grilleChoisi(temp.grille(), nomCompte)
       end
 
       temp.add_events([:button_press_mask])
@@ -51,9 +51,9 @@ class ChoixGrilleUI < Gtk::Box
   end
 
 
-  def grilleChoisi(grille)
+  def grilleChoisi(grille, nomCompte)
 
-    @racine.commencerPartie(grille)
+    @racine.commencerPartie(grille, nomCompte)
 
   end
 

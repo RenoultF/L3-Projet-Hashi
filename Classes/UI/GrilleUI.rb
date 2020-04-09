@@ -13,7 +13,7 @@ require "gtk3"
 
 class GrilleUI < Gtk::DrawingArea
 
-  attr_reader :grille
+  attr_accessor :grille
 
   def initialize(grille, taille = 40, cameraX = 0)
 
@@ -23,6 +23,17 @@ class GrilleUI < Gtk::DrawingArea
     @mat = Array.new(@grille.tailleX()) { Array.new(@grille.tailleY()) }
     @taille = taille
     @cameraX = cameraX
+
+    self.init()
+
+
+    self.signal_connect "draw" do
+      self.on_draw()
+    end
+
+  end
+
+  def init()
 
     self.set_size_request(@grille.tailleY() * @taille, @grille.tailleX() * @taille)
 
@@ -40,9 +51,14 @@ class GrilleUI < Gtk::DrawingArea
       end
     end
 
-    self.signal_connect "draw" do
-      self.on_draw()
-    end
+  end
+
+
+  def grille=(grille)
+
+    @grille = grille
+
+    self.init()
 
   end
 

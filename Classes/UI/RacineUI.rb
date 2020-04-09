@@ -47,11 +47,11 @@ class RacineUI < Gtk::Box
 
   end
 
-  def commencerPartie(grille)
+  def commencerPartie(grille, nomCompte)
 
     @menu.hide
     @choix.hide
-    @jeu.chargerGrille(grille)
+    @jeu.chargerGrille(grille, nomCompte)
     @jeu.show_all
 
   end

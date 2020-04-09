@@ -86,7 +86,7 @@ class Jeu
             when 1
               begin
                 ile2 = demandeCoord()
-                @grille.clickOnIle(ile2)
+                ile2.clickOn()
               rescue => e
                 puts "Erreur : " +  e.message()
               end
@@ -109,7 +109,7 @@ class Jeu
             when 8
                 @verifGrille.aider()
             when 9
-                @donnerTech.aider()
+                puts @donnerTech.aider()
             else
                 puts "puts"
             end
@@ -152,9 +152,6 @@ class Jeu
         y = gets.chomp.to_i
         if(@grille.sortLimite?(x, y))
           raise("Les coordonnée ne sont pas correctes")
-        end
-        if(!@grille.getCase(x, y).estIle?())
-          raise("La case n'est pas une ile")
         end
         return @grille.getCase(x, y)
     end

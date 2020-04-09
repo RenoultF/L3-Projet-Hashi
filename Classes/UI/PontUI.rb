@@ -51,8 +51,11 @@ class PontUI < CaseUI
       cr.fill()
     end
 
-    cr.set_source_rgba(0, 0, 1, 1)
-
+    if(@casee.marque)
+      cr.set_source_rgba(1, 0, 0, 1)
+    else
+      cr.set_source_rgba(0, 0, 1, 1)
+    end
 
 
     if(@casee.direction == Pont::HORIZONTAL)

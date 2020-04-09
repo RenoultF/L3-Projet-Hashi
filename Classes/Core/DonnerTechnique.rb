@@ -1,6 +1,6 @@
 
 
-
+require "../Core/Aide.rb"
 
 class DonnerTechnique < Aide
 
@@ -13,7 +13,7 @@ class DonnerTechnique < Aide
   end
 
 
-  def aider()
+  def aider()#Verifier si la grille est correcte
     archipelle = false
     for i in (0..@grille.tailleX - 1)
       for j in (0..@grille.tailleY - 1)
@@ -25,11 +25,9 @@ class DonnerTechnique < Aide
           puts capa, nChemins
           if(capa > 0)
             if(capa == nChemins)
-              puts "Une ile doit encore placer " + capa.to_s() + " ponts et possède " + nChemins.to_s() + " chemins disponibles"
-              return true
+              return "Une ile doit encore placer " + capa.to_s() + " ponts et possède " + nChemins.to_s() + " chemins disponibles"
             elsif(capa == nChemins - 1 && nDirection <= capa)
-              puts "Une ile doit encore placer " + capa.to_s() + " ponts et possède " + nDirection.to_s() + " directions disponibles"
-              return true
+              return "Une ile doit encore placer " + capa.to_s() + " ponts et possède " + nDirection.to_s() + " directions disponibles"
             elsif(capa == 1)
               archipelle = true
             end
@@ -38,10 +36,9 @@ class DonnerTechnique < Aide
       end
     end
     if(archipelle)
-      puts "Attention à ne pas former d'archipelle"
-      return true
+      return "Attention à ne pas former d'archipelle"
     end
-    return false
+    return "Pas d'aide disponible"
   end
 
 end

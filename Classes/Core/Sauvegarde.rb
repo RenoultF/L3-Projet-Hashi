@@ -77,7 +77,13 @@ class Sauvegarde < ActiveRecord::Base
 
       liste = Sauvegarde.listeCompte(compte)
 
+      grille.afficheSolution()
+
       liste.each do |s|
+
+        puts "_________________________________________"
+
+        s.getGrille().afficheSolution()
 
         if(s.getGrille().memeSolution(grille))
 

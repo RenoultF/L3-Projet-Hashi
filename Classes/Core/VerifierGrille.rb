@@ -1,5 +1,6 @@
 
 
+require "../Core/Aide.rb"
 
 
 class VerifierGrille < Aide
