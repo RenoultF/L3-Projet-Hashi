@@ -59,4 +59,17 @@ class CaseUI < Gtk::DrawingArea
 
   end
 
+  def estIle?()
+
+    return @casee.estIle?()
+
+  end
+
+
+  def estPont?()
+
+    return @casee.estPont?()
+
+  end
+
 end

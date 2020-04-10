@@ -114,6 +114,7 @@ class Pont < Case
         @surbrillance = false
         @marque = false
         @directionSurbrillance = NULLE
+        @observateurs = Array.new()
 
     end
     #:doc:
@@ -123,6 +124,34 @@ class Pont < Case
     def clickOn()
 
       @grille.clickOnPont(self)
+
+    end
+
+
+    def raz()
+
+      @valeur = 0
+      @direction = NULLE
+      @surbrillance = false
+      @marque = false
+      @directionSurbrillance = NULLE
+      notifieObservateur()
+
+    end
+
+    def ajouteObservateur(observateur)
+
+      @observateurs.push(observateur)
+
+    end
+
+    def notifieObservateur()
+
+      @observateurs.each do |o|
+
+        o.actualise()
+
+      end
 
     end
 
@@ -188,6 +217,7 @@ class Pont < Case
                 if(@valeur == 0)
                     @direction = NULLE
                 end
+                notifieObservateur()
                 return true
             end
             return false
@@ -195,6 +225,7 @@ class Pont < Case
         elsif(@direction == NULLE)
             @direction = direction
             @valeur = valeur
+            notifieObservateur()
             return true
         end
     end
@@ -284,7 +315,7 @@ class Pont < Case
     def demarquer()
 
       @marque = false
-
+      
     end
 
 

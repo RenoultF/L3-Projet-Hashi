@@ -161,7 +161,7 @@ class Ile < Case
       ret = 0
       for direction in DIRECTIONS
         if(aVoisinDisponible?(direction))
-          if(@grille.valeurPont(self, getVoisin(direction)) != Pont::MAX_LIGNE)
+          if(@grille.valeurPont(self, getVoisin(direction)) != Pont::MAX_LIGNE && getVoisin(direction).getCapaciteResiduelle > 0)
             ret += 1
           end
         end

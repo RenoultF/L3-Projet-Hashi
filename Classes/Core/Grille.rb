@@ -333,6 +333,20 @@ class Grille
 
     end
 
+    def recommencer()
+
+      setDernierIle(nil)
+
+      @mat.each do |ligne|
+        ligne.each do |c|
+          if(c.estPont?())
+            c.raz()
+          end
+        end
+      end
+
+    end
+
 
 
     def chercherVoisins(pont, direction)

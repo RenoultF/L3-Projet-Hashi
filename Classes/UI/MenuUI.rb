@@ -60,15 +60,19 @@ class MenuUI < Gtk::Box
     print "Taille grille : ", taille, "\n"
     print "Difficulte grille : ", difficulte, "\n"
 
-    ajouteLabel("Creation du compte")
+    afficheLabel("Creation du compte")
 
     Thread.new{@racine.choisirGrille(nomCompte, taille, difficulte)}
 
   end
 
-  def ajouteLabel(label)
+  def afficheLabel(label)
 
-    pack_start(Gtk::Label.new(label), :expand => true, :fill => true)
+    if(!@label.eql?(nil))
+      remove(@label)
+    end
+
+    pack_start(@label = Gtk::Label.new(label), :expand => true, :fill => true)
 
     show_all
 

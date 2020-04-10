@@ -50,7 +50,12 @@ class IleUI < CaseUI
       cr.set_source_rgb(0, 255, 0)
     end
     cr.circle(@taille * @casee.posY() + @taille/2, @taille * @casee.posX() + @taille/2, @taille/2)
-    cr.stroke()
+    if(@casee.getCapaciteResiduelle() == 0)
+      cr.fill()
+      cr.set_source_rgb(255, 255, 255)
+    else
+      cr.stroke()
+    end
 
     text = @casee.valeur.to_s()
 

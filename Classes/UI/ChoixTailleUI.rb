@@ -21,8 +21,9 @@ class ChoixTailleUI < Gtk::Box
     for i in [7, 10, 15]
 
       temp = Gtk::Button.new(:label => "#{i}*#{i}")
-      temp.signal_connect "clicked" do
-        @menu.taille=i
+      temp.name=i.to_s()
+      temp.signal_connect "clicked" do |widget, event|
+        @menu.taille=widget.name.to_i()
       end
       @boutons.pack_start(temp, :expand => true, :fill => true)
 

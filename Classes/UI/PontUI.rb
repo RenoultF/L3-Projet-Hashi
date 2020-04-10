@@ -11,7 +11,8 @@ require "gtk3"
 
 class PontUI < CaseUI
 
-
+  attr_reader :couleurPont
+  attr_reader :couleurPontCourante
 
   private_class_method :new
 
@@ -20,16 +21,20 @@ class PontUI < CaseUI
   #param :
   # * casee La pont à afficher
   # * taille La taille d'une case (40 par defaut)
-  def PontUI.creer(pont, taille = 40)
+  def PontUI.creer(pont, taille = 40, couleurPontCourante = [0, 0, 1])
 
-    new(pont, taille)
+    new(pont, taille, couleurPontCourante)
 
   end
 
   #:nodoc:
-  def initialize(pont, taille)
+  def initialize(pont, taille, couleurPontCourante)
 
     super(pont, taille)
+
+    @couleurPontCourante = couleurPontCourante
+    @couleurPont = couleurPontCourante
+    @casee.ajouteObservateur(self)
 
   end
   #:doc:
@@ -71,7 +76,7 @@ class PontUI < CaseUI
     if(@casee.marque)
       cr.set_source_rgba(1, 0, 0, 1)
     else
-      cr.set_source_rgba(0, 0, 1, 1)
+      cr.set_source_rgb(@couleurPontCourante[0], @couleurPontCourante[1], @couleurPontCourante[2])
     end
 
 
@@ -114,6 +119,43 @@ class PontUI < CaseUI
     end
 
     cr.fill()
+
+  end
+
+  def valeur
+    return @casee.valeur
+  end
+
+
+  def redoCouleurPont=(couleurPont)
+
+    if(@couleurPont == @couleurPontCourante)
+      @couleurPontCourante = couleurPont
+    end
+
+    @couleurPont = couleurPont
+
+  end
+
+
+  def undoCouleurPont=(couleurPont)
+
+    @couleurPont = couleurPont
+
+  end
+
+
+  ##
+  #Cette méthode permet de simuler le clic sur la case
+  def clickOn()
+
+    super()
+
+  end
+
+  def actualise
+
+    @couleurPontCourante = @couleurPont
 
   end
 

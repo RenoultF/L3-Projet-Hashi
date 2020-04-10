@@ -49,7 +49,11 @@ class GrilleUI < Gtk::DrawingArea
         if(c.estIle?())
           @mat[i][j] = IleUI.creer(c, @taille)
         elsif(c.estPont?())
-          @mat[i][j] = PontUI.creer(c, @taille)
+          if(!getCase(i, j).eql?(nil))
+            @mat[i][j] = PontUI.creer(c, @taille, getCase(i, j).couleurPontCourante())
+          else
+            @mat[i][j] = PontUI.creer(c, @taille)
+          end
         else
           @mat[i][j] = CaseUI.creer(c, @taille)
         end
@@ -64,7 +68,7 @@ class GrilleUI < Gtk::DrawingArea
 
     @grille = grille
 
-    self.init()
+    init()
 
   end
 
@@ -118,9 +122,31 @@ class GrilleUI < Gtk::DrawingArea
     cr.rectangle(0, 0, @taille * @grille.tailleY(), @taille * @grille.tailleX())
     cr.fill()
 
+  end
+
+  def redoCouleurPont=(couleur)
+
+    @mat.each do |ligne|
+      ligne.each do |c|
+        if(c.estPont?())
+          c.redoCouleurPont=couleur
+        end
+      end
+    end
 
   end
 
 
+  def undoCouleurPont=(couleur)
+
+    @mat.each do |ligne|
+      ligne.each do |c|
+        if(c.estPont?())
+          c.undoCouleurPont=couleur
+        end
+      end
+    end
+
+  end
 
 end

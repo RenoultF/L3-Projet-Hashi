@@ -35,6 +35,12 @@ class ChoixGrilleUI < Gtk::Box
   # * difficulte La difficulte des grilles à récuperer
   def chargerGrille(nomCompte, taille, difficulte)
 
+    each_all do |c|
+
+      remove(c)
+
+    end
+
     tailleCase = 40
     @tailleTotal = 0
 
@@ -54,6 +60,13 @@ class ChoixGrilleUI < Gtk::Box
 
       self.add(temp)
       @tailleTotal += tailleCase * taille + 10
+
+      self.add(bouton = Gtk::Button.new(:label => "Recommencer"))
+
+      bouton.signal_connect "clicked" do |widget, event|
+        temp.grille().recommencer()
+        grilleChoisie(temp.grille(), nomCompte)
+      end
 
     end
 

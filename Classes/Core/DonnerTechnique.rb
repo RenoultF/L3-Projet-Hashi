@@ -15,6 +15,8 @@ class DonnerTechnique < Aide
 
   def aider()#Verifier si la grille est correcte
     archipelle = false
+    cheminComplet = false
+    cheminIncomplet = false
     for i in (0..@grille.tailleX - 1)
       for j in (0..@grille.tailleY - 1)
         cGrille = @grille.getCase(i, j)
@@ -22,12 +24,16 @@ class DonnerTechnique < Aide
           capa = cGrille.getCapaciteResiduelle()
           nChemins = cGrille.getNombreCheminDisponible()
           nDirection = cGrille.getNombreDirectionConstructible()
-          puts capa, nChemins
+          if(!@grille.getDernierIle.eql?(nil))
+            puts "Capacite, Chemins, Direction : ", @grille.getDernierIle.getCapaciteResiduelle, @grille.getDernierIle.getNombreCheminDisponible, @grille.getDernierIle.getNombreDirectionConstructible
+          end
           if(capa > 0)
             if(capa == nChemins)
-              return "Une ile doit encore placer " + capa.to_s() + " ponts et possède " + nChemins.to_s() + " chemins disponibles"
+              cheminComplet = true
+              messageComplet = "Une ile doit encore placer " + capa.to_s() + " ponts et possède " + nChemins.to_s() + " ponts disponibles"
             elsif(capa == nChemins - 1 && nDirection <= capa)
-              return "Une ile doit encore placer " + capa.to_s() + " ponts et possède " + nDirection.to_s() + " directions disponibles"
+              cheminIncomplet = true
+              messageIncomplet = "Une ile doit encore placer " + capa.to_s() + " ponts et possède " + nDirection.to_s() + " directions disponibles"
             elsif(capa == 1)
               archipelle = true
             end
@@ -35,10 +41,16 @@ class DonnerTechnique < Aide
         end
       end
     end
-    if(archipelle)
-      return "Attention à ne pas former d'archipelle"
+    if(cheminComplet)
+      message = messageComplet
+    elsif(cheminIncomplet)
+      message = messageIncomplet
+    elsif(archipelle)
+      message = "Attention à ne pas former d'archipelle"
+    else
+      message ="Pas d'aide disponible"
     end
-    return "Pas d'aide disponible"
+    return message + "\nAttention s'il y a une erreur dans la grille la technique peut-être érronée"
   end
 
 end

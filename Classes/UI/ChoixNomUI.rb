@@ -20,7 +20,7 @@ class ChoixNomUI < Gtk::Box
     @menu = menu
 
     @entry = Gtk::Entry.new()
-    @label = Gtk::Label.new("Compte")
+    @label = Gtk::Label.new("Prénom")
 
     temp = Gtk::Box.new(:horizontal, 0)
 

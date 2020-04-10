@@ -23,8 +23,9 @@ class ChoixDifficulteUI < Gtk::Box
     for i in [[0, 'Facile'], [1, 'Normal'], [2, 'Difficile']]
 
       temp = Gtk::Button.new(:label => "#{i[1]}")
-      temp.signal_connect "clicked" do
-        @menu.difficulte=i[0]
+      temp.name=i[0].to_s()
+      temp.signal_connect "clicked" do |widget, event|
+        @menu.difficulte=widget.name.to_i()
       end
       @boutons.pack_start(temp, :expand => true, :fill => true)
 

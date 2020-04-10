@@ -5,6 +5,7 @@
 
 require "../Core/DonnerTechnique.rb"
 require "../Core/VerifierGrille.rb"
+require "../Core/UndoRedo.rb"
 
 require "../UI/GrilleJouableUI.rb"
 require 'gtk3'
@@ -18,13 +19,31 @@ class JeuUI < Gtk::Box
 
   def initialize(racine)
 
-    super(:horizontal , 0)
+    super(:vertical , 0)
 
     @racine = racine
 
   end
 
   def chargerGrille(grille, nomCompte)
+
+
+    each_forall do |c|
+
+      remove(c)
+
+    end
+
+
+    @couleurs = UndoRedo.creer()
+
+    @couleurs.empiler([0, 0, 0])
+    @couleurs.empiler([0, 0, 1])
+    @couleurs.empiler([0, 1, 0])
+    @couleurs.empiler([0, 1, 1])
+    @couleurs.empiler([1, 0, 0])
+    @couleurs.empiler([1, 0, 1])
+    @couleurs.empiler([1, 1, 0])
 
     @compte = Compte.recuperer(nomCompte)
 
@@ -35,37 +54,58 @@ class JeuUI < Gtk::Box
 #    @threadChrono = Thread.new{@chronoGrille.lancerChrono()}
 
     @grille = GrilleJouableUI.new(grille)
+    @grille.redoCouleurPont=@couleurs.undo()
 
     @undo = Gtk::Button.new(:label => "Undo")
     @undo.signal_connect "clicked" do
       @grille.grille.undo()
     end
-    self.add(@undo)
 
     @redo = Gtk::Button.new(:label => "Redo")
     @redo.signal_connect "clicked" do
       @grille.grille.redo()
     end
-    self.add(@redo)
 
-    @hypotheseCreer = Gtk::Button.new(:label => "Creer")
+    @hypotheseCreer = Gtk::Button.new(:label => "Creer hypothèse")
     @hypotheseCreer.signal_connect "clicked" do
       @grille.grille.creerHypothese()
-    end
-    self.add(@hypotheseCreer)
+      begin
+        temp = @couleurs.undo()
+        print "Couleur : ", temp, "\n"
+        @grille.undoCouleurPont = temp
+      rescue => e
 
-    @hypotheseValider = Gtk::Button.new(:label => "Valider")
+      end
+    end
+
+    @hypotheseValider = Gtk::Button.new(:label => "Valider hypothèse")
     @hypotheseValider.signal_connect "clicked" do
       @grille.grille.valideHypothese()
+      begin
+        @couleurs.redo()
+        @couleurs.redo()
+        temp = @couleurs.undo()
+        print "Couleur : ", temp, "\n"
+        @grille.redoCouleurPont = temp
+      rescue => e
+
+      end
     end
-    self.add(@hypotheseValider)
 
 
-    @hypotheseSupprimer = Gtk::Button.new(:label => "Supprimer")
+    @hypotheseSupprimer = Gtk::Button.new(:label => "Supprimer hypothèse")
     @hypotheseSupprimer.signal_connect "clicked" do
       @grille.grille.supprimeHypothese(self)
+      begin
+        @couleurs.redo()
+        @couleurs.redo() 
+        temp = @couleurs.undo()
+        print "Couleur : ", temp, "\n"
+        @grille.redoCouleurPont = temp
+      rescue => e
+
+      end
     end
-    self.add(@hypotheseSupprimer)
 
     @sauvegarder = Gtk::Button.new(:label => "Sauvegarder")
     @sauvegarder.signal_connect "clicked" do
@@ -73,27 +113,54 @@ class JeuUI < Gtk::Box
       puts "Classe : " + @grille.grille.to_s()
       Sauvegarde.recuperer(@compte, @grille.grille).setGrille(@grille.grille).sauvegarder()
     end
-    self.add(@sauvegarder)
 
 
     @aideValide = Gtk::Button.new(:label => "Verifier grille")
     @aideValide.signal_connect "clicked" do
       @verifGrille.aider()
     end
-    self.add(@aideValide)
 
     @labelTechnique = Gtk::Label.new()
-    self.add(@labelTechnique)
 
     @aideTechnique = Gtk::Button.new(:label => "Donner technique")
     @aideTechnique.signal_connect "clicked" do
       @labelTechnique.text = @donnerTech.aider()
     end
-    self.add(@aideTechnique)
+
+    @valider = Gtk::Button.new(:label => "Valider")
+    @valider.signal_connect "clicked" do
+      finir()
+    end
+
+    aides = Gtk::Box.new(:horizontal)
+    aides.pack_start(@aideValide, :expand => true, :fill => true)
+    aides.pack_start(@aideTechnique, :expand => true, :fill => true)
+
+    labelTechnique = Gtk::Box.new(:vertical)
+    labelTechnique.pack_start(@labelTechnique, :expand => true, :fill => true)
+    labelTechnique.pack_start(aides, :expand => true, :fill => true)
+
+    undoRedo = Gtk::Box.new(:horizontal)
+    undoRedo.pack_start(@undo, :expand => true, :fill => true)
+    undoRedo.pack_start(@redo, :expand => true, :fill => true)
+
+    hypotheses = Gtk::Box.new(:vertical)
+    hypotheses.pack_start(@hypotheseCreer, :expand => true, :fill => true)
+    hypotheses.pack_start(@hypotheseValider, :expand => true, :fill => true)
+    hypotheses.pack_start(@hypotheseSupprimer, :expand => true, :fill => true)
+
+    controle = Gtk::Box.new(:vertical)
+    controle.pack_start(hypotheses, :expand => true, :fill => true)
+    controle.pack_start(undoRedo, :expand => true, :fill => true)
+    controle.pack_start(labelTechnique, :expand => true, :fill => true)
 
 
+    jeu = Gtk::Box.new(:horizontal)
+    jeu.pack_start(@grille, :expand => true, :fill => true)
+    jeu.pack_start(controle, :expand => true, :fill => true)
 
-    self.add(@grille)
+    pack_start(jeu, :expand => true, :fill => true)
+    pack_start(@valider, :expand => true, :fill => true)
 
     show_all
 
@@ -107,6 +174,16 @@ class JeuUI < Gtk::Box
   def grilleChoisi(grille)
 
     @racine.commancerPartie(grille)
+
+  end
+
+
+  def finir()
+
+    if(@grille.grille.fini?())
+      puts "Bravo vous avez gagné !!!"
+      @racine.finirPartie()
+    end
 
   end
 
