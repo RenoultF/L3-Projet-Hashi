@@ -44,6 +44,14 @@ class MenuUI < Gtk::Box
       self.valide(@choixNom.entry.text(), @taille, @difficulte)
     end
 
+  end
+
+  def retourMenu()
+
+    each_all do |c|
+      remove(c)
+    end
+
     pack_start(@titre, :expand => true, :fill => true)
     pack_start(@choixNom, :expand => true, :fill => true)
     pack_start(@choixTaille, :expand => true, :fill => true)
@@ -55,12 +63,13 @@ class MenuUI < Gtk::Box
 
   def valide(nomCompte, taille, difficulte)
 
+
     puts "Paramètres menu"
     print "Nom Compte : ", nomCompte, "\n"
     print "Taille grille : ", taille, "\n"
     print "Difficulte grille : ", difficulte, "\n"
 
-    afficheLabel("Creation du compte")
+    afficheLabel("Creation du compte en cours")
 
     Thread.new{@racine.choisirGrille(nomCompte, taille, difficulte)}
 
@@ -68,32 +77,9 @@ class MenuUI < Gtk::Box
 
   def afficheLabel(label)
 
-    if(!@label.eql?(nil))
-      remove(@label)
-    end
-
     pack_start(@label = Gtk::Label.new(label), :expand => true, :fill => true)
 
     show_all
-
-  end
-
-
-  def creationRecuperationCompte(nomCompte)
-
-    begin
-
-      Compte.recuperer(nomCompte)
-
-    rescue => e
-
-      puts e
-
-      pack_start(Gtk::Label.new("Creation du compte"), :expand => true, :fill => true)
-
-      self.show_all
-
-    end
 
   end
 

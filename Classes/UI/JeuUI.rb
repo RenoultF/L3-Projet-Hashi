@@ -98,7 +98,7 @@ class JeuUI < Gtk::Box
       @grille.grille.supprimeHypothese(self)
       begin
         @couleurs.redo()
-        @couleurs.redo() 
+        @couleurs.redo()
         temp = @couleurs.undo()
         print "Couleur : ", temp, "\n"
         @grille.redoCouleurPont = temp
@@ -182,7 +182,7 @@ class JeuUI < Gtk::Box
 
     if(@grille.grille.fini?())
       puts "Bravo vous avez gagné !!!"
-      @racine.finirPartie()
+      @racine.finirPartie(@grille.grille.tailleX, @grille.grille.difficulte)
     end
 
   end

@@ -108,7 +108,7 @@ class Grille
             @matSolution = Array.new(@tailleX) { Array.new(@tailleY) }
           elsif(l.start_with?("#D"))
             d = l.split(' ')
-            @difficulte = d[1]
+            @difficulte = d[1].to_i()
           else
             i += 1
             j = -1

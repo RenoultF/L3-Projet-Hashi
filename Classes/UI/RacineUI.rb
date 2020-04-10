@@ -34,7 +34,7 @@ class RacineUI < Gtk::Box
       retourMenu()
     end
 
-
+    @menu.retourMenu()
     pack_start(@menu, :expand => true, :fill => true)
 
     show_all
@@ -44,11 +44,14 @@ class RacineUI < Gtk::Box
 
   def choisirGrille(nomCompte, taille, difficulte)
 
+
+
+    @choix.chargerGrille(nomCompte, taille, difficulte)
+
     each_all do |c|
       remove(c)
     end
 
-    @choix.chargerGrille(nomCompte, taille, difficulte)
     pack_start(@choix, :expand => true, :fill => true)
     pack_start(@retourMenu)
     show_all
@@ -57,23 +60,24 @@ class RacineUI < Gtk::Box
 
   def commencerPartie(grille, nomCompte)
 
+    @jeu.chargerGrille(grille, nomCompte)
+
     each_all do |c|
       remove(c)
     end
 
-    @jeu.chargerGrille(grille, nomCompte)
     pack_start(@jeu, :expand => true, :fill => true)
     pack_start(@retourMenu)
     show_all
 
   end
 
-  def finirPartie()
+  def finirPartie(taille, difficulte)
 
+    @fin.reussi(taille, difficulte)
     each_all do |c|
       remove(c)
     end
-
     pack_start(@fin, :expand => true, :fill => true)
     pack_start(@retourMenu)
     show_all
@@ -82,10 +86,10 @@ class RacineUI < Gtk::Box
 
   def retourMenu()
 
+    @menu.retourMenu()
     each_all do |c|
       remove(c)
     end
-
     pack_start(@menu, :expand => true, :fill => true)
     show_all
 
