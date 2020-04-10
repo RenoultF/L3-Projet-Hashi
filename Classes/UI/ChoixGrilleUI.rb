@@ -50,15 +50,7 @@ class ChoixGrilleUI < Gtk::Box
 
       puts "TEST : #{@window}"
 
-      temp = GrilleUI.new(s.getGrille(), tailleCase)
 
-      temp.signal_connect "button-press-event" do |widget, event|
-        grilleChoisie(temp.grille(), nomCompte)
-      end
-
-      temp.add_events([:button_press_mask])
-
-      self.add(temp)
       @tailleTotal += tailleCase * taille + 10
 
       self.add(bouton = Gtk::Button.new(:label => "Recommencer"))
@@ -67,6 +59,16 @@ class ChoixGrilleUI < Gtk::Box
         temp.grille().recommencer()
         grilleChoisie(temp.grille(), nomCompte)
       end
+
+      temp = GrilleUI.new(s.getGrille(), tailleCase)
+
+      temp.signal_connect "button-press-event" do 
+        grilleChoisie(temp.grille(), nomCompte)
+      end
+
+      temp.add_events([:button_press_mask])
+
+      add(temp)
 
     end
 

@@ -28,7 +28,7 @@ class JeuUI < Gtk::Box
   def chargerGrille(grille, nomCompte)
 
 
-    each_forall do |c|
+    each_all do |c|
 
       remove(c)
 

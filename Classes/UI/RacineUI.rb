@@ -34,6 +34,15 @@ class RacineUI < Gtk::Box
       retourMenu()
     end
 
+    @quitter = Gtk::Button.new(:label => "Quitter")
+    @quitter.signal_connect "clicked" do
+      Gtk.main_quit
+    end
+
+    @boutons = Gtk::Box.new(:horizontal)
+    @boutons.pack_start(@quitter)
+    @boutons.pack_start(@retourMenu)
+
     @menu.retourMenu()
     pack_start(@menu, :expand => true, :fill => true)
 
@@ -53,7 +62,7 @@ class RacineUI < Gtk::Box
     end
 
     pack_start(@choix, :expand => true, :fill => true)
-    pack_start(@retourMenu)
+    pack_start(@boutons)
     show_all
 
   end
@@ -67,7 +76,8 @@ class RacineUI < Gtk::Box
     end
 
     pack_start(@jeu, :expand => true, :fill => true)
-    pack_start(@retourMenu)
+    pack_start(@boutons)
+
     show_all
 
   end
@@ -79,7 +89,7 @@ class RacineUI < Gtk::Box
       remove(c)
     end
     pack_start(@fin, :expand => true, :fill => true)
-    pack_start(@retourMenu)
+    pack_start(@boutons)
     show_all
 
   end

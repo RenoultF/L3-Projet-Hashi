@@ -53,6 +53,8 @@ class Fenetre < Gtk::Window
     self.add(@draw)
 =end
 
+    maximize
+
     show_all
 
   end

@@ -8,6 +8,7 @@
 require "../UI/ChoixNomUI.rb"
 require "../UI/ChoixTailleUI.rb"
 require "../UI/ChoixDifficulteUI.rb"
+require "../UI/FenetreReglesUI.rb"
 require 'gtk3'
 
 
@@ -29,7 +30,7 @@ class MenuUI < Gtk::Box
 
     @racine = racine
 
-    @titre = Gtk::Label.new("Bienvenue dans le Hashiparmenier")
+    @titre = Gtk::Label.new("Bienvenue dans le Hashiparmentier")
 
     @choixNom = ChoixNomUI.new(self)
 
@@ -39,10 +40,23 @@ class MenuUI < Gtk::Box
     @choixDifficulte = ChoixDifficulteUI.new(self)
     @difficulte = 0
 
+    @regles = Gtk::Button.new(:label => "Règles")
+    @regles.signal_connect "clicked" do
+      afficheRegles()
+    end
+
     @valide = Gtk::Button.new(:label => "Valider")
     @valide.signal_connect "clicked" do
-      self.valide(@choixNom.entry.text(), @taille, @difficulte)
+      valide(@choixNom.entry.text(), @taille, @difficulte)
     end
+    @fenetreRegles = FenetreReglesUI.new()
+    @boxValide = Gtk::Box.new(:horizontal)
+    @surBoxValide = Gtk::Box.new(:vertical)
+    
+    @boxValide.pack_start(@regles, :expand => true, :fill => true)
+    @boxValide.pack_start(@valide)
+    @boxValide.pack_start(Gtk::Alignment.new(0,0,0,0), :expand => true, :fill => true)
+    @surBoxValide.pack_start(@boxValide, :expand => true)
 
   end
 
@@ -56,7 +70,7 @@ class MenuUI < Gtk::Box
     pack_start(@choixNom, :expand => true, :fill => true)
     pack_start(@choixTaille, :expand => true, :fill => true)
     pack_start(@choixDifficulte, :expand => true, :fill => true)
-    pack_start(@valide, :expand => true, :fill => true)
+    pack_start(@surBoxValide, :expand => true, :fill => true)
 
   end
 
@@ -80,6 +94,12 @@ class MenuUI < Gtk::Box
     pack_start(@label = Gtk::Label.new(label), :expand => true, :fill => true)
 
     show_all
+
+  end
+
+  def afficheRegles
+
+    @fenetreRegles.show_all
 
   end
 
