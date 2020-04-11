@@ -328,19 +328,6 @@ class Grille
 
       setDernierIle(ile)
 
-=begin
-      if(@dernierIle.eql?(nil))
-        puts "derniere ile == nil"
-        setDernierIle(ile)
-      elsif(!estVoisin?(@dernierIle, ile))
-        puts "pas voisins"
-        setDernierIle(ile)
-      else
-        puts "creation pont"
-        createPont(ile)
-        self.modifScore(-100)
-      end
-=end
     end
 
 
@@ -381,6 +368,10 @@ class Grille
         ligne.each do |c|
           c.raz()
         end
+      end
+
+      while(!@checkpoints.empty?) do
+        valideHypothese()
       end
 
     end
@@ -788,6 +779,10 @@ class Grille
     end
 
     def sauvegarder(compte)
+
+      while(!@checkpoints.empty?) do
+        valideHypothese()
+      end
 
       save = Sauvegarde.recuperer(compte, self)
 

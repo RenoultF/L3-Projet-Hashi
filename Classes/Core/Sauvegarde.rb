@@ -56,7 +56,7 @@ class Sauvegarde < ActiveRecord::Base
 
       if(Sauvegarde.recuperer(compte, grille) == nil)
 
-        new(:compte => compte, :grille => YAML.dump(grille), :taille => grille.tailleX(), :difficulte => grille.difficulte(), :meilleurScore => 0)
+        new(:compte => compte, :grille => Marshal.dump(grille), :taille => grille.tailleX(), :difficulte => grille.difficulte(), :meilleurScore => 0)
 
       else
 
@@ -129,14 +129,14 @@ class Sauvegarde < ActiveRecord::Base
     #Cette méthode permet de recuperer la grille de la sauvegarde
     def getGrille()
 
-      return YAML.load(self.grille)
+      return Marshal.load(self.grille)
 
     end
 
     #Cette méthode permet de modifier la grille enregistré
     def setGrille(grille)
 
-      self.grille = YAML.dump(grille)
+      self.grille = Marshal.dump(grille)
 
       return self
 

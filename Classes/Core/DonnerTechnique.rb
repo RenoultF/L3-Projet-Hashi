@@ -13,7 +13,7 @@ class DonnerTechnique < Aide
   end
 
 
-  def aider()#Verifier si la grille est correcte
+  def aider()
     archipelle = false
     cheminComplet = false
     cheminIncomplet = false

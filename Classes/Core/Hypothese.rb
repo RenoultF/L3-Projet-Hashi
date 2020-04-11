@@ -21,7 +21,7 @@ class Hypothese
   #:nodoc:
   def initialize(grille)
 
-    @grille = YAML.dump(grille) #copie profonde
+    @grille = Marshal.dump(grille) #copie profonde
 
   end
   #:doc:
@@ -34,7 +34,7 @@ class Hypothese
 
   def getGrille()
 
-    return YAML.load(@grille)
+    return Marshal.load(@grille)
 
   end
 

@@ -71,15 +71,6 @@ class JeuUI < Gtk::Box
     @hypotheseSupprimer = Gtk::Button.new(:label => "Supprimer hypothèse")
     @hypotheseSupprimer.signal_connect "clicked" do
       @grille.grille.supprimeHypothese(self)
-      begin
-        @couleurs.redo()
-        @couleurs.redo()
-        temp = @couleurs.undo()
-        print "Couleur : ", temp, "\n"
-        @grille.redoCouleurPont = temp
-      rescue => e
-
-      end
     end
 
     @sauvegarder = Gtk::Button.new(:label => "Sauvegarder")
