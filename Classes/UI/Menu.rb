@@ -5,7 +5,7 @@ class Menu < Gtk::Box
     # --- BUILDERS ---
         # @builder
         # @builderJeu
-        
+
     # --- WINDOWS ---
         # @window
 
@@ -31,7 +31,7 @@ class Menu < Gtk::Box
 			@window.destroy()
 		end
         @builder.add_from_file("../glade/menu.glade")
-        
+
         # --- GET_OBJECT
             # --- WINDOWS ---
             @window = @builder.get_object("windowMenu")
@@ -52,33 +52,32 @@ class Menu < Gtk::Box
             @tglFacile = @builder.get_object("tglFacile")
             @tglNormal = @builder.get_object("tglNorma")
 			@tglDiff = @builder.get_object("tglDifficile")
-			
+
 		# --- ENTRY
 			@pseudo = @builder.get_object("entryPseudo")
-		
+
 
         # --- SIGNAUX ---
             # --- WINDOWS ---
             @window.signal_connect('destroy') { |_widget| Gtk.main_quit }
-            
+
             # --- BTN ---
             @btnQuitter.signal_connect('clicked') { puts "Tchao !"; Gtk.main_quit }
-            @btnJouer.signal_connect('clicked') { |_widget| changerFenetre() }
+            @btnJouer.signal_connect('clicked') { |_widget| retourMenu() }
             @btnAide.signal_connect('clicked') { puts "--- Affichage des aides";  }
             @btnRegles.signal_connect('clicked') { puts "--- Affichage des règles";  }
             @btnAstuces.signal_connect('clicked') { puts "--- Affichage des astuces"; }
         @window.show()
         # Appel de la gestion des signaux
         self.gestionTgl()
-		Gtk.main()
     end
 
     def gestionTgl()
         #Gestion des paramètres selon [Mode], [Taille] et [Difficulté]
-		
+
 		#1-Mode de jeu : Normal OU Aventure
 		@tglMNormal.signal_connect('toggled') {
-			
+
 			if (@@mode != 1) && @tglAventure.active?
 				@tglAventure.active = false;
 				@tglMNormal.active = true;
@@ -91,9 +90,9 @@ class Menu < Gtk::Box
 				end
 			end
 		}
-		
+
 		@tglAventure.signal_connect('toggled') {
-			
+
 			if (@@mode != 2) && @tglMNormal.active?
 				@tglMNormal.active = false;
 				@tglAventure.active = true;
@@ -106,10 +105,10 @@ class Menu < Gtk::Box
 				end
 			end
         }
-        
+
         #2-Taille de grille : 7*7, 10*10 OU 15*15
 		@tgl77.signal_connect('toggled') {
-			
+
 			if (@@taille != 1)  && (@tgl1010.active? || @tgl1515.active?)
 				@tgl1010.active = false;
 				@tgl1515.active = false;
@@ -125,7 +124,7 @@ class Menu < Gtk::Box
 		}
 
 		@tgl1010.signal_connect('toggled') {
-						
+
 			if (@@taille != 2) && (@tgl77.active? || @tgl1515.active?)
 				@tgl77.active = false;
 				@tgl1515.active = false;
@@ -141,7 +140,7 @@ class Menu < Gtk::Box
 		}
 
 		@tgl1515.signal_connect('toggled') {
-			
+
 			if (@@taille != 3) && (@tgl77.active? || @tgl1010.active?)
 				@tgl77.active = false;
 				@tgl1010.active = false;
@@ -158,7 +157,7 @@ class Menu < Gtk::Box
 
 		#3-Difficulté de la grille : Facile, Normal OU Difficile
 		@tglFacile.signal_connect('toggled'){
-		
+
 			if (@@difficulte != 1) && (@tglNormal.active? || @tglDiff.active?)
 				@tglNormal.active = false;
 				@tglDiff.active = false;
@@ -203,29 +202,26 @@ class Menu < Gtk::Box
 			end
 		}
     end
-    
-	def changerFenetre()
+
+	def retourMenu()
 		puts "Paramètres menu"
-		print "Nom Compte : ", @pseudo, "\n"
+		print "Nom Compte : ", @pseudo.text, "\n"
 		print "Taille grille : ", @@taille, "\n"
 		print "Difficulte grille : ",  @@difficulte, "\n"
-	
+
 		#afficheLabel("Creation du compte en cours")
 		puts "AVANT THREAD"
 		@window.hide()
-		Thread.new{@racine.choisirGrille(@pseudo,@@taille, @@difficulte)}
-		# @jeu = JeuUI.new(@@mode, @@taille, @@difficulte,@pseudo,@window) 
-		      
+		Thread.new{@racine.choisirGrille(@pseudo.text,@@taille, @@difficulte)}
+		# @jeu = JeuUI.new(@@mode, @@taille, @@difficulte,@pseudo,@window)
+
 	end
-	
+
 	def afficheLabel(label)
 
 		#pack_start(@label = Gtk::Label.new(label), :expand => true, :fill => true)
-	
+
 		show_all
-	
+
 	  end
 end
-
-
-

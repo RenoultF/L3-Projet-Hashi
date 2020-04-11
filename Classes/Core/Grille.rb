@@ -48,6 +48,12 @@ class Grille
     #@matSolution => La matrice solution
     attr_reader :matSolution
 
+    #@matSolution => La matrice de cases
+    attr_reader :mat
+
+    #@matSolution => La matrice de cases
+    attr_accessor :score
+
 
     include Comparable
 
@@ -94,10 +100,19 @@ class Grille
         puts "Creation !!!"
         @actions = UndoRedo.creer()
         puts chaine
-        @checkpoints = Pile.creer()
+        @checkpoints = Pile.creer(5)
         @score = 0
         i = -1
         j = -1
+
+        @couleurs = UndoRedo.creer()
+
+        @couleurs.empiler([0, 0, 0]) #Noir
+        @couleurs.empiler([0, 0, 1]) #Bleu
+        @couleurs.empiler([0, 1, 0]) #Vert
+        @couleurs.empiler([0, 1, 1]) #Cyan
+        @couleurs.empiler([1, 0, 1]) #Magenta
+        @couleurs.empiler([1, 1, 0]) #Jaune
 
         chaine.each_line do |l|
           if(l.start_with?("#T"))
@@ -138,6 +153,7 @@ class Grille
           end
         end
         @dernierIle = nil
+        undoCouleurPont(@couleurs.undo())
     end
     #:doc:
 
@@ -266,14 +282,22 @@ class Grille
     ##
     #Cette méthode permet d'emmetre une nouvelle hypothèse (rangé dans la pile d'hypothèse)
     def creerHypothese()
-      @checkpoints.empiler(Hypothese.creer(self))
+      begin
+        @checkpoints.empiler(Hypothese.creer(self))
+        undoCouleurPont(@couleurs.undo())
+      rescue => e
+        puts e
+      end
     end
 
     ##
     #Cette méthode permet de valider la dernière hypothèse
     def valideHypothese()
       begin
-        @checkpoints.depiler().grille
+        @checkpoints.depiler()
+        @couleurs.redo()
+        @couleurs.redo()
+        redoCouleurPont(@couleurs.undo())
       rescue => e
         puts e.message()
       end
@@ -285,7 +309,10 @@ class Grille
     #@param jeu Le jeu dont-on va modifier la grille
     def supprimeHypothese(jeu)
       begin
-        jeu.grille = @checkpoints.depiler().grille
+        jeu.grille = @checkpoints.depiler().getGrille
+        @couleurs.redo()
+        @couleurs.redo()
+        redoCouleurPont(@couleurs.undo())
       rescue => e
         puts e.message()
       end
@@ -336,12 +363,23 @@ class Grille
     def recommencer()
 
       setDernierIle(nil)
+      @score = 0
+
+
+      @couleurs = UndoRedo.creer()
+
+      @couleurs.empiler([0, 0, 0]) #Noir
+      @couleurs.empiler([0, 0, 1]) #Bleu
+      @couleurs.empiler([0, 1, 0]) #Vert
+      @couleurs.empiler([0, 1, 1]) #Cyan
+      @couleurs.empiler([1, 0, 1]) #Magenta
+      @couleurs.empiler([1, 1, 0]) #Jaune
+
+      undoCouleurPont(@couleurs.undo())
 
       @mat.each do |ligne|
         ligne.each do |c|
-          if(c.estPont?())
-            c.raz()
-          end
+          c.raz()
         end
       end
 
@@ -417,6 +455,37 @@ class Grille
       end
 
     end
+
+
+    def redoCouleurPont(couleur)
+
+      print "Couleur", couleur, "\n"
+
+      @mat.each do |ligne|
+        ligne.each do |c|
+          if(c.estPont?())
+            c.redoCouleurPont(couleur)
+          end
+        end
+      end
+
+    end
+
+
+    def undoCouleurPont(couleur)
+
+      print "Couleur", couleur, "\n"
+
+      @mat.each do |ligne|
+        ligne.each do |c|
+          if(c.estPont?())
+            c.undoCouleurPont(couleur)
+          end
+        end
+      end
+
+    end
+
 
     def modifScore(val)
       @score += val
@@ -715,6 +784,17 @@ class Grille
       end
 
       return 0
+
+    end
+
+    def sauvegarder(compte)
+
+      save = Sauvegarde.recuperer(compte, self)
+
+      save.setGrille(self)
+      save.setScore([save.getScore(), @score].max)
+
+      save.sauvegarder()
 
     end
 

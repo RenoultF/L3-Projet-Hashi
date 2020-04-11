@@ -115,9 +115,37 @@ class Pont < Case
         @marque = false
         @directionSurbrillance = NULLE
         @observateurs = Array.new()
+        @couleurPont = [1, 1, 0]
+        @couleurPontCourante = [1, 1, 0]
 
     end
     #:doc:
+
+
+    def couleurPont
+      return @couleurPont
+    end
+
+    def couleurPont=(couleur)
+      @couleurPont = couleur
+    end
+
+    def couleurPontCourante
+      return @couleurPontCourante
+    end
+    def couleurPontCouranteRouge
+      return @couleurPontCourante[0]
+    end
+    def couleurPontCouranteVert
+      return @couleurPontCourante[1]
+    end
+    def couleurPontCouranteBleu
+      return @couleurPontCourante[2]
+    end
+
+    def couleurPontCourante=(couleur)
+      @couleurPontCourante = couleur
+    end
 
 
 
@@ -135,25 +163,28 @@ class Pont < Case
       @surbrillance = false
       @marque = false
       @directionSurbrillance = NULLE
-      notifieObservateur()
 
     end
 
-    def ajouteObservateur(observateur)
 
-      @observateurs.push(observateur)
+    def redoCouleurPont(couleurPont)
 
-    end
-
-    def notifieObservateur()
-
-      @observateurs.each do |o|
-
-        o.actualise()
-
+      if(@couleurPont == @couleurPontCourante)
+        @couleurPontCourante = couleurPont
       end
 
+      @couleurPont = couleurPont
+
     end
+
+
+    def undoCouleurPont(couleurPont)
+
+      @couleurPont = couleurPont
+
+    end
+
+
 
 
     ##
@@ -217,7 +248,7 @@ class Pont < Case
                 if(@valeur == 0)
                     @direction = NULLE
                 end
-                notifieObservateur()
+                @couleurPontCourante = @couleurPont
                 return true
             end
             return false
@@ -225,7 +256,7 @@ class Pont < Case
         elsif(@direction == NULLE)
             @direction = direction
             @valeur = valeur
-            notifieObservateur()
+            @couleurPontCourante = @couleurPont
             return true
         end
     end
@@ -315,7 +346,7 @@ class Pont < Case
     def demarquer()
 
       @marque = false
-      
+
     end
 
 

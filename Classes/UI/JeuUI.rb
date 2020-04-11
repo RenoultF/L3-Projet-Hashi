@@ -35,15 +35,7 @@ class JeuUI < Gtk::Box
     end
 
 
-    @couleurs = UndoRedo.creer()
 
-    @couleurs.empiler([0, 0, 0])
-    @couleurs.empiler([0, 0, 1])
-    @couleurs.empiler([0, 1, 0])
-    @couleurs.empiler([0, 1, 1])
-    @couleurs.empiler([1, 0, 0])
-    @couleurs.empiler([1, 0, 1])
-    @couleurs.empiler([1, 1, 0])
 
     @compte = Compte.recuperer(nomCompte)
 
@@ -54,7 +46,6 @@ class JeuUI < Gtk::Box
 #    @threadChrono = Thread.new{@chronoGrille.lancerChrono()}
 
     @grille = GrilleJouableUI.new(grille)
-    @grille.redoCouleurPont=@couleurs.undo()
 
     @undo = Gtk::Button.new(:label => "Undo")
     @undo.signal_connect "clicked" do
@@ -69,27 +60,11 @@ class JeuUI < Gtk::Box
     @hypotheseCreer = Gtk::Button.new(:label => "Creer hypothèse")
     @hypotheseCreer.signal_connect "clicked" do
       @grille.grille.creerHypothese()
-      begin
-        temp = @couleurs.undo()
-        print "Couleur : ", temp, "\n"
-        @grille.undoCouleurPont = temp
-      rescue => e
-
-      end
     end
 
     @hypotheseValider = Gtk::Button.new(:label => "Valider hypothèse")
     @hypotheseValider.signal_connect "clicked" do
       @grille.grille.valideHypothese()
-      begin
-        @couleurs.redo()
-        @couleurs.redo()
-        temp = @couleurs.undo()
-        print "Couleur : ", temp, "\n"
-        @grille.redoCouleurPont = temp
-      rescue => e
-
-      end
     end
 
 
@@ -182,7 +157,20 @@ class JeuUI < Gtk::Box
 
     if(@grille.grille.fini?())
       puts "Bravo vous avez gagné !!!"
+      @grille.recommencer()
+      @grille.sauvegarder(@compte)
       @racine.finirPartie(@grille.grille.tailleX, @grille.grille.difficulte)
+    end
+
+  end
+
+
+  def sauvegardeGrille()
+
+    if(!@grille.eql?(nil))
+
+      @grille.sauvegarder(@compte)
+
     end
 
   end

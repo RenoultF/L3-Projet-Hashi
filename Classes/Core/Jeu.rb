@@ -151,7 +151,7 @@ class Jeu
         puts "coordonnée en y : "
         y = gets.chomp.to_i
         if(@grille.sortLimite?(x, y))
-          raise("Les coordonnée ne sont pas correctes")
+          raise("Les coordonnées ne sont pas correctes")
         end
         return @grille.getCase(x, y)
     end

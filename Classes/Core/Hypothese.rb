@@ -11,8 +11,6 @@
 #Cette classe représente les hypothèse (une sauvegarde de la grille à un certain moment)
 class Hypothese
 
-  #@grille => La sauvegarde de la grille
-  attr_reader :grille
 
   ##
   #Ce constructeur permet de créer une nouvelle hyoothèse
@@ -23,7 +21,7 @@ class Hypothese
   #:nodoc:
   def initialize(grille)
 
-    @grille = YAML.load(YAML.dump(grille)) #copie profonde
+    @grille = YAML.dump(grille) #copie profonde
 
   end
   #:doc:
@@ -32,6 +30,12 @@ class Hypothese
   #Cette méthode permet d'afficher l'hypothèse
   def to_s
     @grille.to_s()
+  end
+
+  def getGrille()
+
+    return YAML.load(@grille)
+
   end
 
 end

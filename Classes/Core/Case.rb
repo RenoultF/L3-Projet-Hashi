@@ -37,6 +37,10 @@ class Case
 
   end
 
+  def retireObservateurs()
+
+  end
+
 
   #Cette méthode permet de comparer deux cases
   #
@@ -70,4 +74,9 @@ class Case
   def estPont?()
     return false
   end
+
+  def raz()
+
+  end
+  
 end

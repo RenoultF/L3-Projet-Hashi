@@ -21,20 +21,16 @@ class PontUI < CaseUI
   #param :
   # * casee La pont à afficher
   # * taille La taille d'une case (40 par defaut)
-  def PontUI.creer(pont, taille = 40, couleurPontCourante = [0, 0, 1])
+  def PontUI.creer(pont, taille = 40)
 
-    new(pont, taille, couleurPontCourante)
+    new(pont, taille)
 
   end
 
   #:nodoc:
-  def initialize(pont, taille, couleurPontCourante)
+  def initialize(pont, taille)
 
     super(pont, taille)
-
-    @couleurPontCourante = couleurPontCourante
-    @couleurPont = couleurPontCourante
-    @casee.ajouteObservateur(self)
 
   end
   #:doc:
@@ -76,7 +72,7 @@ class PontUI < CaseUI
     if(@casee.marque)
       cr.set_source_rgba(1, 0, 0, 1)
     else
-      cr.set_source_rgb(@couleurPontCourante[0], @couleurPontCourante[1], @couleurPontCourante[2])
+      cr.set_source_rgb(@casee.couleurPontCouranteRouge, @casee.couleurPontCouranteVert, @casee.couleurPontCouranteBleu)
     end
 
 
@@ -126,36 +122,11 @@ class PontUI < CaseUI
     return @casee.valeur
   end
 
-
-  def redoCouleurPont=(couleurPont)
-
-    if(@couleurPont == @couleurPontCourante)
-      @couleurPontCourante = couleurPont
-    end
-
-    @couleurPont = couleurPont
-
-  end
-
-
-  def undoCouleurPont=(couleurPont)
-
-    @couleurPont = couleurPont
-
-  end
-
-
   ##
   #Cette méthode permet de simuler le clic sur la case
   def clickOn()
 
     super()
-
-  end
-
-  def actualise
-
-    @couleurPontCourante = @couleurPont
 
   end
 

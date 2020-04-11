@@ -9,17 +9,20 @@ class Pile
 
   #@indice => La position dans la pile
 
+  include Enumerable
+
   private_class_method :new
 
   ##
   #Ce constructeur permet de créer une nouvelle pile
-  def Pile.creer()
-    new()
+  def Pile.creer(max = 0)
+    new(max)
   end
 
   #:nodoc:
-  def initialize()
+  def initialize(max)
     @actions = Array.new()
+    @max = max
   end
   #:doc:
 
@@ -28,7 +31,13 @@ class Pile
   #
   #@param element L'élément à empiler
   def empiler(element)
-    @actions.push(element)
+    if(@max > 0)
+      if(@actions.length < @max)
+        @actions.push(element)
+      end
+    else
+      @actions.push(element)
+    end
     return self
   end
 
@@ -50,6 +59,15 @@ class Pile
   #@return true si la pile est vide, false sinon
   def empty?()
     return @actions.empty?()
+  end
+
+
+  def each
+
+    @actions.each do |hyp|
+       yield hyp
+     end
+
   end
 
 end

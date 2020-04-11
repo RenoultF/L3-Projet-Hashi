@@ -282,4 +282,9 @@ class Ile < Case
       return true
     end
 
+    def raz
+      @nbPont = [0, 0, 0, 0]
+      @dernier = false
+    end
+
 end
