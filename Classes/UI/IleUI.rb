@@ -10,6 +10,8 @@ require "gtk3"
 require "cairo"
 
 
+##
+#Cette classe permet d'afficher une ile de la grille
 class IleUI < CaseUI
 
   private_class_method :new
@@ -39,13 +41,16 @@ class IleUI < CaseUI
   end
   #:doc:
 
-
+  ##
+  #Cette méthode permet de dessiner l'ile
+  #param :
+  # * window La fenetre sur laquelle l'ile va etre afficher
   def draw(window)
 
     cr = window.create_cairo_context
 
     if(@casee.estDernierIle())
-      cr.set_source_rgb(255, 0, 0)
+      cr.set_source_rgb(0, 0, 255)
     else
       cr.set_source_rgb(0, 255, 0)
     end

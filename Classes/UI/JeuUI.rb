@@ -13,7 +13,6 @@ require 'gtk3'
 
 class JeuUI < Gtk::Box
 
-  attr_reader :window
   attr_reader :racine
   attr_reader :compte
 
@@ -25,16 +24,16 @@ class JeuUI < Gtk::Box
 
   end
 
+  ##
+  #Cette méthode permet de charger la grille avec laquelle on va jouer
+  #param :
+  # * grille La grille avec laquelle on va jouer
+  # * nomCompte Le nom du compte qui joue
   def chargerGrille(grille, nomCompte)
 
-
     each_all do |c|
-
       remove(c)
-
     end
-
-
 
 
     @compte = Compte.recuperer(nomCompte)
@@ -134,13 +133,6 @@ class JeuUI < Gtk::Box
 
   def grille=(grille)
     @grille.grille=(grille)
-  end
-
-
-  def grilleChoisi(grille)
-
-    @racine.commancerPartie(grille)
-
   end
 
 

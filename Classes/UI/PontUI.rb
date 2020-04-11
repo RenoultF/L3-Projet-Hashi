@@ -9,10 +9,9 @@ require "../UI/CaseUI.rb"
 require "gtk3"
 
 
+##
+#Cette classe permet d'afficher un pont de la grille
 class PontUI < CaseUI
-
-  attr_reader :couleurPont
-  attr_reader :couleurPontCourante
 
   private_class_method :new
 
@@ -35,7 +34,10 @@ class PontUI < CaseUI
   end
   #:doc:
 
-
+  ##
+  #Cette méthode permet de dessiner le pont
+  #param :
+  # * window La fenetre sur laquelle l'ile va etre afficher
   def draw(window)#C'est pas joli, fait quelque chose
 
     cr = window.create_cairo_context
@@ -118,6 +120,8 @@ class PontUI < CaseUI
 
   end
 
+  ##
+  #Cette méthode permet de retourner la valeu du pont
   def valeur
     return @casee.valeur
   end

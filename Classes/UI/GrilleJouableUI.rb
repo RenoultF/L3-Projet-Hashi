@@ -15,7 +15,7 @@ class GrilleJouableUI < GrilleUI
 
     super(grille, taille)
 
-    self.signal_connect "button-press-event" do |widget, event|
+    self.signal_connect "button-press-event" do |widget, event| #Connexion à l'event "clic"
       self.clickOn(widget, event)
     end
 
@@ -26,6 +26,7 @@ class GrilleJouableUI < GrilleUI
 
   ##
   #Cette méthode permet de gérer les clics sur la grille
+  #Elle appelle la fonction clickOn de la case sur laquelle on a cliqué
   def clickOn(widget, event)
 
     y = (event.x/@taille).to_i

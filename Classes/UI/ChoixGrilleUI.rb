@@ -10,15 +10,12 @@ require 'gtk3'
 #Cette classe permet à l'utilisateur de choisir entre plusieurs grilles proposées
 class ChoixGrilleUI < Gtk::Box
 
-  attr_reader :grilles
-  attr_reader :window
   attr_reader :racine
-  attr_reader :tailleTotal
 
   ##
   #Ce constructeur permet de créer un nouveau ChoixGrilleUI
   #param :
-  # * racine L'objet auquel on envera les parametres choisi à l'aide de la méthode grilleChoisie
+  # * racine Un objet qui doit définir une méthode grilleChoisie(grille, nomCompte) qui sera appeler quand l'utilisateur choisi une grille
   def initialize(racine)
 
     super(:vertical , 20)
@@ -36,23 +33,16 @@ class ChoixGrilleUI < Gtk::Box
   def chargerGrille(nomCompte, taille, difficulte)
 
     each_all do |c|
-
       remove(c)
-
     end
 
     tailleCase = 40
-    @tailleTotal = 0
 
     liste = Sauvegarde.liste(Compte.recuperer_ou_creer(nomCompte), taille, difficulte)
 
     liste.each_with_index do |s, i|
 
-      puts "TEST : #{@window}"
-
       box = Gtk::Box.new(:horizontal)
-
-      @tailleTotal += tailleCase * taille + 10
 
       bouton = Gtk::Button.new(:label => "Réinitialiser")
       temp = GrilleUI.new(s.getGrille(), tailleCase)

@@ -21,7 +21,7 @@ class GrilleUI < Gtk::DrawingArea
   #Ce constructeur permet de créer un nouveau afficheur de grille
   #param :
   # * grille La grille que l'on veut afficher
-  # * taille La taille des cases de la grille
+  # * taille La taille des cases de la grille (40 par default)
   def initialize(grille, taille = 40)
 
     super()
@@ -32,9 +32,8 @@ class GrilleUI < Gtk::DrawingArea
 
     init()
 
-
-    self.signal_connect "draw" do
-      self.on_draw()
+    signal_connect "draw" do
+      on_draw()
     end
 
   end
@@ -59,10 +58,12 @@ class GrilleUI < Gtk::DrawingArea
 
   end
 
-
+  ##
+  #Cette méthode permet de modifier la grille que l'on affiche
+  #Méthode utilisé par la suppression d'hypothèses
+  #param :
+  # * grille La nouvelle grille à afficher
   def grille=(grille)
-
-    puts grille
 
     @grille = grille
 
@@ -97,6 +98,9 @@ class GrilleUI < Gtk::DrawingArea
   end
 
 
+  ##
+  #Cette méthode permet de dessiner la grille
+  #Appelé automatique en la connectant au signal "draw"
   def on_draw()
 
     draw(self.window)
@@ -112,7 +116,7 @@ class GrilleUI < Gtk::DrawingArea
   end
 
 
-  def draw(window)
+  private def draw(window)
 
     cr = window.create_cairo_context
 
@@ -122,13 +126,18 @@ class GrilleUI < Gtk::DrawingArea
 
   end
 
-
+  ##
+  #Cette méthode permet de sauvegarder la grille que l'on est en train d'afficher
+  #param :
+  # * compte Le compte auquel associer la sauvegarde
   def sauvegarder(compte)
 
     @grille.sauvegarder(compte)
 
   end
 
+  ##
+  #Cette méthode permet de réinitialiser le grille que l'on affiche
   def recommencer()
 
     @grille.recommencer()

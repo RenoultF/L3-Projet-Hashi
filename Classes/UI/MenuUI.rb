@@ -52,7 +52,7 @@ class MenuUI < Gtk::Box
     @fenetreRegles = FenetreReglesUI.new()
     @boxValide = Gtk::Box.new(:horizontal)
     @surBoxValide = Gtk::Box.new(:vertical)
-    
+
     @boxValide.pack_start(@regles, :expand => true, :fill => true)
     @boxValide.pack_start(@valide)
     @boxValide.pack_start(Gtk::Alignment.new(0,0,0,0), :expand => true, :fill => true)
@@ -75,7 +75,7 @@ class MenuUI < Gtk::Box
   end
 
 
-  def valide(nomCompte, taille, difficulte)
+  private def valide(nomCompte, taille, difficulte)
 
 
     puts "Paramètres menu"
@@ -85,7 +85,7 @@ class MenuUI < Gtk::Box
 
     afficheLabel("Creation du compte en cours")
 
-    
+
     Thread.new{@racine.choisirGrille(nomCompte, taille, difficulte)}
 
   end

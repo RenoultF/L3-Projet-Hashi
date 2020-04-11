@@ -33,7 +33,7 @@ class DonnerTechnique < Aide
               messageComplet = "Une ile doit encore placer " + capa.to_s() + " ponts et possède " + nChemins.to_s() + " ponts disponibles"
             elsif(capa == nChemins - 1 && nDirection <= capa)
               cheminIncomplet = true
-              messageIncomplet = "Une ile doit encore placer " + capa.to_s() + " ponts et possède " + nDirection.to_s() + " directions disponibles"
+              messageIncomplet = "Une ile doit encore placer " + capa.to_s() + " ponts et possède " + nChemins.to_s() + " ponts disponibles dans " + nDirection.to_s() + " directions possible"
             elsif(capa == 1)
               archipelle = true
             end

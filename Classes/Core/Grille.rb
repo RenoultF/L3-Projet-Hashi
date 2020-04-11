@@ -349,6 +349,11 @@ class Grille
 
     def recommencer()
 
+
+      while(!@checkpoints.empty?) do
+        valideHypothese()
+      end
+
       setDernierIle(nil)
       @score = 0
 
@@ -368,10 +373,6 @@ class Grille
         ligne.each do |c|
           c.raz()
         end
-      end
-
-      while(!@checkpoints.empty?) do
-        valideHypothese()
       end
 
     end
