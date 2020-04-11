@@ -1,18 +1,39 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <interface>
   <!-- interface-requires gtk+ 3.0 -->
+  <object class="GtkImage" id="image4">
+    <property name="visible">True</property>
+    <property name="can_focus">False</property>
+    <property name="stock">gtk-index</property>
+  </object>
+  <object class="GtkImage" id="image5">
+    <property name="visible">True</property>
+    <property name="can_focus">False</property>
+    <property name="stock">gtk-about</property>
+  </object>
+  <object class="GtkImage" id="image1">
+    <property name="visible">True</property>
+    <property name="can_focus">False</property>
+    <property name="stock">gtk-stop</property>
+  </object>
+  <object class="GtkImage" id="image2">
+    <property name="visible">True</property>
+    <property name="can_focus">False</property>
+    <property name="stock">gtk-help</property>
+  </object>
   <object class="GtkImage" id="jouer">
     <property name="visible">True</property>
     <property name="can_focus">False</property>
     <property name="stock">gtk-goto-last</property>
   </object>
-  <object class="GtkImage" id="quitter">
-    <property name="visible">True</property>
-    <property name="can_focus">False</property>
-    <property name="stock">gtk-stop</property>
-  </object>
   <object class="GtkWindow" id="windowMenu">
     <property name="can_focus">False</property>
+    <property name="title" translatable="yes">HASHI</property>
+    <property name="resizable">False</property>
+    <property name="window_position">center</property>
+    <property name="default_width">800</property>
+    <property name="default_height">500</property>
+    <property name="icon">icone.png</property>
     <child>
       <object class="GtkBox" id="mainBox">
         <property name="visible">True</property>
@@ -22,12 +43,18 @@
           <object class="GtkBox" id="helpBox">
             <property name="visible">True</property>
             <property name="can_focus">False</property>
+            <property name="margin_left">15</property>
+            <property name="margin_top">10</property>
+            <property name="spacing">10</property>
             <child>
               <object class="GtkButton" id="btnAide">
                 <property name="label" translatable="yes">Aide</property>
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>
+                <property name="image">image2</property>
+                <property name="relief">none</property>
+                <property name="always_show_image">True</property>
               </object>
               <packing>
                 <property name="expand">False</property>
@@ -41,6 +68,9 @@
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>
+                <property name="image">image4</property>
+                <property name="relief">none</property>
+                <property name="always_show_image">True</property>
               </object>
               <packing>
                 <property name="expand">False</property>
@@ -54,6 +84,9 @@
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>
+                <property name="image">image5</property>
+                <property name="relief">none</property>
+                <property name="always_show_image">True</property>
               </object>
               <packing>
                 <property name="expand">False</property>
@@ -69,11 +102,12 @@
           </packing>
         </child>
         <child>
-          <object class="GtkLabel" id="lbTitre">
+          <object class="GtkImage" id="titre">
             <property name="visible">True</property>
             <property name="can_focus">False</property>
-            <property name="margin_top">15</property>
-            <property name="label" translatable="yes">HASHI</property>
+            <property name="margin_top">10</property>
+            <property name="ypad">17</property>
+            <property name="pixbuf">LOGpR2.png</property>
           </object>
           <packing>
             <property name="expand">False</property>
@@ -91,15 +125,26 @@
               <object class="GtkGrid" id="gridMode">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
+                <property name="column_spacing">10</property>
                 <property name="row_homogeneous">True</property>
                 <property name="column_homogeneous">True</property>
                 <child>
                   <object class="GtkToggleButton" id="tglNormal">
-                    <property name="label" translatable="yes">Normal</property>
                     <property name="visible">True</property>
                     <property name="can_focus">True</property>
                     <property name="receives_default">True</property>
+                    <property name="relief">none</property>
                     <property name="active">True</property>
+                    <child>
+                      <object class="GtkLabel" id="lblNormal">
+                        <property name="visible">True</property>
+                        <property name="can_focus">False</property>
+                        <property name="label" translatable="yes">Normal</property>
+                        <attributes>
+                          <attribute name="font-desc" value="Viner Hand ITC 14"/>
+                        </attributes>
+                      </object>
+                    </child>
                   </object>
                   <packing>
                     <property name="left_attach">0</property>
@@ -110,10 +155,20 @@
                 </child>
                 <child>
                   <object class="GtkToggleButton" id="tglAventure">
-                    <property name="label" translatable="yes">Aventure</property>
                     <property name="visible">True</property>
                     <property name="can_focus">True</property>
                     <property name="receives_default">True</property>
+                    <property name="relief">none</property>
+                    <child>
+                      <object class="GtkLabel" id="lblAventure">
+                        <property name="visible">True</property>
+                        <property name="can_focus">False</property>
+                        <property name="label" translatable="yes">Aventure</property>
+                        <attributes>
+                          <attribute name="font-desc" value="Viner Hand ITC 14"/>
+                        </attributes>
+                      </object>
+                    </child>
                   </object>
                   <packing>
                     <property name="left_attach">1</property>
@@ -127,6 +182,9 @@
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
                     <property name="label" translatable="yes">MODE</property>
+                    <attributes>
+                      <attribute name="font-desc" value="Viner Hand ITC 15"/>
+                    </attributes>
                   </object>
                   <packing>
                     <property name="left_attach">0</property>
@@ -146,6 +204,7 @@
               <object class="GtkGrid" id="gridTaille">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
+                <property name="column_spacing">10</property>
                 <property name="row_homogeneous">True</property>
                 <property name="column_homogeneous">True</property>
                 <child>
@@ -153,6 +212,9 @@
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
                     <property name="label" translatable="yes">Taille de la grille</property>
+                    <attributes>
+                      <attribute name="font-desc" value="Viner Hand ITC 15"/>
+                    </attributes>
                   </object>
                   <packing>
                     <property name="left_attach">0</property>
@@ -163,11 +225,21 @@
                 </child>
                 <child>
                   <object class="GtkToggleButton" id="tgl77">
-                    <property name="label" translatable="yes">7 x 7</property>
                     <property name="visible">True</property>
                     <property name="can_focus">True</property>
                     <property name="receives_default">True</property>
+                    <property name="relief">none</property>
                     <property name="active">True</property>
+                    <child>
+                      <object class="GtkLabel" id="lbl77">
+                        <property name="visible">True</property>
+                        <property name="can_focus">False</property>
+                        <property name="label" translatable="yes">7 x 7</property>
+                        <attributes>
+                          <attribute name="font-desc" value="Viner Hand ITC 14"/>
+                        </attributes>
+                      </object>
+                    </child>
                   </object>
                   <packing>
                     <property name="left_attach">0</property>
@@ -178,10 +250,20 @@
                 </child>
                 <child>
                   <object class="GtkToggleButton" id="tgl1010">
-                    <property name="label" translatable="yes">10 x 10</property>
                     <property name="visible">True</property>
                     <property name="can_focus">True</property>
                     <property name="receives_default">True</property>
+                    <property name="relief">none</property>
+                    <child>
+                      <object class="GtkLabel" id="lbl1010">
+                        <property name="visible">True</property>
+                        <property name="can_focus">False</property>
+                        <property name="label" translatable="yes">10 x 10</property>
+                        <attributes>
+                          <attribute name="font-desc" value="Viner Hand ITC 14"/>
+                        </attributes>
+                      </object>
+                    </child>
                   </object>
                   <packing>
                     <property name="left_attach">1</property>
@@ -192,10 +274,20 @@
                 </child>
                 <child>
                   <object class="GtkToggleButton" id="tgl1515">
-                    <property name="label" translatable="yes">15 x 15</property>
                     <property name="visible">True</property>
                     <property name="can_focus">True</property>
                     <property name="receives_default">True</property>
+                    <property name="relief">none</property>
+                    <child>
+                      <object class="GtkLabel" id="lbl1515">
+                        <property name="visible">True</property>
+                        <property name="can_focus">False</property>
+                        <property name="label" translatable="yes">15 x 15</property>
+                        <attributes>
+                          <attribute name="font-desc" value="Viner Hand ITC 14"/>
+                        </attributes>
+                      </object>
+                    </child>
                   </object>
                   <packing>
                     <property name="left_attach">2</property>
@@ -215,6 +307,7 @@
               <object class="GtkGrid" id="gridDifficulté">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
+                <property name="column_spacing">10</property>
                 <property name="row_homogeneous">True</property>
                 <property name="column_homogeneous">True</property>
                 <child>
@@ -222,6 +315,9 @@
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
                     <property name="label" translatable="yes">Difficultée</property>
+                    <attributes>
+                      <attribute name="font-desc" value="Viner Hand ITC 15"/>
+                    </attributes>
                   </object>
                   <packing>
                     <property name="left_attach">0</property>
@@ -232,11 +328,21 @@
                 </child>
                 <child>
                   <object class="GtkToggleButton" id="tglFacile">
-                    <property name="label" translatable="yes">Facile</property>
                     <property name="visible">True</property>
                     <property name="can_focus">True</property>
                     <property name="receives_default">True</property>
+                    <property name="relief">none</property>
                     <property name="active">True</property>
+                    <child>
+                      <object class="GtkLabel" id="lblFacil">
+                        <property name="visible">True</property>
+                        <property name="can_focus">False</property>
+                        <property name="label" translatable="yes">Facile</property>
+                        <attributes>
+                          <attribute name="font-desc" value="Viner Hand ITC 14"/>
+                        </attributes>
+                      </object>
+                    </child>
                   </object>
                   <packing>
                     <property name="left_attach">0</property>
@@ -247,10 +353,20 @@
                 </child>
                 <child>
                   <object class="GtkToggleButton" id="tglNorma">
-                    <property name="label" translatable="yes">Normal</property>
                     <property name="visible">True</property>
                     <property name="can_focus">True</property>
                     <property name="receives_default">True</property>
+                    <property name="relief">none</property>
+                    <child>
+                      <object class="GtkLabel" id="lblNorma">
+                        <property name="visible">True</property>
+                        <property name="can_focus">False</property>
+                        <property name="label" translatable="yes">Normal</property>
+                        <attributes>
+                          <attribute name="font-desc" value="Viner Hand ITC 14"/>
+                        </attributes>
+                      </object>
+                    </child>
                   </object>
                   <packing>
                     <property name="left_attach">1</property>
@@ -261,10 +377,20 @@
                 </child>
                 <child>
                   <object class="GtkToggleButton" id="tglDifficile">
-                    <property name="label" translatable="yes">Difficile</property>
                     <property name="visible">True</property>
                     <property name="can_focus">True</property>
                     <property name="receives_default">True</property>
+                    <property name="relief">none</property>
+                    <child>
+                      <object class="GtkLabel" id="lblDiff">
+                        <property name="visible">True</property>
+                        <property name="can_focus">False</property>
+                        <property name="label" translatable="yes">Difficile</property>
+                        <attributes>
+                          <attribute name="font-desc" value="Viner Hand ITC 14"/>
+                        </attributes>
+                      </object>
+                    </child>
                   </object>
                   <packing>
                     <property name="left_attach">2</property>
@@ -289,8 +415,10 @@
                   <object class="GtkLabel" id="lbPseudo">
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
-                    <property name="ypad">8</property>
                     <property name="label" translatable="yes">Entrez votre pseudo :</property>
+                    <attributes>
+                      <attribute name="font-desc" value="Viner Hand ITC 15"/>
+                    </attributes>
                   </object>
                   <packing>
                     <property name="expand">False</property>
@@ -304,6 +432,7 @@
                     <property name="can_focus">True</property>
                     <property name="margin_left">130</property>
                     <property name="margin_right">130</property>
+                    <property name="margin_bottom">25</property>
                     <property name="invisible_char">●</property>
                     <property name="input_purpose">name</property>
                   </object>
@@ -331,6 +460,9 @@
           <object class="GtkBox" id="box4">
             <property name="visible">True</property>
             <property name="can_focus">False</property>
+            <property name="margin_left">15</property>
+            <property name="margin_right">15</property>
+            <property name="margin_bottom">10</property>
             <property name="spacing">150</property>
             <property name="homogeneous">True</property>
             <child>
@@ -339,7 +471,9 @@
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>
-                <property name="image">quitter</property>
+                <property name="image">image1</property>
+                <property name="relief">none</property>
+                <property name="always_show_image">True</property>
               </object>
               <packing>
                 <property name="expand">False</property>
@@ -354,7 +488,9 @@
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>
                 <property name="image">jouer</property>
+                <property name="relief">none</property>
                 <property name="image_position">right</property>
+                <property name="always_show_image">True</property>
               </object>
               <packing>
                 <property name="expand">False</property>

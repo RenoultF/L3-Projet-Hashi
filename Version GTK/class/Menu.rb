@@ -1,5 +1,7 @@
 require 'gtk3'
 load 'JeuUI.rb'
+load 'style.rb'
+
 
 class Menu
     # --- BUILDERS ---
@@ -14,8 +16,10 @@ class Menu
     # @btnQuitter
     # @btnAide
     # @btnRegles
-    # @btnAstuces
+	# @btnAstuces
 
+
+	
     @@mode = 1
 	@@taille = 1
 	@@difficulte = 1
@@ -32,10 +36,10 @@ class Menu
         
         # --- GET_OBJECT
             # --- WINDOWS ---
-            @window = @builder.get_object("windowMenu")
-
+			@window = @builder.get_object("windowMenu")
+			
             # --- BTN ---
-            @btnQuitter = @builder.get_object("btnQuitter")
+			@btnQuitter = @builder.get_object("btnQuitter")			
             @btnJouer = @builder.get_object("btnJouer")
             @btnAide = @builder.get_object("btnAide")
             @btnRegles = @builder.get_object("btnRegles")
@@ -50,11 +54,38 @@ class Menu
             @tglFacile = @builder.get_object("tglFacile")
             @tglNormal = @builder.get_object("tglNorma")
 			@tglDiff = @builder.get_object("tglDifficile")
+
+			# -- LABEL
+			@lbTaille = @builder.get_object("lbTaille")
+			@lbTaille.style_context.add_provider(@@CSS_LABEL_MENU, Gtk::StyleProvider::PRIORITY_USER)
+			@lbDiff = @builder.get_object("lbDiff")
+			@lbDiff.style_context.add_provider(@@CSS_LABEL_MENU, Gtk::StyleProvider::PRIORITY_USER)
+			@lbTaille = @builder.get_object("lbTaille")
+			@lbTaille.style_context.add_provider(@@CSS_LABEL_MENU, Gtk::StyleProvider::PRIORITY_USER)
+			@lbPseudo = @builder.get_object("lbPseudo")
+			@lbPseudo.style_context.add_provider(@@CSS_LABEL_MENU, Gtk::StyleProvider::PRIORITY_USER)
+
+			@btnQuitter.style_context.add_provider(@@CSS_BTN_BOTMENU, Gtk::StyleProvider::PRIORITY_USER)		
+			@btnJouer.style_context.add_provider(@@CSS_BTN_BOTMENU, Gtk::StyleProvider::PRIORITY_USER)
+			
+            @btnAide.style_context.add_provider(@@CSS_BTN_TOPMENU, Gtk::StyleProvider::PRIORITY_USER)
+            @btnRegles.style_context.add_provider(@@CSS_BTN_TOPMENU, Gtk::StyleProvider::PRIORITY_USER)
+            @btnAstuces.style_context.add_provider(@@CSS_BTN_TOPMENU, Gtk::StyleProvider::PRIORITY_USER)
+
 			
 		# --- ENTRY
 			@pseudo = @builder.get_object("entryPseudo")
 		
-
+		# --- CSS
+		@window.style_context.add_provider(@@CSS_BG_MENU, Gtk::StyleProvider::PRIORITY_USER)
+		@tglMNormal.style_context.add_provider(@@CSS_BUTTON_ACTIVE, Gtk::StyleProvider::PRIORITY_USER)
+		@tglAventure.style_context.add_provider(@@CSS_BUTTON_ACTIVE, Gtk::StyleProvider::PRIORITY_USER)
+        @tgl77.style_context.add_provider(@@CSS_BUTTON_ACTIVE, Gtk::StyleProvider::PRIORITY_USER)
+        @tgl1010.style_context.add_provider(@@CSS_BUTTON_ACTIVE, Gtk::StyleProvider::PRIORITY_USER)
+        @tgl1515.style_context.add_provider(@@CSS_BUTTON_ACTIVE, Gtk::StyleProvider::PRIORITY_USER)
+        @tglFacile.style_context.add_provider(@@CSS_BUTTON_ACTIVE, Gtk::StyleProvider::PRIORITY_USER)
+        @tglNormal.style_context.add_provider(@@CSS_BUTTON_ACTIVE, Gtk::StyleProvider::PRIORITY_USER)
+		@tglDiff.style_context.add_provider(@@CSS_BUTTON_ACTIVE, Gtk::StyleProvider::PRIORITY_USER)
         # --- SIGNAUX ---
             # --- WINDOWS ---
             @window.signal_connect('destroy') { |_widget| Gtk.main_quit }
