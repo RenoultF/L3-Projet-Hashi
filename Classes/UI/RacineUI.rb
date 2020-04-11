@@ -6,7 +6,7 @@
 
 
 require '../UI/GrilleUI.rb'
-require '../UI/MenuUI.rb'
+require '../UI/Menu.rb'
 require '../UI/ChoixGrilleUI.rb'
 require '../UI/ChoixGrilleScrollUI.rb'
 require '../UI/JeuUI.rb'
@@ -23,8 +23,9 @@ class RacineUI < Gtk::Box
 
     super(:vertical, 10)
 
-    @menu = MenuUI.new(self)
+    @menu = Menu.new(self)
     @choix = ChoixGrilleScrollUI.new(ChoixGrilleUI.new(self))
+    puts "apres choix"
     @jeu = JeuUI.new(self)
     @fin = FinUI.new(self)
 
@@ -53,16 +54,17 @@ class RacineUI < Gtk::Box
 
   def choisirGrille(nomCompte, taille, difficulte)
 
-
+    puts "dans carger grille"
 
     @choix.chargerGrille(nomCompte, taille, difficulte)
-
+     puts "apres charger"
     each_all do |c|
       remove(c)
     end
 
     pack_start(@choix, :expand => true, :fill => true)
     pack_start(@boutons)
+    puts "apres pack start"
     show_all
 
   end

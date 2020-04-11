@@ -85,6 +85,7 @@ class MenuUI < Gtk::Box
 
     afficheLabel("Creation du compte en cours")
 
+    
     Thread.new{@racine.choisirGrille(nomCompte, taille, difficulte)}
 
   end
