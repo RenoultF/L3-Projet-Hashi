@@ -56,7 +56,7 @@ class Sauvegarde < ActiveRecord::Base
 
       if(Sauvegarde.recuperer(compte, grille) == nil)
 
-        new(:compte => compte, :grille => Marshal.dump(grille), :taille => grille.tailleX(), :difficulte => grille.difficulte(), :meilleurScore => 0)
+        new(:compte => compte, :grille => Marshal.dump(grille).force_encoding("ISO-8859-1").encode("UTF-8"), :taille => grille.tailleX(), :difficulte => grille.difficulte(), :meilleurScore => 0)
 
       else
 
@@ -136,7 +136,13 @@ class Sauvegarde < ActiveRecord::Base
     #Cette méthode permet de modifier la grille enregistré
     def setGrille(grille)
 
-      self.grille = Marshal.dump(grille)
+      begin
+        temp = Marshal.dump(grille).force_encoding("ISO-8859-1").encode("UTF-8")
+        Marshal.load(temp)
+        self.grille = temp
+      rescue => e
+        puts e.message()
+      end
 
       return self
 
