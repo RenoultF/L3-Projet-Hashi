@@ -1,7 +1,10 @@
 require 'gtk3'
 
 load 'JeuUI.rb'
+load 'Aide.rb'
 load '../CSS/Style.rb'
+
+
 
 class Menu
     # --- BUILDERS ---
@@ -92,9 +95,9 @@ class Menu
             @window.signal_connect('destroy') { |_widget| Gtk.main_quit }
             
             # --- BTN ---
-            @btnQuitter.signal_connect('clicked') { puts "Tchao !"; Gtk.main_quit }
-            @btnJouer.signal_connect('clicked') { |_widget| changerFenetre() }
-            @btnAide.signal_connect('clicked') { puts "--- Affichage des aides";  }
+            @btnQuitter.signal_connect('clicked') { |_widget| Gtk.main_quit }
+            @btnJouer.signal_connect('clicked') { |_widget| lancerJeu() }
+            @btnAide.signal_connect('clicked') { |_widget| AfficherAide() }
             @btnRegles.signal_connect('clicked') { puts "--- Affichage des règles";  }
 		    @btnAstuces.signal_connect('clicked') { puts "--- Affichage des astuces"; }
 		
@@ -233,9 +236,13 @@ class Menu
 				end
 			end
 		}
-    end
+	end
+	
+	def AfficherAide()
+		@aide = Aide.new()
+	end
     
-	def changerFenetre()
+	def lancerJeu()
 		@jeu = JeuUI.new(@@mode, @@taille, @@difficulte,@pseudo,@window)       
     end
 end

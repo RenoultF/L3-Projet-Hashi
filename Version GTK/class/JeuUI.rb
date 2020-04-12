@@ -52,7 +52,6 @@ class JeuUI
          
          
         # CREATION FENETRE 
-        puts "creation"
         @builderJeu = Gtk::Builder.new
         @builderJeu.add_from_file("../glade/jeu.glade")
 
