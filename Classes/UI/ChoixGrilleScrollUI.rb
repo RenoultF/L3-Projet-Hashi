@@ -34,6 +34,7 @@ class ChoixGrilleScrollUI < Gtk::ScrolledWindow
   def chargerGrille(nomCompte, taille, difficulte)
 
     @choixGrille.chargerGrille(nomCompte, taille, difficulte)
+    show_all
 
   end
 

@@ -1,11 +1,16 @@
 require 'gtk3'
-require "../UI/FenetreJeuUI.rb"
+
+require "../UI/JeuUI.rb"
+require "../UI/Aide.rb"
+require "../CSS/Style.rb"
+
+
 
 class Menu < Gtk::Box
     # --- BUILDERS ---
         # @builder
         # @builderJeu
-
+        
     # --- WINDOWS ---
         # @window
 
@@ -14,13 +19,16 @@ class Menu < Gtk::Box
     # @btnQuitter
     # @btnAide
     # @btnRegles
-    # @btnAstuces
+	# @btnAstuces
 
+
+	
     @@mode = 1
-	@@taille = 1
+	@@taille = 7
 	@@difficulte = 1
 
-     def initialize(racine)
+	 def initialize(racine)
+		super(:vertical, 0)
 		@builder = Gtk::Builder.new
 		@racine = racine
 		self.afficheDemarrage()
@@ -30,14 +38,14 @@ class Menu < Gtk::Box
 		if(@window != nil) then
 			@window.destroy()
 		end
-        @builder.add_from_file("../glade/menu.glade")
-
+		@builder.add_from_file("../glade/menu.glade")
+		        
         # --- GET_OBJECT
             # --- WINDOWS ---
-            @window = @builder.get_object("windowMenu")
-
+			@window = @builder.get_object("windowMenu")
+			
             # --- BTN ---
-            @btnQuitter = @builder.get_object("btnQuitter")
+			@btnQuitter = @builder.get_object("btnQuitter")			
             @btnJouer = @builder.get_object("btnJouer")
             @btnAide = @builder.get_object("btnAide")
             @btnRegles = @builder.get_object("btnRegles")
@@ -53,31 +61,60 @@ class Menu < Gtk::Box
             @tglNormal = @builder.get_object("tglNorma")
 			@tglDiff = @builder.get_object("tglDifficile")
 
+			# -- LABEL
+			@lbTaille = @builder.get_object("lbTaille")
+			@lbTaille.style_context.add_provider(@@CSS_LABEL_MENU, Gtk::StyleProvider::PRIORITY_USER)
+			@lbDiff = @builder.get_object("lbDiff")
+			@lbDiff.style_context.add_provider(@@CSS_LABEL_MENU, Gtk::StyleProvider::PRIORITY_USER)
+			@lbTaille = @builder.get_object("lbTaille")
+			@lbTaille.style_context.add_provider(@@CSS_LABEL_MENU, Gtk::StyleProvider::PRIORITY_USER)
+			@lbPseudo = @builder.get_object("lbPseudo")
+			@lbPseudo.style_context.add_provider(@@CSS_LABEL_MENU, Gtk::StyleProvider::PRIORITY_USER)
+
+			@btnQuitter.style_context.add_provider(@@CSS_BTN_BOTMENU, Gtk::StyleProvider::PRIORITY_USER)		
+			@btnJouer.style_context.add_provider(@@CSS_BTN_BOTMENU, Gtk::StyleProvider::PRIORITY_USER)
+			
+            @btnAide.style_context.add_provider(@@CSS_BTN_TOPMENU, Gtk::StyleProvider::PRIORITY_USER)
+            @btnRegles.style_context.add_provider(@@CSS_BTN_TOPMENU, Gtk::StyleProvider::PRIORITY_USER)
+            @btnAstuces.style_context.add_provider(@@CSS_BTN_TOPMENU, Gtk::StyleProvider::PRIORITY_USER)
+
+			
 		# --- ENTRY
 			@pseudo = @builder.get_object("entryPseudo")
-
-
+		
+		# --- CSS
+		@window.style_context.add_provider(@@CSS_BG_MENU, Gtk::StyleProvider::PRIORITY_USER)
+		@tglMNormal.style_context.add_provider(@@CSS_BUTTON_ACTIVE, Gtk::StyleProvider::PRIORITY_USER)
+		@tglAventure.style_context.add_provider(@@CSS_BUTTON_ACTIVE, Gtk::StyleProvider::PRIORITY_USER)
+        @tgl77.style_context.add_provider(@@CSS_BUTTON_ACTIVE, Gtk::StyleProvider::PRIORITY_USER)
+        @tgl1010.style_context.add_provider(@@CSS_BUTTON_ACTIVE, Gtk::StyleProvider::PRIORITY_USER)
+        @tgl1515.style_context.add_provider(@@CSS_BUTTON_ACTIVE, Gtk::StyleProvider::PRIORITY_USER)
+        @tglFacile.style_context.add_provider(@@CSS_BUTTON_ACTIVE, Gtk::StyleProvider::PRIORITY_USER)
+        @tglNormal.style_context.add_provider(@@CSS_BUTTON_ACTIVE, Gtk::StyleProvider::PRIORITY_USER)
+		@tglDiff.style_context.add_provider(@@CSS_BUTTON_ACTIVE, Gtk::StyleProvider::PRIORITY_USER)
         # --- SIGNAUX ---
             # --- WINDOWS ---
             @window.signal_connect('destroy') { |_widget| Gtk.main_quit }
-
+            
             # --- BTN ---
-            @btnQuitter.signal_connect('clicked') { puts "Tchao !"; Gtk.main_quit }
-            @btnJouer.signal_connect('clicked') { |_widget| retourMenu() }
-            @btnAide.signal_connect('clicked') { puts "--- Affichage des aides";  }
+            @btnQuitter.signal_connect('clicked') { |_widget| Gtk.main_quit }
+            @btnJouer.signal_connect('clicked') { |_widget| valide() }
+            @btnAide.signal_connect('clicked') { |_widget| AfficherAide() }
             @btnRegles.signal_connect('clicked') { puts "--- Affichage des règles";  }
-            @btnAstuces.signal_connect('clicked') { puts "--- Affichage des astuces"; }
+		    @btnAstuces.signal_connect('clicked') { puts "--- Affichage des astuces"; }
+		
         @window.show()
         # Appel de la gestion des signaux
         self.gestionTgl()
+		Gtk.main()
     end
 
     def gestionTgl()
         #Gestion des paramètres selon [Mode], [Taille] et [Difficulté]
-
+		
 		#1-Mode de jeu : Normal OU Aventure
 		@tglMNormal.signal_connect('toggled') {
-
+			
 			if (@@mode != 1) && @tglAventure.active?
 				@tglAventure.active = false;
 				@tglMNormal.active = true;
@@ -90,9 +127,9 @@ class Menu < Gtk::Box
 				end
 			end
 		}
-
+		
 		@tglAventure.signal_connect('toggled') {
-
+			
 			if (@@mode != 2) && @tglMNormal.active?
 				@tglMNormal.active = false;
 				@tglAventure.active = true;
@@ -105,51 +142,51 @@ class Menu < Gtk::Box
 				end
 			end
         }
-
+        
         #2-Taille de grille : 7*7, 10*10 OU 15*15
 		@tgl77.signal_connect('toggled') {
-
-			if (@@taille != 1)  && (@tgl1010.active? || @tgl1515.active?)
+			
+			if (@@taille != 7)  && (@tgl1010.active? || @tgl1515.active?)
 				@tgl1010.active = false;
 				@tgl1515.active = false;
 				@tgl77.active = true;
-				@@taille = 1;
+				@@taille = 7;
 				puts "Taille grille : 7*7 - #{@@taille}";
 			else if !(@tgl77.active?) && !(@tgl1010.active?) && !(@tgl1515.active?)
 					@tgl77.active = true;
-					@@taille = 1;
+					@@taille = 7;
 					puts "Taille grille : 7*7 - #{@@taille}";
 				end
 			end
 		}
 
 		@tgl1010.signal_connect('toggled') {
-
-			if (@@taille != 2) && (@tgl77.active? || @tgl1515.active?)
+						
+			if (@@taille != 10) && (@tgl77.active? || @tgl1515.active?)
 				@tgl77.active = false;
 				@tgl1515.active = false;
 				@tgl1010.active = true;
-				@@taille = 2;
+				@@taille = 10;
 				puts "Taille grille : 10*10 - #{@@taille}";
 			else if !(@tgl1010.active?) && !(@tgl77.active?) && !(@tgl1515.active?)
 					@tgl1010.active = true;
-					@@taille = 2;
+					@@taille = 10;
 					puts "Taille grille : 10*10 - #{@@taille}";
 				end
 			end
 		}
 
 		@tgl1515.signal_connect('toggled') {
-
-			if (@@taille != 3) && (@tgl77.active? || @tgl1010.active?)
+			
+			if (@@taille != 15) && (@tgl77.active? || @tgl1010.active?)
 				@tgl77.active = false;
 				@tgl1010.active = false;
 				@tgl1515.active = true;
-				@@taille = 3;
+				@@taille = 15;
 				puts "Taille grille : 15*15 - #{@@taille}";
 			else if !(@tgl1515.active?) && !(@tgl77.active?) && !(@tgl1010.active?)
 					@tgl1515.active = true;
-					@@taille = 3;
+					@@taille = 15;
 					puts "Taille grille : 15*15 - #{@@taille}";
 				end
 			end
@@ -157,7 +194,7 @@ class Menu < Gtk::Box
 
 		#3-Difficulté de la grille : Facile, Normal OU Difficile
 		@tglFacile.signal_connect('toggled'){
-
+		
 			if (@@difficulte != 1) && (@tglNormal.active? || @tglDiff.active?)
 				@tglNormal.active = false;
 				@tglDiff.active = false;
@@ -201,27 +238,61 @@ class Menu < Gtk::Box
 				end
 			end
 		}
-    end
-
+	end
+	
+	def AfficherAide()
+		@aide = Aide.new()
+	end
+    
+	# def lancerJeu()
+	# 	@jeu = JeuUI.new(@@mode, @@taille, @@difficulte,@pseudo,@window)       
+	# end
+	
 	def retourMenu()
+
+		each_all do |c|
+		  remove(c)
+		end
+	
+		pack_start(@titre, :expand => true, :fill => true)
+		pack_start(@choixNom, :expand => true, :fill => true)
+		pack_start(@choixTaille, :expand => true, :fill => true)
+		pack_start(@choixDifficulte, :expand => true, :fill => true)
+		pack_start(@surBoxValide, :expand => true, :fill => true)
+	
+	end
+	
+	
+	private def valide()
+	
+	
 		puts "Paramètres menu"
-		print "Nom Compte : ", @pseudo.text, "\n"
+		print "Nom Compte : ", @pseudo.text(), "\n"
 		print "Taille grille : ", @@taille, "\n"
-		print "Difficulte grille : ",  @@difficulte, "\n"
-
-		#afficheLabel("Creation du compte en cours")
-		puts "AVANT THREAD"
+		print "Difficulte grille : ", @@difficulte, "\n"
+	
+		afficheLabel("Creation du compte en cours")
+	
 		@window.hide()
-		Thread.new{@racine.choisirGrille(@pseudo.text,@@taille, @@difficulte)}
-		# @jeu = JeuUI.new(@@mode, @@taille, @@difficulte,@pseudo,@window)
-
+		Thread.new{@racine.choisirGrille(@pseudo.text(), @@taille, @@difficulte)}
+	
+	end
+	
+	def afficheLabel(label)
+	
+		pack_start(@label = Gtk::Label.new(label), :expand => true, :fill => true)
+	
+		show_all
+	
+	end
+	
+	def afficheRegles
+	
+		@fenetreRegles.show_all
+	
 	end
 
-	def afficheLabel(label)
-
-		#pack_start(@label = Gtk::Label.new(label), :expand => true, :fill => true)
-
-		show_all
-
-	  end
 end
+
+#menu = Menu.new()
+# menu.afficheDemarrage()

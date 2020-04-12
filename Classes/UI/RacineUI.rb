@@ -7,6 +7,7 @@
 
 require '../UI/GrilleUI.rb'
 require '../UI/MenuUI.rb'
+require '../UI/Menu.rb'
 require '../UI/ChoixGrilleUI.rb'
 require '../UI/ChoixGrilleScrollUI.rb'
 require '../UI/JeuUI.rb'
@@ -59,7 +60,7 @@ class RacineUI < Gtk::Box
   # * taille La taille des grilles à aller chercher
   # * difficulte La difficulté des grilles à aller chercher
   def choisirGrille(nomCompte, taille, difficulte)
-
+    puts "dans choisirGrille"
     @choix = ChoixGrilleScrollUI.new(ChoixGrilleUI.new(self))
     @choix.chargerGrille(nomCompte, taille, difficulte)
 
@@ -116,7 +117,7 @@ class RacineUI < Gtk::Box
   #Elle supprime tous les child de la RacineUI et ajoute la MenuUI
   def retourMenu()
 
-    @menu = MenuUI.new(self)
+    @menu = Menu.new(self)
 
     if(!@jeu.eql?(nil))
       @jeu.sauvegardeGrille() #On sauvegarde la grille si on était en pleine partie
