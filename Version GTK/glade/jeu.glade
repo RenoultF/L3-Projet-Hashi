@@ -1,11 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Generated with glade 3.22.1 -->
 <interface>
-  <requires lib="gtk+" version="3.0"/>
+  <!-- interface-requires gtk+ 3.0 -->
+  <object class="GtkImage" id="image3">
+    <property name="visible">True</property>
+    <property name="can_focus">False</property>
+    <property name="stock">gtk-about</property>
+  </object>
   <object class="GtkImage" id="btnQuitte">
     <property name="visible">True</property>
     <property name="can_focus">False</property>
-    <property name="stock">gtk-stop</property>
+    <property name="stock">gtk-undo</property>
+  </object>
+  <object class="GtkImage" id="image1">
+    <property name="visible">True</property>
+    <property name="can_focus">False</property>
+    <property name="stock">gtk-help</property>
+  </object>
+  <object class="GtkImage" id="image2">
+    <property name="visible">True</property>
+    <property name="can_focus">False</property>
+    <property name="stock">gtk-index</property>
   </object>
   <object class="GtkImage" id="indice">
     <property name="visible">True</property>
@@ -20,7 +34,7 @@
   <object class="GtkImage" id="retourArriere">
     <property name="visible">True</property>
     <property name="can_focus">False</property>
-    <property name="stock">gtk-undo</property>
+    <property name="stock">gtk-media-previous</property>
   </object>
   <object class="GtkImage" id="save">
     <property name="visible">True</property>
@@ -64,24 +78,28 @@
   </object>
   <object class="GtkWindow" id="windowJeu">
     <property name="can_focus">False</property>
-    <child>
-      <placeholder/>
-    </child>
+    <property name="resizable">False</property>
+    <property name="window_position">center</property>
     <child>
       <object class="GtkBox" id="box1">
         <property name="visible">True</property>
         <property name="can_focus">False</property>
         <property name="orientation">vertical</property>
         <child>
-          <object class="GtkBox" id="box2">
+          <object class="GtkBox" id="helpBox">
             <property name="visible">True</property>
             <property name="can_focus">False</property>
+            <property name="margin_left">15</property>
+            <property name="margin_top">10</property>
+            <property name="spacing">10</property>
             <child>
               <object class="GtkButton" id="btnAide">
                 <property name="label" translatable="yes">Aide</property>
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>
+                <property name="image">image1</property>
+                <property name="always_show_image">True</property>
               </object>
               <packing>
                 <property name="expand">False</property>
@@ -95,6 +113,8 @@
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>
+                <property name="image">image2</property>
+                <property name="always_show_image">True</property>
               </object>
               <packing>
                 <property name="expand">False</property>
@@ -108,6 +128,8 @@
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>
+                <property name="image">image3</property>
+                <property name="always_show_image">True</property>
               </object>
               <packing>
                 <property name="expand">False</property>
@@ -234,7 +256,7 @@
                 <property name="can_focus">False</property>
                 <property name="halign">center</property>
                 <property name="valign">center</property>
-                <property name="margin_left">10</property>
+                <property name="margin_left">15</property>
                 <child>
                   <placeholder/>
                 </child>
@@ -286,6 +308,8 @@
                   <packing>
                     <property name="left_attach">0</property>
                     <property name="top_attach">0</property>
+                    <property name="width">1</property>
+                    <property name="height">1</property>
                   </packing>
                 </child>
                 <child>
@@ -298,6 +322,8 @@
                   <packing>
                     <property name="left_attach">0</property>
                     <property name="top_attach">1</property>
+                    <property name="width">1</property>
+                    <property name="height">1</property>
                   </packing>
                 </child>
                 <child>
@@ -310,6 +336,8 @@
                   <packing>
                     <property name="left_attach">0</property>
                     <property name="top_attach">2</property>
+                    <property name="width">1</property>
+                    <property name="height">1</property>
                   </packing>
                 </child>
                 <child>
@@ -319,11 +347,13 @@
                     <property name="can_focus">True</property>
                     <property name="receives_default">True</property>
                     <property name="image">save</property>
+                    <property name="always_show_image">True</property>
                   </object>
                   <packing>
                     <property name="left_attach">0</property>
                     <property name="top_attach">3</property>
                     <property name="width">3</property>
+                    <property name="height">1</property>
                   </packing>
                 </child>
                 <child>
@@ -336,6 +366,8 @@
                   <packing>
                     <property name="left_attach">1</property>
                     <property name="top_attach">0</property>
+                    <property name="width">1</property>
+                    <property name="height">1</property>
                   </packing>
                 </child>
                 <child>
@@ -348,6 +380,8 @@
                   <packing>
                     <property name="left_attach">2</property>
                     <property name="top_attach">0</property>
+                    <property name="width">1</property>
+                    <property name="height">1</property>
                   </packing>
                 </child>
                 <child>
@@ -360,6 +394,8 @@
                   <packing>
                     <property name="left_attach">1</property>
                     <property name="top_attach">1</property>
+                    <property name="width">1</property>
+                    <property name="height">1</property>
                   </packing>
                 </child>
                 <child>
@@ -372,6 +408,8 @@
                   <packing>
                     <property name="left_attach">2</property>
                     <property name="top_attach">1</property>
+                    <property name="width">1</property>
+                    <property name="height">1</property>
                   </packing>
                 </child>
                 <child>
@@ -384,6 +422,8 @@
                   <packing>
                     <property name="left_attach">1</property>
                     <property name="top_attach">2</property>
+                    <property name="width">1</property>
+                    <property name="height">1</property>
                   </packing>
                 </child>
                 <child>
@@ -397,6 +437,8 @@
                   <packing>
                     <property name="left_attach">2</property>
                     <property name="top_attach">2</property>
+                    <property name="width">1</property>
+                    <property name="height">1</property>
                   </packing>
                 </child>
               </object>
@@ -422,9 +464,10 @@
             <property name="margin_left">20</property>
             <property name="margin_right">20</property>
             <property name="margin_top">20</property>
+            <property name="margin_bottom">10</property>
             <child>
-              <object class="GtkButton" id="btnQuitter">
-                <property name="label" translatable="yes">Quitter</property>
+              <object class="GtkButton" id="btnRetour">
+                <property name="label" translatable="yes">Retour</property>
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>

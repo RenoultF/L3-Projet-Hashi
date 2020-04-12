@@ -1,7 +1,7 @@
 require 'gtk3'
-load 'JeuUI.rb'
-load 'style.rb'
 
+load 'JeuUI.rb'
+load '../CSS/Style.rb'
 
 class Menu
     # --- BUILDERS ---
@@ -25,15 +25,16 @@ class Menu
 	@@difficulte = 1
 
      def initialize()
-        @builder = Gtk::Builder.new
+		@builder = Gtk::Builder.new
+		self.afficheDemarrage()
      end
 
      def afficheDemarrage()
 		if(@window != nil) then
 			@window.destroy()
 		end
-        @builder.add_from_file("../glade/menu.glade")
-        
+		@builder.add_from_file("../glade/menu.glade")
+		        
         # --- GET_OBJECT
             # --- WINDOWS ---
 			@window = @builder.get_object("windowMenu")
@@ -95,7 +96,8 @@ class Menu
             @btnJouer.signal_connect('clicked') { |_widget| changerFenetre() }
             @btnAide.signal_connect('clicked') { puts "--- Affichage des aides";  }
             @btnRegles.signal_connect('clicked') { puts "--- Affichage des règles";  }
-            @btnAstuces.signal_connect('clicked') { puts "--- Affichage des astuces"; }
+		    @btnAstuces.signal_connect('clicked') { puts "--- Affichage des astuces"; }
+		
         @window.show()
         # Appel de la gestion des signaux
         self.gestionTgl()
@@ -239,4 +241,4 @@ class Menu
 end
 
 menu = Menu.new()
-menu.afficheDemarrage()
+# menu.afficheDemarrage()

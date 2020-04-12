@@ -69,3 +69,11 @@ require 'gtk3'
         text-decoration: none;
     }
     CSS
+
+@@CSS_ENTRY_MENU ||= Gtk::CssProvider.new
+@@CSS_ENTRY_MENU.load(data: <<-CSS)
+    #entryPseudo {
+        border-width: 2px;
+        border-color: red;
+    }
+    CSS
