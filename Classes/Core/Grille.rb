@@ -97,22 +97,11 @@ class Grille
 
     #:nodoc:
     def initialize(chaine)
-        puts "Creation !!!"
         @actions = UndoRedo.creer()
-        puts chaine
         @checkpoints = Pile.creer(5)
         @score = 0
         i = -1
         j = -1
-
-        @couleurs = UndoRedo.creer()
-
-        @couleurs.empiler([1, 1, 0]) #Jaune
-        @couleurs.empiler([0, 1, 1]) #Cyan
-        @couleurs.empiler([1, 0, 1]) #Magenta
-        @couleurs.empiler([0, 1, 0]) #Vert
-        @couleurs.empiler([0, 0, 1]) #Bleu
-        @couleurs.empiler([0, 0, 0]) #Noir
 
         chaine.each_line do |l|
           if(l.start_with?("#T"))
@@ -152,8 +141,7 @@ class Grille
             end
           end
         end
-        @dernierIle = nil
-        undoCouleurPont(@couleurs.undo())
+        recommencer()
     end
     #:doc:
 
@@ -360,12 +348,13 @@ class Grille
 
       @couleurs = UndoRedo.creer()
 
-      @couleurs.empiler([1, 1, 0]) #Jaune
-      @couleurs.empiler([0, 1, 1]) #Cyan
-      @couleurs.empiler([1, 0, 1]) #Magenta
-      @couleurs.empiler([0, 1, 0]) #Vert
-      @couleurs.empiler([0, 0, 1]) #Bleu
-      @couleurs.empiler([0, 0, 0]) #Noir
+      @couleurs.empiler(Couleur::JAUNE)
+      @couleurs.empiler(Couleur::CYAN)
+      @couleurs.empiler(Couleur::MAGENTA)
+      @couleurs.empiler(Couleur::VERT)
+      @couleurs.empiler(Couleur::BLEU)
+      @couleurs.empiler(Couleur::NOIR)
+
 
       undoCouleurPont(@couleurs.undo())
 

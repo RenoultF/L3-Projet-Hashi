@@ -17,11 +17,13 @@ class Compte < ActiveRecord::Base
 
   validates :name, presence: true, uniqueness: true
 
-  #@pseudo => Contient l'identifiant du compte
+  #@pseudo => Contient le nom du compte
   attr_reader :pseudo
 
   private_class_method :new
 
+  ##
+  #Cette méthode permet de supprimer tous les comptes de la base de donnée
   def Compte.razAllCompte()
 
     Compte.delete_all()
@@ -29,16 +31,14 @@ class Compte < ActiveRecord::Base
   end
 
 
+  ##
+  #Cette méthode de créer le compte par defaut dont-les sauvegardes vont-être utilisées par les nouveaux comptes
   def Compte.maj()
 
     Sauvegarde.razAllSauvegarde()
-
     Compte.razAllCompte()
-
     default = new(COMPTE_DEFAULT)
-
     grilles = Grille.chargerGrilles("../NouvellesGrilles")
-
     Sauvegarde.creerAll(default, grilles)
 
   end
