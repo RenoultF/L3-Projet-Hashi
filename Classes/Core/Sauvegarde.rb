@@ -136,9 +136,9 @@ class Sauvegarde < ActiveRecord::Base
     #Cette méthode permet de modifier la grille enregistré
     def setGrille(grille)
 
-      begin
-        temp = Marshal.dump(grille).force_encoding("ISO-8859-1").encode("UTF-8")
-        Marshal.load(temp)
+      begin #Active record peut enregistrer du TEXT avec UTF-8 uniquement
+        temp = Marshal.dump(grille).force_encoding("ISO-8859-1").encode("UTF-8") #on force donc la chaine en UTF-8
+        Marshal.load(temp) #à condition que l'on puisse la recharger sans exception
         self.grille = temp
       rescue => e
         puts e.message()
