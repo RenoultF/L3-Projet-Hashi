@@ -15,4 +15,10 @@ class Aide
     @grille = grille
   end
 
+  ##
+  #Cette méthode permet de donner de l'aide pour la résolution de la grille
+  def aider()
+
+  end
+
 end

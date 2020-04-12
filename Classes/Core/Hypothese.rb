@@ -32,10 +32,10 @@ class Hypothese
     @grille.to_s()
   end
 
+  ##
+  #Cette méthode permet de récuperer la grille
   def getGrille()
-
     return Marshal.load(@grille)
-
   end
 
 end

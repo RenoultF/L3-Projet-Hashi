@@ -8,6 +8,8 @@
 
 require "active_record"
 
+##
+#Fichier à importer si on veux se connecter à la base de donnée
 ActiveRecord::Base.establish_connection(
 
 	:adapter => "sqlite3",

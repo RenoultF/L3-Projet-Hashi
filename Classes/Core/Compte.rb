@@ -6,11 +6,11 @@
 require "../Core/Sauvegarde.rb"
 require "active_record"
 
-
+##
 #Cette classe représente les comptes utilisateurs
 class Compte < ActiveRecord::Base
 
-
+  #Le compte par defaut
   COMPTE_DEFAULT = "_DEFAULT"
 
   has_many :sauvegardes
@@ -25,9 +25,7 @@ class Compte < ActiveRecord::Base
   ##
   #Cette méthode permet de supprimer tous les comptes de la base de donnée
   def Compte.razAllCompte()
-
     Compte.delete_all()
-
   end
 
 
@@ -43,9 +41,10 @@ class Compte < ActiveRecord::Base
 
   end
 
-  #Cette méthode permet de créer un nouveau compte
-  #
-  #@param pseudo Le pseudo du compte
+  ##
+  #Ce constructeur permet de créer un nouveau compte
+  #param :
+  # * pseudo Le pseudo du compte (Il doit être different de COMPTE_DEFAULT)
   def Compte.creer(pseudo)
 
     if(pseudo == COMPTE_DEFAULT)
@@ -70,78 +69,67 @@ class Compte < ActiveRecord::Base
   #:doc:
 
   ##
-  #Cette méthode permet de récuperer toutes les grilles de base
+  #Cette méthode permet de récuperer toutes les grilles du compte par default dans la base
   def initialiseSauvegarde()
 
     sauvegardes = Sauvegarde.listeCompte(Compte.recuperer(COMPTE_DEFAULT))
-
     sauvegardes.each do |s|
-
       Sauvegarde.creer(self, s.getGrille()).sauvegarder()
-
     end
 
   end
 
+  ##
   #Cette méthode permet de récuperer un compte dans la base de données
-  #
-  #@param pseudo Le pseudo du compte
-  #
-  #@raiseException Si le compte n'existe pas
+  #param :
+  # * pseudo Le pseudo du compte
+  #return :
+  # * Le compte s'il existe
+  # * raiseException Si le compte n'existe pas
   def Compte.recuperer(pseudo)
 
     compte = Compte.find_by(name: pseudo);
-
     if(compte == nil)
-
       raise("Le compte " + pseudo + " n'existe pas")
-
     else
-
       return compte
-
     end
 
   end
 
-
-  #Cette méthode permet de récuperer un compte dans la base de données
-  #
-  #@param pseudo Le pseudo du compte
-  #
-  #@raiseException Si le compte n'existe pas
+  ##
+  #Cette méthode permet de récuperer un compte dans la base de données ou de lcréer s'il n'existe pas
+  #param :
+  # * pseudo Le pseudo du compte
+  #return :
+  # * Le compte récupéré ou crée
   def Compte.recuperer_ou_creer(pseudo)
 
     compte = Compte.find_by(name: pseudo);
-
     if(compte == nil)
-
       Compte.creer(pseudo)
-
     else
-
       return compte
-
     end
 
   end
 
+  ##
   #Cette méthode permet de sauvegarder le compte
-  #
-  #@return true si la sauvegarde est efféctué, false sinon
+  #return :
+  # * true Si la sauvegarde a bien été réalisée
+  # * false sinon
   def sauvegarder()
 
     self.name = @pseudo
-
     return self.save();
 
   end
 
+  ##
   #Cette méthode permet d'afficher un compte
   def to_s
-
       return "<Compte> '#{@pseudo}'"
-
   end
 
 end
