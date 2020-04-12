@@ -8,7 +8,9 @@ require "../UI/GrilleUI.rb"
 
 
 ##
-#Cette classe repréésente une _GrilleUI dans laquelle on peut jouer
+#Cette classe représente une GrilleUI dans laquelle on peut jouer
+#Pour l'utiliser créez en une et ajoutez la avec "add" ou "pack_start" etc, à votre container
+#Voir GrilleUI
 class GrilleJouableUI < GrilleUI
 
   def initialize(grille, taille = 40)

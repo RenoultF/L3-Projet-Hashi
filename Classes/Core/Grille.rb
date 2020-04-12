@@ -781,14 +781,6 @@ class Grille
 
     def sauvegarder(compte)
 
-      while(!@checkpoints.empty?) do
-        valideHypothese()
-      end
-
-      setDernierIle(nil)
-
-      @actions.clear()
-
       save = Sauvegarde.recuperer(compte, self)
 
       save.setGrille(self)
