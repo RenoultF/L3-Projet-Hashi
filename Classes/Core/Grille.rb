@@ -107,12 +107,12 @@ class Grille
 
         @couleurs = UndoRedo.creer()
 
-        @couleurs.empiler([0, 0, 0]) #Noir
-        @couleurs.empiler([0, 0, 1]) #Bleu
-        @couleurs.empiler([0, 1, 0]) #Vert
+        @couleurs.empiler([1, 1, 0]) #Jaune
         @couleurs.empiler([0, 1, 1]) #Cyan
         @couleurs.empiler([1, 0, 1]) #Magenta
-        @couleurs.empiler([1, 1, 0]) #Jaune
+        @couleurs.empiler([0, 1, 0]) #Vert
+        @couleurs.empiler([0, 0, 1]) #Bleu
+        @couleurs.empiler([0, 0, 0]) #Noir
 
         chaine.each_line do |l|
           if(l.start_with?("#T"))
@@ -360,12 +360,12 @@ class Grille
 
       @couleurs = UndoRedo.creer()
 
-      @couleurs.empiler([0, 0, 0]) #Noir
-      @couleurs.empiler([0, 0, 1]) #Bleu
-      @couleurs.empiler([0, 1, 0]) #Vert
+      @couleurs.empiler([1, 1, 0]) #Jaune
       @couleurs.empiler([0, 1, 1]) #Cyan
       @couleurs.empiler([1, 0, 1]) #Magenta
-      @couleurs.empiler([1, 1, 0]) #Jaune
+      @couleurs.empiler([0, 1, 0]) #Vert
+      @couleurs.empiler([0, 0, 1]) #Bleu
+      @couleurs.empiler([0, 0, 0]) #Noir
 
       undoCouleurPont(@couleurs.undo())
 
@@ -785,10 +785,14 @@ class Grille
         valideHypothese()
       end
 
+      setDernierIle(nil)
+
+      @actions.clear()
+
       save = Sauvegarde.recuperer(compte, self)
 
       save.setGrille(self)
-      save.setScore([save.getScore(), @score].max)
+      save.setScore([save.getScore(), @score].max) if self.fini?()
 
       save.sauvegarder()
 

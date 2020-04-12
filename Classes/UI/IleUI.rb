@@ -32,12 +32,6 @@ class IleUI < CaseUI
 
     super(ile, taille)
 
-    self.signal_connect "button-press-event" do
-
-      @casee.clickOn()
-
-    end
-
   end
   #:doc:
 
@@ -49,13 +43,14 @@ class IleUI < CaseUI
 
     cr = window.create_cairo_context
 
-    if(@casee.estDernierIle())
-      cr.set_source_rgb(0, 0, 255)
-    else
-      cr.set_source_rgb(0, 255, 0)
-    end
-    cr.circle(@taille * @casee.posY() + @taille/2, @taille * @casee.posX() + @taille/2, @taille/2)
-    if(@casee.getCapaciteResiduelle() == 0)
+    positionY = @taille * @casee.posY() + @taille/2
+    positionX = @taille * @casee.posX() + @taille/2
+
+    choixCouleur(cr)
+
+    cr.circle(positionY, positionX, @taille/2)
+
+    if(@casee.getCapaciteResiduelle() <= 0)
       cr.fill()
       cr.set_source_rgb(255, 255, 255)
     else
@@ -68,13 +63,20 @@ class IleUI < CaseUI
     cr.set_font_size @taille/2
 
     width = cr.text_extents(text).width
-    height = cr.text_extents(text).height
+    height = cr.text_extents(text).height #Centrer le texte
 
-    cr.move_to(@taille * @casee.posY() + @taille/2 - width/2, @taille * @casee.posX() + @taille/2 + height/2)
+    cr.move_to(positionY - width/2, positionX + height/2)
     cr.show_text(text)
 
   end
 
 
+  private def choixCouleur(cr)
+
+    cr.set_source_rgb(0, 255, 0)
+    cr.set_source_rgb(0, 0, 255) if @casee.estDernierIle()
+    cr.set_source_rgb(255, 0, 0) if @casee.getCapaciteResiduelle() < 0
+
+  end
 
 end

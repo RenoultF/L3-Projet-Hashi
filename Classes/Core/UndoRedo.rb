@@ -65,4 +65,9 @@ class UndoRedo
     return @actions.empty?()
   end
 
+  def clear()
+    @actions.clear()
+    return self
+  end
+
 end

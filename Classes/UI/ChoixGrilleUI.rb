@@ -3,7 +3,9 @@
 # Auteur Brabant Mano
 # Version 0.1 : Date : 09/04/2020
 
-
+require '../Core/Sauvegarde.rb'
+require '../Core/Compte.rb'
+require '../Core/ConnectSqlite3.rb'
 require 'gtk3'
 
 ##
