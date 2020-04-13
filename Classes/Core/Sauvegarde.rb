@@ -1,14 +1,14 @@
 
 
-##
-# Auteur Brabant Mano
-# Version 0.1 : Date : 07/02/2020
-
 require "../Core/Compte.rb"
 require "../Core/Grille.rb"
 require "active_record"
 
 ##
+# Auteur:: Brabant Mano
+# Version:: 0.1
+# Date:: 09/04/2020
+#
 #Cette classe permet de sauvegarder dans une base de données la progression d'un joueur sur une grille et de faire des recherches sur les sauvegardes
 class Sauvegarde < ActiveRecord::Base
 
@@ -33,7 +33,7 @@ class Sauvegarde < ActiveRecord::Base
 
   ##
   #Cette méthode permet de créer un sauvegarde pour un ensemble de grille
-  #param :
+  #param::
   # * compte Le compte pour lequel on va créer les sauvegardes
   # * grilles Un tableau qui contient les grilles à sauvegarder
   def Sauvegarde.creerAll(compte, grilles)
@@ -49,10 +49,10 @@ class Sauvegarde < ActiveRecord::Base
 
   ##
   #Cette méthode permet de creer une grille pour un compte
-  #param :
+  #param::
   # * compte Le compte auquel la sauvegarde est lié
   # * grille La grille auquel la sauvegarde est lié
-  #return :
+  #return::
   # * raiseException Si le compte possède déjà une sauvegarde de cette grille
   def Sauvegarde.creer(compte, grille)
 
@@ -73,10 +73,10 @@ class Sauvegarde < ActiveRecord::Base
 
   ##
   #Cette méthode permet de recuperer la sauvegarde d'un compte pour une grille
-  #param :
+  #param::
   # * compte Le compte auquel la sauvegarde est lié
   # * grille La grille auquel la sauvegarde est lié
-  #return :
+  #return::
   # * La sauvegarde si elle existe
   # * nil Sinon
   def Sauvegarde.recuperer(compte, grille)
@@ -93,9 +93,9 @@ class Sauvegarde < ActiveRecord::Base
 
   ##
   #Cette méthode permet de connaitre les sauvegardes d'un joueur
-  #param :
+  #param::
   # * compte Le compte du joueur
-  #return :
+  #return::
   # * Le tableau des sauvegardes du compte
   def Sauvegarde.listeCompte(compte)
     return Sauvegarde.where(compte: compte).to_a()
@@ -103,11 +103,11 @@ class Sauvegarde < ActiveRecord::Base
 
   ##
   #Cette méthode permet de connaitre les sauvegardes d'un joueur pour les grilles d'une certaine taille et d'une certaine difficulté
-  #param :
+  #param::
   # * compte Le compte du joueur
   # * taille La taille de la grille
   # * difficulte La difficulte de la grille
-  #return :
+  #return::
   # * Le tableau des sauvegardes du compte de taille et difficulté données
   def Sauvegarde.liste(compte, taille, difficulte)
     return Sauvegarde.where(compte: compte, taille: taille, difficulte: difficulte).to_a()
@@ -115,7 +115,7 @@ class Sauvegarde < ActiveRecord::Base
 
   ##
   #Cette méthode permet d'enregistrer la sauvegarde
-  #return :
+  #return::
   # * true Si la sauvegarde est efféctué
   # * false Sinon
   def sauvegarder()
@@ -136,7 +136,7 @@ class Sauvegarde < ActiveRecord::Base
 
   ##
   #Cette méthode permet de modifier la grille enregistrée
-  #param :
+  #param::
   # * grille La nouvelle grille
   def setGrille(grille)
 
@@ -154,7 +154,7 @@ class Sauvegarde < ActiveRecord::Base
 
   ##
   #Cette méthode permet de recupérer la grille de la sauvegarde
-  #return :
+  #return::
   # * Le score de la sauvegarde
   def getScore()
     return self.meilleurScore
@@ -162,7 +162,7 @@ class Sauvegarde < ActiveRecord::Base
 
   ##
   #Cette méthode permet de modifier la grille enregistré
-  #param :
+  #param::
   # * score Le nouveau score
   def setScore(score)
 

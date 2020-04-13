@@ -1,12 +1,13 @@
 
-##
-# Auteur Brabant Mano
-# Version 0.1 : Date : 07/02/2020
 
 require "../Core/Sauvegarde.rb"
 require "active_record"
 
 ##
+# Auteur:: Brabant Mano
+# Version:: 0.1
+# Date:: 09/04/2020
+#
 #Cette classe représente les comptes utilisateurs
 class Compte < ActiveRecord::Base
 
@@ -43,7 +44,7 @@ class Compte < ActiveRecord::Base
 
   ##
   #Ce constructeur permet de créer un nouveau compte
-  #param :
+  #param::
   # * pseudo Le pseudo du compte (Il doit être different de COMPTE_DEFAULT)
   def Compte.creer(pseudo)
 
@@ -81,9 +82,9 @@ class Compte < ActiveRecord::Base
 
   ##
   #Cette méthode permet de récuperer un compte dans la base de données
-  #param :
+  #param::
   # * pseudo Le pseudo du compte
-  #return :
+  #return::
   # * Le compte s'il existe
   # * raiseException Si le compte n'existe pas
   def Compte.recuperer(pseudo)
@@ -99,9 +100,9 @@ class Compte < ActiveRecord::Base
 
   ##
   #Cette méthode permet de récuperer un compte dans la base de données ou de lcréer s'il n'existe pas
-  #param :
+  #param::
   # * pseudo Le pseudo du compte
-  #return :
+  #return::
   # * Le compte récupéré ou crée
   def Compte.recuperer_ou_creer(pseudo)
 
@@ -116,7 +117,7 @@ class Compte < ActiveRecord::Base
 
   ##
   #Cette méthode permet de sauvegarder le compte
-  #return :
+  #return::
   # * true Si la sauvegarde a bien été réalisée
   # * false sinon
   def sauvegarder()

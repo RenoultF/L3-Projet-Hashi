@@ -1,10 +1,10 @@
 
-##
-# Auteur Brabant Mano
-# Version 0.1 : Date : 13/04/2020
-
 
 ##
+# Auteur:: Brabant Mano
+# Version:: 0.1
+# Date:: 09/04/2020
+#
 #Cette classe représente des couleurs
 class Couleur
 
@@ -15,7 +15,7 @@ class Couleur
 
   ##
   #Ce constructeur permet de créer une nouvelle couleur
-  #param :
+  #param::
   # * couleur La tableau qui représente la couleur
   def initialize(couleur)
     modifCouleur(couleur)
@@ -29,7 +29,7 @@ class Couleur
 
   ##
   #Cette méthode permet de connaitre la composante rouge de la couleur
-  #return :
+  #return::
   # * La composante rouge de la couleur
   def rouge
     return @couleur[0]
@@ -37,7 +37,7 @@ class Couleur
 
   ##
   #Cette méthode permet de connaitre la composante verte de la couleur
-  #return :
+  #return::
   # * La composante verte de la couleur
   def vert
     return @couleur[1]
@@ -45,7 +45,7 @@ class Couleur
 
   ##
   #Cette méthode permet de connaitre la composante bleu de la couleur
-  #return :
+  #return::
   # * La composante bleu de la couleur
   def bleu
     return @couleur[2]
@@ -53,9 +53,9 @@ class Couleur
 
   ##
   #Cette méthode permet de comparer la couleur avec une autre
-  #param :
+  #param::
   # * autre L'autre couleur
-  #return :
+  #return::
   # * 0 Si les deux couleurs sont égales
   # un nombre positif si la couleur est supérieur à l'autre
   # un nombre négatif si la couleur est inférieur à l'autre

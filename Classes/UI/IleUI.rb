@@ -1,7 +1,4 @@
 
-##
-# Auteur Brabant Mano
-# Version 0.1 : Date : 09/04/2020
 
 require "../Core/Ile.rb"
 
@@ -11,6 +8,10 @@ require "cairo"
 
 
 ##
+# Auteur:: Brabant Mano
+# Version:: 0.1
+# Date:: 09/04/2020
+#
 #Cette classe permet d'afficher une ile de la grille
 class IleUI < CaseUI
 
@@ -18,7 +19,7 @@ class IleUI < CaseUI
 
   ##
   #Ce constructeur permet de créer un nouveau afficheur d'ile
-  #param :
+  #param::
   # * ile L'ile à afficher
   # * taille La taille d'une case (40 par defaut)
   def IleUI.creer(ile, taille = 40)
@@ -37,7 +38,7 @@ class IleUI < CaseUI
 
   ##
   #Cette méthode permet de dessiner l'ile
-  #param :
+  #param::
   # * window La fenetre sur laquelle l'ile va etre afficher
   def draw(window)
 

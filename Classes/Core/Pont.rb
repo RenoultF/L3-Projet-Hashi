@@ -1,13 +1,13 @@
 
 
-##
-# Auteur Brabant Mano
-# Version 0.1 : Date : 07/02/2020
-
 load "../Core/Case.rb"
 load "../Core/Couleur.rb"
 
 ##
+# Auteur:: Brabant Mano
+# Version:: 0.1
+# Date:: 09/04/2020
+#
 #Cette classe représente les ponts du Hashi
 class Pont < Case
 
@@ -42,6 +42,12 @@ class Pont < Case
   #@marque => Booléen pour l'affichage, si égal à true le pont sera affiché en surbrillance rouge
   attr_accessor :marque
 
+  #@couleurPont => La couleur que prendrait le pont s'il est modifié
+  attr_accessor :couleurPont
+
+  #@couleurPontCourante => La couleur du pont
+  attr_accessor :couleurPontCourante
+
   #:nodoc:
   def Pont.verifieDirection(direction) #privée
     return true if([NULLE, HORIZONTAL, VERTICAL].include?(direction))
@@ -54,30 +60,30 @@ class Pont < Case
 
   ##
   #Ce constructeur permet de créer un nouveau pont
-  #param :
+  #param::
   # * posX La position sur l'axe des abscisse
   # * posY La position sur l'axe des ordonnées
   # * grille La grille sur laquelle se trouve le pont
   def Pont.creer(posX, posY, grille)
-
       Pont.construit(posX, posY, grille, NULLE, 0)
-
   end
 
   ##
   #Ce constructeur permet de créer un nouveau pont avec des valeurs
-  #param :
+  #param::
   # * posX La position sur l'axe des abscisse
   # * posY La position sur l'axe des ordonnées
   # * grille La grille sur laquelle se trouve le pont
   # * direction La direction du pont
   # * valeur La taille du pont
   def Pont.construit(posX, posY, grille, direction, valeur)
+
       if(Pont.verifieDirection(direction))
         new(posX, posY, grille, direction, valeur)
       else
         new(posX, posY, grille, NULLE, 0)
       end
+
   end
 
 
@@ -97,38 +103,6 @@ class Pont < Case
   #:doc:
 
   ##
-  #Cette méthode permet de connaitre la couleur que prendrait le pont s'il était modifié
-  #return :
-  # * La couleur du pont s'il était modifié (Couleur.rb)
-  def couleurPont
-    return @couleurPont
-  end
-
-  ##
-  #Cette méthode permet de modifier la couleur que prendrait le pont s'il était modifié
-  #param :
-  # * couleur La couleur que prendrait le pont s'il était modifié (Couleur.rb)
-  def couleurPont=(couleur)
-    @couleurPont = couleur
-  end
-
-  ##
-  #Cette méthode permet de connaitre la couleur du pont
-  #return :
-  # * La couleur du pont (Couleur.rb)
-  def couleurPontCourante
-    return @couleurPontCourante
-  end
-
-  ##
-  #Cette méthode permet de modifier la couleur du pont
-  #param :
-  # * couleur La couleur du pont (Couleur.rb)
-  def couleurPontCourante=(couleur)
-    @couleurPontCourante = couleur
-  end
-
-  ##
   #Cette méthode permet de modifier la couleur que devrais prendre le pont s'il est modifié
   #ainsi que sa couleur courante si elle était la même que la couleur après modification
   #Utilisé par les hypothèses
@@ -140,11 +114,10 @@ class Pont < Case
   end
 
   ##
-  #alias de couleurPont=(couleur)
+  #Cette méthode permet de modifer la couleur la couleur que devrais prendre le pont s'il est modifié
   def undoCouleurPont(couleurPont)
     @couleurPont = couleurPont
   end
-
 
   ##
   #Cette méthode permet de simuler un "clic" sur le pont
@@ -165,32 +138,27 @@ class Pont < Case
 
   end
 
-
-
   ##
   #Cette méthode permet de comparer des ponts entre-eux
-  #param :
+  #param::
   # * autre L'autre pont à comparer
-  #return :
+  #return::
   # * 0 si les ponts sont égaux
   # * un nombre négatif si le premier pont est inférieur au deuxième
   # * un nombre positif si le premier pont est supérieur au deuxième
   def <=>(autre)
-    if(!autre.estPont?())
-      return 1
-    end
-    if(@direction != autre.direction)
-        return @direction <=> autre.direction
-    end
-    if(@valeur != autre.valeur)
-        return @valeur <=> autre.valeur
-    end
+
+    return 1 if(!autre.estPont?())
+    return @direction <=> autre.direction if(@direction != autre.direction)
+    return @valeur <=> autre.valeur if(@valeur != autre.valeur)
     return 0
+
   end
 
   ##
   #Cette méthode permet d'afficher le pont dans un terminal
   def to_s()
+
     ret = " "
     if(@surbrillance)
       ret = "P"
@@ -212,6 +180,7 @@ class Pont < Case
       ret = "R"
     end
     return ret
+
   end
 
 
@@ -256,10 +225,10 @@ class Pont < Case
 
   ##
   #Cette méthode permet d'augmenter la valeur du pont
-  #param :
+  #param::
   # * direction La direction dans laquelle on veut augmenter le pont
   #Si le pont que l'on augmente avait 2 trait alors le pont disparait
-  #return :
+  #return::
   # * true Si la valeur à été modifié
   # * false Sinon
   def augmenteValeur(direction)
@@ -268,10 +237,10 @@ class Pont < Case
 
   ##
   #Cette méthode permet de diminuer la valeur du pont
-  #param :
+  #param::
   # * direction La direction dans laquelle on veut diminuer le pont
   #Si le pont que l'on diminue n'avait pas de trait alors un pont à deux trait apparait
-  #return :
+  #return::
   # * true Si la valeur à été modifié
   # * false Sinon
   def diminueValeur(direction)
@@ -281,15 +250,13 @@ class Pont < Case
 
   ##
   #Cette méthode permet de mettre en surbrillance le pont
-  #param :
+  #param::
   # * direction La direction dans laquelle on veut mettre en surbrillance le pont
-  #return :
+  #return::
   # * true Si le pont a été mis en surbrillance
   # * false Sinon
   def metSurbrillance(direction)
-
       return modifSurbrillance(direction, true)
-
   end
 
   #Cette méthode permet de diminuer la valeur du pont
@@ -300,9 +267,7 @@ class Pont < Case
   #
   #@return true si la valeur à été modifié, false sinon
   def supprSurbrillance(direction)
-
       return modifSurbrillance(direction, false)
-
   end
 
   ##
@@ -322,7 +287,7 @@ class Pont < Case
 
   ##
   #Cette méthode retourne vrai
-  #return :
+  #return::
   # * true
   def estPont?()
     return true

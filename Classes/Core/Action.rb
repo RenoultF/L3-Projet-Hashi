@@ -1,8 +1,10 @@
 
-##
-# Auteur Brabant Mano
-# Version 0.1 : Date : 07/02/2020
 
+##
+# Auteur:: Brabant Mano
+# Version:: 0.1
+# Date:: 09/04/2020
+#
 #Cette classe représente les actions réalisées par le joueur (placer, retirer des ponts)
 class Action
 
@@ -12,18 +14,17 @@ class Action
   #@ile2 => La deuxième ile
   attr_reader:ile2
 
-  #@ile1 => La méthode utilisé
+  #@ile1 => La méthode utilisé (createPont ou supprimePont)
   attr_reader:methode
 
   private_class_method :new
 
+  ##
   #Ce constructeur permet de creer une nouvelle action
-  #
-  #@param ile1 La premiere ile
-  #
-  #@param ile2 La deuxieme ile
-  #
-  #@param methode La methode utilisé (createPont ou supprimePont)
+  #param::
+  # * ile1 La premiere ile
+  # * ile2 La deuxieme ile
+  # * methode La methode utilisé (createPont ou supprimePont)
   def Action.creer(ile1, ile2, methode)
     new(ile1, ile2, methode)
   end
@@ -36,6 +37,7 @@ class Action
   end
   #:doc:
 
+  ##
   #Cette méthode permet d'afficher l'action
   def to_s
     @ile1.to_s() + ":" + @ile2.to_s() + ":" + @methode.to_s()

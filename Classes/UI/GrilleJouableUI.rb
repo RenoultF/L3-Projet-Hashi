@@ -1,13 +1,12 @@
 
-##
-# Auteur Brabant Mano
-# Version 0.1 : Date : 09/04/2020
-
-
 require "../UI/GrilleUI.rb"
 
 
 ##
+# Auteur:: Brabant Mano
+# Version:: 0.1
+# Date:: 09/04/2020
+#
 #Cette classe représente une GrilleUI dans laquelle on peut jouer
 #Pour l'utiliser créez en une et ajoutez la avec "add" ou "pack_start" etc, à votre container
 #Voir GrilleUI

@@ -4,7 +4,10 @@
 
 require 'gtk3'
 
-
+##
+# Auteur:: Brabant Mano
+# Version:: 0.1
+# Date:: 09/04/2020
 class ReglesUI < Gtk::Box
 
 

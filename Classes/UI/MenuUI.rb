@@ -1,8 +1,4 @@
 
-##
-# Auteur Brabant Mano
-# Version 0.1 : Date : 09/04/2020
-
 
 
 require "../UI/ChoixNomUI.rb"
@@ -11,7 +7,10 @@ require "../UI/ChoixDifficulteUI.rb"
 require "../UI/FenetreReglesUI.rb"
 require 'gtk3'
 
-
+##
+# Auteur:: Brabant Mano
+# Version:: 0.1
+# Date:: 09/04/2020
 class MenuUI < Gtk::Box
 
   attr_reader :choixNom

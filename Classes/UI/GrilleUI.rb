@@ -1,8 +1,4 @@
 
-##
-# Auteur Brabant Mano
-# Version 0.1 : Date : 09/04/2020
-
 require "../Core/Grille.rb"
 
 require "../UI/CaseUI.rb"
@@ -12,6 +8,10 @@ require "gtk3"
 
 
 ##
+# Auteur:: Brabant Mano
+# Version:: 0.1
+# Date:: 09/04/2020
+#
 #Cette classe permet d'afficher une grille de hashi
 class GrilleUI < Gtk::DrawingArea
 
@@ -19,7 +19,7 @@ class GrilleUI < Gtk::DrawingArea
 
   ##
   #Ce constructeur permet de créer un nouveau afficheur de grille
-  #param :
+  #param::
   # * grille La grille que l'on veut afficher
   # * taille La taille des cases de la grille (40 par default)
   def initialize(grille, taille = 40)
@@ -61,7 +61,7 @@ class GrilleUI < Gtk::DrawingArea
   ##
   #Cette méthode permet de modifier la grille que l'on affiche
   #Méthode utilisé par la suppression d'hypothèses
-  #param :
+  #param::
   # * grille La nouvelle grille à afficher
   def grille=(grille)
 
@@ -73,10 +73,10 @@ class GrilleUI < Gtk::DrawingArea
 
   ##
   #Cette méthode permet de retourner une case à une position donnée
-  #param :
+  #param::
   # * i La position en abscisse
   # * j La position en ordonnée
-  #return :
+  #return::
   # * La case à la position [i][j]
   def getCase(i, j)
 
@@ -86,10 +86,10 @@ class GrilleUI < Gtk::DrawingArea
 
   ##
   #Cette méthode permet de savoir si une position donnée est dans les limites de la grille
-  #param :
+  #param::
   # * i La position en abscisse
   # * j La position en ordonnée
-  #return :
+  #return::
   # * true si les coordonnées sont en dehors de la grille, false sinon
   def sortLimite?(i, j)
 
@@ -128,7 +128,7 @@ class GrilleUI < Gtk::DrawingArea
 
   ##
   #Cette méthode permet de sauvegarder la grille que l'on est en train d'afficher
-  #param :
+  #param::
   # * compte Le compte auquel associer la sauvegarde
   def sauvegarder(compte)
 

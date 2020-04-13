@@ -1,38 +1,35 @@
 
-##
-# Auteur Brabant Mano
-# Version 0.1 : Date : 09/04/2020
-
 require "../Core/Case.rb"
 
 require "gtk3"
 
 ##
+# Auteur:: Brabant Mano
+# Version:: 0.1
+# Date:: 09/04/2020
+#
 #Cette classe permet d'afficher une case de la grille
 class CaseUI < Gtk::DrawingArea
 
+  #@casee => La case que l'on va afficher
   attr_reader :casee
 
   private_class_method :new
 
   ##
   #Ce constructeur permet de créer un nouveau afficheur de case
-  #param :
+  #param::
   # * casee La case à afficher
-  # * taille La taille d'une case (40 par defaut)
+  # * taille La taille d'une case (en pixels)
   def CaseUI.creer(casee, taille = 40)
-
     new(casee, taille)
-
   end
 
   #:nodoc:
   def initialize(casee, taille = 40)
 
     super()
-
     @casee = casee
-
     @taille = taille
 
   end
@@ -41,9 +38,7 @@ class CaseUI < Gtk::DrawingArea
   ##
   #Cette méthode permet de simuler le clic sur la case
   def clickOn()
-
     @casee.clickOn()
-
   end
 
   ##
@@ -59,17 +54,16 @@ class CaseUI < Gtk::DrawingArea
 
   end
 
+  ##
+  #Cette méthode permet de savoir si la case que l'on affiche est une ile
   def estIle?()
-
     return @casee.estIle?()
-
   end
 
-
+  ##
+  #Cette méthode permet de savoir si la case que l'on affiche est un pont
   def estPont?()
-
     return @casee.estPont?()
-
   end
 
 end

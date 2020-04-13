@@ -1,12 +1,13 @@
 
 
-##
-# Auteur Brabant Mano
-# Version 0.1 : Date : 09/04/2020
 
 require 'gtk3'
 
 ##
+# Auteur:: Brabant Mano
+# Version:: 0.1
+# Date:: 09/04/2020
+#
 #Cette classe permet à l'utilisateur de choisir entre plusieurs difficulté
 class ChoixDifficulteUI < Gtk::Box
 
