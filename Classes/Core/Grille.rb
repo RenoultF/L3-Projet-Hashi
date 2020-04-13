@@ -514,9 +514,9 @@ class Grille
 
     private def homologue(methode)
       if(methode == :createPont)
-        return::supprimePont
+        return supprimePont
       elsif(methode == :supprimePont)
-        return::createPont
+        return createPont
       else
         raise("Je ne connais pas la methode")
       end
