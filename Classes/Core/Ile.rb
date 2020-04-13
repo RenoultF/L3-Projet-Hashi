@@ -168,7 +168,7 @@ class Ile < Case
   ##
   #Cette méthode permet d'afficher les infos utiles de l'ile
   def afficheInfo()
-      return @valeur, @posX, @posY
+      return @valeur, @posX, @posY, getCapaciteResiduelle()
   end
 
   ##

@@ -326,6 +326,7 @@ class Grille
       if(!@dernierIle.eql?(nil))
         if(pont.surbrillance())
           self.chercherVoisins(pont, pont.directionSurbrillance)
+          puts "ALLLLLLLLOOOOOO ?????? : ", @dernierIle.afficheInfo()
           @score -= 100
         else
           self.setDernierIle(nil)
@@ -587,12 +588,12 @@ class Grille
     # * false Sinon
     def createPont(ile2, action = true)
       direction = getDirectionPont(@dernierIle, ile2)
-      if(action && direction != Pont::NULLE)
-        self.addAction(@dernierIle, ile2, :createPont)
+      if(direction != Pont::NULLE)
+        if(action)
+          self.addAction(@dernierIle, ile2, :createPont)
+        end
         ile2.ajouteNombrePont(@dernierIle)
         @dernierIle.ajouteNombrePont(ile2)
-        print "Nombre chemin disponible : ", @dernierIle.getNombreCheminDisponible(), "\n"
-        print "Capacite residuelle : ", @dernierIle.getCapaciteResiduelle(), "\n"
       end
       proc = Proc.new do |pont|
         pont.augmenteValeur(direction)
@@ -610,12 +611,12 @@ class Grille
     # * false Sinon
     def supprimePont(ile2, action = true)
       direction = getDirectionPont(@dernierIle, ile2)
-      if(action && direction != Pont::NULLE)
-        self.addAction(@dernierIle, ile2, :supprimePont)
+      if(direction != Pont::NULLE)
+        if(action)
+          self.addAction(@dernierIle, ile2, :supprimePont)
+        end
         ile2.retireNombrePont(@dernierIle)
         @dernierIle.retireNombrePont(ile2)
-        print "Nombre chemin disponible : ", @dernierIle.getNombreCheminDisponible(), "\n"
-        print "Capacite residuelle : ", @dernierIle.getCapaciteResiduelle(), "\n"
       end
       proc = Proc.new do |pont|
         pont.diminueValeur(direction)

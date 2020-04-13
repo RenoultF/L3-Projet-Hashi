@@ -74,8 +74,6 @@ class JeuUI < Gtk::Box
 
     @sauvegarder = Gtk::Button.new(:label => "Sauvegarder")
     @sauvegarder.signal_connect "clicked" do
-      puts "Classe : " + @grille.to_s()
-      puts "Classe : " + @grille.grille.to_s()
       Sauvegarde.recuperer(@compte, @grille.grille).setGrille(@grille.grille).sauvegarder()
     end
 
