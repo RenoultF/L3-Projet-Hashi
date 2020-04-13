@@ -8,7 +8,7 @@ require "../Core/Action.rb"
 
 
 ##
-# Auteur:: Brabant Mano
+# Auteur:: Brabant Mano, Renoult Florent
 # Version:: 0.1
 # Date:: 09/04/2020
 #
@@ -99,7 +99,7 @@ class Grille
       puts "chaine", chaine
         @actions = UndoRedo.creer()
         @checkpoints = Pile.creer(5)
-        
+
         i = -1
         j = -1
 
@@ -293,8 +293,8 @@ class Grille
 
     ##
     #Cette méthode permet de supprimer la dernière hypothèse et de revenir à l'état correspondant
-    #
-    #@param jeu Le jeu dont-on va modifier la grille
+    #param::
+    # * jeu Le jeu dont-on va modifier la grille
     def supprimeHypothese(jeu)
       begin
         jeu.grille = @checkpoints.depiler().getGrille
@@ -310,19 +310,17 @@ class Grille
 
     ##
     #Méthode à appeler quand on appuie sur une ile
-    #
-    #@param ile L'ile sur laquelle on a cliqué
+    #param::
+    # * ile L'ile sur laquelle on a cliqué
     def clickOnIle(ile)
-
       setDernierIle(ile)
-
     end
 
 
     ##
     #Méthode à appeler quand on appuie sur une ile
-    #
-    #@param ile L'ile sur laquelle on a cliqué
+    #param::
+    # * ile L'ile sur laquelle on a cliqué
     def clickOnPont(pont)
 
       if(!@dernierIle.eql?(nil))
@@ -336,8 +334,9 @@ class Grille
 
     end
 
+    ##
+    #Cette méthode permet de remmetre à zéro la grille
     def recommencer()
-
 
       while(!@checkpoints.empty?) do
         valideHypothese()
@@ -368,31 +367,23 @@ class Grille
     end
 
 
-
+    ##
+    #Cette méthode permet de créer un pont entre la dernière ile et une autre ile qui passe par un pont donné
+    #param::
+    # * pont La case pont par lequel doit passer le pont entre les deux iles
+    # * direction La direction dans laquelle est dirigé le pont
     def chercherVoisins(pont, direction)
 
       if(direction == Pont::HORIZONTAL)
 
         i = pont.posX
         j = pont.posY
-
-        puts "Ile droite", i, j
-
         while(!(ileDroite = getCase(i, j)).estIle?())
-
           j += 1
-          puts "Ile droite", i, j
-
         end
-
         j = pont.posY
-        puts "Ile gauche", i, j
-
         while(!(ileGauche = getCase(i, j)).estIle?())
-
           j -= 1
-          puts "Ile gauche", i, j
-
         end
 
         if(ileGauche == @dernierIle)
@@ -400,30 +391,18 @@ class Grille
         else
           ile2 = ileGauche
         end
-
         createPont(ile2)
 
       elsif(direction == Pont::VERTICAL)
 
         i = pont.posX
         j = pont.posY
-        puts "Ile bas", i, j
-
         while(!(ileBas = getCase(i, j)).estIle?())
-
           i += 1
-          puts "Ile bas", i, j
-
         end
-
-      i = pont.posX
-      puts "Ile haut", i, j
-
+        i = pont.posX
         while(!(ileHaut = getCase(i, j)).estIle?())
-
           i -= 1
-          puts "Ile haut", i, j
-
         end
 
         if(ileBas == @dernierIle)
@@ -431,17 +410,17 @@ class Grille
         else
           ile2 = ileBas
         end
-
         createPont(ile2)
 
       end
 
     end
 
-
+    ##
+    #Cette méthode permet d'appeler la méthode Case#redoCouleurPont de chaque case de la grille
+    #param::
+    # * couleur La couleur à passer au la méthode Case#redoCouleurPont
     def redoCouleurPont(couleur)
-
-      print "Couleur", couleur, "\n"
 
       @mat.each do |ligne|
         ligne.each do |c|
@@ -454,9 +433,11 @@ class Grille
     end
 
 
+    ##
+    #Cette méthode permet d'appeler la méthode Case#undoCouleurPont de chaque case de la grille
+    #param::
+    # * couleur La couleur à passer au la méthode Case#undoCouleurPont
     def undoCouleurPont(couleur)
-
-      print "Couleur", couleur, "\n"
 
       @mat.each do |ligne|
         ligne.each do |c|
@@ -477,46 +458,41 @@ class Grille
       labelScore.set_label(@score.to_s)
     end
 
+    ##
     #Cette méthode permet d'ajouter une action à la pile d'action
-    #
-    #@param ile1 La premère ile
-    #
-    #@param ile2 La deuxième ile
-    #
-    #@param methode La méthode utilisé (:createPont ou :supprimePont)
+    #param::
+    # * ile1 La premère ile
+    # * ile2 La deuxième ile
+    # * methode La méthode utilisé (:createPont ou :supprimePont)
     def addAction(ile1, ile2, methode)
       @actions.empiler(Action.creer(ile1, ile2, methode))
     end
 
-
-    #Cette méthode permet d'annuler la dernière action
+    ##
+    #Cette méthode permet d'annuler la dernière action éfféctué par l'utilisateur
     def undo()
-      puts"dans undo"
       if(!@actions.empty?())
         begin
-          puts"avant tempile"
           tempIle = self.getDernierIle()
-          puts"avant action"
           action = @actions.undo()
-          puts"avant dernierIle"
           self.setDernierIle(action.ile1())
-          puts"avant dend"
+          #Invoque l'inverse de la méthode utilisé sans l'ajouter à la undoRedo d'action
           self.send(homologue(action.methode()), action.ile2(), false)
-          puts"avant setDerniile2"
           self.setDernierIle(tempIle)
-          puts"avant fin"
         rescue => e
           puts e.message()
         end
       end
     end
 
-    #Cette méthode permet de refaire une action annulé
+    ##
+    #Cette méthode permet de refaire la dernière action annulé par le undo
     def redo()
       if(!@actions.empty?())
         begin
           action = @actions.redo()
           self.setDernierIle(action.ile1())
+          #Invoque la méthode utilisé sans l'ajouter à la undoRedo d'action
           self.send(action.methode(), action.ile2(), false)
         rescue => e
           puts e.message()
@@ -524,6 +500,12 @@ class Grille
       end
     end
 
+    ##
+    #Donne la méthode inverse de celle passé en paramètre
+    #param::
+    # * methode La méthode dont-il faut retourner l'inverse
+    #return::
+    # * Une méthode qui permet en l'appelant avec les mêmes paramètres de revenir à l'état précedant
     private def homologue(methode)
       if(methode == :createPont)
         return :supprimePont
@@ -534,13 +516,14 @@ class Grille
       end
     end
 
-    #Cette méthode permet de connaitre la direction du pont qui pourrait relier ses deux iles
-    #
-    #@param ile1 La première ile
-    #
-    #@param ile2 La deuxième ile
-    #
-    #@return La direction du pont, retourne Pont::NULLE si les iles ne sont pas voisines
+    ##
+    #Cette méthode permet de connaitre la direction du pont qui pourrait relier deux iles
+    #param::
+    # * ile1 La première ile
+    # * ile2 La deuxième ile
+    #return::
+    # *  La direction du pont Si les deux iles sont voisines
+    # *  Pont::NULLE Sinon
     def getDirectionPont(ile1, ile2)
       if(ile1.posX() == ile2.posX()) #alors pont horizontal
         return Pont::HORIZONTAL
@@ -551,24 +534,18 @@ class Grille
       end
     end
 
-
-    #Cette méthode permet de connaitre la direction et les positions des ponts qui pourrait relier ses deux iles
-    #
-    #@param ile1 La première ile
-    #
-    #@param ile2 La deuxième ile
-    #
-    #@return direction, petitPos, grandPos
-    #
-    #direction : La direction du pont, retourne Pont::NULLE si les iles ne sont pas voisines
-    #
-    #petitPos : La plus petit coordonnée du pont (en abscisse ou en ordonnée en fontion de la direction)
-    #
-    #petitPos : La plus grande coordonnée du pont (en abscisse ou en ordonnée en fontion de la direction)
+    ##
+    #Cette méthode permet de connaitre la direction et les positions des ponts qui pourrait relier deux iles
+    #param::
+    # * ile1 La première ile
+    # * ile2 La deuxième ile
+    #return::
+    # * direction : La direction du pont, retourne Pont::NULLE si les iles ne sont pas voisines
+    # * petitPos : La plus petit coordonnée du pont (en abscisse ou en ordonnée en fontion de la direction)
+    # * grandPos : La plus grande coordonnée du pont (en abscisse ou en ordonnée en fontion de la direction)
     def getDifference(ile1, ile2)
 
       direction = getDirectionPont(ile1, ile2)
-
       if(direction == Pont::HORIZONTAL)
         petitPos = [ile2.posY(), ile1.posY()].min() + 1
         grandPos = [ile2.posY(), ile1.posY()].max() - 1
@@ -580,15 +557,17 @@ class Grille
         grandPos = 0
       end
       return direction, petitPos, grandPos
+
     end
 
+    ##
     #Cette méthode permet de savoir si deux iles sont voisines
-    #
-    #@param ile1 La première ile
-    #
-    #@param ile2 La deuxième ile
-    #
-    #@return true si les iles sont voisines, false sinon
+    #param::
+    # * ile1 La première ile
+    # * ile2 La deuxième ile
+    #return::
+    # * true Si les iles sont voisines
+    # * false Sinon
     def estVoisin?(ile1, ile2 = @dernierIle)
       proc = Proc.new do |pont|
         if(pont.estIle?())
@@ -598,11 +577,14 @@ class Grille
       return parcoursPont(ile1, ile2, proc)
     end
 
+    ##
     #Cette méthode permet de créer un pont entre deux iles
-    #
-    #@param ile2 La deuxième ile (La première est l'ile @dernierIle)
-    #
-    #return true si le pont a été créer, false sinon
+    #param::
+    # * ile2 La deuxième ile (La première est l'ile @dernierIle)
+    # * action Boolean, si true on ajoute l'action à la pile d'action, si false on ne l'ajoute pas
+    #return::
+    # * true Si le pont a été crée
+    # * false Sinon
     def createPont(ile2, action = true)
       direction = getDirectionPont(@dernierIle, ile2)
       if(action && direction != Pont::NULLE)
@@ -618,11 +600,14 @@ class Grille
       return parcoursPont(@dernierIle, ile2, proc)
     end
 
+    ##
     #Cette méthode permet de supprimer un pont entre deux iles
-    #
-    #@param ile2 La deuxième ile (La première est l'ile @dernierIle)
-    #
-    #return true si le pont a été créer, false sinon
+    #param::
+    # * ile2 La deuxième ile (La première est l'ile @dernierIle)
+    # * action Boolean, si true on ajoute l'action à la pile d'action, si false on ne l'ajoute pas
+    #return::
+    # * true Si le pont a été supprimer
+    # * false Sinon
     def supprimePont(ile2, action = true)
       direction = getDirectionPont(@dernierIle, ile2)
       if(action && direction != Pont::NULLE)
@@ -638,11 +623,14 @@ class Grille
       return parcoursPont(@dernierIle, ile2, proc)
     end
 
+
+    ##
     #Cette méthode permet de mettre en surbrillance un pont entre deux iles
-    #
-    #@param ile2 La deuxième ile (La première est l'ile @dernierIle)
-    #
-    #return true si le pont a été mis en surbrillance, false sinon
+    #param::
+    # * ile2 La deuxième ile (La première est l'ile @dernierIle)
+    #return::
+    # * true Si le pont a été mis en surbrillance
+    # * false Sinon
     def surbrillancePont(ile2)
       direction = getDirectionPont(@dernierIle, ile2)
       proc = Proc.new do |pont|
@@ -651,11 +639,13 @@ class Grille
       return parcoursPont(@dernierIle, ile2, proc)
     end
 
-    #Cette méthode permet d'enlever la surbrillance d'un pont entre deux iles
-    #
-    #@param ile2 La deuxième ile (La première est l'ile @dernierIle)
-    #
-    #return true si le pont n'est plus surbrillance, false sinon
+    ##
+    #Cette méthode permet de retirer la surbrillance d'un pont entre deux iles
+    #param::
+    # * ile2 La deuxième ile (La première est l'ile @dernierIle)
+    #return::
+    # * true Si le pont n'est plus en surbrillance
+    # * false Sinon
     def eteintPont(ile2)
       direction = getDirectionPont(@dernierIle, ile2)
       proc = Proc.new do |pont|
@@ -664,8 +654,12 @@ class Grille
       return parcoursPont(@dernierIle, ile2, proc)
     end
 
+    ##
+    #Cette méthode permet de savoir si la route entre deux pont est disponible (iles voisines et pas séparées par un pont)
+    #param::
+    # * ile1 La première ile
+    # * ile2 La deuxième ile
     def routeDisponible?(ile1, ile2)
-      puts "Debout : " + ile1.to_s + " : " + ile2.to_s()
       direction = getDirectionPont(ile1, ile2)
       proc = Proc.new do |pont|
         if(pont.direction != Pont::NULLE && pont.direction != direction)
@@ -675,13 +669,15 @@ class Grille
       return parcoursPont(ile1, ile2, proc)
     end
 
+    ##
     #Cette méthode permet de parcourir les ponts entre deux ile avec un bloc
-    #
-    #@param ile1 La première ile
-    #
-    #@param ile2 La deuxième ile
-    #
-    #@param proc Le bloc
+    #param::
+    # * ile1 La première ile
+    # * ile2 La deuxième ile
+    # * proc Le bloc
+    #return::
+    # * false Si les deux iles ne sont pas voisines
+    # * La valeur de retour du bloc sinon
     def parcoursPont(ile1, ile2, proc)
       direction, petitPos, grandPos = getDifference(ile1, ile2)
       if(direction == Pont::HORIZONTAL)
@@ -693,6 +689,8 @@ class Grille
       end
     end
 
+    ##
+    #Cette méthode permet de faire un parcous vertical
     private def parcoursPontVertical(petitPos, grandPos, proc, colonne)
       for i in (petitPos..grandPos)
         proc.call(@mat[i][colonne])
@@ -700,6 +698,8 @@ class Grille
       return true
     end
 
+    ##
+    #Cette méthode permet de faire un parcous horizontal
     private def parcoursPontHorizontal(petitPos, grandPos, proc, ligne)
       for i in (petitPos..grandPos)
         proc.call(@mat[ligne][i])
@@ -707,9 +707,10 @@ class Grille
       return true
     end
 
+    ##
     #Cette méthode permet de modifier la dernière ile séléctionnée
-    #
-    #@param ile1 La nouvelle ile
+    #param::
+    # * ile1 La nouvelle ile
     def setDernierIle(ile1)
       if(!@dernierIle.eql?(nil))
         effacePont()
@@ -723,53 +724,47 @@ class Grille
       end
     end
 
+    ##
     #Cette méthode permet de recuperer la dernière ile séléctionnée
-    #
-    #@return La dernière ile séléctionnée
+    #return::
+    # * La dernière ile séléctionnée
     def getDernierIle()
       return @dernierIle
     end
 
-
+    ##
     #Cette méthode permet de mettre en surbrillance les pont disponibles de @dernierIle
     def montrePont()
-      puts "montrePont"
       for direction in Ile::DIRECTIONS
-        puts "direction : " + direction.to_s()
         if(@dernierIle.aVoisinDisponible?(direction))
-          puts "direction : " + direction.to_s()
           surbrillancePont(@dernierIle.getVoisin(direction))
         end
       end
     end
 
+    ##
     #Cette méthode permet d'enlever la surbrillance des pont disponibles de @dernierIle
     def effacePont()
-      puts "montrePont"
       for direction in Ile::DIRECTIONS
-        puts "direction : " + direction.to_s()
         if(@dernierIle.aVoisinDisponible?(direction))
-          puts "direction : " + direction.to_s()
           eteintPont(@dernierIle.getVoisin(direction))
         end
       end
     end
 
+    ##
     #Cette méthode permet de retourner la valeur du pont entre deux ile
+    #return::
+    # * La valeur du pont entre deux iles Si elles sont rélié
+    # * 0 Sinon
     def valeurPont(ile1, ile2)
       direction, petitPos, grandPos = getDifference(ile1, ile2)
       if(direction == Pont::HORIZONTAL)
-
         pont = @mat[ile1.posX()][petitPos]
-
       elsif(direction == Pont::VERTICAL)
-
         pont = @mat[petitPos][ile1.posY()]
-
       elsif(direction == Pont::NULLE)
-
         return 0
-
       end
 
       if(pont.direction == direction)
@@ -780,13 +775,13 @@ class Grille
 
     end
 
+    ##
+    #Cette méthode permet de sauvegarder la grille dans la base de donnée
     def sauvegarder(compte)
 
       save = Sauvegarde.recuperer(compte, self)
-
       save.setGrille(self)
       save.setScore([save.getScore(), @score].max) if self.fini?()
-
       save.sauvegarder()
 
     end
