@@ -2,9 +2,10 @@
 
 
 require "../UI/Fenetre.rb"
+require "../UI/Menu.rb"
 require 'gtk3'
 
 
-  fenetre = Fenetre.new()
+  fenetre = Menu.new()
 
 Gtk.main

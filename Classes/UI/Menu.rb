@@ -27,10 +27,10 @@ class Menu < Gtk::Box
 	@@taille = 7
 	@@difficulte = 1
 
-	 def initialize(racine)
+	 def initialize()
 		super(:vertical, 0)
 		@builder = Gtk::Builder.new
-		@racine = racine
+		#@racine = racine
 		self.afficheDemarrage()
      end
 
