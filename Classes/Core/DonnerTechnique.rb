@@ -2,17 +2,27 @@
 
 require "../Core/Aide.rb"
 
+##
+#Cette classe permet de donner de l'aide pour résoudre une grille
 class DonnerTechnique < Aide
 
+  ##
+  #Ce constructeur permet de créer une nouvelle aide
+  #param :
+  # * grille La grille sur laquelle on va donner des aides
   def DonnerTechnique.creer(grille)
     new(grille)
   end
 
+  #:nodoc:
   def initialize(grille)
     super(grille)
   end
+  #:doc:
 
-
+  ##
+  #L'aide apporté ici est une phrase qui indique des informations sur une ile qui peut poser de façon évidente des ponts
+  #Par exemple une ile qui ne possède qu'un seul voisin
   def aider()
     archipelle = false
     cheminComplet = false
@@ -24,9 +34,6 @@ class DonnerTechnique < Aide
           capa = cGrille.getCapaciteResiduelle()
           nChemins = cGrille.getNombreCheminDisponible()
           nDirection = cGrille.getNombreDirectionConstructible()
-          if(!@grille.getDernierIle.eql?(nil))
-            puts "Capacite, Chemins, Direction : ", @grille.getDernierIle.getCapaciteResiduelle, @grille.getDernierIle.getNombreCheminDisponible, @grille.getDernierIle.getNombreDirectionConstructible
-          end
           if(capa > 0)
             if(capa == nChemins)
               cheminComplet = true

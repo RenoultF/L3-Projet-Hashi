@@ -108,7 +108,7 @@ class PontUI < CaseUI
     if(@casee.marque)
       cr.set_source_rgb(1, 0, 0)
     else
-      cr.set_source_rgb(@casee.couleurPontCouranteRouge, @casee.couleurPontCouranteVert, @casee.couleurPontCouranteBleu)
+      cr.set_source_rgb(@casee.couleurPontCourante.rouge, @casee.couleurPontCourante.vert, @casee.couleurPontCourante.bleu)
     end
 
     affichePontSimple(cr) if @casee.valeur == 1

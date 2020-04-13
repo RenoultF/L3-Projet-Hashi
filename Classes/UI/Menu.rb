@@ -243,6 +243,12 @@ class Menu < Gtk::Box
 	def AfficherAide()
 		@aide = Aide.new()
 	end
+
+	def removeChild(fenetre)
+		fenetre.each_all do |c|
+		  remove(c)
+		end
+	end
     
 	# def lancerJeu()
 	# 	@jeu = JeuUI.new(@@mode, @@taille, @@difficulte,@pseudo,@window)       
@@ -274,7 +280,14 @@ class Menu < Gtk::Box
 		afficheLabel("Creation du compte en cours")
 	
 		@window.hide()
-		Thread.new{@racine.choisirGrille(@pseudo.text(), @@taille, @@difficulte)}
+		fenetreScroll = Gtk::Window.new()
+		boxScroll = Gtk::Box.new(:horizontal)
+		choix = ChoixGrilleScrollUI.new(ChoixGrilleUI.new(@racine))
+		choix.chargerGrille(@pseudo.text(),@@taille,@@difficulte)
+		boxScroll.pack_start(choix, :expand => true, :fill => true)
+		fenetreScroll.add(boxScroll)
+		fenetreScroll.show_all
+		#Thread.new{@racine.choisirGrille(@pseudo.text(), @@taille, @@difficulte)}
 	
 	end
 	
