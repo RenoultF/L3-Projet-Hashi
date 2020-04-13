@@ -34,6 +34,7 @@ class FenetreJeuUI
         @builderJeu = Gtk::Builder.new
         @builderJeu.add_from_file("../glade/jeu.glade")
         @window = @builderJeu.get_object("windowJeu")
+        @window.style_context.add_provider(@@CSS_BG_JEU, Gtk::StyleProvider::PRIORITY_USER)
         
 
         #autre
@@ -62,17 +63,17 @@ class FenetreJeuUI
         @btnSuppr1 = @builderJeu.get_object("btnsup1")
         @btnSuppr1.signal_connect('clicked'){@grille.supprimeHypothese(@grilleJouable)}
 
-        @btnValid2 = @builderJeu.get_object("btnvalid2")
-        @btnValid2.signal_connect('clicked'){@grille.creerHypothese()}
+        # @btnValid2 = @builderJeu.get_object("btnvalid2")
+        # @btnValid2.signal_connect('clicked'){@grille.creerHypothese()}
 
-        @btnSuppr2 = @builderJeu.get_object("btnsup2")
-        @btnSuppr2.signal_connect('clicked'){@grille.supprimeHypothese(@grilleJouable)}
+        # @btnSuppr2 = @builderJeu.get_object("btnsup2")
+        # @btnSuppr2.signal_connect('clicked'){@grille.supprimeHypothese(@grilleJouable)}
 
-        @btnValid3 = @builderJeu.get_object("btnvalid3")
-        @btnValid3.signal_connect('clicked'){@grille.creerHypothese()}
+        # @btnValid3 = @builderJeu.get_object("btnvalid3")
+        # @btnValid3.signal_connect('clicked'){@grille.creerHypothese()}
         
-        @btnSuppr3 = @builderJeu.get_object("btnsup3")
-        @btnSuppr3.signal_connect('clicked'){@grille.supprimeHypothese(@grilleJouable)}
+        # @btnSuppr3 = @builderJeu.get_object("btnsup3")
+        # @btnSuppr3.signal_connect('clicked'){@grille.supprimeHypothese(@grilleJouable)}
 
         @btnSauvegarder = @builderJeu.get_object("btnsave")
         @btnSauvegarder.signal_connect('clicked'){Sauvegarde.recuperer(@compte, @grille).setGrille(@grille).sauvegarder()}

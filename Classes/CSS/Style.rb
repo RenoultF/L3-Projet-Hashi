@@ -11,6 +11,15 @@ require 'gtk3'
     }
     CSS
 
+@@CSS_BG_JEU ||= Gtk::CssProvider.new
+@@CSS_BG_JEU.load(data: <<-CSS)
+    * {
+        background-image: url("../glade/wJapStylePlusNet.jpg");
+    }
+    CSS
+
+    
+
 @@CSS_BUTTON_ACTIVE ||= Gtk::CssProvider.new
 @@CSS_BUTTON_ACTIVE.load(data: <<-CSS)
     button{
