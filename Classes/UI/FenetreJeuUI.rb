@@ -95,9 +95,9 @@ class FenetreJeuUI
 
     def modifScore(val)
         @grille.score += val
-        # if(@grille.score<0)
-        #     @grille.score = 0
-        # end
+        if(@grille.score<0)
+            @grille.score = 0
+        end
         @labelScore.set_label(@grille.score.to_s)
     end
 
