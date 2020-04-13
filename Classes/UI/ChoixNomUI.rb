@@ -8,6 +8,8 @@ require 'gtk3'
 # Auteur:: Brabant Mano
 # Version:: 0.1
 # Date:: 09/04/2020
+#
+#Permet de choisir une nom
 class ChoixNomUI < Gtk::Box
 
   attr_reader :menu

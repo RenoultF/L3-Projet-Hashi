@@ -22,7 +22,7 @@ class Couleur
   end
 
 
-  def modifCouleur(couleur)
+  private def modifCouleur(couleur)
     @couleur = couleur
     return self
   end

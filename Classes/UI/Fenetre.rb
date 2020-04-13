@@ -6,6 +6,8 @@ require 'gtk3'
 # Auteur:: Brabant Mano
 # Version:: 0.1
 # Date:: 09/04/2020
+#
+#Une fenetre ou va apparaitre le jeu
 class Fenetre < Gtk::Window
 
   def initialize()

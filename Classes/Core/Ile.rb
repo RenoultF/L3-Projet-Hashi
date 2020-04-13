@@ -9,6 +9,8 @@ load "../Core/Case.rb"
 # Date:: 09/04/2020
 #
 #Cette classe représente les iles de la grille
+#
+#Hérite de Case
 class Ile < Case
 
   #Cette constante représente l'une des directions dans laquelle peut se trouver un voisin

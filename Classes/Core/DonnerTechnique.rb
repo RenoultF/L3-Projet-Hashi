@@ -8,6 +8,8 @@ require "../Core/Aide.rb"
 # Date:: 09/04/2020
 #
 #Cette classe permet de donner de l'aide pour résoudre une grille
+#
+#Hérite de Aide
 class DonnerTechnique < Aide
 
   ##
@@ -26,6 +28,7 @@ class DonnerTechnique < Aide
 
   ##
   #L'aide apporté ici est une phrase qui indique des informations sur une ile qui peut poser de façon évidente des ponts
+  #
   #Par exemple une ile qui ne possède qu'un seul voisin
   def aider()
     archipelle = false

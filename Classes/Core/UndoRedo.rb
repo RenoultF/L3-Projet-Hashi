@@ -42,7 +42,8 @@ class UndoRedo
 
   ##
   #Cette méthode permet de recupérer l'élément d'avant (de descendre dans la undoRedo)
-  #return:: L'élément d'avant
+  #return::
+  # * L'élément d'avant
   def undo()
 
     if(@indice <= 0)
@@ -56,7 +57,8 @@ class UndoRedo
 
   ##
   #Cette méthode permet de recupérer l'élément du dernier undo (de remonter dans la undoRedo)
-  #@return L'élément du dernier undo
+  #return::
+  # * L'élément du dernier undo
   def redo()
 
     if(@indice >= @nbElement)
