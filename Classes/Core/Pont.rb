@@ -9,6 +9,8 @@ load "../Core/Couleur.rb"
 # Date:: 09/04/2020
 #
 #Cette classe représente les ponts du Hashi
+#
+#Hérite de Case
 class Pont < Case
 
   #Cette constante représente l'une des directions que peut prendre un pont(Seulement quand valeur du pont = 0)
@@ -105,7 +107,10 @@ class Pont < Case
   ##
   #Cette méthode permet de modifier la couleur que devrais prendre le pont s'il est modifié
   #ainsi que sa couleur courante si elle était la même que la couleur après modification
+  #
   #Utilisé par les hypothèses
+  #param::
+  # * couleurPont La nouvelle couleur
   def redoCouleurPont(couleurPont)
     if(@couleurPont == @couleurPontCourante)
       @couleurPontCourante = couleurPont
@@ -115,6 +120,8 @@ class Pont < Case
 
   ##
   #Cette méthode permet de modifer la couleur la couleur que devrais prendre le pont s'il est modifié
+  #param::
+  # * couleurPont La nouvelle couleur
   def undoCouleurPont(couleurPont)
     @couleurPont = couleurPont
   end
@@ -259,13 +266,13 @@ class Pont < Case
       return modifSurbrillance(direction, true)
   end
 
+  ##
   #Cette méthode permet de diminuer la valeur du pont
-  #
-  #@param direction La direction dans laquelle ont veut diminuer le pont
-  #
-  #Si le pont que l'on diminue n'avait pas de trait alors un pont à deux trait apparait
-  #
-  #@return true si la valeur à été modifié, false sinon
+  #param::
+  # * direction La direction dans laquelle on veut enlever la surbrillance
+  #return::
+  # * true Si la valeur n'est plus en surbrillance
+  # * false Sinon
   def supprSurbrillance(direction)
       return modifSurbrillance(direction, false)
   end

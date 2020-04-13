@@ -15,6 +15,7 @@ require "gtk3"
 #Cette classe permet d'afficher une grille de hashi
 class GrilleUI < Gtk::DrawingArea
 
+  #@grille => La grile avec laquelle on joue
   attr_accessor :grille
 
   ##
@@ -77,7 +78,7 @@ class GrilleUI < Gtk::DrawingArea
   # * i La position en abscisse
   # * j La position en ordonnée
   #return::
-  # * La case à la position [i][j]
+  # * La case à la position (i, j)
   def getCase(i, j)
 
     return @mat[i][j]

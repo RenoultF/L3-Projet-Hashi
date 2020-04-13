@@ -9,6 +9,8 @@ require 'gtk3'
 # Auteur:: Brabant Mano
 # Version:: 0.1
 # Date:: 09/04/2020
+#
+#Montre l'ecran de victoire
 class FinUI < Gtk::Box
 
   def initialize(racine)
