@@ -1,5 +1,3 @@
-
-
 require "../Core/Case.rb"
 require "../Core/Ile.rb"
 require "../Core/Pont.rb"
@@ -27,7 +25,7 @@ class Grille
     @actions #pile des actions
     @sauvegarde #sauvegarde de la grille
     @matSolution #matrice de la grille Solution
-    @scoreCourant#score actuelle de la grille
+    @score#score actuelle de la grille
     @chronoGrille #chrono de la grille
     @threadChrono #thread dans equel le chrono va tourner
     @minutesFin #minutes a laquelle il a fini la map
@@ -59,22 +57,16 @@ class Grille
 
     ##
     #Cette méthode permet de retourner toutes les grilles d'un dossier
+    #param::
+    # * dossier Le dossier où on va chercher les grilles
     def Grille.chargerGrilles(dossier)
 
-      puts dossier
-
       ret = Array.new()
-
       Dir.each_child(dossier) do |fichier|
-
-        puts fichier
-
         text = File.open(dossier + "/" + fichier).read
         text.gsub!(/\r\n/, "\n");
         ret.push(Grille.creer(text))
-
       end
-
       return ret
 
     end
@@ -82,24 +74,32 @@ class Grille
 
     private_class_method :new
 
+    ##
     #Ce constructeur permet de créer une nouvelle grille
-    #
-    #@param chaine La chaine génératrice
-    #
-    #@param tailleX Le nombre de cases en abscisse
-    #
-    #@param tailleY Le nombre de cases en ordonnée
-    #
-    #@param difficulte La difficulté de la grille
+    #param::
+    # * chaine La chaine génératrice
+    #Le format de la chaine est::
+    # * "#T tailleGrilleX tailleGrilleY"
+    # * "#D difficulteGrille"
+    # * Ensemble de caractères séparés par des espaces pour coder la grille complète
+    #Les caractères spéciaux sont::
+    # * \[1-8\] Correspont à une ile avec le même nombre de liens à faire
+    # * N Correspont à une case vide
+    # * \- Correspont à un pont horizontal simple
+    # * \= Correspont à un pont horizontal double
+    # * | Correspont à un pont vertical simple
+    # * H Correspont à un pont vertical double
     def Grille.creer(chaine)
         new(chaine)
     end
 
+
     #:nodoc:
     def initialize(chaine)
+      puts "chaine", chaine
         @actions = UndoRedo.creer()
         @checkpoints = Pile.creer(5)
-        @score = 0
+        
         i = -1
         j = -1
 
@@ -145,15 +145,9 @@ class Grille
     end
     #:doc:
 
+    ##
     #Cette méthode permet d'afficher les case de la grille
     def afficheToi()
-=begin
-      if(!@dernierIle.eql?(nil))
-        print "Nombre chemin disponible : ", @dernierIle.getNombreCheminDisponible(), "\n"
-        print "Capacite residuelle : ", @dernierIle.getCapaciteResiduelle(), "\n"
-        print "Nombre Pont : ", @dernierIle.getNombrePont().to_s(), "\n"
-      end
-=end
       print "\t"
       for colonne in (0..tailleX-1)
         print colonne.to_s() + " "
@@ -169,6 +163,8 @@ class Grille
       end
     end
 
+    ##
+    #Cette méthode permet d'afficher les case de la grille solution
     def afficheSolution()
       print "\t"
       for colonne in (0..tailleX-1)
@@ -185,11 +181,11 @@ class Grille
       end
     end
 
-
-
-    #Cette méthode permet de savoir si la grille est correcte
-    #
-    #@return true si la grille est fini, false sinon
+    ##
+    #Cette méthode permet de savoir si la grille est fini (si tous les ponts on été placé comme dans la solution)
+    #return::
+    # * true Si la grille est fini
+    # * false Sinon
     def fini?()
       for i in (0..(@tailleX-1))
         for j in (0..(@tailleY-1))
@@ -201,9 +197,14 @@ class Grille
       return true
     end
 
+    ##
     #Cette méthode permet de savoir si les coordonnées passés sont comprises dans la grille
-    #
-    #@return true si les coordonnées sont valide, false sinon
+    #param::
+    # * posX La position en abscisse
+    # * posY La position en ordonnée
+    #return::
+    # * true Si les coordonnées sont valides
+    # * false Sinon
     def sortLimite?(posX, posY)
       if(posX < 0 || posY < 0 || posX >= @tailleX || posY >= @tailleY)
         return true
@@ -211,22 +212,22 @@ class Grille
       return false
     end
 
+    ##
     #Cette méthode permet de recuperer la matrice de cases
     def getGrille()
         return @mat
     end
 
-
+    ##
+    #Cette méthode permet de savoir si la grille à une solution identique à une autre grille
+    #param::
+    # * grille L'autre grille
+    #return::
+    # * true Si les grilles ont la même solution
+    # * false Sinon
     def memeSolution(grille)
 
-      if(@tailleX != grille.tailleX)
-        return false
-      end
-
-      if(@tailleY != grille.tailleY)
-        return false
-      end
-
+      return false if(@tailleX != grille.tailleX || @tailleY != grille.tailleY)
       for i in (0..(@tailleX-1))
         for j in (0..(@tailleY-1))
           if(self.getCaseSolution(i, j) != grille.getCaseSolution(i, j))
@@ -235,16 +236,16 @@ class Grille
         end
       end
       return true
+
     end
 
-
+    ##
     #Cette méthode permet de recuperer une case de la grille
-    #
-    #@param i La position en abscisse
-    #
-    #@param j La position en ordonnée
-    #
-    #@return La case à la position [i][j]
+    #param::
+    # * i La position en abscisse
+    # * j La position en ordonnée
+    #return::
+    # * La case à la position [i][j]
     def getCase(i, j)
         return @mat[i][j]
     end
@@ -255,14 +256,13 @@ class Grille
       @secondesFin =secondes
     end
 
-
+    ##
     #Cette méthode permet de recuperer une case de la grille solution
-    #
-    #@param i La position en abscisse
-    #
-    #@param j La position en ordonnée
-    #
-    #@return La case à la position [i][j]
+    #param::
+    # * i La position en abscisse
+    # * j La position en ordonnée
+    #return::
+    # * La case à la position (i, j)
     def getCaseSolution(i, j)
         return @matSolution[i][j]
     end
@@ -328,6 +328,7 @@ class Grille
       if(!@dernierIle.eql?(nil))
         if(pont.surbrillance())
           self.chercherVoisins(pont, pont.directionSurbrillance)
+          @score -= 100
         else
           self.setDernierIle(nil)
         end
@@ -343,7 +344,7 @@ class Grille
       end
 
       setDernierIle(nil)
-      @score = 0
+      @score = 500 * @tailleX
 
 
       @couleurs = UndoRedo.creer()
@@ -468,8 +469,12 @@ class Grille
     end
 
 
-    def modifScore(val)
+    def modifScore(val,labelScore)
       @score += val
+      if(@score<0)
+        @score = 0
+      end
+      labelScore.set_label(@score.to_s)
     end
 
     #Cette méthode permet d'ajouter une action à la pile d'action
@@ -486,13 +491,20 @@ class Grille
 
     #Cette méthode permet d'annuler la dernière action
     def undo()
+      puts"dans undo"
       if(!@actions.empty?())
         begin
+          puts"avant tempile"
           tempIle = self.getDernierIle()
+          puts"avant action"
           action = @actions.undo()
+          puts"avant dernierIle"
           self.setDernierIle(action.ile1())
+          puts"avant dend"
           self.send(homologue(action.methode()), action.ile2(), false)
+          puts"avant setDerniile2"
           self.setDernierIle(tempIle)
+          puts"avant fin"
         rescue => e
           puts e.message()
         end
@@ -514,9 +526,9 @@ class Grille
 
     private def homologue(methode)
       if(methode == :createPont)
-        return::supprimePont
+        return :supprimePont
       elsif(methode == :supprimePont)
-        return::createPont
+        return :createPont
       else
         raise("Je ne connais pas la methode")
       end

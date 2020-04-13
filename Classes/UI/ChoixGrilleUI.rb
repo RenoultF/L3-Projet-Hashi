@@ -35,14 +35,12 @@ class ChoixGrilleUI < Gtk::Box
   # * difficulte La difficulte des grilles à récuperer
   def chargerGrille(nomCompte, taille, difficulte)
     puts "dans charger grille choixGRilleUI"
-    each_all do |c|
-      puts "remove"
-      remove(c)
-    end
-
+    puts "nomCompte", nomCompte,"taille", taille,"difficulte", difficulte
+    
     tailleCase = 40
 
     liste = Sauvegarde.liste(Compte.recuperer_ou_creer(nomCompte), taille, difficulte)
+    p liste
     liste.each_with_index do |s, i|
       puts "liste.each"
       box = Gtk::Box.new(:horizontal)
@@ -65,7 +63,6 @@ class ChoixGrilleUI < Gtk::Box
       add(box)
 
     end
-    puts "show all"
     show_all
 
   end

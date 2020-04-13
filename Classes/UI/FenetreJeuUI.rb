@@ -17,20 +17,11 @@ require "../Core/Jeu.rb"
 class FenetreJeuUI
 
 
-    def initialize(mode, taille, difficulte,pseudo,window)
+    def initialize(mode, grille ,pseudo,window)
+        @grille=grille
         @mode = mode
-        case taille
-            when 1
-                @taille = 7
-            when 2
-                @taille = 10
-            when 3
-                @taille = 15        
-            else
-                puts "PROBLEME TAILLE"            
-        end
-        @difficulte = difficulte
-        @pseudo = pseudo.text()
+        @pseudo = pseudo
+        @scoreCourant = 500 * @grille.tailleX
         puts "Pseudo : #{@pseudo}";
         @compte = Compte.recuperer(@pseudo)
 
@@ -50,11 +41,13 @@ class FenetreJeuUI
         @labelPseudo.set_label("Joueur : "+ @pseudo)
         @labelChrono = @builderJeu.get_object("chrono")
         @labelScore = @builderJeu.get_object("lbVarScore")
-        #Creation du jeu
-        @jeu = Jeu.creer(@difficulte,@taille,@compte,self,@labelChrono, @labelScore)
+        @labelScore.set_label(@grille.score.to_s)
+
+        #Creation de la grille
+        grilleJeux = @builderJeu.get_object("grilleJeux")
+        grilleJeux.pack_start(@grilleJouable = GrilleJouableUI.new(grille))
+        #@jeu = Jeu.creer(@difficulte,@taille,@compte,self, @labelChrono, @labelScore)
         
-        @grille = @jeu.grille
-        p ("grille = #{@grille}")
         @checkpoints = Pile.creer()
         @verifGrille = VerifierGrille.creer(@grille)
         @donnerTech = DonnerTechnique.creer(@grille)
@@ -67,19 +60,19 @@ class FenetreJeuUI
         @btnValid1.signal_connect('clicked'){@grille.creerHypothese()}
 
         @btnSuppr1 = @builderJeu.get_object("btnsup1")
-        @btnSuppr1.signal_connect('clicked'){@grille.supprimeHypothese(@jeu)}
+        @btnSuppr1.signal_connect('clicked'){@grille.supprimeHypothese(@grilleJouable)}
 
         @btnValid2 = @builderJeu.get_object("btnvalid2")
         @btnValid2.signal_connect('clicked'){@grille.creerHypothese()}
 
         @btnSuppr2 = @builderJeu.get_object("btnsup2")
-        @btnSuppr2.signal_connect('clicked'){@grille.supprimeHypothese(@jeu)}
+        @btnSuppr2.signal_connect('clicked'){@grille.supprimeHypothese(@grilleJouable)}
 
         @btnValid3 = @builderJeu.get_object("btnvalid3")
         @btnValid3.signal_connect('clicked'){@grille.creerHypothese()}
         
         @btnSuppr3 = @builderJeu.get_object("btnsup3")
-        @btnSuppr3.signal_connect('clicked'){@grille.supprimeHypothese(@jeu)}
+        @btnSuppr3.signal_connect('clicked'){@grille.supprimeHypothese(@grilleJouable)}
 
         @btnSauvegarder = @builderJeu.get_object("btnsave")
         @btnSauvegarder.signal_connect('clicked'){Sauvegarde.recuperer(@compte, @grille).setGrille(@grille).sauvegarder()}
@@ -90,41 +83,22 @@ class FenetreJeuUI
         @btnVerif = @builderJeu.get_object("btnVerif")
         @btnVerif.signal_connect('clicked'){@donnerTech.aider()}
 
+        @chronoGrille = Chrono.new(self,  @labelChrono)
+        @threadChrono = Thread.new{@chronoGrille.lancerChrono()}
+
         #@chronoGrille = Chrono.new(@jeu)
         #@threadChrono = Thread.new{@chronoGrille.lancerChrono()}
-        @threadJeu = Thread.new{@jeu.lanceToi()}
+        #@threadJeu = Thread.new{@jeu.lanceToi()}
         @window.show_all()
         Gtk.main() 
     end
 
-    def AfficherGrille()
-        grilleJeux = @builderJeu.get_object("grilleJeux")
-        bouton = Gtk::Button.new(:label => " ")
-        (0..@grille.tailleX-1).each do |i|
-          (0..@grille.tailleY-1).each do |j|
-                bouton = Gtk::Button.new(:label => " ")
-                #puts "taille X #{@grille.tailleX}"
-                #puts "taille Y #{@grille.tailleY}"
-                temp = @grille.getCase(i,j)
-                #boutton = Gtk::Button.new(:label => "COUCOU")
-                if(temp.instance_of? Pont)
-    
-                    bouton.set_label("#{temp.valeur.to_s}")
-                    #puts "C EST UN PONT"
-                    #creation du bouton pont
-                elsif(temp.instance_of? Ile)
-                    bouton.set_label("#{temp.valeur.to_s}")
-                    #puts "C EST UNE ILE"
-                elsif(temp.instance_of? Case)
-                    bouton.set_label("case")
-                    #puts "C EST UNE CASE"
-                else
-                    puts "PROBLEME INSTANCE"
-                end
-
-            grilleJeux.attach bouton, i, j, 1, 1
-            end
-        end
-        @window.show_all()
+    def modifScore(val)
+        @grille.score += val
+        # if(@grille.score<0)
+        #     @grille.score = 0
+        # end
+        @labelScore.set_label(@grille.score.to_s)
     end
+
 end

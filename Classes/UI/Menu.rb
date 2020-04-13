@@ -1,7 +1,7 @@
 require 'gtk3'
 
-require "../UI/JeuUI.rb"
-require "../UI/Aide.rb"
+require "../UI/FenetreJeuUI.rb"
+require "../UI/AideUI.rb"
 require "../CSS/Style.rb"
 
 
@@ -241,7 +241,7 @@ class Menu < Gtk::Box
 	end
 	
 	def AfficherAide()
-		@aide = Aide.new()
+		@aide = AideUI.new()
 	end
 
 	def removeChild(fenetre)
@@ -250,9 +250,10 @@ class Menu < Gtk::Box
 		end
 	end
     
-	# def lancerJeu()
-	# 	@jeu = JeuUI.new(@@mode, @@taille, @@difficulte,@pseudo,@window)       
-	# end
+	def commencerPartie(grille,nomCompte)
+		@fenetreScroll.hide
+		@jeu = FenetreJeuUI.new(@@mode, grille,nomCompte,@window)       
+	end
 	
 	def retourMenu()
 
@@ -271,22 +272,26 @@ class Menu < Gtk::Box
 	
 	private def valide()
 	
-	
+		@@difficulte -= 1
 		puts "Paramètres menu"
 		print "Nom Compte : ", @pseudo.text(), "\n"
 		print "Taille grille : ", @@taille, "\n"
 		print "Difficulte grille : ", @@difficulte, "\n"
 	
 		afficheLabel("Creation du compte en cours")
-	
+		
 		@window.hide()
-		fenetreScroll = Gtk::Window.new()
+		@fenetreScroll = Gtk::Window.new()
+		@fenetreScroll.set_title("Scroll")
 		boxScroll = Gtk::Box.new(:horizontal)
-		choix = ChoixGrilleScrollUI.new(ChoixGrilleUI.new(@racine))
+		choix = ChoixGrilleScrollUI.new(ChoixGrilleUI.new(self))
 		choix.chargerGrille(@pseudo.text(),@@taille,@@difficulte)
 		boxScroll.pack_start(choix, :expand => true, :fill => true)
-		fenetreScroll.add(boxScroll)
-		fenetreScroll.show_all
+		@fenetreScroll.add(boxScroll)
+		@fenetreScroll.set_window_position(Gtk::WindowPosition::CENTER)
+		@fenetreScroll.maximize
+		@fenetreScroll.show_all
+	
 		#Thread.new{@racine.choisirGrille(@pseudo.text(), @@taille, @@difficulte)}
 	
 	end

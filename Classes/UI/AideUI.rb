@@ -1,6 +1,6 @@
 load '../CSS/Style.rb'
 
-class Aide
+class AideUI
 
     def initialize()       
         @builderAide = Gtk::Builder.new
