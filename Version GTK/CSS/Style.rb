@@ -74,15 +74,6 @@ require 'gtk3'
     }
     CSS
 
-@@CSS_ENTRY_MENU ||= Gtk::CssProvider.new
-@@CSS_ENTRY_MENU.load(data: <<-CSS)
-    #entryPseudo {
-        border-width: 2px;
-        border-color: red;
-    }
-    CSS
-
-
 #
 # CSS AIDE
 #
@@ -100,5 +91,12 @@ require 'gtk3'
         border: 2px solid #e29085;
         box-shadow: 3px 3px 2px #656565;
         font-weight: bold;
+    }
+    CSS
+
+@@CSS_ASTUCES ||= Gtk::CssProvider.new
+@@CSS_ASTUCES.load(data: <<-CSS)
+    * {
+        background-image: linear-gradient(#e7b7b0, white);
     }
     CSS

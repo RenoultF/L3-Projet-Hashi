@@ -1,7 +1,9 @@
 require 'gtk3'
 
 load 'JeuUI.rb'
-load 'Aide.rb'
+load 'aide.rb'
+load 'regles.rb'
+load 'astuces.rb'
 load '../CSS/Style.rb'
 
 
@@ -98,8 +100,8 @@ class Menu
             @btnQuitter.signal_connect('clicked') { |_widget| Gtk.main_quit }
             @btnJouer.signal_connect('clicked') { |_widget| lancerJeu() }
             @btnAide.signal_connect('clicked') { |_widget| AfficherAide() }
-            @btnRegles.signal_connect('clicked') { puts "--- Affichage des règles";  }
-		    @btnAstuces.signal_connect('clicked') { puts "--- Affichage des astuces"; }
+            @btnRegles.signal_connect('clicked') { |_widget| AfficherRegles()  }
+		    @btnAstuces.signal_connect('clicked') { |_widget| AfficherAstuces() }
 		
         @window.show()
         # Appel de la gestion des signaux
@@ -240,6 +242,14 @@ class Menu
 	
 	def AfficherAide()
 		@aide = Aide.new()
+	end
+
+	def AfficherRegles()
+		@regles = Regles.new()
+	end
+
+	def AfficherAstuces()
+		@astuces = Astuces.new()
 	end
     
 	def lancerJeu()
