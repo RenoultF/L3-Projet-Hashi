@@ -1,9 +1,10 @@
 
-##
-# Auteur Brabant Mano
-# Version 0.1 : Date : 07/02/2020
 
 ##
+# Auteur:: Brabant Mano
+# Version:: 0.1
+# Date:: 09/04/2020
+#
 #Cette classe représente une structure de donnée permettant de faire des undo et des redo
 class UndoRedo
 
@@ -28,7 +29,7 @@ class UndoRedo
 
   ##
   #Cette méthode permet de d'empiler un élément
-  #param :
+  #param::
   # * element L'élément à empiler
   def empiler(element)
 
@@ -41,7 +42,7 @@ class UndoRedo
 
   ##
   #Cette méthode permet de recupérer l'élément d'avant (de descendre dans la undoRedo)
-  #return : L'élément d'avant
+  #return:: L'élément d'avant
   def undo()
 
     if(@indice <= 0)
@@ -69,7 +70,7 @@ class UndoRedo
 
   ##
   #Cette méthode permet de savoir si la undoRedo est vide
-  #return :
+  #return::
   # * true Si la undoRedo est vide
   # * false Sinon
   def empty?()

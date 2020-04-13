@@ -1,8 +1,4 @@
 
-##
-# Auteur Brabant Mano, Renoult Florent
-# Version 2.0.1 : Date : 15/03/2020
-
 
 require "../Core/Case.rb"
 require "../Core/Ile.rb"
@@ -13,7 +9,11 @@ require "../Core/Hypothese.rb"
 require "../Core/Action.rb"
 
 
-
+##
+# Auteur:: Brabant Mano
+# Version:: 0.1
+# Date:: 09/04/2020
+#
 #Cette classe représente une grille de jeu avec les cases, la pile d'action, les hypoyhèses, etc
 class Grille
 
@@ -514,9 +514,9 @@ class Grille
 
     private def homologue(methode)
       if(methode == :createPont)
-        return :supprimePont
+        return::supprimePont
       elsif(methode == :supprimePont)
-        return :createPont
+        return::createPont
       else
         raise("Je ne connais pas la methode")
       end

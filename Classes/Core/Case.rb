@@ -1,19 +1,20 @@
 
-##
-# Auteur Brabant Mano
-# Version 0.1 : Date : 07/02/2020
 
 ##
+# Auteur:: Brabant Mano
+# Version:: 0.1
+# Date:: 09/04/2020
+#
 #Cette classe représente les cases de notre grille
 class Case
 
   #@posX => La position en abscisse de la case
   attr_reader :posX
 
-  #@posX => La position en ordonnée de la case
+  #@posY => La position en ordonnée de la case
   attr_reader :posY
 
-  #@posX => La grille sur laquelle se trouve la case
+  #@grille => La grille sur laquelle se trouve la case
   attr_reader :grille
 
   include Comparable
@@ -22,7 +23,7 @@ class Case
 
   ##
   #Ce constructeur permet de creer une nouvelle case
-  #param :
+  #param::
   # * posX La position en abscisse de la case
   # * posY La position en ordonnée de la case
   # * grille La grille dans laquelle se trouve la case
@@ -45,11 +46,11 @@ class Case
   end
 
   #Cette méthode permet de comparer deux cases
-  #param :
+  #param::
   # * autre L'autre case
-  #return :
-  # * 0 si l'autre case n'est ni une ile ni un pont
-  # * 1 sinon
+  #return::
+  # * 0 Si l'autre case n'est ni une ile ni un pont
+  # * 1 Sinon
   def <=>(autre)
     if(autre.estIle?() || autre.estPont?())
       return 1
@@ -64,7 +65,7 @@ class Case
   end
 
   #Cette méthode permet de savoir si la case est une ile
-  #return :
+  #return::
   # * true Si la case est une ile
   # * false Sinon
   def estIle?()
@@ -72,7 +73,7 @@ class Case
   end
 
   #Cette méthode permet de savoir si la case est un pont
-  #return :
+  #return::
   # * true Si la case est un pont
   # * false Sinon
   def estPont?()

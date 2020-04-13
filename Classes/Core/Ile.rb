@@ -1,13 +1,13 @@
 
-##
-# Auteur Brabant Mano
-# Version 0.1 : Date : 07/02/2020
-
 
 load "../Core/Case.rb"
 
 
 ##
+# Auteur:: Brabant Mano
+# Version:: 0.1
+# Date:: 09/04/2020
+#
 #Cette classe représente les iles de la grille
 class Ile < Case
 
@@ -37,7 +37,7 @@ class Ile < Case
 
   ##
   #Ce constructeur permet de créer une nouvelle ile
-  #param :
+  #param::
   # * posX La position en abscisse
   # * posY La position en ordonnée
   # * nbLien Le nombre de lien que doit possèder l'ile pour être valide
@@ -57,7 +57,7 @@ class Ile < Case
 
   ##
   #Cette méthode permet de recuperer le nombre de lien nécéssaire pour être valide
-  #return :
+  #return::
   # * Le nombre de lien nécéssaire pour être valide
   def getValeur()
       return @valeur
@@ -65,7 +65,7 @@ class Ile < Case
 
   ##
   #Cette méthode permet de recuperer le nombre de lien actuel
-  #return :
+  #return::
   # * Le nombre de lien actuel
   def getNombrePont()
     return @nbPont[HAUT] + @nbPont[DROITE] + @nbPont[BAS] + @nbPont[GAUCHE]
@@ -73,7 +73,7 @@ class Ile < Case
 
   ##
   #Cette méthode permet d'ajouter un pont entre cette ile et une autre
-  #param :
+  #param::
   # * ile L'autre ile
   def ajouteNombrePont(ile)
     for direction in DIRECTIONS
@@ -89,7 +89,7 @@ class Ile < Case
 
   ##
   #Cette méthode permet de retirer un pont entre cette ile et une autre
-  #param :
+  #param::
   # * ile L'autre ile
   def retireNombrePont(ile)
     for direction in DIRECTIONS
@@ -113,7 +113,7 @@ class Ile < Case
 
   ##
   #Cette méthode permet de savoir si cette ile est la dernière ile séléctionné
-  #return :
+  #return::
   # * true Si l'ile est la dernière séléctionné
   # * false Sinon
   def estDernierIle()
@@ -126,7 +126,7 @@ class Ile < Case
 
   ##
   #Cette méthode permet de savoir si l'ile est connécté à autant de pont que son objectif
-  #return :
+  #return::
   # * true Si l'ile est connécté à autant de pont que son objectif
   # * false Sinon
   def estValide?()
@@ -136,7 +136,7 @@ class Ile < Case
 
   ##
   #Cette méthode permet de savoir combien il reste de pont à connécter pour que l'ile soit valide
-  #return :
+  #return::
   # * Combien il reste de pont à connécter pour que l'ile soit valide
   def getCapaciteResiduelle()
     return getValeur() - getNombrePont()
@@ -144,7 +144,7 @@ class Ile < Case
 
   ##
   #Cette méthode permet de savoir le nombre de ponts qui peuvent être connecté à l'ile
-  #return :
+  #return::
   # * Le nombre de ponts qui peuvent être connecté à l'ile
   def getNombreCheminDisponible()
     ret = 0
@@ -171,7 +171,7 @@ class Ile < Case
 
   ##
   #Cette méthode permet de connaitre le nombre de directions dans laquelle on peut ajouter un pont
-  #return :
+  #return::
   # * Le nombre de directions dans laquelle on peut ajouter un pont
   def getNombreDirectionConstructible()
     ret = 0
@@ -187,7 +187,7 @@ class Ile < Case
 
   ##
   #Cette méthode permet de connaitre le nombre de direction dans laquelle un voisin est disponible
-  #return :
+  #return::
   # * Le nombre de direction dans laquelle un voisin est disponible
   def getNombreDirectionDisponible()
     ret = 0
@@ -201,9 +201,9 @@ class Ile < Case
 
   ##
   #Cette méthode permet de comparer des iles entre-elles
-  #param :
+  #param::
   # * autre L'autre ile à comparer
-  #return :
+  #return::
   # * 0 si les iles sont égales
   # * un nombre négatif si la première ile est inférieure à la deuxième
   # * un nombre positif si la première ile est supérieure à la deuxième
@@ -219,9 +219,9 @@ class Ile < Case
 
   ##
   #Cette méthode permet de connaitre un voisin dans une direction
-  #param :
+  #param::
   # * direction La direction dans laquelle on cherche le voisin
-  #return :
+  #return::
   # * Le voisin dans cette direction s'il existe
   # * raiseException Sinon
   def getVoisin(direction)
@@ -243,9 +243,9 @@ class Ile < Case
 
   ##
   #Cette méthode permet de savoir si l'ile a un voisin dans une direction
-  #param :
+  #param::
   # * direction La direction dans laquelle on cherche le voisin
-  #return :
+  #return::
   # * true Si l'ile a un voisin dans cette direction
   # * false Sinon
   def aVoisin?(direction)
@@ -279,9 +279,9 @@ class Ile < Case
 
   ##
   #Cette méthode permet de savoir si l'ile a un voisin disponible dans une direction (s'il n'a pas de pont qui les sépares)
-  #param :
+  #param::
   # * direction La direction dans laquelle on cherche le voisin
-  #return :
+  #return::
   # * true Si l'ile a un voisin disponible dans cette direction
   # * false Sinon
   def aVoisinDisponible?(direction)
@@ -297,7 +297,7 @@ class Ile < Case
 
   ##
   #Cette méthode retourne vrai
-  #return :
+  #return::
   # * true
   def estIle?()
     return true

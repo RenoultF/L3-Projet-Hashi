@@ -1,8 +1,4 @@
 
-##
-# Auteur Brabant Mano
-# Version 0.1 : Date : 09/04/2020
-
 require "../Core/Pont.rb"
 
 require "../UI/CaseUI.rb"
@@ -10,6 +6,10 @@ require "gtk3"
 
 
 ##
+# Auteur:: Brabant Mano
+# Version:: 0.1
+# Date:: 09/04/2020
+#
 #Cette classe permet d'afficher un pont de la grille
 class PontUI < CaseUI
 
@@ -17,7 +17,7 @@ class PontUI < CaseUI
 
   ##
   #Ce constructeur permet de créer un nouveau afficheur de pont
-  #param :
+  #param::
   # * casee La pont à afficher
   # * taille La taille d'une case (40 par defaut)
   def PontUI.creer(pont, taille = 40)
@@ -97,7 +97,7 @@ class PontUI < CaseUI
 
   ##
   #Cette méthode permet de dessiner le pont
-  #param :
+  #param::
   # * window La fenetre sur laquelle l'ile va etre afficher
   def draw(window)
 

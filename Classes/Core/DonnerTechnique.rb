@@ -3,12 +3,16 @@
 require "../Core/Aide.rb"
 
 ##
+# Auteur:: Brabant Mano
+# Version:: 0.1
+# Date:: 09/04/2020
+#
 #Cette classe permet de donner de l'aide pour résoudre une grille
 class DonnerTechnique < Aide
 
   ##
   #Ce constructeur permet de créer une nouvelle aide
-  #param :
+  #param::
   # * grille La grille sur laquelle on va donner des aides
   def DonnerTechnique.creer(grille)
     new(grille)

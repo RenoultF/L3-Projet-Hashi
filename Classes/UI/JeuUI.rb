@@ -1,7 +1,4 @@
 
-##
-# Auteur Brabant Mano
-# Version 0.1 : Date : 09/04/2020
 
 require "../Core/DonnerTechnique.rb"
 require "../Core/VerifierGrille.rb"
@@ -10,7 +7,10 @@ require "../Core/UndoRedo.rb"
 require "../UI/GrilleJouableUI.rb"
 require 'gtk3'
 
-
+##
+# Auteur:: Brabant Mano
+# Version:: 0.1
+# Date:: 09/04/2020
 class JeuUI < Gtk::Box
 
   attr_reader :racine
@@ -26,7 +26,7 @@ class JeuUI < Gtk::Box
 
   ##
   #Cette méthode permet de charger la grille avec laquelle on va jouer
-  #param :
+  #param::
   # * grille La grille avec laquelle on va jouer
   # * nomCompte Le nom du compte qui joue
   def chargerGrille(grille, nomCompte)

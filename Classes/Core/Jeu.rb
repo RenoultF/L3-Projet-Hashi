@@ -15,7 +15,12 @@ require "../Core/VerifierGrille.rb"
 require "../Core/Action.rb"
 require "../Core/Hypothese.rb"
 require "../Core/Chrono.rb"
+
 ##
+# Auteur:: Brabant Mano, Serelle Erwan
+# Version:: 0.1
+# Date:: 09/04/2020
+#
 #Cette classe permet de s'occuper du déroulement d'une partie
 class Jeu
 

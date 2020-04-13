@@ -1,6 +1,10 @@
 
 
 ##
+# Auteur:: Brabant Mano
+# Version:: 0.1
+# Date:: 09/04/2020
+#
 #Cette classe represente les aides de notre grille
 class Aide
 
@@ -9,7 +13,7 @@ class Aide
 
   ##
   #Ce constructeur permet de créer une nouvelle aide pour une grille
-  #param :
+  #param::
   # * grille La grille sur laquelle on va donner des informations
   def initialize(grille)
     @grille = grille

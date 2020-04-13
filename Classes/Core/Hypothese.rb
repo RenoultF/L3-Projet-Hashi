@@ -2,12 +2,10 @@
 
 
 ##
-# Auteur Brabant Mano
-# Version 0.1 : Date : 19/03/2020
-
-
-
-##
+# Auteur:: Brabant Mano
+# Version:: 0.1
+# Date:: 09/04/2020
+#
 #Cette classe représente les hypothèse (une sauvegarde de la grille à un certain moment)
 class Hypothese
 

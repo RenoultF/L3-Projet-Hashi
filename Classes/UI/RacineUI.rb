@@ -1,9 +1,4 @@
 
-##
-# Auteur Brabant Mano
-# Version 0.1 : Date : 09/04/2020
-
-
 
 require '../UI/GrilleUI.rb'
 require '../UI/MenuUI.rb'
@@ -15,6 +10,10 @@ require 'gtk3'
 
 
 ##
+# Auteur:: Brabant Mano
+# Version:: 0.1
+# Date:: 09/04/2020
+#
 #Cette classe permet de gérer le déroulement (et l'affichage) du jeu
 #C'est le widget à ajjouter à la fenetre principale
 #Elle possède une ensemble de méthode qui permette de passer d'une page à une autre
@@ -54,7 +53,7 @@ class RacineUI < Gtk::Box
   ##
   #Cette méthode permet d'afficher un ChoixGrilleScrollUI
   #Elle supprime tous les child de la RacineUI et ajoute le ChoixGrilleScrollUI
-  #param :
+  #param::
   # * nomCompte Le nom du compte pour lequel on va chercher les grilles
   # * taille La taille des grilles à aller chercher
   # * difficulte La difficulté des grilles à aller chercher
@@ -75,7 +74,7 @@ class RacineUI < Gtk::Box
   ##
   #Cette méthode permet d'afficher un JeuUI
   #Elle supprime tous les child de la RacineUI et ajoute le JeuUI
-  #param :
+  #param::
   # * grille La grille avec laquelle on va jouer
   # * nomCompte Le nom du compte qui va jouer
   def commencerPartie(grille, nomCompte)
@@ -94,7 +93,7 @@ class RacineUI < Gtk::Box
   ##
   #Cette méthode permet d'afficher un FinUI
   #Elle supprime tous les child de la RacineUI et ajoute la FinUI
-  #param :
+  #param::
   # * taille La taille de la grille que l'on vient de finir
   # * difficulte La difficulte de la grille que l'on vient de finir
   # Les paramètres taille et difficulte ne sont pas obligatoires

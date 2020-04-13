@@ -1,9 +1,9 @@
 
 ##
-# Auteur Brabant Mano
-# Version 0.1 : Date : 07/02/2020
-
-##
+# Auteur:: Brabant Mano
+# Version:: 0.1
+# Date:: 09/04/2020
+#
 #Cette classe représente une pile
 class Pile
 
@@ -16,7 +16,7 @@ class Pile
 
   ##
   #Ce constructeur permet de créer une nouvelle pile
-  #param :
+  #param::
   # * max Le nombre maximum d'élément dans la pile ("infini" par defaut)
   def Pile.creer(max = 0)
     new(max)
@@ -33,7 +33,7 @@ class Pile
 
   ##
   #Cette méthode permet de d'empiler un élément
-  #param :
+  #param::
   # * element L'élément à empiler
   def empiler(element)
 
@@ -50,7 +50,7 @@ class Pile
 
   ##
   #Cette méthode permet de dépiler le dernier élément
-  #return :
+  #return::
   # * L'élément dépilé
   # * raiseException Si la pile est vide
   def depiler
@@ -65,7 +65,7 @@ class Pile
 
   ##
   #Cette méthode permet de savoir si la pile est vide ou non
-  #return :
+  #return::
   # * true Si la pile est vide
   # * false Sinon
   def empty?()
