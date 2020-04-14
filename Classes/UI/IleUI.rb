@@ -51,7 +51,7 @@ class IleUI < CaseUI
 
     choixCouleur(cr)
 
-    cr.circle(positionY, positionX, @taille/2)
+    cr.circle(positionY, positionX, @taille/2-1)
 
     if(@casee.getCapaciteResiduelle() <= 0)
       cr.fill()
