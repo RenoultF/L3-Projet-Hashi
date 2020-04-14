@@ -63,7 +63,7 @@ class Compte < ActiveRecord::Base
     @pseudo = pseudo
     self.sauvegarder()
     if(pseudo != COMPTE_DEFAULT)
-      self.initialiseSauvegarde()
+      initialiseSauvegarde()
     end
 
   end

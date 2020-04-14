@@ -56,17 +56,13 @@ class Sauvegarde < ActiveRecord::Base
   # * raiseException Si le compte possède déjà une sauvegarde de cette grille
   def Sauvegarde.creer(compte, grille)
 
-    if(Sauvegarde.recuperer(compte, grille) == nil)
-      begin
-        temp = Marshal.dump(grille).force_encoding("ISO-8859-1").encode("UTF-8")
-        Marshal.load(temp)
-      rescue
-        temp = YAML.dump(grille)
-      end
-      new(:compte => compte, :grille => temp, :taille => grille.tailleX(), :difficulte => grille.difficulte(), :meilleurScore => 0)
-    else
-      raise("Le compte a déjà une sauvegarde de cette grille")
+    begin
+      temp = Marshal.dump(grille).force_encoding("ISO-8859-1").encode("UTF-8")
+      Marshal.load(temp)
+    rescue
+      temp = YAML.dump(grille)
     end
+    new(:compte => compte, :grille => temp, :taille => grille.tailleX(), :difficulte => grille.difficulte(), :meilleurScore => 0)
 
   end
 

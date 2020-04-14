@@ -27,7 +27,7 @@ class Menu < Gtk::Box
 	
     @@mode = 1
 	@@taille = 7
-	@@difficulte = 1
+	@@difficulte = 0
 
 	 def initialize()
 		super(:vertical, 0)
@@ -197,45 +197,45 @@ class Menu < Gtk::Box
 		#3-Difficulté de la grille : Facile, Normal OU Difficile
 		@tglFacile.signal_connect('toggled'){
 		
-			if (@@difficulte != 1) && (@tglNormal.active? || @tglDiff.active?)
+			if (@@difficulte != 0) && (@tglNormal.active? || @tglDiff.active?)
 				@tglNormal.active = false;
 				@tglDiff.active = false;
 				@tglFacile.active = true;
-				@@difficulte = 1;
+				@@difficulte = 0;
 				puts "Difficultée : Facile - #{@@difficulte}";
 			else if !(@tglFacile.active?) && !(@tglNormal.active?) && !(@tglDiff.active?)
 					@tglFacile.active = true;
-					@@difficulte = 1;
+					@@difficulte = 0;
 					puts "Difficultée : Facile - #{@@difficulte}";
 				end
 			end
 		}
 
 		@tglNormal.signal_connect('toggled'){
-			if (@@difficulte != 2) && (@tglFacile.active? || @tglDiff.active?)
+			if (@@difficulte != 1) && (@tglFacile.active? || @tglDiff.active?)
 				@tglDiff.active = false;
 				@tglFacile.active = false;
 				@tglNormal.active = true;
-				@@difficulte = 2;
+				@@difficulte = 1;
 				puts "Difficultée : Normale - #{@@difficulte}";
 			else if !(@tglNormal.active?) && !(@tglFacile.active?) && !(@tglDiff.active?)
 					@tglNormal.active = true;
-					@@difficulte = 2;
+					@@difficulte = 1;
 					puts "Difficultée : Normale - #{@@difficulte}";
 				end
 			end
 		}
 
 		@tglDiff.signal_connect('toggled'){
-			if (@@difficulte != 3) && (@tglFacile.active? || @tglNormal.active?)
+			if (@@difficulte != 2) && (@tglFacile.active? || @tglNormal.active?)
 				@tglFacile.active = false;
 				@tglNormal.active = false;
 				@tglDiff.active = true;
-				@@difficulte = 3;
+				@@difficulte = 2;
 				puts "Difficultée : Difficile - #{@@difficulte}";
 			else if !(@tglDiff.active?) && !(@tglFacile.active?) && !(@tglNormal.active?)
 					@tglDiff.active = true;
-					@@difficulte = 3;
+					@@difficulte = 2;
 					puts "Difficultée : Difficile - #{@@difficulte}";
 				end
 			end
