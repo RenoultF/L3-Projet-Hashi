@@ -77,7 +77,6 @@ require 'gtk3'
         border: 2px solid #6e4af2;
         box-shadow: 3px 3px 2px #656565;
         font-weight: bold;
-        
     }
     button:active {
         background-image: image(#FAECBA);
@@ -85,9 +84,26 @@ require 'gtk3'
         border-width: 2px;
         border-color: #c47d73;
         font-weight: bold;
+        color:black;
     }
-    button:hover{
-        text-decoration: none;
+    CSS
+
+@@CSS_BTN_JEU ||= Gtk::CssProvider.new
+@@CSS_BTN_JEU.load(data: <<-CSS)
+    button{
+        background-image: image(#a40d0f);
+        border: 2px solid #7a0808;
+        box-shadow: 3px 3px 2px #656565;
+        font-weight: bold;
+        color: white;        
+    }
+    button:active {
+        background-image: image(#FAECBA);
+        border-style: solid;
+        border-width: 2px;
+        border-color: #c47d73;
+        font-weight: bold;
+        color:black;
     }
     CSS
 
@@ -134,6 +150,5 @@ require 'gtk3'
         border: 2px solid #a40d0f;
         font-weight: bold;
         padding: 5px;
-        margin-top: -15px;
     }
     CSS
