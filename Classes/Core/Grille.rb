@@ -339,7 +339,6 @@ class Grille
 
       @actions = UndoRedo.creer()
 
-
       setDernierIle(nil)
       @score = 500 * @tailleX
 
@@ -384,12 +383,17 @@ class Grille
           j -= 1
         end
 
+        temp = @dernierIle
         if(ileGauche == @dernierIle)
           ile2 = ileDroite
-        else
+        elsif(ileDroite == @dernierIle)
           ile2 = ileGauche
+        else
+          ile2 = ileDroite
+          setDernierIle(ileGauche)
         end
         createPont(ile2)
+        setDernierIle(temp)
 
       elsif(direction == Pont::VERTICAL)
 
@@ -403,13 +407,17 @@ class Grille
           i -= 1
         end
 
+        temp = @dernierIle
         if(ileBas == @dernierIle)
           ile2 = ileHaut
-        else
+        elsif(ileHaut == @dernierIle)
           ile2 = ileBas
+        else
+          ile2 = ileHaut
+          setDernierIle(ileBas)
         end
         createPont(ile2)
-
+        setDernierIle(temp)
       end
 
     end
@@ -441,6 +449,7 @@ class Grille
           if(c.estPont?())
             if(c.couleurPont == c.couleurPontCourante)
               while(c.valeur != 0)
+                print "Valeur", c.valeur, c.direction, "\n"
                 chercherVoisins(c, c.direction)
               end
             end
@@ -809,9 +818,7 @@ class Grille
 
 
     def getMeilleurScore()
-
       Sauvegarde.recuperer(compte, self).getScore()
-
     end
 
 end
