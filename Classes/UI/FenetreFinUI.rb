@@ -15,7 +15,14 @@ class FenetreFinUI
 
         @windowFin = @builderFin.get_object("FenetreFin")
 
-
+        @imgEtoile = @builderFin.get_object("image2")
+        if(@grille.score>(500*@grille.tailleX / 2))
+            #mettre a jour pour image 3 etoile
+        elsif(@grille.score>(500*@grille.tailleX / 3))
+            #mettre a jour pour image 2 etoles
+        else
+            #mettre a jour pour image 1 etoiles
+        end
         #fonctions
         @clickRetour = @builderFin.get_object("button1")
         @clickRetour.signal_connect('clicked'){
@@ -35,7 +42,8 @@ class FenetreFinUI
         @clickMapSuivante = @builderFin.get_object("button2")
         @clickMapSuivante.signal_connect('clicked'){
             @grille.recommencer()
-            puts "mode aventure inch"
+            @grille.sauvegarder(compte)
+            puts "mode aventure MAJ"
         }
 
         @labelHsJoueur = @builderFin.get_object("valeurHS")
