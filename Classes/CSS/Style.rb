@@ -150,5 +150,7 @@ require 'gtk3'
         border: 2px solid #a40d0f;
         font-weight: bold;
         padding: 5px;
+        background-image: image(#e6e1b9);
+        font-size:12px;
     }
     CSS

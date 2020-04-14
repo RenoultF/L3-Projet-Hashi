@@ -93,8 +93,10 @@ class FenetreJeuUI
         @btnSauvegarder = @builderJeu.get_object("btnsave")
         @btnSauvegarder.signal_connect('clicked'){@grille.sauvegarder(@compte)}
 
+        @labelIndice = @builderJeu.get_object("labelIndice")
+        
         @btnDonnerTech = @builderJeu.get_object("btnIndice")
-        @btnDonnerTech.signal_connect('clicked'){puts @donnerTech.aider()}
+        @btnDonnerTech.signal_connect('clicked'){@labelIndice.set_label(@donnerTech.aider())}
 
         @btnVerif = @builderJeu.get_object("btnVerifGrille")
         @btnVerif.signal_connect('clicked'){@verifGrille.aider()}
@@ -111,6 +113,8 @@ class FenetreJeuUI
 
         @grille111 = @builderJeu.get_object("grid1")
         @grille111.style_context.add_provider(@@CSS_BOX_STAT, Gtk::StyleProvider::PRIORITY_USER)
+
+
     
         @btnAide.style_context.add_provider(@@CSS_BTN_JEU, Gtk::StyleProvider::PRIORITY_USER)
         @btnRegles.style_context.add_provider(@@CSS_BTN_JEU, Gtk::StyleProvider::PRIORITY_USER)
