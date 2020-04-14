@@ -77,20 +77,11 @@ class FenetreJeuUI
         @btnSuppr1 = @builderJeu.get_object("btnsup1")
         @btnSuppr1.signal_connect('clicked'){@grille.supprimeHypothese(@grilleJouable)}
 
-        # @btnValid2 = @builderJeu.get_object("btnvalid2")
-        # @btnValid2.signal_connect('clicked'){@grille.creerHypothese()}
-
-        # @btnSuppr2 = @builderJeu.get_object("btnsup2")
-        # @btnSuppr2.signal_connect('clicked'){@grille.supprimeHypothese(@grilleJouable)}
-
-        # @btnValid3 = @builderJeu.get_object("btnvalid3")
-        # @btnValid3.signal_connect('clicked'){@grille.creerHypothese()}
-
-        # @btnSuppr3 = @builderJeu.get_object("btnsup3")
-        # @btnSuppr3.signal_connect('clicked'){@grille.supprimeHypothese(@grilleJouable)}
+        @btnValCP = @builderJeu.get_object("btnVerifCP")
+        @btnValCP.signal_connect('clicked'){@grille.valideHypothese()}
 
         @btnSauvegarder = @builderJeu.get_object("btnsave")
-        @btnSauvegarder.signal_connect('clicked'){@grille.sauvegarder()}
+        @btnSauvegarder.signal_connect('clicked'){Sauvegarde.recuperer(@compte, @grille).setGrille(@grille).sauvegarder()}
 
         @btnDonnerTech = @builderJeu.get_object("btnIndice")
         @btnDonnerTech.signal_connect('clicked'){puts @donnerTech.aider()}

@@ -330,7 +330,7 @@
                 </child>
                 <child>
                   <object class="GtkButton" id="btnVerifCP">
-                    <property name="label" translatable="yes">Vérifier Checkpoint</property>
+                    <property name="label" translatable="yes">Valider Checkpoint</property>
                     <property name="visible">True</property>
                     <property name="can_focus">True</property>
                     <property name="receives_default">True</property>
