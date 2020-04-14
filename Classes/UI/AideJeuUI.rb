@@ -4,7 +4,7 @@ class AideJeuUI
 
     def initialize()       
         @builderAideJeu = Gtk::Builder.new
-        @builderAideJeu.add_from_file("../glade/aide.glade")
+        @builderAideJeu.add_from_file("../glade/aideJeu.glade")
 
         @window = @builderAideJeu.get_object("windowAide")
 

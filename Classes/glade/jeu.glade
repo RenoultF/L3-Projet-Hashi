@@ -253,12 +253,11 @@
           <object class="GtkBox" id="box6">
             <property name="visible">True</property>
             <property name="can_focus">False</property>
-            <property name="margin_left">300</property>
+            <property name="margin_left">400</property>
             <property name="margin_right">15</property>
             <child>
               <object class="GtkBox" id="grilleJeux">
                 <property name="visible">True</property>
-                <property name="margin_left">15</property>
                 <property name="can_focus">False</property>
               </object>
               <packing>
@@ -282,7 +281,8 @@
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
                     <property name="margin_right">5</property>
-                    <property name="label" translatable="yes">Checkpoint 1</property>
+                    <property name="margin_bottom">10</property>
+                    <property name="label" translatable="yes">Checkpoint</property>
                   </object>
                   <packing>
                     <property name="left_attach">0</property>
@@ -298,6 +298,7 @@
                     <property name="can_focus">True</property>
                     <property name="receives_default">True</property>
                     <property name="image">save</property>
+                    <property name="relief">none</property>
                     <property name="always_show_image">True</property>
                   </object>
                   <packing>
@@ -312,7 +313,10 @@
                     <property name="visible">True</property>
                     <property name="can_focus">True</property>
                     <property name="receives_default">True</property>
+                    <property name="margin_right">5</property>
+                    <property name="margin_bottom">10</property>
                     <property name="image">valid1</property>
+                    <property name="relief">none</property>
                     <property name="always_show_image">True</property>
                   </object>
                   <packing>
@@ -327,7 +331,9 @@
                     <property name="visible">True</property>
                     <property name="can_focus">True</property>
                     <property name="receives_default">True</property>
+                    <property name="margin_bottom">10</property>
                     <property name="image">supr1</property>
+                    <property name="relief">none</property>
                     <property name="always_show_image">True</property>
                   </object>
                   <packing>
@@ -341,9 +347,11 @@
                   <object class="GtkButton" id="btnVerifCP">
                     <property name="label" translatable="yes">Valider Checkpoint</property>
                     <property name="visible">True</property>
-                    <property name="can_focus">False</property>
+                    <property name="can_focus">True</property>
                     <property name="receives_default">True</property>
+                    <property name="margin_bottom">10</property>
                     <property name="image">vérifcp</property>
+                    <property name="relief">none</property>
                     <property name="always_show_image">True</property>
                   </object>
                   <packing>
@@ -355,14 +363,14 @@
                 </child>
               </object>
               <packing>
-                <property name="expand">False</property>
+                <property name="expand">True</property>
                 <property name="fill">True</property>
                 <property name="position">2</property>
               </packing>
             </child>
           </object>
           <packing>
-            <property name="expand">False</property>
+            <property name="expand">True</property>
             <property name="fill">True</property>
             <property name="position">2</property>
           </packing>
@@ -385,6 +393,7 @@
                 <property name="receives_default">True</property>
                 <property name="margin_right">55</property>
                 <property name="image">btnQuitte</property>
+                <property name="relief">none</property>
                 <property name="always_show_image">True</property>
               </object>
               <packing>
@@ -404,6 +413,7 @@
                     <property name="can_focus">True</property>
                     <property name="receives_default">True</property>
                     <property name="image">indice</property>
+                    <property name="relief">none</property>
                     <property name="always_show_image">True</property>
                   </object>
                   <packing>
@@ -413,12 +423,13 @@
                   </packing>
                 </child>
                 <child>
-                  <object class="GtkButton" id="btnRetourarr">
+                  <object class="GtkButton" id="btnUndo">
                     <property name="label" translatable="yes">Annuler</property>
                     <property name="visible">True</property>
                     <property name="can_focus">True</property>
                     <property name="receives_default">True</property>
                     <property name="image">retourArriere</property>
+                    <property name="relief">none</property>
                     <property name="always_show_image">True</property>
                   </object>
                   <packing>
@@ -428,12 +439,13 @@
                   </packing>
                 </child>
                 <child>
-                  <object class="GtkButton" id="btnRetourarr1">
-                    <property name="label" translatable="yes">Annuler</property>
+                  <object class="GtkButton" id="btnRedo">
+                    <property name="label" translatable="yes">Rétablir</property>
                     <property name="visible">True</property>
                     <property name="can_focus">True</property>
                     <property name="receives_default">True</property>
                     <property name="image">image4</property>
+                    <property name="relief">none</property>
                     <property name="always_show_image">True</property>
                   </object>
                   <packing>
@@ -443,12 +455,13 @@
                   </packing>
                 </child>
                 <child>
-                  <object class="GtkButton" id="btnReinit1">
+                  <object class="GtkButton" id="btnReinit">
                     <property name="label" translatable="yes">Réinitialiser</property>
                     <property name="visible">True</property>
                     <property name="can_focus">True</property>
                     <property name="receives_default">True</property>
                     <property name="image">reinit1</property>
+                    <property name="relief">none</property>
                     <property name="always_show_image">True</property>
                   </object>
                   <packing>
@@ -472,6 +485,7 @@
                 <property name="receives_default">True</property>
                 <property name="margin_left">55</property>
                 <property name="image">image5</property>
+                <property name="relief">none</property>
                 <property name="always_show_image">True</property>
               </object>
               <packing>
@@ -481,12 +495,13 @@
               </packing>
             </child>
             <child>
-              <object class="GtkButton" id="btnVerif">
+              <object class="GtkButton" id="btnValidGrille">
                 <property name="label" translatable="yes">Valider</property>
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>
                 <property name="image">valid4</property>
+                <property name="relief">none</property>
                 <property name="image_position">right</property>
                 <property name="always_show_image">True</property>
               </object>
