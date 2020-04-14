@@ -22,7 +22,7 @@ class ChoixGrilleUI < Gtk::Box
   # * racine Un objet qui doit définir une méthode commencerPartie(grille, nomCompte) qui sera appelée quand l'utilisateur aura choisi une grille
   def initialize(racine)
 
-    super(:horizontal , 20)
+    super(:vertical , 20)
     @racine = racine
 
   end
@@ -41,9 +41,9 @@ class ChoixGrilleUI < Gtk::Box
 
     liste = Sauvegarde.liste(Compte.recuperer_ou_creer(nomCompte), taille, difficulte)
     p liste
+    box = Gtk::Box.new(:horizontal, 30)
     liste.each_with_index do |s, i|
       puts "liste.each"
-      box = Gtk::Box.new(:horizontal)
       bouton = Gtk::Button.new(:label => "Réinitialiser")
       temp = GrilleUI.new(s.getGrille(), tailleCase)
 
@@ -60,9 +60,11 @@ class ChoixGrilleUI < Gtk::Box
       box.add(temp)
     #  box.add(bouton)
 
-      add(box)
-
     end
+
+    add(Gtk::Label.new("Veuillez choisir une grille"))
+    add(box)
+
     show_all
 
   end

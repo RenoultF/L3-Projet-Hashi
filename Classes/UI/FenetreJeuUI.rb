@@ -28,14 +28,14 @@ class FenetreJeuUI
         # puts "Mode : #{@mode}";
         # puts "Taille : #{@taille}";
         # puts "Difficulté : #{@difficulte}";
-         
-        window.destroy()  
-        # CREATION FENETRE 
+
+        window.destroy()
+        # CREATION FENETRE
         @builderJeu = Gtk::Builder.new
         @builderJeu.add_from_file("../glade/jeu.glade")
         @window = @builderJeu.get_object("windowJeu")
         @window.style_context.add_provider(@@CSS_BG_JEU, Gtk::StyleProvider::PRIORITY_USER)
-        
+
 
         #autre
         @labelPseudo = @builderJeu.get_object("lbPseudo")
@@ -48,7 +48,7 @@ class FenetreJeuUI
         grilleJeux = @builderJeu.get_object("grilleJeux")
         grilleJeux.pack_start(@grilleJouable = GrilleJouableUI.new(grille))
         #@jeu = Jeu.creer(@difficulte,@taille,@compte,self, @labelChrono, @labelScore)
-        
+
         @checkpoints = Pile.creer()
         @verifGrille = VerifierGrille.creer(@grille)
         @donnerTech = DonnerTechnique.creer(@grille)
@@ -71,18 +71,18 @@ class FenetreJeuUI
 
         # @btnValid3 = @builderJeu.get_object("btnvalid3")
         # @btnValid3.signal_connect('clicked'){@grille.creerHypothese()}
-        
+
         # @btnSuppr3 = @builderJeu.get_object("btnsup3")
         # @btnSuppr3.signal_connect('clicked'){@grille.supprimeHypothese(@grilleJouable)}
 
         @btnSauvegarder = @builderJeu.get_object("btnsave")
-        @btnSauvegarder.signal_connect('clicked'){Sauvegarde.recuperer(@compte, @grille).setGrille(@grille).sauvegarder()}
+        @btnSauvegarder.signal_connect('clicked'){@grille.sauvegarder()}
 
         @btnDonnerTech = @builderJeu.get_object("btnIndice")
-        @btnDonnerTech.signal_connect('clicked'){@donnerTech.aider()}
+        @btnDonnerTech.signal_connect('clicked'){puts @donnerTech.aider()}
 
         @btnVerif = @builderJeu.get_object("btnVerif")
-        @btnVerif.signal_connect('clicked'){@donnerTech.aider()}
+        @btnVerif.signal_connect('clicked'){@verifGrille.aider()}
 
         @chronoGrille = Chrono.new(self,  @labelChrono)
         @threadChrono = Thread.new{@chronoGrille.lancerChrono()}
@@ -91,7 +91,7 @@ class FenetreJeuUI
         #@threadChrono = Thread.new{@chronoGrille.lancerChrono()}
         #@threadJeu = Thread.new{@jeu.lanceToi()}
         @window.show_all()
-        Gtk.main() 
+        Gtk.main()
     end
 
     def modifScore(val)

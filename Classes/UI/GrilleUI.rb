@@ -121,7 +121,7 @@ class GrilleUI < Gtk::DrawingArea
 
     cr = window.create_cairo_context
 
-    cr.set_source_rgb(255, 255, 255)
+    cr.set_source_rgb(239/255.0, 227/255.0, 192/255.0)
     cr.rectangle(0, 0, @taille * @grille.tailleY(), @taille * @grille.tailleX())
     cr.fill()
 
@@ -132,9 +132,7 @@ class GrilleUI < Gtk::DrawingArea
   #param::
   # * compte Le compte auquel associer la sauvegarde
   def sauvegarder(compte)
-
     @grille.sauvegarder(compte)
-
   end
 
   ##

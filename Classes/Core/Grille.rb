@@ -782,7 +782,9 @@ class Grille
 
       save = Sauvegarde.recuperer(compte, self)
       save.setGrille(self)
-      save.setScore([save.getScore(), @score].max) if self.fini?()
+      if(fini?())
+        save.setScore([save.getScore(), @score].max) if self.fini?()
+      end
       save.sauvegarder()
 
     end

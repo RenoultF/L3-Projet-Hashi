@@ -23,16 +23,12 @@ class IleUI < CaseUI
   # * ile L'ile à afficher
   # * taille La taille d'une case (40 par defaut)
   def IleUI.creer(ile, taille = 40)
-
     new(ile, taille)
-
   end
 
   #:nodoc:
   def initialize(ile, taille)
-
     super(ile, taille)
-
   end
   #:doc:
 
@@ -42,10 +38,16 @@ class IleUI < CaseUI
   # * window La fenetre sur laquelle l'ile va etre afficher
   def draw(window)
 
+    super(window)
+
     cr = window.create_cairo_context
 
     positionY = @taille * @casee.posY() + @taille/2
     positionX = @taille * @casee.posX() + @taille/2
+
+    cr.set_source_rgb(255, 255, 255)
+    cr.circle(positionY, positionX, @taille/2)
+    cr.fill()
 
     choixCouleur(cr)
 
@@ -74,9 +76,11 @@ class IleUI < CaseUI
 
   private def choixCouleur(cr)
 
-    cr.set_source_rgb(0, 255, 0)
-    cr.set_source_rgb(0, 0, 255) if @casee.estDernierIle()
-    cr.set_source_rgb(255, 0, 0) if @casee.getCapaciteResiduelle() < 0
+    couleur = Couleur::NOIR
+    couleur = Couleur::VERT if @casee.estDernierIle()
+    couleur = Couleur::ROUGE if @casee.getCapaciteResiduelle() < 0
+
+    cr.set_source_rgb(couleur.rouge, couleur.vert, couleur.bleu)
 
   end
 

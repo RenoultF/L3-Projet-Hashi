@@ -101,6 +101,8 @@ class PontUI < CaseUI
   # * window La fenetre sur laquelle l'ile va etre afficher
   def draw(window)
 
+    super(window)
+
     cr = window.create_cairo_context
 
     afficheSurbrillance(cr) if @casee.surbrillance

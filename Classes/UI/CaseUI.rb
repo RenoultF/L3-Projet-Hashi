@@ -45,12 +45,13 @@ class CaseUI < Gtk::DrawingArea
   #Cette méthode permet d'afficher la case
   def draw(window)
 
-  #  cr = window.create_cairo_context
+    cr = window.create_cairo_context
 
+    taille = @taille/20
 
-  #  cr.set_source_rgb(255, 0, 0)
-  #  cr.rectangle(@taille * @casee.posY(), @taille * @casee.posX(), @taille, @taille)
-  #  cr.fill()
+    cr.set_source_rgb(248/255.0, 236/255.0, 194/255.0)
+    cr.rectangle(@taille * @casee.posY() + taille, @taille * @casee.posX() + taille, @taille - taille * 2, @taille - taille * 2)
+    cr.fill()
 
   end
 
