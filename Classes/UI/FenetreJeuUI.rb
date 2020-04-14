@@ -13,8 +13,9 @@ require "../Core/Action.rb"
 require "../Core/Hypothese.rb"
 require "../Core/Chrono.rb"
 require "../Core/Jeu.rb"
-require "../UI/Menu.rb"
 
+require "../UI/Menu.rb"
+require "../UI/FenetreFinUI.rb"
 require "../UI/AideJeuUI.rb"
 require "../UI/ReglesUI.rb"
 require "../UI/AstucesUI.rb"
@@ -102,7 +103,14 @@ class FenetreJeuUI
         @btnVerif.signal_connect('clicked'){@verifGrille.aider()}
 
         @btnValidGrille = @builderJeu.get_object("btnValidGrille")
-        @btnValidGrille.signal_connect('clicked'){@verifGrille.aider()}
+        @btnValidGrille.signal_connect('clicked'){
+            @grille.sauvegarder(@compte)
+            if(@grille.fini?() == true)
+                fenetre_fin = FenetreFinUI.new(@grille,@compte,@window)
+            else
+                @labelIndice.set_label("Vous n'avez pas trouvé la solution ! \n Continuez ...")
+            end
+        }
 
         @chronoGrille = Chrono.new(self,  @labelChrono)
         @threadChrono = Thread.new{@chronoGrille.lancerChrono()}

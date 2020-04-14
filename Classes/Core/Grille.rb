@@ -805,7 +805,7 @@ class Grille
     end
 
 
-    def getMeilleurScore()
+    def getMeilleurScore(compte)
       Sauvegarde.recuperer(compte, self).getScore()
     end
 
