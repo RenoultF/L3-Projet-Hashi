@@ -337,7 +337,6 @@ class Grille
     #Cette méthode permet de remmetre à zéro la grille
     def recommencer()
 
-      @checkpoints = Pile.creer(5)
       @actions = UndoRedo.creer()
 
 
@@ -432,15 +431,20 @@ class Grille
     end
 
     ##
-    #Cette méthode permet d'appeler la méthode Case#redoCouleurPont de chaque case de la grille
+    #Cette méthode permet d'appeler la méthode Case#redoCouleurPont de chaque case de la grille et de supprimer les ponts de la dernière hypothèse
     #param::
-    # * couleur La couleur à passer au la méthode Case#redoCouleurPont
+    # * couleur La couleur à passer a la méthode Case#redoCouleurPont
     def redoSupprCouleurPont(couleur)
 
       @mat.each do |ligne|
         ligne.each do |c|
           if(c.estPont?())
-            c.redoSupprCouleurPont(couleur)
+            if(c.couleurPont == c.couleurPontCourante)
+              while(c.valeur != 0)
+                chercherVoisins(c, c.direction)
+              end
+            end
+            c.redoCouleurPont(couleur)
           end
         end
       end

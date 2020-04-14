@@ -92,14 +92,14 @@ class Pont < Case
   #:nodoc:
   def initialize(posX, posY, grille, direction, valeur)
 
-      super(posX, posY, grille)
-      @valeur = valeur
-      @direction = direction
-      @surbrillance = false
-      @marque = false
-      @directionSurbrillance = NULLE
-      @couleurPont = Couleur::JAUNE
-      @couleurPontCourante = Couleur::JAUNE
+    super(posX, posY, grille)
+    @valeur = valeur
+    @direction = direction
+    @surbrillance = false
+    @marque = false
+    @directionSurbrillance = NULLE
+    @couleurPont = Couleur::JAUNE
+    @couleurPontCourante = Couleur::JAUNE
 
   end
   #:doc:
@@ -114,20 +114,6 @@ class Pont < Case
   def redoCouleurPont(couleurPont)
     if(@couleurPont == @couleurPontCourante)
       @couleurPontCourante = couleurPont
-    end
-    @couleurPont = couleurPont
-  end
-
-  ##
-  #Cette méthode permet de modifier la couleur que devrais prendre le pont s'il est modifié
-  #ainsi que sa couleur courante si elle était la même que la couleur après modification
-  #
-  #Utilisé par les hypothèses
-  #param::
-  # * couleurPont La nouvelle couleur
-  def redoSupprCouleurPont(couleurPont)
-    if(@couleurPont == @couleurPontCourante)
-      raz()
     end
     @couleurPont = couleurPont
   end
