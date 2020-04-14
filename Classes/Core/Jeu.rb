@@ -17,6 +17,7 @@ require "../Core/Hypothese.rb"
 require "../Core/Chrono.rb"
 
 #require '../class/JeuUI.rb'
+
 ##
 #Cette classe permet de s'occuper du déroulement d'une partie
 class Jeu
@@ -92,7 +93,7 @@ class Jeu
         @jeuUI.AfficherGrille()
         while(!win)
             @grille.afficheToi
-            
+
             case action()
             when 1
               begin
@@ -172,5 +173,5 @@ class Jeu
         return @grille.getCase(x, y)
     end
 
-    
+
 end

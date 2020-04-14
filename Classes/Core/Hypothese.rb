@@ -9,6 +9,8 @@
 #Cette classe représente une hypothèse (une sauvegarde de la grille à un certain moment)
 class Hypothese
 
+  #@grille => La grille supposé()
+
 
   ##
   #Ce constructeur permet de créer une nouvelle hyoothèse
@@ -20,9 +22,7 @@ class Hypothese
 
   #:nodoc:
   def initialize(grille)
-
     @grille = Marshal.dump(grille) #copie profonde
-
   end
   #:doc:
 

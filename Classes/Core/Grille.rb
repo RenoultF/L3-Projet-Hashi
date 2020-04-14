@@ -789,4 +789,11 @@ class Grille
 
     end
 
+
+    def getMeilleurScore()
+
+      Sauvegarde.recuperer(compte, self).getScore()
+
+    end
+
 end

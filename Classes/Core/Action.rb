@@ -31,9 +31,11 @@ class Action
 
   #:nodoc:
   def initialize(ile1, ile2, methode)
+
     @ile1 = ile1
     @ile2 = ile2
     @methode = methode
+
   end
   #:doc:
 

@@ -60,9 +60,7 @@ class Couleur
   # un nombre positif si la couleur est supérieur à l'autre
   # un nombre négatif si la couleur est inférieur à l'autre
   def <=>(autre)
-
     return @couleur <=> autre.couleur
-
   end
 
   #La couleur blanc

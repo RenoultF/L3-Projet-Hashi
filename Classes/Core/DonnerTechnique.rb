@@ -42,10 +42,10 @@ class DonnerTechnique < Aide
           nChemins = cGrille.getNombreCheminDisponible()
           nDirection = cGrille.getNombreDirectionConstructible()
           if(capa > 0)
-            if(capa == nChemins)
+            if(capa == nChemins)  #Alors le placement est évident
               cheminComplet = true
               messageComplet = "Une ile doit encore placer " + capa.to_s() + " ponts et possède " + nChemins.to_s() + " ponts disponibles"
-            elsif(capa == nChemins - 1 && nDirection <= capa)
+            elsif(capa == nChemins - 1 && nDirection <= capa) #On peut placer un pont simple dans (capa - nDirection + 1) directions
               cheminIncomplet = true
               messageIncomplet = "Une ile doit encore placer " + capa.to_s() + " ponts et possède " + nChemins.to_s() + " ponts disponibles dans " + nDirection.to_s() + " directions possible"
             elsif(capa == 1)

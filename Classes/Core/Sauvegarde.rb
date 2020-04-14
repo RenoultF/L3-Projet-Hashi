@@ -60,11 +60,10 @@ class Sauvegarde < ActiveRecord::Base
       begin
         temp = Marshal.dump(grille).force_encoding("ISO-8859-1").encode("UTF-8")
         Marshal.load(temp)
-        new(:compte => compte, :grille => temp, :taille => grille.tailleX(), :difficulte => grille.difficulte(), :meilleurScore => 0)
       rescue
-        temp = YAML.dump(grille).force_encoding("ISO-8859-1").encode("UTF-8")
-        new(:compte => compte, :grille => temp, :taille => grille.tailleX(), :difficulte => grille.difficulte(), :meilleurScore => 0)
+        temp = YAML.dump(grille)
       end
+      new(:compte => compte, :grille => temp, :taille => grille.tailleX(), :difficulte => grille.difficulte(), :meilleurScore => 0)
     else
       raise("Le compte a déjà une sauvegarde de cette grille")
     end
@@ -72,7 +71,7 @@ class Sauvegarde < ActiveRecord::Base
   end
 
   ##
-  #Cette méthode permet de recuperer la sauvegarde d'un compte pour une grille
+  #Cette méthode permet de recupérer la sauvegarde d'un compte pour une grille
   #param::
   # * compte Le compte auquel la sauvegarde est lié
   # * grille La grille auquel la sauvegarde est lié
@@ -124,6 +123,8 @@ class Sauvegarde < ActiveRecord::Base
 
   ##
   #Cette méthode permet de recupérer la grille de la sauvegarde
+  #return::
+  # * La grille sauvegardé
   def getGrille()
 
     begin
@@ -143,17 +144,16 @@ class Sauvegarde < ActiveRecord::Base
     begin #Active record peut enregistrer du TEXT avec UTF-8 uniquement
       temp = Marshal.dump(grille).force_encoding("ISO-8859-1").encode("UTF-8") #on force donc la chaine en UTF-8
       Marshal.load(temp) #à condition que l'on puisse la recharger sans exception
-      self.grille = temp
     rescue
       temp = YAML.dump(grille) #Sinon on enregistre avec YAML qui est plus lent
-      self.grille = temp
     end
+    self.grille = temp
     return self
 
   end
 
   ##
-  #Cette méthode permet de recupérer la grille de la sauvegarde
+  #Cette méthode permet de recupérer le meilleur score associé à la grille enregistré
   #return::
   # * Le score de la sauvegarde
   def getScore()
@@ -161,7 +161,7 @@ class Sauvegarde < ActiveRecord::Base
   end
 
   ##
-  #Cette méthode permet de modifier la grille enregistré
+  #Cette méthode permet de modifier le meilleur score associé à la grille enregistré
   #param::
   # * score Le nouveau score
   def setScore(score)

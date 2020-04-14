@@ -132,7 +132,6 @@ class Pont < Case
     @grille.clickOnPont(self)
   end
 
-
   ##
   #Cette méthode permet de remettre à zéro le pont
   def raz()
@@ -191,7 +190,6 @@ class Pont < Case
   end
 
 
-  #:nodoc:
   private def modifValeur(direction, valeur)
       demarquer()
       if(@direction != NULLE)
@@ -228,7 +226,6 @@ class Pont < Case
       return true
     end
   end
-  #:doc:
 
   ##
   #Cette méthode permet d'augmenter la valeur du pont
@@ -253,7 +250,6 @@ class Pont < Case
   def diminueValeur(direction)
       return modifValeur(direction, MAX_LIGNE)
   end
-
 
   ##
   #Cette méthode permet de mettre en surbrillance le pont
@@ -283,14 +279,11 @@ class Pont < Case
     @marque = true
   end
 
-
-
   ##
   #Cette méthode permet de modifier le marquage du pont quand il est valide
   def demarquer()
     @marque = false
   end
-
 
   ##
   #Cette méthode retourne vrai

@@ -34,6 +34,8 @@ class Ile < Case
   #@dernier => true si l'ile est la derniere ile séléctionnée
   attr_accessor :dernier
 
+  #@nbPont => Le nombre de pont que possède l'ile dans chaque direction [HAUT, DROITE, BAS, GAUCHE]
+
   include Comparable
   private_class_method :new
 
@@ -45,15 +47,17 @@ class Ile < Case
   # * nbLien Le nombre de lien que doit possèder l'ile pour être valide
   # * grille La grille sur laquelle se trouve l'ile
   def Ile.creer(posX, posY, nbLien, grille)
-      new(posX, posY, nbLien, grille)
+    new(posX, posY, nbLien, grille)
   end
 
   #:nodoc:
   def initialize(posX, posY, nbLien, grille)
-      super(posX, posY, grille)
-      @valeur = nbLien
-      @nbPont = [0, 0, 0, 0]
-      @dernier = false
+
+    super(posX, posY, grille)
+    @valeur = nbLien
+    @nbPont = [0, 0, 0, 0]
+    @dernier = false
+
   end
   #:doc:
 
@@ -78,15 +82,16 @@ class Ile < Case
   #param::
   # * ile L'autre ile
   def ajouteNombrePont(ile)
+
     for direction in DIRECTIONS
       if(aVoisin?(direction))
         if(getVoisin(direction) == ile)
-          puts "Ajoute : Direction : " + direction.to_s()
           @nbPont[direction] += 1
           @nbPont[direction] %= (Pont::MAX_LIGNE + 1)
         end
       end
     end
+
   end
 
   ##
@@ -94,23 +99,22 @@ class Ile < Case
   #param::
   # * ile L'autre ile
   def retireNombrePont(ile)
+
     for direction in DIRECTIONS
       if(aVoisin?(direction))
         if(getVoisin(direction) == ile)
-          puts "Retire : Direction : " + direction.to_s()
           @nbPont[direction] += Pont::MAX_LIGNE
           @nbPont[direction] %= (Pont::MAX_LIGNE + 1)
         end
       end
     end
+
   end
 
   ##
   #Cette méthode permet d'appeler clickOnIle de la grille dans laquelle se trouve l'ile
   def clickOn()
-
     @grille.clickOnIle(self)
-
   end
 
   ##
@@ -119,9 +123,7 @@ class Ile < Case
   # * true Si l'ile est la dernière séléctionné
   # * false Sinon
   def estDernierIle()
-
     return @dernier
-
   end
 
 
@@ -132,7 +134,7 @@ class Ile < Case
   # * true Si l'ile est connécté à autant de pont que son objectif
   # * false Sinon
   def estValide?()
-      return getNombrePont() == getValeur()
+    return getNombrePont() == getValeur()
   end
 
 
@@ -149,6 +151,7 @@ class Ile < Case
   #return::
   # * Le nombre de ponts qui peuvent être connecté à l'ile
   def getNombreCheminDisponible()
+
     ret = 0
     for direction in DIRECTIONS
       if(aVoisinDisponible?(direction))
@@ -157,18 +160,19 @@ class Ile < Case
       end
     end
     return ret
+
   end
 
   ##
   #Cette méthode permet d'afficher l'ile dans un terminal
   def to_s()
-      return getCapaciteResiduelle().to_s()
+    return getCapaciteResiduelle().to_s()
   end
 
   ##
   #Cette méthode permet d'afficher les infos utiles de l'ile
   def afficheInfo()
-      return @valeur, @posX, @posY, getCapaciteResiduelle()
+    return @valeur, @posX, @posY, getCapaciteResiduelle()
   end
 
   ##
@@ -176,6 +180,7 @@ class Ile < Case
   #return::
   # * Le nombre de directions dans laquelle on peut ajouter un pont
   def getNombreDirectionConstructible()
+
     ret = 0
     for direction in DIRECTIONS
       if(aVoisinDisponible?(direction))
@@ -185,6 +190,7 @@ class Ile < Case
       end
     end
     return ret
+
   end
 
   ##
@@ -192,6 +198,7 @@ class Ile < Case
   #return::
   # * Le nombre de direction dans laquelle un voisin est disponible
   def getNombreDirectionDisponible()
+
     ret = 0
     for direction in DIRECTIONS
       if(aVoisinDisponible?(direction))
@@ -199,6 +206,7 @@ class Ile < Case
       end
     end
     return ret
+
   end
 
   ##
@@ -227,6 +235,7 @@ class Ile < Case
   # * Le voisin dans cette direction s'il existe
   # * raiseException Sinon
   def getVoisin(direction)
+
     indiceX, indiceY = getIncrementDirection(direction)
     indiceAddX = indiceX
     indiceAddY = indiceY
@@ -241,6 +250,7 @@ class Ile < Case
     else
       return @grille.getCase(posX, posY)
     end
+
   end
 
   ##
@@ -251,15 +261,18 @@ class Ile < Case
   # * true Si l'ile a un voisin dans cette direction
   # * false Sinon
   def aVoisin?(direction)
+
     begin
       return getVoisin(direction).estIle?()
     rescue => e
       puts e.message()
       return false
     end
+
   end
 
   private def getIncrementDirection(direction)
+
     if(direction == Ile::HAUT)
       indiceX = -1
       indiceY = 0
@@ -276,6 +289,7 @@ class Ile < Case
       raise("La direction n'est pas bonne")
     end
     return indiceX, indiceY
+
   end
 
 
@@ -287,14 +301,15 @@ class Ile < Case
   # * true Si l'ile a un voisin disponible dans cette direction
   # * false Sinon
   def aVoisinDisponible?(direction)
+
     begin
       ile2 = self.getVoisin(direction)
-      puts "Allo ?" + ile2.to_s()
       return @grille.routeDisponible?(self, ile2)
     rescue => e
       puts e.message()
       return false
     end
+
   end
 
   ##
