@@ -154,3 +154,24 @@ require 'gtk3'
         font-size:12px;
     }
     CSS
+
+@@CSS_BG_SCORE1 ||= Gtk::CssProvider.new
+@@CSS_BG_SCORE1.load(data: <<-CSS)
+    * {
+        background-image: url("../glade/images/1stars.png");
+    }
+    CSS
+
+@@CSS_BG_SCORE2 ||= Gtk::CssProvider.new
+@@CSS_BG_SCORE2.load(data: <<-CSS)
+    * {
+        background-image: url("../glade/images/2stars.png");
+    }
+    CSS
+
+@@CSS_BG_SCORE3 ||= Gtk::CssProvider.new
+@@CSS_BG_SCORE3.load(data: <<-CSS)
+    * {
+        background-image: url("../glade/images/3stars.png");
+    }
+    CSS

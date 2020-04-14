@@ -15,13 +15,13 @@ class FenetreFinUI
 
         @windowFin = @builderFin.get_object("FenetreFin")
 
-        @imgEtoile = @builderFin.get_object("image2")
+        @imgEtoile = @builderFin.get_object("imgScore")
         if(@grille.score>(500*@grille.tailleX / 2))
-            #mettre a jour pour image 3 etoile
+            @imgEtoile.style_context.add_provider(@@CSS_BG_SCORE3, Gtk::StyleProvider::PRIORITY_USER)
         elsif(@grille.score>(500*@grille.tailleX / 3))
-            #mettre a jour pour image 2 etoles
+            @imgEtoile.style_context.add_provider(@@CSS_BG_SCORE2, Gtk::StyleProvider::PRIORITY_USER)
         else
-            #mettre a jour pour image 1 etoiles
+            @imgEtoile.style_context.add_provider(@@CSS_BG_SCORE1, Gtk::StyleProvider::PRIORITY_USER)
         end
         #fonctions
         @clickRetour = @builderFin.get_object("button1")
