@@ -52,6 +52,9 @@ class Grille
     #@score => Le score de la grille
     attr_accessor :score
 
+    #@couleurs => Les couleur que prennent les pont en fonction du niveau d'hypothèse
+    attr_reader :couleurs
+
 
     include Comparable
 
@@ -97,8 +100,6 @@ class Grille
     #:nodoc:
     def initialize(chaine)
       puts "chaine", chaine
-        @actions = UndoRedo.creer()
-        @checkpoints = Pile.creer(5)
 
         i = -1
         j = -1
@@ -268,10 +269,9 @@ class Grille
     end
 
     ##
-    #Cette méthode permet d'emmetre une nouvelle hypothèse (rangé dans la pile d'hypothèse)
+    #Cette méthode permet d'emmetre une nouvelle hypothèse (changer la couleur des ponts que l'on va modifier)
     def creerHypothese()
       begin
-        @checkpoints.empiler(Hypothese.creer(self))
         undoCouleurPont(@couleurs.undo())
       rescue => e
         puts e
@@ -279,10 +279,9 @@ class Grille
     end
 
     ##
-    #Cette méthode permet de valider la dernière hypothèse
+    #Cette méthode permet de valider la dernière hypothèse (prendre tous les ponts de la dernière couleur et la changer à l'avant dernière)
     def valideHypothese()
       begin
-        @checkpoints.depiler()
         @couleurs.redo()
         @couleurs.redo()
         redoCouleurPont(@couleurs.undo())
@@ -292,15 +291,15 @@ class Grille
     end
 
     ##
-    #Cette méthode permet de supprimer la dernière hypothèse et de revenir à l'état correspondant
+    #Cette méthode permet de supprimer la dernière hypothèse (supprime tous les ponts de la dernière couleur)
     #param::
     # * jeu Le jeu dont-on va modifier la grille
-    def supprimeHypothese(jeu)
+    def supprimeHypothese()
       begin
-        jeu.grille = @checkpoints.depiler().getGrille
         @couleurs.redo()
         @couleurs.redo()
-        redoCouleurPont(@couleurs.undo())
+        redoSupprCouleurPont(@couleurs.undo())
+        setDernierIle(@dernierIle)
       rescue => e
         puts e.message()
       end
@@ -326,7 +325,6 @@ class Grille
       if(!@dernierIle.eql?(nil))
         if(pont.surbrillance())
           self.chercherVoisins(pont, pont.directionSurbrillance)
-          puts "ALLLLLLLLOOOOOO ?????? : ", @dernierIle.afficheInfo()
           @score -= 100
         else
           self.setDernierIle(nil)
@@ -339,9 +337,8 @@ class Grille
     #Cette méthode permet de remmetre à zéro la grille
     def recommencer()
 
-      while(!@checkpoints.empty?) do
-        valideHypothese()
-      end
+      @actions = UndoRedo.creer()
+
 
       setDernierIle(nil)
       @score = 500 * @tailleX
@@ -426,6 +423,27 @@ class Grille
       @mat.each do |ligne|
         ligne.each do |c|
           if(c.estPont?())
+            c.redoCouleurPont(couleur)
+          end
+        end
+      end
+
+    end
+
+    ##
+    #Cette méthode permet d'appeler la méthode Case#redoCouleurPont de chaque case de la grille et de supprimer les ponts de la dernière hypothèse
+    #param::
+    # * couleur La couleur à passer a la méthode Case#redoCouleurPont
+    def redoSupprCouleurPont(couleur)
+
+      @mat.each do |ligne|
+        ligne.each do |c|
+          if(c.estPont?())
+            if(c.couleurPont == c.couleurPontCourante)
+              while(c.valeur != 0)
+                chercherVoisins(c, c.direction)
+              end
+            end
             c.redoCouleurPont(couleur)
           end
         end

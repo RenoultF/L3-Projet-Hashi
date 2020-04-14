@@ -45,10 +45,10 @@ class Pont < Case
   attr_accessor :marque
 
   #@couleurPont => La couleur que prendrait le pont s'il est modifié
-  attr_accessor :couleurPont
+  attr_reader :couleurPont
 
   #@couleurPontCourante => La couleur du pont
-  attr_accessor :couleurPontCourante
+  attr_reader :couleurPontCourante
 
   #:nodoc:
   def Pont.verifieDirection(direction) #privée
@@ -92,14 +92,14 @@ class Pont < Case
   #:nodoc:
   def initialize(posX, posY, grille, direction, valeur)
 
-      super(posX, posY, grille)
-      @valeur = valeur
-      @direction = direction
-      @surbrillance = false
-      @marque = false
-      @directionSurbrillance = NULLE
-      @couleurPont = Couleur::NOIR
-      @couleurPontCourante = Couleur::NOIR
+    super(posX, posY, grille)
+    @valeur = valeur
+    @direction = direction
+    @surbrillance = false
+    @marque = false
+    @directionSurbrillance = NULLE
+    @couleurPont = Couleur::JAUNE
+    @couleurPontCourante = Couleur::JAUNE
 
   end
   #:doc:
@@ -191,6 +191,7 @@ class Pont < Case
 
 
   private def modifValeur(direction, valeur)
+      print "Couleur Pont : ", @couleurPontCourante, @couleurPont, "\n"
       demarquer()
       if(@direction != NULLE)
           #On modifie la valeur du pont si la direction donné est la bonne
@@ -200,16 +201,19 @@ class Pont < Case
                   @direction = NULLE
               end
               @couleurPontCourante = @couleurPont
-              return true
+              ret = true
           end
-          return false
+          ret = false
       #On crée un nouveau pont
       elsif(@direction == NULLE)
           @direction = direction
           @valeur = valeur
           @couleurPontCourante = @couleurPont
-          return true
+          ret = true
       end
+      puts "apres"
+      print "Couleur Pont : ", @couleurPontCourante, @couleurPont, "\n"
+      return ret
   end
 
   private def modifSurbrillance(direction, valeur)

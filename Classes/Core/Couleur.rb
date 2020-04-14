@@ -63,6 +63,10 @@ class Couleur
     return @couleur <=> autre.couleur
   end
 
+  def to_s()
+    @couleur.to_s()
+  end
+
   #La couleur blanc
   BLANC =   Couleur.new([1, 1, 1])
 

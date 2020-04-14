@@ -258,6 +258,7 @@
             <child>
               <object class="GtkBox" id="grilleJeux">
                 <property name="visible">True</property>
+                <property name="margin_left">15</property>
                 <property name="can_focus">False</property>
               </object>
               <packing>
@@ -270,10 +271,7 @@
               <object class="GtkGrid" id="grid1">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
-                <property name="valign">center</property>
-                <property name="margin_left">100</property>
-                <property name="margin_right">50</property>
-                <property name="margin_bottom">20</property>
+                <property name="margin_left">150</property>
                 <property name="row_homogeneous">True</property>
                 <property name="column_homogeneous">True</property>
                 <child>
@@ -338,9 +336,9 @@
                 </child>
                 <child>
                   <object class="GtkButton" id="btnVerifCP">
-                    <property name="label" translatable="yes">Vérifier Checkpoint</property>
+                    <property name="label" translatable="yes">Valider Checkpoint</property>
                     <property name="visible">True</property>
-                    <property name="can_focus">True</property>
+                    <property name="can_focus">False</property>
                     <property name="receives_default">True</property>
                     <property name="image">vérifcp</property>
                     <property name="always_show_image">True</property>
@@ -354,14 +352,14 @@
                 </child>
               </object>
               <packing>
-                <property name="expand">True</property>
+                <property name="expand">False</property>
                 <property name="fill">True</property>
                 <property name="position">2</property>
               </packing>
             </child>
           </object>
           <packing>
-            <property name="expand">True</property>
+            <property name="expand">False</property>
             <property name="fill">True</property>
             <property name="position">2</property>
           </packing>
