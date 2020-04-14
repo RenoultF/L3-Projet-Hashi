@@ -32,7 +32,7 @@ class FenetreJeuUI
         @compte = Compte.recuperer(@pseudo)
 
         # puts "Mode : #{@mode}";
-        puts "Taille : #{@taille}";
+        # puts "Taille : #{@taille}";
         # puts "Difficulté : #{@difficulte}";
 
         window.destroy()
@@ -65,13 +65,13 @@ class FenetreJeuUI
         @donnerTech = DonnerTechnique.creer(@grille)
 
         #fonctions
-        @clickUndo = @builderJeu.get_object("btnRetourarr")
+        @clickUndo = @builderJeu.get_object("btnUndo")
         @clickUndo.signal_connect('clicked'){@grille.undo()}
 
-        @clickRedo = @builderJeu.get_object("btnRetourarr1")
+        @clickRedo = @builderJeu.get_object("btnRedo")
         @clickRedo.signal_connect('clicked'){@grille.redo()}
 
-        @btnReinit = @builderJeu.get_object("btnReinit1")
+        @btnReinit = @builderJeu.get_object("btnReinit")
         @btnReinit.signal_connect('clicked'){@grille.recommencer()}
 
         @btnRetour = @builderJeu.get_object("btnRetour")
@@ -96,8 +96,11 @@ class FenetreJeuUI
         @btnDonnerTech = @builderJeu.get_object("btnIndice")
         @btnDonnerTech.signal_connect('clicked'){puts @donnerTech.aider()}
 
-        @btnVerif = @builderJeu.get_object("btnVerif")
+        @btnVerif = @builderJeu.get_object("btnVerifGrille")
         @btnVerif.signal_connect('clicked'){@verifGrille.aider()}
+
+        @btnValidGrille = @builderJeu.get_object("btnValidGrille")
+        @btnValidGrille.signal_connect('clicked'){@verifGrille.aider()}
 
         @chronoGrille = Chrono.new(self,  @labelChrono)
         @threadChrono = Thread.new{@chronoGrille.lancerChrono()}
@@ -105,10 +108,26 @@ class FenetreJeuUI
         @btnAide = @builderJeu.get_object("btnAide")
         @btnRegles = @builderJeu.get_object("btnRegles")
         @btnAstuces = @builderJeu.get_object("btnAstuces")
+
+        @grille111 = @builderJeu.get_object("grid1")
+        @grille111.style_context.add_provider(@@CSS_BOX_STAT, Gtk::StyleProvider::PRIORITY_USER)
     
-        @btnAide.style_context.add_provider(@@CSS_BTN_TOPMENU, Gtk::StyleProvider::PRIORITY_USER)
-        @btnRegles.style_context.add_provider(@@CSS_BTN_TOPMENU, Gtk::StyleProvider::PRIORITY_USER)
-        @btnAstuces.style_context.add_provider(@@CSS_BTN_TOPMENU, Gtk::StyleProvider::PRIORITY_USER)
+        @btnAide.style_context.add_provider(@@CSS_BTN_JEU, Gtk::StyleProvider::PRIORITY_USER)
+        @btnRegles.style_context.add_provider(@@CSS_BTN_JEU, Gtk::StyleProvider::PRIORITY_USER)
+        @btnAstuces.style_context.add_provider(@@CSS_BTN_JEU, Gtk::StyleProvider::PRIORITY_USER)
+
+        @btnValid1.style_context.add_provider(@@CSS_BTN_JEU, Gtk::StyleProvider::PRIORITY_USER)
+        @btnSuppr1.style_context.add_provider(@@CSS_BTN_JEU, Gtk::StyleProvider::PRIORITY_USER)
+        @btnValCP.style_context.add_provider(@@CSS_BTN_JEU, Gtk::StyleProvider::PRIORITY_USER)
+        @btnSauvegarder.style_context.add_provider(@@CSS_BTN_JEU, Gtk::StyleProvider::PRIORITY_USER)
+
+        @btnRetour.style_context.add_provider(@@CSS_BTN_JEU, Gtk::StyleProvider::PRIORITY_USER)
+        @btnDonnerTech.style_context.add_provider(@@CSS_BTN_JEU, Gtk::StyleProvider::PRIORITY_USER)
+        @clickRedo.style_context.add_provider(@@CSS_BTN_JEU, Gtk::StyleProvider::PRIORITY_USER)
+        @clickUndo.style_context.add_provider(@@CSS_BTN_JEU, Gtk::StyleProvider::PRIORITY_USER)
+        @btnReinit.style_context.add_provider(@@CSS_BTN_JEU, Gtk::StyleProvider::PRIORITY_USER)
+        @btnVerif.style_context.add_provider(@@CSS_BTN_JEU, Gtk::StyleProvider::PRIORITY_USER)
+        @btnValidGrille.style_context.add_provider(@@CSS_BTN_JEU, Gtk::StyleProvider::PRIORITY_USER)
     
         @btnAide.signal_connect('clicked') { |_widget| AfficherAideJeu() }
         @btnRegles.signal_connect('clicked') { |_widget| AfficherRegles()  }
