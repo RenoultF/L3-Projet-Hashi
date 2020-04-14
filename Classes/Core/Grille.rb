@@ -16,20 +16,8 @@ require "../Core/Action.rb"
 class Grille
 
 
-    @tailleX #taille x de la grille
-    @tailleY #taille y de la grille
-    @mat #matrice de type Case[taillex][tailleY]
-    @dernierIle #dernierIle sur laquelle on a cliqué
-    @numGrille #numero de la grille
-    @checkpoints #liste des différents chekcpoints
-    @actions #pile des actions
-    @sauvegarde #sauvegarde de la grille
-    @matSolution #matrice de la grille Solution
-    @score#score actuelle de la grille
-    @chronoGrille #chrono de la grille
-    @threadChrono #thread dans equel le chrono va tourner
-    @minutesFin #minutes a laquelle il a fini la map
-    @secondesFin #secondes a laquelle il a fini la map
+
+    #@dernierIle => La dernière ile séléctionnée par l'utilisateur
 
     #@difficulte => La difficulté de la grille
     attr_reader :difficulte
