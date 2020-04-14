@@ -45,10 +45,10 @@ class Pont < Case
   attr_accessor :marque
 
   #@couleurPont => La couleur que prendrait le pont s'il est modifié
-  attr_accessor :couleurPont
+  attr_reader :couleurPont
 
   #@couleurPontCourante => La couleur du pont
-  attr_accessor :couleurPontCourante
+  attr_reader :couleurPontCourante
 
   #:nodoc:
   def Pont.verifieDirection(direction) #privée
@@ -98,8 +98,8 @@ class Pont < Case
       @surbrillance = false
       @marque = false
       @directionSurbrillance = NULLE
-      @couleurPont = Couleur::NOIR
-      @couleurPontCourante = Couleur::NOIR
+      @couleurPont = Couleur::JAUNE
+      @couleurPontCourante = Couleur::JAUNE
 
   end
   #:doc:
@@ -114,6 +114,20 @@ class Pont < Case
   def redoCouleurPont(couleurPont)
     if(@couleurPont == @couleurPontCourante)
       @couleurPontCourante = couleurPont
+    end
+    @couleurPont = couleurPont
+  end
+
+  ##
+  #Cette méthode permet de modifier la couleur que devrais prendre le pont s'il est modifié
+  #ainsi que sa couleur courante si elle était la même que la couleur après modification
+  #
+  #Utilisé par les hypothèses
+  #param::
+  # * couleurPont La nouvelle couleur
+  def redoSupprCouleurPont(couleurPont)
+    if(@couleurPont == @couleurPontCourante)
+      raz()
     end
     @couleurPont = couleurPont
   end
@@ -191,6 +205,7 @@ class Pont < Case
 
 
   private def modifValeur(direction, valeur)
+      print "Couleur Pont : ", @couleurPontCourante, @couleurPont, "\n"
       demarquer()
       if(@direction != NULLE)
           #On modifie la valeur du pont si la direction donné est la bonne
@@ -200,16 +215,19 @@ class Pont < Case
                   @direction = NULLE
               end
               @couleurPontCourante = @couleurPont
-              return true
+              ret = true
           end
-          return false
+          ret = false
       #On crée un nouveau pont
       elsif(@direction == NULLE)
           @direction = direction
           @valeur = valeur
           @couleurPontCourante = @couleurPont
-          return true
+          ret = true
       end
+      puts "apres"
+      print "Couleur Pont : ", @couleurPontCourante, @couleurPont, "\n"
+      return ret
   end
 
   private def modifSurbrillance(direction, valeur)

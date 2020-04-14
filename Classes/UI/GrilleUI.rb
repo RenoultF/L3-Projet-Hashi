@@ -16,7 +16,7 @@ require "gtk3"
 class GrilleUI < Gtk::DrawingArea
 
   #@grille => La grile avec laquelle on joue
-  attr_accessor :grille
+  attr_reader :grille
 
   ##
   #Ce constructeur permet de créer un nouveau afficheur de grille
@@ -28,7 +28,6 @@ class GrilleUI < Gtk::DrawingArea
     super()
 
     @grille = grille
-    @mat = Array.new(@grille.tailleX()) { Array.new(@grille.tailleY()) }
     @taille = taille
 
     init()
@@ -40,6 +39,8 @@ class GrilleUI < Gtk::DrawingArea
   end
 
   private def init()
+
+    @mat = Array.new(@grille.tailleX()) { Array.new(@grille.tailleY()) }
 
     self.set_size_request(@grille.tailleY() * @taille, @grille.tailleX() * @taille)
 
@@ -67,7 +68,6 @@ class GrilleUI < Gtk::DrawingArea
   def grille=(grille)
 
     @grille = grille
-
     init()
 
   end
@@ -80,9 +80,7 @@ class GrilleUI < Gtk::DrawingArea
   #return::
   # * La case à la position (i, j)
   def getCase(i, j)
-
     return @mat[i][j]
-
   end
 
   ##
@@ -93,9 +91,7 @@ class GrilleUI < Gtk::DrawingArea
   #return::
   # * true si les coordonnées sont en dehors de la grille, false sinon
   def sortLimite?(i, j)
-
     return @grille.sortLimite?(i, j)
-
   end
 
 
@@ -138,9 +134,7 @@ class GrilleUI < Gtk::DrawingArea
   ##
   #Cette méthode permet de réinitialiser le grille que l'on affiche
   def recommencer()
-
     @grille.recommencer()
-
   end
 
 end
