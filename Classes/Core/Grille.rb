@@ -313,7 +313,7 @@ class Grille
       if(!@dernierIle.eql?(nil))
         if(pont.surbrillance())
           self.chercherVoisins(pont, pont.directionSurbrillance)
-          @score -= 100
+          @score -= 20
         else
           self.setDernierIle(nil)
         end
@@ -465,14 +465,6 @@ class Grille
 
     end
 
-
-    def modifScore(val,labelScore)
-      @score += val
-      if(@score<0)
-        @score = 0
-      end
-      labelScore.set_label(@score.to_s)
-    end
 
     ##
     #Cette méthode permet d'ajouter une action à la pile d'action

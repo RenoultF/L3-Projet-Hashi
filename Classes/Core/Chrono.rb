@@ -60,6 +60,7 @@ class Chrono
 	#Chrono sans arguments
 		activeChrono()
 		while( (@minutes < 59) && @active )
+			@jeuCourant.actualiseScore()
 			afficherTps()
 			sleep(1)
 			@secondes += 1

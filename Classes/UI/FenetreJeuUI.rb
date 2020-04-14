@@ -78,6 +78,7 @@ class FenetreJeuUI
         @btnRetour = @builderJeu.get_object("btnRetour")
         @btnRetour.signal_connect('clicked'){
             @grille.sauvegarder(@compte)
+            Thread.kill(@threadChrono)
             @window.destroy()
             Menu.new()
         }
@@ -106,6 +107,7 @@ class FenetreJeuUI
         @btnValidGrille.signal_connect('clicked'){
             @grille.sauvegarder(@compte)
             if(@grille.fini?() == true)
+                Thread.kill(@threadChrono)
                 fenetre_fin = FenetreFinUI.new(@grille,@compte,@window)
             else
                 @labelIndice.set_label("Vous n'avez pas trouvé la solution ! \n Continuez ...")
@@ -159,6 +161,10 @@ class FenetreJeuUI
         if(@grille.score<0)
             @grille.score = 0
         end
+        @labelScore.set_label(@grille.score.to_s)
+    end
+
+    def actualiseScore()
         @labelScore.set_label(@grille.score.to_s)
     end
 
