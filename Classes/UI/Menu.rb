@@ -262,7 +262,7 @@ class Menu < Gtk::Box
     
 	def commencerPartie(grille,nomCompte)
 		@fenetreScroll.hide
-		@jeu = FenetreJeuUI.new(@@mode, grille,nomCompte,@window)       
+		@jeu = FenetreJeuUI.new(@@mode, grille,nomCompte,@window,@fenetreScroll)       
 	end
 	
 	def retourMenu()

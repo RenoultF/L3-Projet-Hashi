@@ -24,7 +24,7 @@ require "../CSS/Style.rb"
 class FenetreJeuUI
 
 
-    def initialize(mode, grille ,pseudo,window)
+    def initialize(mode, grille ,pseudo,window,window1)
         @grille=grille
         @mode = mode
         @pseudo = pseudo
@@ -37,6 +37,7 @@ class FenetreJeuUI
         # puts "Difficulté : #{@difficulte}";
 
         window.destroy()
+        window1.destroy()
         # CREATION FENETRE
         @builderJeu = Gtk::Builder.new
         @builderJeu.add_from_file("../glade/jeu.glade")
