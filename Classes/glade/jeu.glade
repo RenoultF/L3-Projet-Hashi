@@ -6,6 +6,16 @@
     <property name="can_focus">False</property>
     <property name="stock">gtk-media-previous</property>
   </object>
+  <object class="GtkImage" id="image1">
+    <property name="visible">True</property>
+    <property name="can_focus">False</property>
+    <property name="stock">gtk-help</property>
+  </object>
+  <object class="GtkImage" id="image2">
+    <property name="visible">True</property>
+    <property name="can_focus">False</property>
+    <property name="stock">gtk-index</property>
+  </object>
   <object class="GtkImage" id="image3">
     <property name="visible">True</property>
     <property name="can_focus">False</property>
@@ -21,21 +31,6 @@
     <property name="can_focus">False</property>
     <property name="stock">gtk-apply</property>
   </object>
-  <object class="GtkImage" id="image6">
-    <property name="visible">True</property>
-    <property name="can_focus">False</property>
-    <property name="stock">gtk-apply</property>
-  </object>
-  <object class="GtkImage" id="image1">
-    <property name="visible">True</property>
-    <property name="can_focus">False</property>
-    <property name="stock">gtk-help</property>
-  </object>
-  <object class="GtkImage" id="image2">
-    <property name="visible">True</property>
-    <property name="can_focus">False</property>
-    <property name="stock">gtk-index</property>
-  </object>
   <object class="GtkImage" id="indice">
     <property name="visible">True</property>
     <property name="can_focus">False</property>
@@ -50,11 +45,6 @@
     <property name="visible">True</property>
     <property name="can_focus">False</property>
     <property name="stock">gtk-undo</property>
-  </object>
-  <object class="GtkImage" id="retourArriere1">
-    <property name="visible">True</property>
-    <property name="can_focus">False</property>
-    <property name="stock">gtk-media-previous</property>
   </object>
   <object class="GtkImage" id="save">
     <property name="visible">True</property>
@@ -76,10 +66,19 @@
     <property name="can_focus">False</property>
     <property name="stock">gtk-media-next</property>
   </object>
+  <object class="GtkImage" id="vérifcp">
+    <property name="visible">True</property>
+    <property name="can_focus">False</property>
+    <property name="stock">gtk-apply</property>
+  </object>
   <object class="GtkWindow" id="windowJeu">
     <property name="can_focus">False</property>
+    <property name="title" translatable="yes">HASHI - Jeu</property>
     <property name="resizable">False</property>
     <property name="window_position">center-always</property>
+    <property name="default_width">1170</property>
+    <property name="default_height">650</property>
+    <property name="icon">images/icone.png</property>
     <child>
       <object class="GtkBox" id="box1">
         <property name="visible">True</property>
@@ -89,6 +88,8 @@
           <object class="GtkBox" id="helpBox">
             <property name="visible">True</property>
             <property name="can_focus">False</property>
+            <property name="halign">start</property>
+            <property name="valign">start</property>
             <property name="margin_left">15</property>
             <property name="margin_top">10</property>
             <property name="spacing">10</property>
@@ -99,6 +100,7 @@
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>
                 <property name="image">image1</property>
+                <property name="relief">none</property>
                 <property name="always_show_image">True</property>
               </object>
               <packing>
@@ -114,6 +116,7 @@
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>
                 <property name="image">image2</property>
+                <property name="relief">none</property>
                 <property name="always_show_image">True</property>
               </object>
               <packing>
@@ -129,6 +132,7 @@
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>
                 <property name="image">image3</property>
+                <property name="relief">none</property>
                 <property name="always_show_image">True</property>
               </object>
               <packing>
@@ -145,12 +149,11 @@
           </packing>
         </child>
         <child>
-          <object class="GtkBox" id="box3">
+          <object class="GtkBox" id="boxStat">
             <property name="visible">True</property>
             <property name="can_focus">False</property>
             <property name="halign">center</property>
             <property name="valign">center</property>
-            <property name="margin_top">15</property>
             <property name="margin_bottom">15</property>
             <child>
               <object class="GtkBox" id="box4">
@@ -250,6 +253,8 @@
           <object class="GtkBox" id="box6">
             <property name="visible">True</property>
             <property name="can_focus">False</property>
+            <property name="margin_left">300</property>
+            <property name="margin_right">15</property>
             <child>
               <object class="GtkBox" id="grilleJeux">
                 <property name="visible">True</property>
@@ -266,7 +271,10 @@
               <object class="GtkGrid" id="grid1">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
-                <property name="margin_left">150</property>
+                <property name="valign">center</property>
+                <property name="margin_left">100</property>
+                <property name="margin_right">50</property>
+                <property name="margin_bottom">20</property>
                 <property name="row_homogeneous">True</property>
                 <property name="column_homogeneous">True</property>
                 <child>
@@ -335,7 +343,7 @@
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
                     <property name="receives_default">True</property>
-                    <property name="image">image6</property>
+                    <property name="image">vérifcp</property>
                     <property name="always_show_image">True</property>
                   </object>
                   <packing>
