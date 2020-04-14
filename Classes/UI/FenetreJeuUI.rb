@@ -75,7 +75,7 @@ class FenetreJeuUI
         @btnValid1.signal_connect('clicked'){@grille.creerHypothese()}
 
         @btnSuppr1 = @builderJeu.get_object("btnsup1")
-        @btnSuppr1.signal_connect('clicked'){@grille.supprimeHypothese(@grilleJouable)}
+        @btnSuppr1.signal_connect('clicked'){@grille.supprimeHypothese()}
 
         @btnValCP = @builderJeu.get_object("btnVerifCP")
         @btnValCP.signal_connect('clicked'){@grille.valideHypothese()}
