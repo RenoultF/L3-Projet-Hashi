@@ -66,7 +66,7 @@ class FenetreJeuUI
 
         @btnRetour = @builderJeu.get_object("btnRetour")
         @btnRetour.signal_connect('clicked'){
-            Sauvegarde.recuperer(@compte, @grille).setGrille(@grille).sauvegarder()
+            @grille.sauvegarder(@compte)
             @window.destroy()
             Menu.new()
         }
@@ -81,7 +81,7 @@ class FenetreJeuUI
         @btnValCP.signal_connect('clicked'){@grille.valideHypothese()}
 
         @btnSauvegarder = @builderJeu.get_object("btnsave")
-        @btnSauvegarder.signal_connect('clicked'){Sauvegarde.recuperer(@compte, @grille).setGrille(@grille).sauvegarder()}
+        @btnSauvegarder.signal_connect('clicked'){@grille.sauvegarder(@compte)}
 
         @btnDonnerTech = @builderJeu.get_object("btnIndice")
         @btnDonnerTech.signal_connect('clicked'){puts @donnerTech.aider()}
