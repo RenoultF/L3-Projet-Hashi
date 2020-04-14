@@ -1,4 +1,4 @@
-
+# DEPRECATED
 #Cette classe représente les actions réalisé par le joueur (placer, retirer des ponts)
 class Action2
 

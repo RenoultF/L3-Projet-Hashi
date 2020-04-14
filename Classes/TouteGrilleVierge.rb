@@ -1,3 +1,4 @@
+# DEPRECATED
 class TouteGrilleVierge
 
     #creation de toutes les maps
@@ -30,5 +31,3 @@ class TouteGrilleVierge
     @mat27
 
     def initialize
-        
-    

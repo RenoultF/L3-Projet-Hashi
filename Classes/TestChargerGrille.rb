@@ -1,4 +1,5 @@
 load "Grille.rb"
+# DEPRECATED
 
 grille = Grille.charger(nil, 15, 15, 1, 1)
 

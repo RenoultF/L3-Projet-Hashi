@@ -1,4 +1,5 @@
 load("Aide.rb")
+# DEPRECATED
 class DonnerTechnique < Aide
     ##
     #donne une technique de resolution à l'utilisateur en fonction de l'état de la grille

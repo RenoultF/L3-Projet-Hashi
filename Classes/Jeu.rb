@@ -8,6 +8,7 @@ require "./DonnerTechnique.rb"
 require "./VerifierGrille.rb"
 require "./Action.rb"
 ##
+# DEPRECATED
 #classe qui s'occupe du déroulement d'une partie
 class Jeu
 

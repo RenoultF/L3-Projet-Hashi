@@ -1,3 +1,4 @@
+# DEPRECATED
 class Menu
 
     private_class_method :new

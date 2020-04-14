@@ -9,6 +9,7 @@ require "./Grille2Essai.rb"
 require "active_record"
 
 
+# DEPRECATED
 #Cette classe permet de sauvegarder dans une base de données la progression d'un joueur sur une grille et de faire des recherches sur les sauvegardes
 class Sauvegarde < ActiveRecord::Base
 

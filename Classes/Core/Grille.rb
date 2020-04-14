@@ -46,10 +46,10 @@ class Grille
     #@matSolution => La matrice solution
     attr_reader :matSolution
 
-    #@matSolution => La matrice de cases
+    #@mat => La matrice de cases
     attr_reader :mat
 
-    #@matSolution => La matrice de cases
+    #@score => Le score de la grille
     attr_accessor :score
 
 

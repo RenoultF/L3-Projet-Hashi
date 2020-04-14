@@ -2,6 +2,7 @@
 require "active_record"
 
 
+# DEPRECATED
 class Case
 
     attr_reader :posX

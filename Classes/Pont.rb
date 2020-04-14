@@ -6,6 +6,7 @@
 
 load "Case.rb"
 
+# DEPRECATED
 #Cette classe représente les ponts du Hashi
 class Pont < Case
 

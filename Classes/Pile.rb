@@ -1,5 +1,6 @@
 
 
+# DEPRECATED
 #Cette classe représente une pile
 class Pile
 

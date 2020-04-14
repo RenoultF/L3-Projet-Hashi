@@ -1,3 +1,4 @@
+# DEPRECATED
 class Checkpoint
 
     private_class_method :new

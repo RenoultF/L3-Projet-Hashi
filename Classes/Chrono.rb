@@ -1,4 +1,5 @@
 ##
+# DEPRECATED
 # Auteur JOLLIET Corentin
 # Version 0.1 : Date : Fri Mar 06 09:24:44 CET 2020
 #

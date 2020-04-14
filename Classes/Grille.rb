@@ -1,6 +1,7 @@
 require "./Pont.rb"
 require "./Ile.rb"
 
+# DEPRECATED
 class Grille
 
     @tailleX #taille x de la grille

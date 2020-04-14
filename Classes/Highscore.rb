@@ -1,3 +1,4 @@
+# DEPRECATED
 class Highscore
     private_class_method :new
 
@@ -55,7 +56,7 @@ class Highscore
     def afficher()
         puts "      Highscore       \n\n"
         @liste.each_pair do |key, value|
-            print key 
+            print key
             puts "=>" + value
         end
     end
@@ -77,7 +78,7 @@ class Highscore
                 attente_key[1] = key
                 attente_value[1] = value
             end
-        end 
+        end
         x = 2
         for i in 0..x
             print attente_key[i]
@@ -112,6 +113,3 @@ tab.ajouter(1100, "Player Test")
 #tab.trie()
 #tab.afficher
 tab.afficheToi()
-
-
-

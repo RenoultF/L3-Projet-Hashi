@@ -1,5 +1,6 @@
 load "Case.rb"
 
+# DEPRECATED
 class Ile < Case
 
 

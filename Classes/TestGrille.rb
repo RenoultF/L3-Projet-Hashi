@@ -1,6 +1,7 @@
 
 
 require "./Grille2Essai.rb"
+# DEPRECATED
 
 res = ""
 

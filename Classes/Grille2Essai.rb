@@ -1,5 +1,6 @@
 
 ##
+# DEPRECATED
 # Auteur Brabant Mano
 # Version 2.0.1 : Date : 15/03/2020
 

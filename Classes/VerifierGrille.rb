@@ -1,4 +1,5 @@
 load("Aide.rb")
+# DEPRECATED
 class VerifierGrille < Aide
     attr:bTetard, false
     ##

@@ -2,6 +2,7 @@
 
 require "./Jeu.rb"
 require "./ConnectSqlite3.rb"
+# DEPRECATED
 
 res = ""
 

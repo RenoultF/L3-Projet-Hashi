@@ -8,6 +8,7 @@ require "../UI/FenetreReglesUI.rb"
 require 'gtk3'
 
 ##
+# PAS UTILISE DANS LE VERSION FINALE
 # Auteur:: Brabant Mano
 # Version:: 0.1
 # Date:: 09/04/2020

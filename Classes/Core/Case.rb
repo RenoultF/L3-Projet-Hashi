@@ -45,6 +45,7 @@ class Case
 
   end
 
+  ##
   #Cette méthode permet de comparer deux cases
   #param::
   # * autre L'autre case
@@ -58,12 +59,13 @@ class Case
     return 0
   end
 
-
+  ##
   #Cette méthode permet d'afficher la case
   def to_s
     " "
   end
 
+  ##
   #Cette méthode permet de savoir si la case est une ile
   #return::
   # * true Si la case est une ile
@@ -72,6 +74,7 @@ class Case
     return false
   end
 
+  ##
   #Cette méthode permet de savoir si la case est un pont
   #return::
   # * true Si la case est un pont

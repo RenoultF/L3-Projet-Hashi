@@ -1,3 +1,5 @@
+# DEPRECATED
+# Pas un vrai fichier
 def initialize(chaine, tailleX, tailleY, difficulte)
 
     if(chaine.length != tailleX * tailleY)

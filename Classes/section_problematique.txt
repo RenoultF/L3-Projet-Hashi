@@ -1,3 +1,4 @@
+# DEPRECATED
 #Changements à intégrer :
 #Projet-Hashi.rb :
 
@@ -15,7 +16,7 @@
 		.
 		.
 		.
-	
+
 		puts "*~Travail en cours~* - Accueil to Partie.";
 		@window2.show;
 	    	@thr = Thread.new{ @chronoInterne.lancerChrono(59,@chrono) }
