@@ -5,6 +5,8 @@ require "../Core/VerifierGrille.rb"
 require "../Core/UndoRedo.rb"
 
 require "../UI/GrilleJouableUI.rb"
+
+
 require 'gtk3'
 
 ##
@@ -134,7 +136,6 @@ class JeuUI < Gtk::Box
     @grille.grille=(grille)
   end
 
-
   def finir()
 
     if(@grille.grille.fini?())
@@ -156,6 +157,5 @@ class JeuUI < Gtk::Box
     end
 
   end
-
 
 end

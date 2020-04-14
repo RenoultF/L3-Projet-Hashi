@@ -1,16 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <interface>
   <!-- interface-requires gtk+ 3.0 -->
-  <object class="GtkImage" id="image1">
-    <property name="visible">True</property>
-    <property name="can_focus">False</property>
-    <property name="stock">gtk-stop</property>
-  </object>
-  <object class="GtkImage" id="image2">
-    <property name="visible">True</property>
-    <property name="can_focus">False</property>
-    <property name="stock">gtk-help</property>
-  </object>
   <object class="GtkImage" id="image4">
     <property name="visible">True</property>
     <property name="can_focus">False</property>
@@ -20,6 +10,16 @@
     <property name="visible">True</property>
     <property name="can_focus">False</property>
     <property name="stock">gtk-about</property>
+  </object>
+  <object class="GtkImage" id="image1">
+    <property name="visible">True</property>
+    <property name="can_focus">False</property>
+    <property name="stock">gtk-stop</property>
+  </object>
+  <object class="GtkImage" id="image2">
+    <property name="visible">True</property>
+    <property name="can_focus">False</property>
+    <property name="stock">gtk-help</property>
   </object>
   <object class="GtkImage" id="jouer">
     <property name="visible">True</property>
@@ -33,7 +33,7 @@
     <property name="window_position">center</property>
     <property name="default_width">800</property>
     <property name="default_height">500</property>
-    <property name="icon">icone.png</property>
+    <property name="icon">images/icone.png</property>
     <child>
       <object class="GtkBox" id="mainBox">
         <property name="visible">True</property>
@@ -107,7 +107,7 @@
             <property name="can_focus">False</property>
             <property name="margin_top">10</property>
             <property name="ypad">17</property>
-            <property name="pixbuf">LOGpR2.png</property>
+            <property name="pixbuf">images/LOGpR2.png</property>
           </object>
           <packing>
             <property name="expand">False</property>
@@ -434,7 +434,6 @@
                     <property name="margin_right">130</property>
                     <property name="margin_bottom">25</property>
                     <property name="invisible_char">●</property>
-                    <property name="placeholder_text">test</property>
                     <property name="input_purpose">name</property>
                   </object>
                   <packing>

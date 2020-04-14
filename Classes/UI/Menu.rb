@@ -2,6 +2,8 @@ require 'gtk3'
 
 require "../UI/FenetreJeuUI.rb"
 require "../UI/AideUI.rb"
+require "../UI/AstucesUI.rb"
+require "../UI/ReglesUI.rb"
 require "../CSS/Style.rb"
 
 
@@ -100,8 +102,8 @@ class Menu < Gtk::Box
             @btnQuitter.signal_connect('clicked') { |_widget| Gtk.main_quit }
             @btnJouer.signal_connect('clicked') { |_widget| valide() }
             @btnAide.signal_connect('clicked') { |_widget| AfficherAide() }
-            @btnRegles.signal_connect('clicked') { puts "--- Affichage des règles";  }
-		    @btnAstuces.signal_connect('clicked') { puts "--- Affichage des astuces"; }
+            @btnRegles.signal_connect('clicked') { |_widget| AfficherRegles()  }
+		    @btnAstuces.signal_connect('clicked') { |_widget| AfficherAstuces() }
 		
         @window.show()
         # Appel de la gestion des signaux
@@ -244,6 +246,14 @@ class Menu < Gtk::Box
 		@aide = AideUI.new()
 	end
 
+	def AfficherRegles()
+		@regles = ReglesUI.new()
+	end
+
+	def AfficherAstuces()
+		@astuces = AstucesUI.new()
+	end
+
 	def removeChild(fenetre)
 		fenetre.each_all do |c|
 		  remove(c)
@@ -304,10 +314,8 @@ class Menu < Gtk::Box
 	
 	end
 	
-	def afficheRegles
-	
-		@fenetreRegles.show_all
-	
+	def afficheRegles	
+		@fenetreRegles.show_all	
 	end
 
 end
