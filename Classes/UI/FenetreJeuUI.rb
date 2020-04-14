@@ -15,6 +15,11 @@ require "../Core/Chrono.rb"
 require "../Core/Jeu.rb"
 require "../UI/Menu.rb"
 
+require "../UI/AideJeuUI.rb"
+require "../UI/ReglesUI.rb"
+require "../UI/AstucesUI.rb"
+require "../CSS/Style.rb"
+
 class FenetreJeuUI
 
 
@@ -27,7 +32,7 @@ class FenetreJeuUI
         @compte = Compte.recuperer(@pseudo)
 
         # puts "Mode : #{@mode}";
-        # puts "Taille : #{@taille}";
+        puts "Taille : #{@taille}";
         # puts "Difficulté : #{@difficulte}";
 
         window.destroy()
@@ -35,7 +40,12 @@ class FenetreJeuUI
         @builderJeu = Gtk::Builder.new
         @builderJeu.add_from_file("../glade/jeu.glade")
         @window = @builderJeu.get_object("windowJeu")
-        @window.style_context.add_provider(@@CSS_BG_JEU, Gtk::StyleProvider::PRIORITY_USER)
+        if (@grille.tailleX == 15)
+            @window.style_context.add_provider(@@CSS_BG_JEU15, Gtk::StyleProvider::PRIORITY_USER)
+        else
+            @window.style_context.add_provider(@@CSS_BG_JEU, Gtk::StyleProvider::PRIORITY_USER)
+        end
+        
 
 
         #autre
@@ -92,6 +102,20 @@ class FenetreJeuUI
         @chronoGrille = Chrono.new(self,  @labelChrono)
         @threadChrono = Thread.new{@chronoGrille.lancerChrono()}
 
+        @btnAide = @builderJeu.get_object("btnAide")
+        @btnRegles = @builderJeu.get_object("btnRegles")
+        @btnAstuces = @builderJeu.get_object("btnAstuces")
+    
+        @btnAide.style_context.add_provider(@@CSS_BTN_TOPMENU, Gtk::StyleProvider::PRIORITY_USER)
+        @btnRegles.style_context.add_provider(@@CSS_BTN_TOPMENU, Gtk::StyleProvider::PRIORITY_USER)
+        @btnAstuces.style_context.add_provider(@@CSS_BTN_TOPMENU, Gtk::StyleProvider::PRIORITY_USER)
+    
+        @btnAide.signal_connect('clicked') { |_widget| AfficherAideJeu() }
+        @btnRegles.signal_connect('clicked') { |_widget| AfficherRegles()  }
+        @btnAstuces.signal_connect('clicked') { |_widget| AfficherAstuces() }
+
+        @boxStat = @builderJeu.get_object("boxStat")
+        @boxStat.style_context.add_provider(@@CSS_BOX_STAT, Gtk::StyleProvider::PRIORITY_USER)
         #@chronoGrille = Chrono.new(@jeu)
         #@threadChrono = Thread.new{@chronoGrille.lancerChrono()}
         #@threadJeu = Thread.new{@jeu.lanceToi()}
@@ -106,5 +130,17 @@ class FenetreJeuUI
         end
         @labelScore.set_label(@grille.score.to_s)
     end
+
+    def AfficherAideJeu()
+		@aide = AideJeuUI.new()
+	end
+
+	def AfficherRegles()
+		@regles = ReglesUI.new()
+	end
+
+	def AfficherAstuces()
+		@astuces = AstucesUI.new()
+	end
 
 end

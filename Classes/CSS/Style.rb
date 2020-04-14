@@ -7,14 +7,21 @@ require 'gtk3'
 @@CSS_BG_MENU ||= Gtk::CssProvider.new
 @@CSS_BG_MENU.load(data: <<-CSS)
     * {
-        background-image: url("../glade/bg.jpg");
+        background-image: url("../glade/images/bg.jpg");
     }
     CSS
 
 @@CSS_BG_JEU ||= Gtk::CssProvider.new
 @@CSS_BG_JEU.load(data: <<-CSS)
     * {
-        background-image: url("../glade/wJapStylePlusNet.jpg");
+        background-image: url("../glade/images/wJapStylePlusNet.jpg");
+    }
+    CSS
+
+@@CSS_BG_JEU15 ||= Gtk::CssProvider.new
+@@CSS_BG_JEU15.load(data: <<-CSS)
+    * {
+        background-image: url("../glade/images/wJapStylePlusNet15.jpg");
     }
     CSS
 
@@ -53,6 +60,7 @@ require 'gtk3'
         background-image: image(#ae9bf4);
         border: 2px solid #6e4af2;
         box-shadow: 3px 3px 2px #656565;
+        font-weight: bold;
     }
     button:active {
         background-image: image(#FAECBA);
@@ -109,5 +117,23 @@ require 'gtk3'
         border: 2px solid #e29085;
         box-shadow: 3px 3px 2px #656565;
         font-weight: bold;
+    }
+    CSS
+
+@@CSS_ASTUCES ||= Gtk::CssProvider.new
+@@CSS_ASTUCES.load(data: <<-CSS)
+    * {
+        background-image: linear-gradient(#e7b7b0, white);
+    }
+    CSS
+
+@@CSS_BOX_STAT ||= Gtk::CssProvider.new
+@@CSS_BOX_STAT.load(data: <<-CSS)
+    * {
+        border-radius: 15px;
+        border: 2px solid #a40d0f;
+        font-weight: bold;
+        padding: 5px;
+        margin-top: -15px;
     }
     CSS

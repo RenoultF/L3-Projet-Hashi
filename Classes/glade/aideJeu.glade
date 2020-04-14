@@ -56,7 +56,7 @@
             <property name="can_focus">False</property>
             <property name="yalign">0</property>
             <property name="ypad">10</property>
-            <property name="label" translatable="yes">Bienvenue sur notre jeux HASHI !</property>
+            <property name="label" translatable="yes">C'est parti !</property>
           </object>
           <packing>
             <property name="expand">False</property>
@@ -70,14 +70,28 @@
             <property name="can_focus">False</property>
             <property name="xpad">20</property>
             <property name="ypad">10</property>
-            <property name="label" translatable="yes">Pour commencer votre partie, séléctionner le mode, la dimensions des grilles, puis la difficulté.
+            <property name="label" translatable="yes">Pour jouer, cliquer sur une ile, les liens possibles seront indiqués en rouge, cliquez une ou deux fois
+sur ce lien pour créer un pont ou deux entre deux iles.
 
-Si le pseudo rentré éxiste déjà vous retrouverez la progression de vos grille ! 
+A droite de votre grille vous aurez la possibilité de créer un Checkpoint, un point de sauvegarde dans votre
+grille.
+Vous pourrez ainsi bloquez vos retour arrière jusqu'à ce Checkpoint. 
+Vous pouvez également vérifier si votre grille est bonne jusquà la progression de votre Checkpoint.
+Vous pouvez le supprimer et en recréer un à tout moment, pratique non ?
 
-Vous pourrez réinitialiser vos grilles comme bon vous semble pour obtenir un meilleur score !
+Expliquation des boutons en bas de la fenêtre :
 
-Rentrer un nouveau pseudo créera une nouvelle sauvegarde.</property>
-            <property name="justify">center</property>
+Retour : Vous retournez à la fenêtre de sélection de grille.
+
+Indice : Affiche un indice vous aidant à progresser dans la résolution de la grille.
+Annuler : Annule le dernier pont créer.
+Rétablir : Rétabli de dernier pont éffacé.
+Réinitialiser : Réinitialise toute la grille, checkpoint y compris.
+
+Vérifier Grille : Vérifie si votre grille est valide.
+Valider : Valide votre grille et vous affiche les résultats.
+
+N'hésitez pas à consulter les règles et astuces !</property>
           </object>
           <packing>
             <property name="expand">False</property>
@@ -89,8 +103,10 @@ Rentrer un nouveau pseudo créera une nouvelle sauvegarde.</property>
           <object class="GtkLabel" id="BonChance">
             <property name="visible">True</property>
             <property name="can_focus">False</property>
+            <property name="tooltip_markup" translatable="yes">Bon courage !</property>
+            <property name="tooltip_text" translatable="yes">Bon courage !</property>
             <property name="ypad">10</property>
-            <property name="label" translatable="yes">Ganbatte !</property>
+            <property name="label" translatable="yes" context="Bon courage !" comments="Bon courage !">Ganbatte !</property>
             <attributes>
               <attribute name="font-desc" value="Viner Hand ITC 16"/>
               <attribute name="underline" value="True"/>
