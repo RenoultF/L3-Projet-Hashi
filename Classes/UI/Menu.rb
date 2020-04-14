@@ -272,7 +272,7 @@ class Menu < Gtk::Box
 	
 	private def valide()
 	
-		@@difficulte -= 1
+		
 		puts "Paramètres menu"
 		print "Nom Compte : ", @pseudo.text(), "\n"
 		print "Taille grille : ", @@taille, "\n"

@@ -13,6 +13,7 @@ require "../Core/Action.rb"
 require "../Core/Hypothese.rb"
 require "../Core/Chrono.rb"
 require "../Core/Jeu.rb"
+require "../UI/Menu.rb"
 
 class FenetreJeuUI
 
@@ -56,6 +57,19 @@ class FenetreJeuUI
         #fonctions
         @clickUndo = @builderJeu.get_object("btnRetourarr")
         @clickUndo.signal_connect('clicked'){@grille.undo()}
+
+        @clickRedo = @builderJeu.get_object("btnRetourarr1")
+        @clickRedo.signal_connect('clicked'){@grille.redo()}
+
+        @btnReinit = @builderJeu.get_object("btnReinit1")
+        @btnReinit.signal_connect('clicked'){@grille.recommencer()}
+
+        @btnRetour = @builderJeu.get_object("btnRetour")
+        @btnRetour.signal_connect('clicked'){
+            Sauvegarde.recuperer(@compte, @grille).setGrille(@grille).sauvegarder()
+            @window.destroy()
+            Menu.new()
+        }
 
         @btnValid1 = @builderJeu.get_object("btnvalid1")
         @btnValid1.signal_connect('clicked'){@grille.creerHypothese()}
