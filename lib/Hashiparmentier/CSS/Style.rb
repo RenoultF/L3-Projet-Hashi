@@ -14,15 +14,9 @@ require 'gtk3'
 #
 # CSS JEU
 #
+
 @@CSS_BG_JEU ||= Gtk::CssProvider.new
 @@CSS_BG_JEU.load(data: <<-CSS)
-    * {
-        background-image: url("lib/Hashiparmentier/glade/images/wJapStylePlusNet.jpg");
-    }
-    CSS
-
-@@CSS_BG_JEU15 ||= Gtk::CssProvider.new
-@@CSS_BG_JEU15.load(data: <<-CSS)
     * {
         background-image: url("lib/Hashiparmentier/glade/images/wJapStylePlusNet15.jpg");
     }

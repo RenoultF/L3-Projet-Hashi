@@ -50,14 +50,8 @@ class FenetreJeuUI
             @window.destroy()
             Gtk.main_quit }
 
-        if (@grille.tailleX == 15)
-            @window.maximize
-            @window.style_context.add_provider(@@CSS_BG_JEU15, Gtk::StyleProvider::PRIORITY_USER)
-        else
-            @window.style_context.add_provider(@@CSS_BG_JEU, Gtk::StyleProvider::PRIORITY_USER)
-        end
 
-
+        @window.style_context.add_provider(@@CSS_BG_JEU, Gtk::StyleProvider::PRIORITY_USER)
 
         #autre
         @labelPseudo = @builderJeu.get_object("lbPseudo")
