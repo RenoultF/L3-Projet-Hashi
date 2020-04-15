@@ -10,11 +10,11 @@ Créateurs :
  
 Architecture projet :
  - Architecture :
-  - L'architecture (diagramme UML) de notre application
+   - L'architecture (diagramme UML) de notre application
  - lib :
-  - Les sources de notre application
+   - Les sources de notre application
  - bin :
-  - En cours de modification
+   - En cours de modification
  
 Prérequis d'installation :
  - Avoir installé ruby >= 2.6.3 : https://www.ruby-lang.org/fr/documentation/installation/
