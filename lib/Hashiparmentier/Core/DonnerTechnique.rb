@@ -64,7 +64,7 @@ class DonnerTechnique < Aide
     else
       message ="Pas d'aide disponible"
     end
-    return message + "\nAttention s'il y a une erreur dans la grille la technique peut-être érronée"
+    return message + "\nAttention s'il y a une erreur dans la grille la technique peut-être erronée"
   end
 
 end
