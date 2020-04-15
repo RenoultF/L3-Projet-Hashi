@@ -37,8 +37,8 @@ class FenetreJeuUI
         # puts "Taille : #{@taille}";
         # puts "Difficulté : #{@difficulte}";
 
-        window.destroy()
-        window1.destroy()
+        window.destroy() #menu
+        window1.destroy() #scroll
         # CREATION FENETRE
         @builderJeu = Gtk::Builder.new
         @builderJeu.add_from_file("lib/Hashiparmentier/glade/jeu.glade")
