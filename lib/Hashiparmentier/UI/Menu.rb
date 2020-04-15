@@ -297,6 +297,7 @@ class Menu < Gtk::Box
 		@fenetreScroll.add(boxScroll)
 		@fenetreScroll.set_window_position(Gtk::WindowPosition::CENTER)
 		@fenetreScroll.maximize
+		@fenetreScroll.signal_connect('destroy') {|_widget| Gtk.main_quit}
 		@fenetreScroll.show_all
 
 		#Thread.new{@racine.choisirGrille(@pseudo.text(), @@taille, @@difficulte)}

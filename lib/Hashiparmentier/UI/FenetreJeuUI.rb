@@ -118,7 +118,7 @@ class FenetreJeuUI
             if(@grille.fini?() == true)
                 Thread.kill(@threadChrono)
                 fenetre_fin = FenetreFinUI.new(@grille,@compte,@window)
-                Gtk.main_quit 
+                #Gtk.main_quit 
             else
                 @labelIndice.set_label("Vous n'avez pas trouvé la solution ! \n Continuez ...")
             end
@@ -163,7 +163,7 @@ class FenetreJeuUI
         #@threadChrono = Thread.new{@chronoGrille.lancerChrono()}
         #@threadJeu = Thread.new{@jeu.lanceToi()}
         @window.show_all()
-        Gtk.main()
+        #Gtk.main()
     end
 
     def modifScore(val)
