@@ -16,9 +16,9 @@ class FenetreFinUI
         @windowFin = @builderFin.get_object("FenetreFin")
         @windowFin.style_context.add_provider(@@CSS_FIN, Gtk::StyleProvider::PRIORITY_USER)
         @windowFin.signal_connect('destroy') { |_widget| Gtk.main_quit }
-        #(500*@grille.tailleX / 2)
+        
         @imgEtoile = @builderFin.get_object("imgScore")
-        if(@grille.score>500)
+        if(@grille.score>(500*@grille.tailleX / 2))
             @imgEtoile.style_context.add_provider(@@CSS_BG_SCORE3, Gtk::StyleProvider::PRIORITY_USER)
         elsif(@grille.score>(500*@grille.tailleX / 3))
             @imgEtoile.style_context.add_provider(@@CSS_BG_SCORE2, Gtk::StyleProvider::PRIORITY_USER)
