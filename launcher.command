@@ -1,3 +1,3 @@
 #!/bin/bash
 
-ruby bin/Hashi
+ruby bin/Hashiparmentier
