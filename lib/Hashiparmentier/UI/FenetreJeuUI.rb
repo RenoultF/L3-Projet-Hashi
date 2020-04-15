@@ -37,19 +37,21 @@ class FenetreJeuUI
         # puts "Taille : #{@taille}";
         # puts "Difficulté : #{@difficulte}";
 
-        window.destroy()
+        window.hide()
         if(@mode == 1)
-            window1.destroy()
+            window1.hide()
         end
         # CREATION FENETRE
         @builderJeu = Gtk::Builder.new
         @builderJeu.add_from_file("lib/Hashiparmentier/glade/jeu.glade")
+        
         @window = @builderJeu.get_object("windowJeu")
-        @window.signal_connect('destroy') { |_widget| 
+        @window.signal_connect('destroy') {
             @grille.sauvegarder(@compte)
             Thread.kill(@threadChrono)
-            @window.destroy()
-            Gtk.main_quit}
+            exit!
+            #Gtk.main_quit
+        }
 
         if (@grille.tailleX == 15)
             @window.style_context.add_provider(@@CSS_BG_JEU, Gtk::StyleProvider::PRIORITY_USER)
@@ -120,7 +122,8 @@ class FenetreJeuUI
             if(@grille.fini?() == true)
                 Thread.kill(@threadChrono)
                 fenetre_fin = FenetreFinUI.new(@mode,@grille,@compte,@window)
-                #Gtk.main_quit 
+                exit!
+                Gtk.main_quit 
             else
                 @labelIndice.set_label("Vous n'avez pas trouvé la solution ! \n Continuez ...")
             end

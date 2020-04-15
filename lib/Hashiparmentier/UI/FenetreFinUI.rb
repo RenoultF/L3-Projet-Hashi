@@ -11,7 +11,7 @@ class FenetreFinUI
     def initialize(mode,grille,compte,window)
         @mode = mode
         @grille = grille
-        window.destroy()
+        window.hide()
         @builderFin = Gtk::Builder.new
         @builderFin.add_from_file("lib/Hashiparmentier/glade/Fin.glade")
 
