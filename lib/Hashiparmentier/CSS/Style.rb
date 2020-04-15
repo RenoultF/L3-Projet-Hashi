@@ -11,6 +11,9 @@ require 'gtk3'
     }
     CSS
 
+#
+# CSS JEU
+#
 @@CSS_BG_JEU ||= Gtk::CssProvider.new
 @@CSS_BG_JEU.load(data: <<-CSS)
     * {
@@ -25,7 +28,35 @@ require 'gtk3'
     }
     CSS
 
+#
+# CSS REGLES
+#
+@@CSS_REGLES ||= Gtk::CssProvider.new
+@@CSS_REGLES.load(data: <<-CSS)
+    * {
+        background-image: linear-gradient(#e7b7b0, white);
+    }
+    CSS
     
+#
+# CSS AIDE
+#
+@@CSS_AIDE ||= Gtk::CssProvider.new
+@@CSS_AIDE.load(data: <<-CSS)
+    * {
+        background-image: linear-gradient(#e7b7b0, white);
+    }
+    CSS
+    
+#
+# CSS FIN
+#
+@@CSS_FIN ||= Gtk::CssProvider.new
+@@CSS_FIN.load(data: <<-CSS)
+    * {
+        background-image: linear-gradient(#a40d0f, white);
+    }
+    CSS
 
 @@CSS_BUTTON_ACTIVE ||= Gtk::CssProvider.new
 @@CSS_BUTTON_ACTIVE.load(data: <<-CSS)
@@ -107,24 +138,7 @@ require 'gtk3'
     }
     CSS
 
-@@CSS_ENTRY_MENU ||= Gtk::CssProvider.new
-@@CSS_ENTRY_MENU.load(data: <<-CSS)
-    #entryPseudo {
-        border-width: 2px;
-        border-color: red;
-    }
-    CSS
 
-
-#
-# CSS AIDE
-#
-@@CSS_AIDE ||= Gtk::CssProvider.new
-@@CSS_AIDE.load(data: <<-CSS)
-    * {
-        background-image: linear-gradient(#e7b7b0, white);
-    }
-    CSS
 
 @@CSS_BUTTON_ROSE ||= Gtk::CssProvider.new
 @@CSS_BUTTON_ROSE.load(data: <<-CSS)
@@ -176,9 +190,3 @@ require 'gtk3'
     }
     CSS
 
-@@CSS_FIN ||= Gtk::CssProvider.new
-@@CSS_FIN.load(data: <<-CSS)
-    * {
-        background-image: linear-gradient(#a40d0f, white);
-    }
-    CSS

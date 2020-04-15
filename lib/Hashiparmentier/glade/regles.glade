@@ -1,853 +1,109 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Generated with glade 3.22.2 -->
 <interface>
-  <requires lib="gtk+" version="3.6"/>
-
-  <object class="GtkImage" id="image2">
+  <!-- interface-requires gtk+ 3.0 -->
+  <object class="GtkImage" id="image3">
     <property name="visible">True</property>
     <property name="can_focus">False</property>
-    <property name="pixbuf">images/Capture du 2020-02-07 11-48-54.png</property>
+    <property name="stock">gtk-stop</property>
   </object>
-
-
-  <object class="GtkWindow" id="REGLES1">
-    <property name="width_request">1000</property>
-    <property name="height_request">700</property>
+  <object class="GtkWindow" id="windowRegles">
     <property name="can_focus">False</property>
-    <property name="window_position">center</property>
-    <property name="default_width">1000</property>
-    <property name="default_height">500</property>
-    <property name="icon_name">Régles</property>
-    <property name="gravity">north</property>
-    <child type="titlebar">
-      <placeholder/>
-    </child>
+    <property name="title" translatable="yes">HASHI - Règles</property>
+    <property name="window_position">center-always</property>
+    <property name="icon">images/icone.png</property>
     <child>
-      <object class="GtkFixed">
+      <object class="GtkBox" id="box1">
         <property name="visible">True</property>
         <property name="can_focus">False</property>
+        <property name="margin_left">20</property>
+        <property name="margin_right">20</property>
+        <property name="margin_top">20</property>
+        <property name="orientation">vertical</property>
         <child>
-          <object class="GtkScrolledWindow">
-            <property name="width_request">970</property>
-            <property name="height_request">500</property>
+          <object class="GtkImage" id="image1">
             <property name="visible">True</property>
-            <property name="can_focus">True</property>
-            <property name="shadow_type">in</property>
-            <child>
-              <object class="GtkViewport">
-                <property name="visible">True</property>
-                <property name="can_focus">False</property>
-                <property name="hscroll_policy">natural</property>
-                <child>
-                  <object class="GtkBox">
-                    <property name="visible">True</property>
-                    <property name="can_focus">False</property>
-                    <property name="orientation">vertical</property>
-                    <child>
-                      <object class="GtkLabel">
-                        <property name="visible">True</property>
-                        <property name="can_focus">False</property>
-                        <property name="halign">start</property>
-                        <property name="xpad">4</property>
-                        <property name="label" translatable="yes">
-Hashi est un jeu de logique très addictif inventé au Japon.
-
-Le but du jeu est de connecter les points de la grille entre eux.
-Pour se faire vous pouvez connecter un point à un autre par le haut, le bas, la gauche ou la droite.
-
-Chaque connexion entre deux points peut avoir une ou deux lignes. Un point sera donc relié à minimum
-une ligne et maximum huit lignes. Chaque point est marqué d'un nombre de 1 à 8 qui indique le nombre de
- lignes qui lui sont connectées.
-
-La grille sera résolue lorsque tous les points seront reliés les uns aux autres. Il ne peut y avoir deux groupes
-de points indépendants.
-</property>
-                        <attributes>
-                          <attribute name="style" value="normal"/>
-                          <attribute name="weight" value="book"/>
-                          <attribute name="size" value="15000"/>
-                        </attributes>
-                      </object>
-                      <packing>
-                        <property name="expand">False</property>
-                        <property name="fill">True</property>
-                        <property name="position">0</property>
-                      </packing>
-                    </child>
-                    <child>
-                      <object class="GtkImage">
-                        <property name="visible">True</property>
-                        <property name="can_focus">True</property>
-                        <property name="halign">start</property>
-                        <property name="margin_top">1</property>
-                        <property name="hexpand">True</property>
-                        <property name="vexpand">True</property>
-                        <property name="xpad">250</property>
-                        <property name="pixbuf">images/puzzle-solvation.gif</property>
-                      </object>
-                      <packing>
-                        <property name="expand">False</property>
-                        <property name="fill">True</property>
-                        <property name="position">1</property>
-                      </packing>
-                    </child>
-                    <child>
-                      <object class="GtkLabel">
-                        <property name="visible">True</property>
-                        <property name="can_focus">False</property>
-                        <property name="halign">start</property>
-                        <property name="xpad">250</property>
-                        <property name="label" translatable="yes">
-Exemple de solution:</property>
-                        <attributes>
-                          <attribute name="style" value="italic"/>
-                          <attribute name="weight" value="bold"/>
-                          <attribute name="variant" value="normal"/>
-                          <attribute name="underline" value="True"/>
-                          <attribute name="size" value="30000"/>
-                        </attributes>
-                      </object>
-                      <packing>
-                        <property name="expand">False</property>
-                        <property name="fill">True</property>
-                        <property name="position">2</property>
-                      </packing>
-                    </child>
-                    <child>
-                      <object class="GtkFixed">
-                        <property name="visible">True</property>
-                        <property name="can_focus">False</property>
-                        <property name="margin_bottom">40</property>
-                        <child>
-                          <object class="GtkImage">
-                            <property name="width_request">100</property>
-                            <property name="height_request">80</property>
-                            <property name="visible">True</property>
-                            <property name="can_focus">False</property>
-                            <property name="pixbuf">images/Capture du 2020-02-13 17-54-16.png</property>
-                          </object>
-                          <packing>
-                            <property name="x">28</property>
-                            <property name="y">27</property>
-                          </packing>
-                        </child>
-                        <child>
-                          <object class="GtkLabel">
-                            <property name="width_request">100</property>
-                            <property name="height_request">80</property>
-                            <property name="visible">True</property>
-                            <property name="can_focus">False</property>
-                            <property name="label" translatable="yes">Le 4 ( rouge ) ne peut être relié qu’aux deux îles 4 et 2.
- Comme le nombre de ponts est, au maximum de 2,
-il ne peut, entre ces îles , y avoir que deux liaisons. </property>
-                            <attributes>
-                              <attribute name="style" value="normal"/>
-                              <attribute name="weight" value="book"/>
-                              <attribute name="size" value="14000"/>
-                            </attributes>
-                          </object>
-                          <packing>
-                            <property name="x">348</property>
-                            <property name="y">46</property>
-                          </packing>
-                        </child>
-                        <child>
-                          <object class="GtkImage">
-                            <property name="width_request">100</property>
-                            <property name="height_request">80</property>
-                            <property name="visible">True</property>
-                            <property name="can_focus">False</property>
-                            <property name="pixbuf">images/Capture du 2020-02-13 18-00-00.png</property>
-                          </object>
-                          <packing>
-                            <property name="x">614</property>
-                            <property name="y">149</property>
-                          </packing>
-                        </child>
-                        <child>
-                          <object class="GtkImage">
-                            <property name="width_request">100</property>
-                            <property name="height_request">80</property>
-                            <property name="visible">True</property>
-                            <property name="can_focus">False</property>
-                            <property name="pixbuf">images/Capture du 2020-02-13 18-01-25.png</property>
-                          </object>
-                          <packing>
-                            <property name="x">29</property>
-                            <property name="y">304</property>
-                          </packing>
-                        </child>
-                        <child>
-                          <object class="GtkLabel">
-                            <property name="width_request">100</property>
-                            <property name="height_request">80</property>
-                            <property name="visible">True</property>
-                            <property name="can_focus">False</property>
-                            <property name="label" translatable="yes">L’île 1 ne peut être reliée qu’à l’île 4
-( Règle : Tous les ponts sont en ligne
- droite verticale ou horizontale.).
-Il y a donc une liaison entre ces deux îles.</property>
-                            <attributes>
-                              <attribute name="size" value="14000"/>
-                            </attributes>
-                          </object>
-                          <packing>
-                            <property name="x">254</property>
-                            <property name="y">306</property>
-                          </packing>
-                        </child>
-                        <child>
-                          <object class="GtkImage">
-                            <property name="width_request">100</property>
-                            <property name="height_request">80</property>
-                            <property name="visible">True</property>
-                            <property name="can_focus">False</property>
-                            <property name="pixbuf">images/Capture du 2020-02-13 18-17-16.png</property>
-                          </object>
-                          <packing>
-                            <property name="x">424</property>
-                            <property name="y">468</property>
-                          </packing>
-                        </child>
-                        <child>
-                          <object class="GtkImage">
-                            <property name="width_request">100</property>
-                            <property name="height_request">80</property>
-                            <property name="visible">True</property>
-                            <property name="can_focus">False</property>
-                            <property name="pixbuf">images/Capture du 2020-02-13 18-17-40.png</property>
-                          </object>
-                          <packing>
-                            <property name="x">40</property>
-                            <property name="y">691</property>
-                          </packing>
-                        </child>
-                        <child>
-                          <object class="GtkLabel">
-                            <property name="width_request">100</property>
-                            <property name="height_request">80</property>
-                            <property name="visible">True</property>
-                            <property name="can_focus">False</property>
-                            <property name="label" translatable="yes">L’île 1 ( couleur verte )ne peut être reliée qu’à l’île2
-( Rappelons qu’aucun pont ne peut en croiser un autre ).
-Nous devons donc tracer une liaison entre ces deux îles.
-Nous avons donc, pour l’instant : </property>
-                            <attributes>
-                              <attribute name="style" value="normal"/>
-                              <attribute name="weight" value="book"/>
-                              <attribute name="size" value="14000"/>
-                            </attributes>
-                          </object>
-                          <packing>
-                            <property name="x">270</property>
-                            <property name="y">743</property>
-                          </packing>
-                        </child>
-                        <child>
-                          <object class="GtkImage">
-                            <property name="width_request">100</property>
-                            <property name="height_request">80</property>
-                            <property name="visible">True</property>
-                            <property name="can_focus">False</property>
-                            <property name="pixbuf">images/Capture du 2020-02-13 18-18-01.png</property>
-                          </object>
-                          <packing>
-                            <property name="x">615</property>
-                            <property name="y">833</property>
-                          </packing>
-                        </child>
-                        <child>
-                          <object class="GtkImage">
-                            <property name="width_request">100</property>
-                            <property name="height_request">80</property>
-                            <property name="visible">True</property>
-                            <property name="can_focus">False</property>
-                            <property name="pixbuf">images/Capture du 2020-02-13 18-18-23.png</property>
-                          </object>
-                          <packing>
-                            <property name="x">42</property>
-                            <property name="y">1051</property>
-                          </packing>
-                        </child>
-                        <child>
-                          <object class="GtkLabel">
-                            <property name="width_request">100</property>
-                            <property name="height_request">80</property>
-                            <property name="visible">True</property>
-                            <property name="can_focus">False</property>
-                            <property name="label" translatable="yes">L’île 2 a déjà une liaison. Il en manque donc une avec la seule île possible :
-l’île 3 située en haut à droite.  </property>
-                            <attributes>
-                              <attribute name="style" value="normal"/>
-                              <attribute name="weight" value="book"/>
-                              <attribute name="size" value="14000"/>
-                            </attributes>
-                          </object>
-                          <packing>
-                            <property name="x">272</property>
-                            <property name="y">1050</property>
-                          </packing>
-                        </child>
-                        <child>
-                          <object class="GtkImage">
-                            <property name="width_request">100</property>
-                            <property name="height_request">80</property>
-                            <property name="visible">True</property>
-                            <property name="can_focus">False</property>
-                            <property name="pixbuf">images/Capture du 2020-02-13 18-19-00.png</property>
-                          </object>
-                          <packing>
-                            <property name="x">615</property>
-                            <property name="y">1141</property>
-                          </packing>
-                        </child>
-                        <child>
-                          <object class="GtkImage">
-                            <property name="width_request">100</property>
-                            <property name="height_request">80</property>
-                            <property name="visible">True</property>
-                            <property name="can_focus">False</property>
-                            <property name="pixbuf">images/Capture du 2020-02-13 18-19-17.png</property>
-                          </object>
-                          <packing>
-                            <property name="x">40</property>
-                            <property name="y">1355</property>
-                          </packing>
-                        </child>
-                        <child>
-                          <object class="GtkLabel">
-                            <property name="width_request">100</property>
-                            <property name="height_request">80</property>
-                            <property name="visible">True</property>
-                            <property name="can_focus">False</property>
-                            <property name="label" translatable="yes">Continuons avec l’île 3 située en haut à droite.
-Cette île est déjà reliée à une île à l’aide d’une liaison.
-Le nombre de liaisons entre les deux îles 3 et 3 est donc de 2. </property>
-                            <attributes>
-                              <attribute name="style" value="normal"/>
-                              <attribute name="weight" value="book"/>
-                              <attribute name="size" value="14000"/>
-                            </attributes>
-                          </object>
-                          <packing>
-                            <property name="x">270</property>
-                            <property name="y">1364</property>
-                          </packing>
-                        </child>
-                        <child>
-                          <object class="GtkImage">
-                            <property name="width_request">100</property>
-                            <property name="height_request">80</property>
-                            <property name="visible">True</property>
-                            <property name="can_focus">False</property>
-                            <property name="pixbuf">images/Capture du 2020-02-13 18-19-54.png</property>
-                          </object>
-                          <packing>
-                            <property name="x">616</property>
-                            <property name="y">1459</property>
-                          </packing>
-                        </child>
-                        <child>
-                          <object class="GtkLabel">
-                            <property name="width_request">100</property>
-                            <property name="height_request">80</property>
-                            <property name="visible">True</property>
-                            <property name="can_focus">False</property>
-                            <property name="label" translatable="yes">Entre cette dernière île 3 et l’île 2 située en haut, à gauche, il ne peut y avoir
-qu’une seule liaison ( total égal à 3 ). </property>
-                            <attributes>
-                              <attribute name="size" value="14000"/>
-                            </attributes>
-                          </object>
-                          <packing>
-                            <property name="x">130</property>
-                            <property name="y">1652</property>
-                          </packing>
-                        </child>
-                        <child>
-                          <object class="GtkImage">
-                            <property name="width_request">100</property>
-                            <property name="height_request">80</property>
-                            <property name="visible">True</property>
-                            <property name="can_focus">False</property>
-                          </object>
-                          <packing>
-                            <property name="x">407</property>
-                            <property name="y">1649</property>
-                          </packing>
-                        </child>
-                        <child>
-                          <object class="GtkImage">
-                            <property name="width_request">100</property>
-                            <property name="height_request">80</property>
-                            <property name="visible">True</property>
-                            <property name="can_focus">False</property>
-                            <property name="pixbuf">images/Capture du 2020-02-18 14-24-24.png</property>
-                          </object>
-                          <packing>
-                            <property name="x">617</property>
-                            <property name="y">1700</property>
-                          </packing>
-                        </child>
-                        <child>
-                          <object class="GtkImage">
-                            <property name="width_request">100</property>
-                            <property name="height_request">80</property>
-                            <property name="visible">True</property>
-                            <property name="can_focus">False</property>
-                            <property name="pixbuf">images/Capture du 2020-02-18 14-24-44.png</property>
-                          </object>
-                          <packing>
-                            <property name="x">40</property>
-                            <property name="y">1829</property>
-                          </packing>
-                        </child>
-                        <child>
-                          <object class="GtkLabel">
-                            <property name="width_request">100</property>
-                            <property name="height_request">80</property>
-                            <property name="visible">True</property>
-                            <property name="can_focus">False</property>
-                            <property name="label" translatable="yes">Nous pouvons continuer et relier les deux îles 2 et 3 par une liaison. </property>
-                            <attributes>
-                              <attribute name="size" value="14000"/>
-                            </attributes>
-                          </object>
-                          <packing>
-                            <property name="x">259</property>
-                            <property name="y">1900</property>
-                          </packing>
-                        </child>
-                        <child>
-                          <object class="GtkImage">
-                            <property name="width_request">100</property>
-                            <property name="height_request">80</property>
-                            <property name="visible">True</property>
-                            <property name="can_focus">False</property>
-                            <property name="pixbuf">images/Capture du 2020-02-18 14-24-58.png</property>
-                          </object>
-                          <packing>
-                            <property name="x">627</property>
-                            <property name="y">1990</property>
-                          </packing>
-                        </child>
-                        <child>
-                          <object class="GtkImage">
-                            <property name="width_request">100</property>
-                            <property name="height_request">80</property>
-                            <property name="visible">True</property>
-                            <property name="can_focus">False</property>
-                            <property name="pixbuf">images/Capture du 2020-02-18 14-25-16.png</property>
-                          </object>
-                          <packing>
-                            <property name="x">42</property>
-                            <property name="y">2165</property>
-                          </packing>
-                        </child>
-                        <child>
-                          <object class="GtkLabel">
-                            <property name="width_request">100</property>
-                            <property name="height_request">80</property>
-                            <property name="visible">True</property>
-                            <property name="can_focus">False</property>
-                            <property name="label" translatable="yes">Entre les deux îles 2 et 4 indiquées sur le dessin ci-contre, il y a au moins une liaison.
-L’île 2 ne peut pas rester isolée et la seule liaison possible est avec cette île 4 .
-Il y a donc deux ponts entre ces îles.</property>
-                            <attributes>
-                              <attribute name="size" value="14000"/>
-                            </attributes>
-                          </object>
-                          <packing>
-                            <property name="x">271</property>
-                            <property name="y">2220</property>
-                          </packing>
-                        </child>
-                        <child>
-                          <object class="GtkImage">
-                            <property name="width_request">100</property>
-                            <property name="height_request">80</property>
-                            <property name="visible">True</property>
-                            <property name="can_focus">False</property>
-                            <property name="pixbuf">images/Capture du 2020-02-18 14-25-36.png</property>
-                          </object>
-                          <packing>
-                            <property name="x">635</property>
-                            <property name="y">2319</property>
-                          </packing>
-                        </child>
-                        <child>
-                          <object class="GtkImage">
-                            <property name="width_request">100</property>
-                            <property name="height_request">80</property>
-                            <property name="visible">True</property>
-                            <property name="can_focus">False</property>
-                            <property name="pixbuf">images/Capture du 2020-02-18 14-25-51.png</property>
-                          </object>
-                          <packing>
-                            <property name="x">49</property>
-                            <property name="y">2524</property>
-                          </packing>
-                        </child>
-                        <child>
-                          <object class="GtkLabel">
-                            <property name="width_request">100</property>
-                            <property name="height_request">80</property>
-                            <property name="visible">True</property>
-                            <property name="can_focus">False</property>
-                            <property name="label" translatable="yes">Trois liaisons seulement arrivent sur l’île 4. Il manque un pont qui ne peut être
- en relation qu’avec l’île 3 .</property>
-                            <attributes>
-                              <attribute name="size" value="14000"/>
-                            </attributes>
-                          </object>
-                          <packing>
-                            <property name="x">267</property>
-                            <property name="y">2550</property>
-                          </packing>
-                        </child>
-                        <child>
-                          <object class="GtkImage">
-                            <property name="width_request">100</property>
-                            <property name="height_request">80</property>
-                            <property name="visible">True</property>
-                            <property name="can_focus">False</property>
-                            <property name="pixbuf">images/Capture du 2020-02-18 14-26-04.png</property>
-                          </object>
-                          <packing>
-                            <property name="x">643</property>
-                            <property name="y">2600</property>
-                          </packing>
-                        </child>
-                        <child>
-                          <object class="GtkImage">
-                            <property name="width_request">100</property>
-                            <property name="height_request">80</property>
-                            <property name="visible">True</property>
-                            <property name="can_focus">False</property>
-                            <property name="pixbuf">images/Capture du 2020-02-18 14-26-15.png</property>
-                          </object>
-                          <packing>
-                            <property name="x">51</property>
-                            <property name="y">2780</property>
-                          </packing>
-                        </child>
-                        <child>
-                          <object class="GtkLabel">
-                            <property name="width_request">100</property>
-                            <property name="height_request">80</property>
-                            <property name="visible">True</property>
-                            <property name="can_focus">False</property>
-                            <property name="label" translatable="yes">Entre ces deux îles, il peut y avoir :
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-</property>
-                            <attributes>
-                              <attribute name="size" value="14000"/>
-                            </attributes>
-                          </object>
-                          <packing>
-                            <property name="x">257</property>
-                            <property name="y">2810</property>
-                          </packing>
-                        </child>
-                        <child>
-                          <object class="GtkLabel">
-                            <property name="width_request">100</property>
-                            <property name="height_request">80</property>
-                            <property name="visible">True</property>
-                            <property name="can_focus">False</property>
-                            <property name="label" translatable="yes">Cas 1 : 2 liaisons. </property>
-                            <attributes>
-                              <attribute name="weight" value="semibold"/>
-                              <attribute name="underline" value="True"/>
-                              <attribute name="size" value="14000"/>
-                            </attributes>
-                          </object>
-                          <packing>
-                            <property name="x">77</property>
-                            <property name="y">2950</property>
-                          </packing>
-                        </child>
-                        <child>
-                          <object class="GtkImage">
-                            <property name="width_request">100</property>
-                            <property name="height_request">80</property>
-                            <property name="visible">True</property>
-                            <property name="can_focus">False</property>
-                            <property name="pixbuf">images/Capture du 2020-02-18 15-01-40.png</property>
-                          </object>
-                          <packing>
-                            <property name="x">169</property>
-                            <property name="y">3040</property>
-                          </packing>
-                        </child>
-                        <child>
-                          <object class="GtkImage">
-                            <property name="width_request">100</property>
-                            <property name="height_request">80</property>
-                            <property name="visible">True</property>
-                            <property name="can_focus">False</property>
-                            <property name="pixbuf">images/Capture du 2020-02-18 15-02-08.png</property>
-                          </object>
-                          <packing>
-                            <property name="x">609</property>
-                            <property name="y">3045</property>
-                          </packing>
-                        </child>
-                        <child>
-                          <object class="GtkLabel">
-                            <property name="width_request">100</property>
-                            <property name="height_request">80</property>
-                            <property name="visible">True</property>
-                            <property name="can_focus">False</property>
-                            <property name="label" translatable="yes">puis</property>
-                            <attributes>
-                              <attribute name="size" value="14300"/>
-                            </attributes>
-                          </object>
-                          <packing>
-                            <property name="x">457</property>
-                            <property name="y">3100</property>
-                          </packing>
-                        </child>
-                        <child>
-                          <object class="GtkImage">
-                            <property name="width_request">100</property>
-                            <property name="height_request">80</property>
-                            <property name="visible">True</property>
-                            <property name="can_focus">False</property>
-                            <property name="pixbuf">images/Capture du 2020-02-18 15-33-07.png</property>
-                          </object>
-                          <packing>
-                            <property name="x">631</property>
-                            <property name="y">3300</property>
-                          </packing>
-                        </child>
-                        <child>
-                          <object class="GtkLabel">
-                            <property name="width_request">100</property>
-                            <property name="height_request">80</property>
-                            <property name="visible">True</property>
-                            <property name="can_focus">False</property>
-                            <property name="label" translatable="yes">Cas 2 : 0 liaison</property>
-                            <attributes>
-                              <attribute name="weight" value="semibold"/>
-                              <attribute name="underline" value="True"/>
-                              <attribute name="size" value="14100"/>
-                            </attributes>
-                          </object>
-                          <packing>
-                            <property name="x">80</property>
-                            <property name="y">3335</property>
-                          </packing>
-                        </child>
-                        <child>
-                          <object class="GtkImage">
-                            <property name="width_request">100</property>
-                            <property name="height_request">80</property>
-                            <property name="visible">True</property>
-                            <property name="can_focus">False</property>
-                            <property name="pixbuf">images/Capture du 2020-02-18 15-02-33.png</property>
-                          </object>
-                          <packing>
-                            <property name="x">170</property>
-                            <property name="y">3408</property>
-                          </packing>
-                        </child>
-                        <child>
-                          <object class="GtkImage">
-                            <property name="width_request">100</property>
-                            <property name="height_request">80</property>
-                            <property name="visible">True</property>
-                            <property name="can_focus">False</property>
-                            <property name="pixbuf">images/Capture du 2020-02-18 15-02-54.png</property>
-                          </object>
-                          <packing>
-                            <property name="x">608</property>
-                            <property name="y">3407</property>
-                          </packing>
-                        </child>
-                        <child>
-                          <object class="GtkImage">
-                            <property name="width_request">100</property>
-                            <property name="height_request">80</property>
-                            <property name="visible">True</property>
-                            <property name="can_focus">False</property>
-                            <property name="pixbuf">images/Capture du 2020-02-18 15-36-05.png</property>
-                          </object>
-                          <packing>
-                            <property name="x">633</property>
-                            <property name="y">3640</property>
-                          </packing>
-                        </child>
-                        <child>
-                          <object class="GtkLabel">
-                            <property name="width_request">100</property>
-                            <property name="height_request">80</property>
-                            <property name="visible">True</property>
-                            <property name="can_focus">False</property>
-                            <property name="label" translatable="yes">puis</property>
-                            <attributes>
-                              <attribute name="size" value="14300"/>
-                            </attributes>
-                          </object>
-                          <packing>
-                            <property name="x">450</property>
-                            <property name="y">3500</property>
-                          </packing>
-                        </child>
-                        <child>
-                          <object class="GtkLabel">
-                            <property name="width_request">100</property>
-                            <property name="height_request">80</property>
-                            <property name="visible">True</property>
-                            <property name="can_focus">False</property>
-                            <property name="label" translatable="yes">Cas 3 : Seul cas restant - 1 liaison  </property>
-                            <attributes>
-                              <attribute name="weight" value="semibold"/>
-                              <attribute name="underline" value="True"/>
-                              <attribute name="size" value="14100"/>
-                            </attributes>
-                          </object>
-                          <packing>
-                            <property name="x">80</property>
-                            <property name="y">3610</property>
-                          </packing>
-                        </child>
-                        <child>
-                          <object class="GtkImage">
-                            <property name="width_request">100</property>
-                            <property name="height_request">80</property>
-                            <property name="visible">True</property>
-                            <property name="can_focus">False</property>
-                            <property name="pixbuf">images/Capture du 2020-02-18 15-03-13.png</property>
-                          </object>
-                          <packing>
-                            <property name="x">263</property>
-                            <property name="y">3709</property>
-                          </packing>
-                        </child>
-                        <child>
-                          <object class="GtkImage">
-                            <property name="width_request">100</property>
-                            <property name="height_request">80</property>
-                            <property name="visible">True</property>
-                            <property name="can_focus">False</property>
-                            <property name="pixbuf">images/Capture du 2020-02-18 15-03-39.png</property>
-                          </object>
-                          <packing>
-                            <property name="x">30</property>
-                            <property name="y">4000</property>
-                          </packing>
-                        </child>
-                        <child>
-                          <object class="GtkImage">
-                            <property name="width_request">100</property>
-                            <property name="height_request">80</property>
-                            <property name="visible">True</property>
-                            <property name="can_focus">False</property>
-                            <property name="pixbuf">images/Capture du 2020-02-18 15-03-55.png</property>
-                          </object>
-                          <packing>
-                            <property name="x">357</property>
-                            <property name="y">4000</property>
-                          </packing>
-                        </child>
-                        <child>
-                          <object class="GtkImage">
-                            <property name="width_request">100</property>
-                            <property name="height_request">80</property>
-                            <property name="visible">True</property>
-                            <property name="can_focus">False</property>
-                            <property name="pixbuf">images/Capture du 2020-02-18 15-04-10.png</property>
-                          </object>
-                          <packing>
-                            <property name="x">670</property>
-                            <property name="y">4000</property>
-                          </packing>
-                        </child>
-                        <child>
-                          <object class="GtkImage">
-                            <property name="width_request">100</property>
-                            <property name="height_request">80</property>
-                            <property name="visible">True</property>
-                            <property name="can_focus">False</property>
-                            <property name="pixbuf">images/18790.ico</property>
-                          </object>
-                          <packing>
-                            <property name="x">440</property>
-                            <property name="y">3270</property>
-                          </packing>
-                        </child>
-                        <child>
-                          <object class="GtkImage">
-                            <property name="width_request">100</property>
-                            <property name="height_request">80</property>
-                            <property name="visible">True</property>
-                            <property name="can_focus">False</property>
-                            <property name="pixbuf">images/18790.ico</property>
-                          </object>
-                          <packing>
-                            <property name="x">440</property>
-                            <property name="y">3560</property>
-                          </packing>
-                        </child>
-                      </object>
-                      <packing>
-                        <property name="expand">False</property>
-                        <property name="fill">True</property>
-                        <property name="position">3</property>
-                      </packing>
-                    </child>
-                  </object>
-                </child>
-              </object>
-            </child>
+            <property name="can_focus">False</property>
+            <property name="margin_bottom">20</property>
+            <property name="pixbuf">images/LOGpR2.png</property>
           </object>
           <packing>
-            <property name="x">17</property>
-            <property name="y">130</property>
+            <property name="expand">False</property>
+            <property name="fill">True</property>
+            <property name="position">0</property>
           </packing>
         </child>
         <child>
-          <object class="GtkButton" id="Terminer">
-            <property name="width_request">90</property>
-            <property name="height_request">50</property>
+          <object class="GtkLabel" id="label1">
+            <property name="visible">True</property>
+            <property name="can_focus">False</property>
+            <property name="label" translatable="yes">Hashi aussi connu sous le nom de Hashiwokakero est un casse-tête logique avec des règles simples mais difficile à résoudre.
+
+Hashi se joue sur une grille rectangulaire sans taille particulière. 
+
+Certaines cellules contiennent un nombre compris entre 1 et 8 (inclus) : ce sont des îles. 
+
+Les autres cellules sont vides. Le but est de connecter toutes les îles en un seul groupe interconnecté en dessinant des ponts entre les îles. 
+
+Les ponts doivent suivre certains critères : 
+	- Ils doivent commencer et finir sur des îles distinctes, selon une ligne droite
+	- Ils ne doivent pas croiser d'autres ponts ou îles
+	- Les ponts ne sont que verticaux ou horizontaux 
+	- Il y a au plus deux ponts entre deux îles et le nombre de pont partant de chaque île doit correspondre au nombre indiqué sur l'île.</property>
+          </object>
+          <packing>
+            <property name="expand">False</property>
+            <property name="fill">True</property>
+            <property name="position">1</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkLabel" id="label2">
+            <property name="visible">True</property>
+            <property name="can_focus">False</property>
+            <property name="margin_top">20</property>
+            <property name="label" translatable="yes">Exemple de solution</property>
+            <attributes>
+              <attribute name="font-desc" value="Sans 14"/>
+              <attribute name="weight" value="bold"/>
+            </attributes>
+          </object>
+          <packing>
+            <property name="expand">False</property>
+            <property name="fill">True</property>
+            <property name="position">2</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkImage" id="image2">
+            <property name="visible">True</property>
+            <property name="can_focus">False</property>
+            <property name="margin_top">20</property>
+            <property name="margin_bottom">15</property>
+            <property name="pixbuf">images/puzzle-solvation.gif</property>
+          </object>
+          <packing>
+            <property name="expand">False</property>
+            <property name="fill">True</property>
+            <property name="position">3</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkButton" id="btnQuitter">
+            <property name="label" translatable="yes">Fermer la fenêtre</property>
             <property name="visible">True</property>
             <property name="can_focus">True</property>
             <property name="receives_default">True</property>
-            <property name="image">image2</property>
+            <property name="halign">center</property>
+            <property name="margin_top">15</property>
+            <property name="margin_bottom">15</property>
+            <property name="image">image3</property>
+            <property name="relief">none</property>
+            <property name="always_show_image">True</property>
           </object>
           <packing>
-            <property name="x">405</property>
-            <property name="y">635</property>
-          </packing>
-        </child>
-        <child>
-          <object class="GtkImage">
-            <property name="width_request">100</property>
-            <property name="height_request">80</property>
-            <property name="visible">True</property>
-            <property name="can_focus">False</property>
-            <property name="pixbuf">images/LOGpR.png</property>
-          </object>
-          <packing>
-            <property name="x">260</property>
-            <property name="y">3</property>
+            <property name="expand">False</property>
+            <property name="fill">False</property>
+            <property name="position">4</property>
           </packing>
         </child>
       </object>
