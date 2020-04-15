@@ -31,7 +31,7 @@ class VerifierGrille < Aide
   ##
   #L'aide apporté ici est de marquer tous les ponts dont la valeur est supérieur à la solution
   #
-  #Par exemple si dans la solution un pont était un pont simple et que le joueur a placé un pont double, alors se pont sera marquer et affiché en tant que tel
+  #Par exemple si dans la solution un pont était un pont simple et que le joueur a placé un pont double, alors se pont sera marqué et affiché en tant que tel
   def aider()
     for i in (0..@grille.tailleX - 1)
       for j in (0..@grille.tailleY - 1)

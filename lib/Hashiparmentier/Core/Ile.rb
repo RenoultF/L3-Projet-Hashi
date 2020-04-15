@@ -62,7 +62,7 @@ class Ile < Case
   #:doc:
 
   ##
-  #Cette méthode permet de recuperer le nombre de lien nécéssaire pour être valide
+  #Cette méthode permet de recupérer le nombre de lien nécéssaire pour être valide
   #return::
   # * Le nombre de lien nécéssaire pour être valide
   def getValeur()
@@ -70,7 +70,7 @@ class Ile < Case
   end
 
   ##
-  #Cette méthode permet de recuperer le nombre de lien actuel
+  #Cette méthode permet de recupérer le nombre de lien actuel
   #return::
   # * Le nombre de lien actuel
   def getNombrePont()
@@ -78,7 +78,7 @@ class Ile < Case
   end
 
   ##
-  #Cette méthode permet d'ajouter un pont entre cette ile et une autre
+  #Cette méthode permet de mettre à jour le nombre de pont entre cette ile et une autre (appelé dans Grille à chaque modification de pont)
   #param::
   # * ile L'autre ile
   def ajouteNombrePont(ile)
@@ -95,7 +95,7 @@ class Ile < Case
   end
 
   ##
-  #Cette méthode permet de retirer un pont entre cette ile et une autre
+  #Cette méthode permet de mettre à jour le nombre de pont entre cette ile et une autre (appelé dans Grille à chaque modification de pont)
   #param::
   # * ile L'autre ile
   def retireNombrePont(ile)
@@ -112,7 +112,7 @@ class Ile < Case
   end
 
   ##
-  #Cette méthode permet d'appeler clickOnIle de la grille dans laquelle se trouve l'ile
+  #Cette méthode permet d'appeler Grille#clickOnIle de la grille dans laquelle se trouve l'ile
   def clickOn()
     @grille.clickOnIle(self)
   end
@@ -178,7 +178,7 @@ class Ile < Case
   ##
   #Cette méthode permet de connaitre le nombre de directions dans laquelle on peut ajouter un pont
   #return::
-  # * Le nombre de directions dans laquelle on peut ajouter un pont
+  # * Le nombre de direction dans laquelle on peut ajouter un pont
   def getNombreDirectionConstructible()
 
     ret = 0
@@ -271,6 +271,9 @@ class Ile < Case
 
   end
 
+  ##
+  #Fonction utils
+  #Cette méthode permet de recupérer des indices pour savoir dans quel sens parcourir la grille
   private def getIncrementDirection(direction)
 
     if(direction == Ile::HAUT)

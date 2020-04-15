@@ -35,7 +35,7 @@ class Pont < Case
   #@direction => Direction du pont (NULLE, HORIZONTAL, VERTICAL)
   attr_reader :direction
 
-  #@surbrillance => Booléen pour l'affichage, si égal à true le pont sera affiché en surbrillance
+  #@surbrillance => Booléen pour l'affichage, si égal à true le pont sera affiché en surbrillance (le pont est mis en surbrillance quand la dernière ile séléctionné peut se connecter à une autre ile en passant par ce pont)
   attr_accessor :surbrillance
 
   #@directionSurbrillance => La direction dans laquelle le pont en surbrillance est dirigé
@@ -119,7 +119,7 @@ class Pont < Case
   end
 
   ##
-  #Cette méthode permet de modifer la couleur la couleur que devrais prendre le pont s'il est modifié
+  #Cette méthode permet de modifer la couleur que devrais prendre le pont s'il est modifié
   #param::
   # * couleurPont La nouvelle couleur
   def undoCouleurPont(couleurPont)
@@ -189,7 +189,7 @@ class Pont < Case
 
   end
 
-
+  #Voir Pont#augmenteValeur et Pont#diminueValeur
   private def modifValeur(direction, valeur)
       #print "Couleur Pont : ", @couleurPontCourante, @couleurPont, "\n"
       demarquer()
@@ -216,6 +216,7 @@ class Pont < Case
       return ret
   end
 
+  #Voir metSurbrillance Pont#supprSurbrillance
   private def modifSurbrillance(direction, valeur)
     if(@direction != NULLE)
       if(@direction == direction)

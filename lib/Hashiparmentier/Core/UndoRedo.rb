@@ -28,7 +28,7 @@ class UndoRedo
   #:doc:
 
   ##
-  #Cette méthode permet de d'empiler un élément
+  #Cette méthode permet de d'empiler un élément (va supprimer tous les éléments qui aurait pu être récupérer avec UndoRedo#redo)
   #param::
   # * element L'élément à empiler
   def empiler(element)
