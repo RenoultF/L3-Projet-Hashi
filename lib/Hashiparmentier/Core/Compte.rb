@@ -33,6 +33,7 @@ class Compte < ActiveRecord::Base
 
   ##
   #Cette méthode de créer le compte par defaut dont-les sauvegardes vont-être utilisées par les nouveaux comptes
+  #Attention ! Tous les enregistrements de la base de données seront supprimés
   def Compte.maj()
 
     Sauvegarde.razAllSauvegarde()
@@ -46,7 +47,7 @@ class Compte < ActiveRecord::Base
   ##
   #Ce constructeur permet de créer un nouveau compte
   #param::
-  # * pseudo Le pseudo du compte (Il doit être different de COMPTE_DEFAULT)
+  # * pseudo Le pseudo du compte (Il doit être different de Compte#COMPTE_DEFAULT)
   def Compte.creer(pseudo)
 
     if(pseudo == COMPTE_DEFAULT)
@@ -71,7 +72,7 @@ class Compte < ActiveRecord::Base
   #:doc:
 
   ##
-  #Cette méthode permet de récuperer toutes les grilles du compte par default dans la base
+  #Cette méthode permet de récuperer toutes les grilles du compte par default dans la base et de créer une nouvelle sauvegarde pour chacune d'elles
   def initialiseSauvegarde()
 
     sauvegardes = Sauvegarde.listeCompte(Compte.recuperer(COMPTE_DEFAULT))
@@ -100,11 +101,11 @@ class Compte < ActiveRecord::Base
   end
 
   ##
-  #Cette méthode permet de récuperer un compte dans la base de données ou de lcréer s'il n'existe pas
+  #Cette méthode permet de récuperer un compte dans la base de données ou de le créer s'il n'existe pas
   #param::
   # * pseudo Le pseudo du compte
   #return::
-  # * Le compte récupéré ou crée
+  # * Le compte récupéré ou créé
   def Compte.recuperer_ou_creer(pseudo)
 
     compte = Compte.find_by(name: pseudo);

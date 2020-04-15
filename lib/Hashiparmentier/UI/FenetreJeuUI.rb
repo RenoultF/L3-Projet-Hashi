@@ -21,7 +21,12 @@ require_relative "../UI/ReglesUI.rb"
 require_relative "../UI/AstucesUI.rb"
 require_relative "../UI/GrilleJouableUI.rb"
 require_relative "../CSS/Style.rb"
-
+##
+#
+# Auteur:: Adrien PITAULT
+# Version:: 0.1
+# 
+#Initialise  la fenetre de jeu 
 class FenetreJeuUI
 
 

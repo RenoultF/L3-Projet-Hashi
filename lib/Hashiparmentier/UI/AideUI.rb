@@ -1,5 +1,10 @@
 require_relative '../CSS/Style.rb'
-
+##
+#
+# Auteur:: Adrien PITAULT
+# Version:: 0.1
+# 
+#Initialise la fenetre d'aide du menu
 class AideUI
 
     def initialize()

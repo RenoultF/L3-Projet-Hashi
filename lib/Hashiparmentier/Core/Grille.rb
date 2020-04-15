@@ -34,18 +34,18 @@ class Grille
     #@matSolution => La matrice solution
     attr_reader :matSolution
 
-    #@mat => La matrice de cases
+    #@mat => La matrice de jeu
     attr_reader :mat
 
     #@score => Le score de la grille
     attr_accessor :score
 
-    #@couleurs => Les couleur que prennent les pont en fonction du niveau d'hypothèse
+    #@couleurs => Les couleurs que prennent les ponts en fonction du niveau d'hypothèse
     attr_reader :couleurs
 
 
     include Comparable
-    
+
     ##
     #Cette méthode permet de retourner toutes les grilles d'un dossier
     #param::
@@ -135,7 +135,7 @@ class Grille
     #:doc:
 
     ##
-    #Cette méthode permet d'afficher les case de la grille
+    #Cette méthode permet d'afficher les cases de la grille
     def afficheToi()
       print "\t"
       for colonne in (0..tailleX-1)
@@ -153,7 +153,7 @@ class Grille
     end
 
     ##
-    #Cette méthode permet d'afficher les case de la grille solution
+    #Cette méthode permet d'afficher les cases de la grille solution
     def afficheSolution()
       print "\t"
       for colonne in (0..tailleX-1)
@@ -171,9 +171,9 @@ class Grille
     end
 
     ##
-    #Cette méthode permet de savoir si la grille est fini (si tous les ponts on été placé comme dans la solution)
+    #Cette méthode permet de savoir si la grille est finie (si tous les ponts ont été placé comme dans la solution)
     #return::
-    # * true Si la grille est fini
+    # * true Si la grille est finie
     # * false Sinon
     def fini?()
       for i in (0..(@tailleX-1))
@@ -187,7 +187,7 @@ class Grille
     end
 
     ##
-    #Cette méthode permet de savoir si les coordonnées passés sont comprises dans la grille
+    #Cette méthode permet de savoir si les coordonnées passées sont comprises dans la grille
     #param::
     # * posX La position en abscisse
     # * posY La position en ordonnée
@@ -208,7 +208,7 @@ class Grille
     end
 
     ##
-    #Cette méthode permet de savoir si la grille à une solution identique à une autre grille
+    #Cette méthode permet de savoir si la grille a une solution identique à une autre grille
     #param::
     # * grille L'autre grille
     #return::
@@ -239,14 +239,18 @@ class Grille
         return @mat[i][j]
     end
 
-    #met a jour le temps que l'utilisateur à mis à finir la map
+    ##
+    #Met à jour le temps que l'utilisateur a mis à finir la map
+    #param::
+    # * minutes Le nombre de minutes
+    # * secondes Le nombre seconde
     def setTempsFin(minutes,secondes)
       @minutesFin = minutes
       @secondesFin =secondes
     end
 
     ##
-    #Cette méthode permet de recuperer une case de la grille solution
+    #Cette méthode permet de recupérer une case de la grille solution
     #param::
     # * i La position en abscisse
     # * j La position en ordonnée
@@ -257,7 +261,7 @@ class Grille
     end
 
     ##
-    #Cette méthode permet d'emmetre une nouvelle hypothèse (changer la couleur des ponts que l'on va modifier)
+    #Cette méthode permet d'émetre une nouvelle hypothèse (changer la couleur des ponts que l'on va modifier)
     def creerHypothese()
       begin
         undoCouleurPont(@couleurs.undo())
@@ -267,7 +271,7 @@ class Grille
     end
 
     ##
-    #Cette méthode permet de valider la dernière hypothèse (prendre tous les ponts de la dernière couleur et la changer à l'avant dernière)
+    #Cette méthode permet de valider la dernière hypothèse (prendre tous les ponts de la dernière couleur et les changer à l'avant dernière)
     def valideHypothese()
       begin
         @couleurs.redo()
@@ -280,8 +284,6 @@ class Grille
 
     ##
     #Cette méthode permet de supprimer la dernière hypothèse (supprime tous les ponts de la dernière couleur)
-    #param::
-    # * jeu Le jeu dont-on va modifier la grille
     def supprimeHypothese()
       begin
         @couleurs.redo()
@@ -305,9 +307,9 @@ class Grille
 
 
     ##
-    #Méthode à appeler quand on appuie sur une ile
+    #Méthode à appeler quand on appuie sur un pont
     #param::
-    # * ile L'ile sur laquelle on a cliqué
+    # * pont Le pont sur lequel on a cliqué
     def clickOnPont(pont)
 
       if(!@dernierIle.eql?(nil))
@@ -355,7 +357,7 @@ class Grille
     ##
     #Cette méthode permet de créer un pont entre la dernière ile et une autre ile qui passe par un pont donné
     #param::
-    # * pont La case pont par lequel doit passer le pont entre les deux iles
+    # * pont La case pont par laquelle doit passer le pont entre les deux iles
     # * direction La direction dans laquelle est dirigé le pont
     def chercherVoisins(pont, direction)
 
@@ -413,7 +415,7 @@ class Grille
     ##
     #Cette méthode permet d'appeler la méthode Case#redoCouleurPont de chaque case de la grille
     #param::
-    # * couleur La couleur à passer au la méthode Case#redoCouleurPont
+    # * couleur La couleur à passer à la méthode Case#redoCouleurPont
     def redoCouleurPont(couleur)
 
       @mat.each do |ligne|
@@ -427,9 +429,9 @@ class Grille
     end
 
     ##
-    #Cette méthode permet d'appeler la méthode Case#redoCouleurPont de chaque case de la grille et de supprimer les ponts de la dernière hypothèse
+    #Cette méthode permet d'appeler la méthode Case#redoCouleurPont de chaque cases de la grille et de supprimer les ponts de la dernière hypothèse
     #param::
-    # * couleur La couleur à passer a la méthode Case#redoCouleurPont
+    # * couleur La couleur à passer à la méthode Case#redoCouleurPont
     def redoSupprCouleurPont(couleur)
 
       @mat.each do |ligne|
@@ -450,9 +452,9 @@ class Grille
 
 
     ##
-    #Cette méthode permet d'appeler la méthode Case#undoCouleurPont de chaque case de la grille
+    #Cette méthode permet d'appeler la méthode Case#undoCouleurPont de chaque cases de la grille
     #param::
-    # * couleur La couleur à passer au la méthode Case#undoCouleurPont
+    # * couleur La couleur à passer à la méthode Case#undoCouleurPont
     def undoCouleurPont(couleur)
 
       @mat.each do |ligne|
@@ -471,20 +473,20 @@ class Grille
     #param::
     # * ile1 La premère ile
     # * ile2 La deuxième ile
-    # * methode La méthode utilisé (:createPont ou :supprimePont)
+    # * methode La méthode utilisée (:createPont ou :supprimePont)
     def addAction(ile1, ile2, methode)
       @actions.empiler(Action.creer(ile1, ile2, methode))
     end
 
     ##
-    #Cette méthode permet d'annuler la dernière action éfféctué par l'utilisateur
+    #Cette méthode permet d'annuler la dernière action éffectuée par l'utilisateur
     def undo()
       if(!@actions.empty?())
         begin
           tempIle = self.getDernierIle()
           action = @actions.undo()
           self.setDernierIle(action.ile1())
-          #Invoque l'inverse de la méthode utilisé sans l'ajouter à la undoRedo d'action
+          #Invoque l'inverse de la méthode utilisée sans l'ajouter à la undoRedo d'action
           self.send(homologue(action.methode()), action.ile2(), false)
           self.setDernierIle(tempIle)
         rescue => e
@@ -494,13 +496,13 @@ class Grille
     end
 
     ##
-    #Cette méthode permet de refaire la dernière action annulé par le undo
+    #Cette méthode permet de refaire la dernière action annulée par le undo
     def redo()
       if(!@actions.empty?())
         begin
           action = @actions.redo()
           self.setDernierIle(action.ile1())
-          #Invoque la méthode utilisé sans l'ajouter à la undoRedo d'action
+          #Invoque la méthode utilisée sans l'ajouter à la undoRedo d'action
           self.send(action.methode(), action.ile2(), false)
         rescue => e
           puts e.message()
@@ -509,11 +511,11 @@ class Grille
     end
 
     ##
-    #Donne la méthode inverse de celle passé en paramètre
+    #Donne la méthode inverse de celle passée en paramètre
     #param::
     # * methode La méthode dont-il faut retourner l'inverse
     #return::
-    # * Une méthode qui permet en l'appelant avec les mêmes paramètres de revenir à l'état précedant
+    # * Une méthode qui permet en l'appelant avec les mêmes paramètres de revenir à l'état précédent
     private def homologue(methode)
       if(methode == :createPont)
         return :supprimePont
@@ -549,7 +551,7 @@ class Grille
     # * ile2 La deuxième ile
     #return::
     # * direction : La direction du pont, retourne Pont::NULLE si les iles ne sont pas voisines
-    # * petitPos : La plus petit coordonnée du pont (en abscisse ou en ordonnée en fontion de la direction)
+    # * petitPos : La plus petite coordonnée du pont (en abscisse ou en ordonnée en fontion de la direction)
     # * grandPos : La plus grande coordonnée du pont (en abscisse ou en ordonnée en fontion de la direction)
     def getDifference(ile1, ile2)
 
@@ -591,7 +593,7 @@ class Grille
     # * ile2 La deuxième ile (La première est l'ile @dernierIle)
     # * action Boolean, si true on ajoute l'action à la pile d'action, si false on ne l'ajoute pas
     #return::
-    # * true Si le pont a été crée
+    # * true Si le pont a été créé
     # * false Sinon
     def createPont(ile2, action = true)
       direction = getDirectionPont(@dernierIle, ile2)
@@ -678,7 +680,7 @@ class Grille
     end
 
     ##
-    #Cette méthode permet de parcourir les ponts entre deux ile avec un bloc
+    #Cette méthode permet de parcourir les ponts entre deux iles avec un bloc
     #param::
     # * ile1 La première ile
     # * ile2 La deuxième ile
@@ -698,7 +700,12 @@ class Grille
     end
 
     ##
-    #Cette méthode permet de faire un parcous vertical
+    #Cette méthode permet de faire un parcours vertical
+    #param::
+    # * petitPos La plus petite position du pont
+    # * grandPos La plus grande position du pont
+    # * proc Le bloc à effectuer sur chaque pont
+    # * colonne La colonne à parcourir
     private def parcoursPontVertical(petitPos, grandPos, proc, colonne)
       for i in (petitPos..grandPos)
         proc.call(@mat[i][colonne])
@@ -707,7 +714,12 @@ class Grille
     end
 
     ##
-    #Cette méthode permet de faire un parcous horizontal
+    #Cette méthode permet de faire un parcours horizontal
+    #param::
+    # * petitPos La plus petite position du pont
+    # * grandPos La plus grande position du pont
+    # * proc Le bloc à effectuer sur chaque pont
+    # * ligne La ligne à parcourir
     private def parcoursPontHorizontal(petitPos, grandPos, proc, ligne)
       for i in (petitPos..grandPos)
         proc.call(@mat[ligne][i])
@@ -733,7 +745,7 @@ class Grille
     end
 
     ##
-    #Cette méthode permet de recuperer la dernière ile séléctionnée
+    #Cette méthode permet de recupérer la dernière ile séléctionnée
     #return::
     # * La dernière ile séléctionnée
     def getDernierIle()
@@ -741,7 +753,7 @@ class Grille
     end
 
     ##
-    #Cette méthode permet de mettre en surbrillance les pont disponibles de @dernierIle
+    #Cette méthode permet de mettre en surbrillance les ponts disponibles de @dernierIle
     def montrePont()
       for direction in Ile::DIRECTIONS
         if(@dernierIle.aVoisinDisponible?(direction))
@@ -751,7 +763,7 @@ class Grille
     end
 
     ##
-    #Cette méthode permet d'enlever la surbrillance des pont disponibles de @dernierIle
+    #Cette méthode permet d'enlever la surbrillance des ponts disponibles de @dernierIle
     def effacePont()
       for direction in Ile::DIRECTIONS
         if(@dernierIle.aVoisinDisponible?(direction))
@@ -761,9 +773,9 @@ class Grille
     end
 
     ##
-    #Cette méthode permet de retourner la valeur du pont entre deux ile
+    #Cette méthode permet de retourner la valeur du pont entre deux iles
     #return::
-    # * La valeur du pont entre deux iles Si elles sont rélié
+    # * La valeur du pont entre deux iles Si elles sont réliées
     # * 0 Sinon
     def valeurPont(ile1, ile2)
       direction, petitPos, grandPos = getDifference(ile1, ile2)
@@ -784,7 +796,9 @@ class Grille
     end
 
     ##
-    #Cette méthode permet de sauvegarder la grille dans la base de donnée
+    #Cette méthode permet de sauvegarder la grille dans la base de données
+    #param::
+    # * compte Le compte pour lequel on va sauvegarder la grille
     def sauvegarder(compte)
 
       save = Sauvegarde.recuperer(compte, self)
@@ -796,7 +810,12 @@ class Grille
 
     end
 
-
+    ##
+    #Cette méthode permet de récupérer le meilleur score du joueur sur la grille
+    #param::
+    # * compte Le compte dont-on va récupérer le meilleur score
+    #return::
+    # * Le meilleur score
     def getMeilleurScore(compte)
       Sauvegarde.recuperer(compte, self).getScore()
     end

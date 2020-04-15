@@ -9,7 +9,11 @@ require_relative "../UI/ChoixGrilleScrollUI.rb"
 require_relative "../CSS/Style.rb"
 
 
-
+##
+# Auteur:: Adrien PITAULT
+# Version:: 0.1
+# 
+#Cette classe créer la fenêtre du menu
 class Menu < Gtk::Box
     # --- BUILDERS ---
         # @builder
@@ -75,8 +79,8 @@ class Menu < Gtk::Box
 			@lbPseudo = @builder.get_object("lbPseudo")
 			@lbPseudo.style_context.add_provider(@@CSS_LABEL_MENU, Gtk::StyleProvider::PRIORITY_USER)
 
-			@btnQuitter.style_context.add_provider(@@CSS_BTN_BOTMENU, Gtk::StyleProvider::PRIORITY_USER)
-			@btnJouer.style_context.add_provider(@@CSS_BTN_BOTMENU, Gtk::StyleProvider::PRIORITY_USER)
+			@btnQuitter.style_context.add_provider(@@CSS_BTN_TOPMENU, Gtk::StyleProvider::PRIORITY_USER)
+			@btnJouer.style_context.add_provider(@@CSS_BTN_TOPMENU, Gtk::StyleProvider::PRIORITY_USER)
 
             @btnAide.style_context.add_provider(@@CSS_BTN_TOPMENU, Gtk::StyleProvider::PRIORITY_USER)
             @btnRegles.style_context.add_provider(@@CSS_BTN_TOPMENU, Gtk::StyleProvider::PRIORITY_USER)
@@ -123,8 +127,10 @@ class Menu < Gtk::Box
 		
 		Gtk.main()
 		
-    end
-
+	end
+	
+  ##
+  #Cette méthode gère les boutons togle, si, pour chaque ligne, l'un est préssé l'autre n'as plus le focus
     def gestionTgl()
         #Gestion des paramètres selon [Mode], [Taille] et [Difficulté]
 
@@ -256,24 +262,34 @@ class Menu < Gtk::Box
 		}
 	end
 
+	##
+	#Lance l'affichage de la fenêtre d'aide du menu
 	def AfficherAide()
 		@aide = AideUI.new()
 	end
 
+	##
+	#Lance l'affichage de la fenêtre de règles
 	def AfficherRegles()
 		@regles = ReglesUI.new()
 	end
 
+	##
+	#Lance l'affichage de la fenêtre d'astuces
 	def AfficherAstuces()
 		@astuces = AstucesUI.new()
 	end
 
+	##
+	#PAS UTILISE DANS LA VERSION FINALE (vide tout le contenu d'un objet)
 	def removeChild(fenetre)
 		fenetre.each_all do |c|
 		  remove(c)
 		end
 	end
 
+	##
+	#Lance la partie selon les choix de l'utilisateur
 	def commencerPartie(grille,nomCompte)
 		if(@@mode==1)
 			@fenetreScroll.hide
@@ -283,6 +299,8 @@ class Menu < Gtk::Box
 		Gtk.main_quit
 	end
 
+	##
+	#PAS UTILISE DANS LA VERSION FINALE
 	def retourMenu()
 
 		each_all do |c|
@@ -297,14 +315,15 @@ class Menu < Gtk::Box
 
 	end
 
-
+	##
+	#Affiche la fenètre de sélection de grille
 	private def valide()
 
 		afficheLabel("Creation du compte en cours")
 
 		@window.hide()
 		@fenetreScroll = Gtk::Window.new()
-		@fenetreScroll.set_title("Choix Grille")
+		@fenetreScroll.set_title("HASHI - Choix Grille")
 		boxScroll = Gtk::Box.new(:horizontal)
 		choix = ChoixGrilleScrollUI.new(ChoixGrilleUI.new(self))
 		choix.chargerGrille(@pseudo.text(),@@taille,@@difficulte)
