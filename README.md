@@ -8,6 +8,14 @@ Créateurs :
  - Renoult Florent
  - Serelle Erwan
  
+Architecture projet :
+ - Architecture :
+  - L'architecture (diagramme UML) de notre application
+ - lib :
+  - Les sources de notre application
+ - bin :
+  - En cours de modification
+ 
 Prérequis d'installation :
  - Avoir installé ruby >= 2.6.3 : https://www.ruby-lang.org/fr/documentation/installation/
  - Avoir installé la gem activerecord >= 6.0.2.1 : https://rubygems.org/gems/activerecord
