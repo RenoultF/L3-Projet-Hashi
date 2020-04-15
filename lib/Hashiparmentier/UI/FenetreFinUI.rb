@@ -6,6 +6,13 @@ require_relative "../Core/Compte.rb"
 
 require_relative "../CSS/Style.rb"
 
+##
+#
+# Auteur:: Adrien PITAULT
+# Version:: 0.1
+# 
+#Initialise  la fenetre de resultat
+
 class FenetreFinUI
 
     def initialize(mode,grille,compte,window)
@@ -23,6 +30,7 @@ class FenetreFinUI
             @windowFin.destroy()
             Gtk.main_quit }
         
+        #Application du style adapté au nombre d'étoiles selon le score
         @imgEtoile = @builderFin.get_object("imgScore")
         if(@grille.score>(500*@grille.tailleX * 0.7))
             @imgEtoile.style_context.add_provider(@@CSS_BG_SCORE3, Gtk::StyleProvider::PRIORITY_USER)
@@ -31,6 +39,7 @@ class FenetreFinUI
         else
             @imgEtoile.style_context.add_provider(@@CSS_BG_SCORE1, Gtk::StyleProvider::PRIORITY_USER)
         end
+
         #fonctions
         @clickRetour = @builderFin.get_object("button1")
         @clickRetour.style_context.add_provider(@@CSS_BTN_JEU, Gtk::StyleProvider::PRIORITY_USER)
@@ -51,7 +60,8 @@ class FenetreFinUI
             Gtk.main_quit
         }
         
-
+        #Parametrage du bouton map suivante pour la fenetre de fin du mode aventure
+        #Le bouton "map suivante" ne fait rien hors mode aventure
         @clickMapSuivante = @builderFin.get_object("button2")
         @clickMapSuivante.style_context.add_provider(@@CSS_BTN_JEU, Gtk::StyleProvider::PRIORITY_USER)
         if(@mode==2)

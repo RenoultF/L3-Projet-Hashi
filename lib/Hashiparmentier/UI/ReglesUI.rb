@@ -1,5 +1,12 @@
 require_relative "../CSS/Style.rb"
 
+##
+#
+# Auteur:: Adrien PITAULT
+# Version:: 0.1
+# 
+#Initialise  la fenetre de règle
+
 class ReglesUI
 
     def initialize()
