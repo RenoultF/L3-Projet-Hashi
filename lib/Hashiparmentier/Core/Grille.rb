@@ -45,7 +45,7 @@ class Grille
 
 
     include Comparable
-    
+
     ##
     #Cette méthode permet de retourner toutes les grilles d'un dossier
     #param::
@@ -239,7 +239,11 @@ class Grille
         return @mat[i][j]
     end
 
-    #met a jour le temps que l'utilisateur à mis à finir la map
+    ##
+    #Met a jour le temps que l'utilisateur à mis à finir la map
+    #param::
+    # * minutes Le nombre de minutes
+    # * secondes Le nombre seconde
     def setTempsFin(minutes,secondes)
       @minutesFin = minutes
       @secondesFin =secondes
@@ -280,8 +284,6 @@ class Grille
 
     ##
     #Cette méthode permet de supprimer la dernière hypothèse (supprime tous les ponts de la dernière couleur)
-    #param::
-    # * jeu Le jeu dont-on va modifier la grille
     def supprimeHypothese()
       begin
         @couleurs.redo()
@@ -307,7 +309,7 @@ class Grille
     ##
     #Méthode à appeler quand on appuie sur une ile
     #param::
-    # * ile L'ile sur laquelle on a cliqué
+    # * pont Le pont sur lequel on a cliqué
     def clickOnPont(pont)
 
       if(!@dernierIle.eql?(nil))
@@ -699,6 +701,11 @@ class Grille
 
     ##
     #Cette méthode permet de faire un parcous vertical
+    #param::
+    # * petitPos La plus petite position du pont
+    # * grandPos La plus grande position du pont
+    # * proc Le bloc à efféctuer sur chaque pont
+    # * colonne La colonne à parcourir
     private def parcoursPontVertical(petitPos, grandPos, proc, colonne)
       for i in (petitPos..grandPos)
         proc.call(@mat[i][colonne])
@@ -708,6 +715,11 @@ class Grille
 
     ##
     #Cette méthode permet de faire un parcous horizontal
+    #param::
+    # * petitPos La plus petite position du pont
+    # * grandPos La plus grande position du pont
+    # * proc Le bloc à efféctuer sur chaque pont
+    # * ligne La ligne à parcourir
     private def parcoursPontHorizontal(petitPos, grandPos, proc, ligne)
       for i in (petitPos..grandPos)
         proc.call(@mat[ligne][i])
@@ -785,6 +797,8 @@ class Grille
 
     ##
     #Cette méthode permet de sauvegarder la grille dans la base de donnée
+    #param::
+    # * compte Le compte pour lequel on va sauvegarder la grille
     def sauvegarder(compte)
 
       save = Sauvegarde.recuperer(compte, self)
@@ -796,7 +810,12 @@ class Grille
 
     end
 
-
+    ##
+    #Cette méthode permet de récupérer le meilleur score du joueur sur la grille
+    #param::
+    # * compte Le compte dont-on va récupérer le meilleur score
+    #return::
+    # * Le meilleur score
     def getMeilleurScore(compte)
       Sauvegarde.recuperer(compte, self).getScore()
     end

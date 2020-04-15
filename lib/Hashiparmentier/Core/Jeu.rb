@@ -1,10 +1,5 @@
 
 
-##
-# Auteur Brabant Mano, Serelle Erwan
-# Version 0.1 : Date : 07/02/2020
-
-
 require_relative "../Core/Grille.rb"
 require_relative "../Core/Aide.rb"
 require_relative "../Core/Sauvegarde.rb"
@@ -19,6 +14,11 @@ require_relative "../Core/Chrono.rb"
 #require_relative '../class/JeuUI.rb'
 
 ##
+#PAS UTILISE DANS VERSION FINALE
+# Auteur Brabant Mano, Serelle Erwan
+# Version:: 0.1
+# Date:: 07/02/2020
+#
 #Cette classe permet de s'occuper du déroulement d'une partie
 class Jeu
 
