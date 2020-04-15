@@ -82,7 +82,7 @@ class FenetreFinUI
                     @grille.recommencer()
                     @grille.sauvegarder(compte)
                     liste = Sauvegarde.liste(Compte.recuperer_ou_creer(compte.name), nvtaille, nvDifficulte)
-                    nvgrille = liste[rand(2)].getGrille()
+                    nvgrille = liste[rand(3)].getGrille()
                     FenetreJeuUI.new(@mode, nvgrille,compte.name,@windowFin,nil)
                     Gtk.main_quit
                 }

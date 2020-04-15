@@ -107,7 +107,7 @@ class Menu < Gtk::Box
 					valide()
 				else
 					liste = Sauvegarde.liste(Compte.recuperer_ou_creer(@pseudo.text()), 7, 0)
-					grille = liste[rand(2)].getGrille()
+					grille = liste[rand(3)].getGrille()
 					commencerPartie(grille,@pseudo.text())
 				end
 			}
