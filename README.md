@@ -13,3 +13,7 @@ Prérequis d'installation :
  - Avoir installé la gem activerecord >= 6.0.2.1 : https://rubygems.org/gems/activerecord
  - Avoir installé la gem gtk3 >= 3.4.1 : https://rubygems.org/gems/gtk3
  - Avoir installé la gem sqlite3 >= 1.4.1 : https://rubygems.org/gems/sqlite3
+
+Utilisation :
+ - Téléchargez ou clonez le dépot
+ - Double cliquez sur LauncherLinux.command ou LauncherWindows.exe
