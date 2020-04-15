@@ -1,0 +1,12 @@
+#T 10 10
+#D 0
+3 - 2 - - 3 = = = 4
+H 3 - 1 N N 4 = 2 H
+4 H N N N N H N N H
+H 5 - - - - 7 = = 5
+2 H N N N N H 2 N |
+N H N N 2 N H H N |
+N H N N H N H 4 = 3
+N 5 = = 4 N H N N N
+N | N N N N H N N N
+N 1 N N 1 - 4 - 1 N

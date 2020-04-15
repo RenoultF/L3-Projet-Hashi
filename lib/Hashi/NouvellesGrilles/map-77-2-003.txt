@@ -1,9 +1,0 @@
-#T 7 7
-#D 2
-3 - - - - - 3
-H N N N N N H
-5 = 4 - 4 = 5
-| N | N | N |
-| N | N | N |
-1 N 1 N 1 N |
-N N N N N N 1
