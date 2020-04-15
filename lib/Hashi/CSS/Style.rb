@@ -145,6 +145,10 @@ require 'gtk3'
 
 @@CSS_BOX_STAT ||= Gtk::CssProvider.new
 @@CSS_BOX_STAT.load(data: <<-CSS)
+    /*@font-face{
+    font-family: "Vineritc";
+    src: url("lib/Hashi/glade/fonts/VINERITC.TTF") format("ttf");
+    }*/
     * {
         border-radius: 15px;
         border: 2px solid #a40d0f;

@@ -7,6 +7,7 @@ class AstucesUI
         @builderAide.add_from_file("lib/Hashi/glade/astuces.glade")
 
         @window = @builderAide.get_object("windowAstuces")
+        @window.maximize
 
         @window.signal_connect('destroy') { |_widget| Gtk.main_quit }
         @window.style_context.add_provider(@@CSS_ASTUCES, Gtk::StyleProvider::PRIORITY_USER)
