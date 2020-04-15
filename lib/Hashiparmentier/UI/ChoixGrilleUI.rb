@@ -39,10 +39,10 @@ class ChoixGrilleUI < Gtk::Box
     #puts "dans charger grille choixGRilleUI"
     #puts "nomCompte", nomCompte,"taille", taille,"difficulte", difficulte
 
-    tailleCase = 40
+    tailleCase = (taille * (-2.8)) + 70
 
     liste = Sauvegarde.liste(Compte.recuperer_ou_creer(nomCompte), taille, difficulte)
-    
+
     box = Gtk::Box.new(:horizontal, 30)
     liste.each_with_index do |s, i|
       #puts "liste.each"

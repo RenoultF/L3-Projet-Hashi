@@ -27,8 +27,10 @@ class GrilleUI < Gtk::DrawingArea
 
     super()
 
+    tailleCase = (grille.tailleX * (-2.8)) + 70
+
     @grille = grille
-    @taille = taille
+    @taille = tailleCase
 
     init()
 
