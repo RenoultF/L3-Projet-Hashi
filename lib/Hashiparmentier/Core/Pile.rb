@@ -17,7 +17,7 @@ class Pile
   ##
   #Ce constructeur permet de créer une nouvelle pile
   #param::
-  # * max Le nombre maximum d'élément dans la pile ("infini" par defaut)
+  # * max Le nombre maximum d'éléments dans la pile ("infini" par defaut)
   def Pile.creer(max = 0)
     new(max)
   end

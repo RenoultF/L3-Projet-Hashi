@@ -9,7 +9,7 @@ require "active_record"
 # Version:: 0.1
 # Date:: 09/04/2020
 #
-#Cette classe permet de sauvegarder dans une base de données la progression d'un joueur sur une grille et de faire des recherches sur les sauvegardes
+#Cette classe permet de sauvegarder dans une base de données, la progression d'un joueur sur une grille et de faire des recherches sur les sauvegardes
 class Sauvegarde < ActiveRecord::Base
 
 
@@ -26,13 +26,13 @@ class Sauvegarde < ActiveRecord::Base
 
 
   ##
-  #Cette méthode permet de supprimer toutes les sauvegardes dans la base de donnée
+  #Cette méthode permet de supprimer toutes les sauvegardes dans la base de données
   def Sauvegarde.razAllSauvegarde()
     Sauvegarde.delete_all()
   end
 
   ##
-  #Cette méthode permet de créer des sauvegarde pour un ensemble de grille
+  #Cette méthode permet de créer des sauvegardes pour un ensemble de grilles
   #param::
   # * compte Le compte pour lequel on va créer les sauvegardes
   # * grilles Un tableau qui contient les grilles à sauvegarder
@@ -50,8 +50,8 @@ class Sauvegarde < ActiveRecord::Base
   ##
   #Cette méthode permet de créer une grille pour un compte
   #param::
-  # * compte Le compte auquel la sauvegarde est lié
-  # * grille La grille auquel la sauvegarde est lié
+  # * compte Le compte auquel la sauvegarde est liée
+  # * grille La grille auquel la sauvegarde est liée
   #return::
   # * raiseException Si le compte possède déjà une sauvegarde de cette grille
   def Sauvegarde.creer(compte, grille)
@@ -69,8 +69,8 @@ class Sauvegarde < ActiveRecord::Base
   ##
   #Cette méthode permet de recupérer la sauvegarde d'un compte pour une grille
   #param::
-  # * compte Le compte auquel la sauvegarde est lié
-  # * grille La grille auquel la sauvegarde est lié
+  # * compte Le compte auquel la sauvegarde est liée
+  # * grille La grille auquel la sauvegarde est liée
   #return::
   # * La sauvegarde si elle existe
   # * nil Sinon
@@ -111,7 +111,7 @@ class Sauvegarde < ActiveRecord::Base
   ##
   #Cette méthode permet d'enregistrer la sauvegarde
   #return::
-  # * true Si la sauvegarde est efféctué
+  # * true Si la sauvegarde est efféctuée
   # * false Sinon
   def sauvegarder()
     return self.save()
@@ -149,7 +149,7 @@ class Sauvegarde < ActiveRecord::Base
   end
 
   ##
-  #Cette méthode permet de recupérer le meilleur score associé à la grille enregistré
+  #Cette méthode permet de recupérer le meilleur score associé à la grille enregistrée
   #return::
   # * Le score de la sauvegarde
   def getScore()
@@ -157,7 +157,7 @@ class Sauvegarde < ActiveRecord::Base
   end
 
   ##
-  #Cette méthode permet de modifier le meilleur score associé à la grille enregistré
+  #Cette méthode permet de modifier le meilleur score associé à la grille enregistrée
   #param::
   # * score Le nouveau score
   def setScore(score)
