@@ -1,0 +1,25 @@
+# DEPRECATED
+
+                                                        % de finition des classes :
+
+Aide : 99%
+Compte : 69%
+HighScore : 80%
+Menu : 80 %
+
+Action : 17,7013%
+Sauvegarde : 69%
+Checkpoint : 70%
+Case :  10%
+
+Jeu : 90%
+Pont : 80%
+Ile : 55%
+Grille : 80%
+
+BDD : 39%
+
+Test unitaire :
+
+TestPont : 49%
+TestCompte : 89%
