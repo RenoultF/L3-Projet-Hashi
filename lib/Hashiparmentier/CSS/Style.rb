@@ -1,5 +1,10 @@
 require 'gtk3'
 
+##
+# Auteur:: Adrien PITAULT
+# Version:: 0.1
+# 
+#On définit ici les styles en CSS qui seront appliqués à certains éléments des fenètre
 
 #
 # CSS MENU
@@ -14,7 +19,6 @@ require 'gtk3'
 #
 # CSS JEU
 #
-
 @@CSS_BG_JEU ||= Gtk::CssProvider.new
 @@CSS_BG_JEU.load(data: <<-CSS)
     * {
@@ -41,6 +45,16 @@ require 'gtk3'
         background-image: linear-gradient(#e7b7b0, white);
     }
     CSS
+
+#
+# 
+#
+@@CSS_ASTUCES ||= Gtk::CssProvider.new
+@@CSS_ASTUCES.load(data: <<-CSS)
+    * {
+        background-image: linear-gradient(#e7b7b0, white);
+    }
+    CSS
     
 #
 # CSS FIN
@@ -52,6 +66,9 @@ require 'gtk3'
     }
     CSS
 
+#
+# CSS des togles du menu
+#
 @@CSS_BUTTON_ACTIVE ||= Gtk::CssProvider.new
 @@CSS_BUTTON_ACTIVE.load(data: <<-CSS)
     button{
@@ -69,32 +86,20 @@ require 'gtk3'
     }
     CSS
 
+#
+# REGLAGES POUR LES LABELS DU MENU
+#
 @@CSS_LABEL_MENU ||= Gtk::CssProvider.new
 @@CSS_LABEL_MENU.load(data: <<-CSS)
     label {
        margin-top: 30px;
        margin-bottom: 5px;
-       font-weight: bold;
-    }
-    CSS
-    
-
-@@CSS_BTN_BOTMENU ||= Gtk::CssProvider.new
-@@CSS_BTN_BOTMENU.load(data: <<-CSS)
-    button{
-        background-image: image(#ae9bf4);
-        border: 2px solid #6e4af2;
-        box-shadow: 3px 3px 2px #656565;
-        font-weight: bold;
-    }
-    button:active {
-        background-image: image(#FAECBA);
-        border-style: solid;
-        border-width: 2px;
-        border-color: #c47d73;
     }
     CSS
 
+#
+# CSS DES BOUTONS EN HAUT ET BAS DU MENU
+#
 @@CSS_BTN_TOPMENU ||= Gtk::CssProvider.new
 @@CSS_BTN_TOPMENU.load(data: <<-CSS)
     button{
@@ -113,6 +118,9 @@ require 'gtk3'
     }
     CSS
 
+#
+# CSS DES BOUTONS DANS LA FENETRE DE JEUX
+#
 @@CSS_BTN_JEU ||= Gtk::CssProvider.new
 @@CSS_BTN_JEU.load(data: <<-CSS)
     button{
@@ -133,6 +141,9 @@ require 'gtk3'
     CSS
 
 
+#
+# CSS DES BOUTONS ROSES
+#
 
 @@CSS_BUTTON_ROSE ||= Gtk::CssProvider.new
 @@CSS_BUTTON_ROSE.load(data: <<-CSS)
@@ -144,13 +155,9 @@ require 'gtk3'
     }
     CSS
 
-@@CSS_ASTUCES ||= Gtk::CssProvider.new
-@@CSS_ASTUCES.load(data: <<-CSS)
-    * {
-        background-image: linear-gradient(#e7b7b0, white);
-    }
-    CSS
-
+#
+# CSS DE LA BOX AVEC SCORE, CHRONO, PSEUDO ET CELLE DES CHECKPOINT
+#
 @@CSS_BOX_STAT ||= Gtk::CssProvider.new
 @@CSS_BOX_STAT.load(data: <<-CSS)
     * {
@@ -163,6 +170,10 @@ require 'gtk3'
     }
     CSS
 
+
+#
+# AFFICHAGE DANS LE LABEL RESULTAT D'UNE IMAGE AVEC 1 - 2 - 3 ETOILES
+#
 @@CSS_BG_SCORE1 ||= Gtk::CssProvider.new
 @@CSS_BG_SCORE1.load(data: <<-CSS)
     * {
