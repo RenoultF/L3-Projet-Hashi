@@ -4,12 +4,12 @@
 # Version 0.1 : Date : 07/02/2020
 
 
-require "../Core/Compte.rb"
-require "../Core/Grille.rb"
-require "../Core/Sauvegarde.rb"
+require_relative "../Core/Compte.rb"
+require_relative "../Core/Grille.rb"
+require_relative "../Core/Sauvegarde.rb"
 require "active_record"
 require "rubygems"
-require "../Core/ConnectSqlite3.rb"
+require_relative "../Core/ConnectSqlite3.rb"
 
 Compte.has_many :sauvegardes
 Sauvegarde.belongs_to :compte

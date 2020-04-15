@@ -40,8 +40,8 @@
             <property name="ypad">5</property>
             <property name="label" translatable="yes">AIDES</property>
             <attributes>
-              <attribute name="font-desc" value="Viner Hand ITC 20"/>
-              <attribute name="underline" value="True"/>
+              <attribute name="font-desc" value="Sans 20"/>
+              <attribute name="weight" value="ultrabold"/>
             </attributes>
           </object>
           <packing>
@@ -92,8 +92,8 @@ Rentrer un nouveau pseudo créera une nouvelle sauvegarde.</property>
             <property name="ypad">10</property>
             <property name="label" translatable="yes">Ganbatte !</property>
             <attributes>
-              <attribute name="font-desc" value="Viner Hand ITC 16"/>
-              <attribute name="underline" value="True"/>
+              <attribute name="font-desc" value="Sans 18"/>
+              <attribute name="weight" value="bold"/>
             </attributes>
           </object>
           <packing>

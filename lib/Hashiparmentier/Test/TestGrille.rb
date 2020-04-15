@@ -4,7 +4,7 @@
 # Auteur Brabant Mano
 # Version 0.1 : Date : 07/02/2020
 
-require "../Core/Grille.rb"
+require_relative "../Core/Grille.rb"
 
 res = ""
 

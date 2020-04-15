@@ -141,7 +141,8 @@
                         <property name="can_focus">False</property>
                         <property name="label" translatable="yes">Normal</property>
                         <attributes>
-                          <attribute name="font-desc" value="Viner Hand ITC 14"/>
+                          <attribute name="font-desc" value="Sans 14"/>
+                          <attribute name="weight" value="bold"/>
                         </attributes>
                       </object>
                     </child>
@@ -165,7 +166,8 @@
                         <property name="can_focus">False</property>
                         <property name="label" translatable="yes">Aventure</property>
                         <attributes>
-                          <attribute name="font-desc" value="Viner Hand ITC 14"/>
+                          <attribute name="font-desc" value="Sans 14"/>
+                          <attribute name="weight" value="bold"/>
                         </attributes>
                       </object>
                     </child>
@@ -183,7 +185,8 @@
                     <property name="can_focus">False</property>
                     <property name="label" translatable="yes">MODE</property>
                     <attributes>
-                      <attribute name="font-desc" value="Viner Hand ITC 15"/>
+                      <attribute name="font-desc" value="Sans 15"/>
+                      <attribute name="weight" value="bold"/>
                     </attributes>
                   </object>
                   <packing>
@@ -213,7 +216,8 @@
                     <property name="can_focus">False</property>
                     <property name="label" translatable="yes">Taille de la grille</property>
                     <attributes>
-                      <attribute name="font-desc" value="Viner Hand ITC 15"/>
+                      <attribute name="font-desc" value="Sans 15"/>
+                      <attribute name="weight" value="bold"/>
                     </attributes>
                   </object>
                   <packing>
@@ -236,7 +240,8 @@
                         <property name="can_focus">False</property>
                         <property name="label" translatable="yes">7 x 7</property>
                         <attributes>
-                          <attribute name="font-desc" value="Viner Hand ITC 14"/>
+                          <attribute name="font-desc" value="Sans 14"/>
+                          <attribute name="weight" value="bold"/>
                         </attributes>
                       </object>
                     </child>
@@ -260,7 +265,8 @@
                         <property name="can_focus">False</property>
                         <property name="label" translatable="yes">10 x 10</property>
                         <attributes>
-                          <attribute name="font-desc" value="Viner Hand ITC 14"/>
+                          <attribute name="font-desc" value="Sans 14"/>
+                          <attribute name="weight" value="bold"/>
                         </attributes>
                       </object>
                     </child>
@@ -284,7 +290,8 @@
                         <property name="can_focus">False</property>
                         <property name="label" translatable="yes">15 x 15</property>
                         <attributes>
-                          <attribute name="font-desc" value="Viner Hand ITC 14"/>
+                          <attribute name="font-desc" value="Sans 14"/>
+                          <attribute name="weight" value="bold"/>
                         </attributes>
                       </object>
                     </child>
@@ -316,7 +323,8 @@
                     <property name="can_focus">False</property>
                     <property name="label" translatable="yes">Difficulté</property>
                     <attributes>
-                      <attribute name="font-desc" value="Viner Hand ITC 15"/>
+                      <attribute name="font-desc" value="Sans 15"/>
+                      <attribute name="weight" value="bold"/>
                     </attributes>
                   </object>
                   <packing>
@@ -339,7 +347,8 @@
                         <property name="can_focus">False</property>
                         <property name="label" translatable="yes">Facile</property>
                         <attributes>
-                          <attribute name="font-desc" value="Viner Hand ITC 14"/>
+                          <attribute name="font-desc" value="Sans 14"/>
+                          <attribute name="weight" value="bold"/>
                         </attributes>
                       </object>
                     </child>
@@ -363,7 +372,8 @@
                         <property name="can_focus">False</property>
                         <property name="label" translatable="yes">Normal</property>
                         <attributes>
-                          <attribute name="font-desc" value="Viner Hand ITC 14"/>
+                          <attribute name="font-desc" value="Sans 14"/>
+                          <attribute name="weight" value="bold"/>
                         </attributes>
                       </object>
                     </child>
@@ -387,7 +397,8 @@
                         <property name="can_focus">False</property>
                         <property name="label" translatable="yes">Difficile</property>
                         <attributes>
-                          <attribute name="font-desc" value="Viner Hand ITC 14"/>
+                          <attribute name="font-desc" value="Sans 14"/>
+                          <attribute name="weight" value="bold"/>
                         </attributes>
                       </object>
                     </child>
@@ -417,7 +428,8 @@
                     <property name="can_focus">False</property>
                     <property name="label" translatable="yes">Entrez votre pseudo :</property>
                     <attributes>
-                      <attribute name="font-desc" value="Viner Hand ITC 15"/>
+                      <attribute name="font-desc" value="Sans 15"/>
+                      <attribute name="weight" value="bold"/>
                     </attributes>
                   </object>
                   <packing>

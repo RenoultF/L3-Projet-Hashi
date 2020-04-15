@@ -45,7 +45,7 @@ class Grille
 
 
     include Comparable
-
+    
     ##
     #Cette méthode permet de retourner toutes les grilles d'un dossier
     #param::
@@ -363,11 +363,11 @@ class Grille
 
         i = pont.posX
         j = pont.posY
-        while(!(ileDroite = getCase(i, j)).estIle?())
+        while(!sortLimite?(i, j) && !(ileDroite = getCase(i, j)).estIle?())
           j += 1
         end
         j = pont.posY
-        while(!(ileGauche = getCase(i, j)).estIle?())
+        while(!sortLimite?(i, j) && !(ileGauche = getCase(i, j)).estIle?())
           j -= 1
         end
 
@@ -387,11 +387,11 @@ class Grille
 
         i = pont.posX
         j = pont.posY
-        while(!(ileBas = getCase(i, j)).estIle?())
+        while(!sortLimite?(i, j) && !(ileBas = getCase(i, j)).estIle?())
           i += 1
         end
         i = pont.posX
-        while(!(ileHaut = getCase(i, j)).estIle?())
+        while(!sortLimite?(i, j) && !(ileHaut = getCase(i, j)).estIle?())
           i -= 1
         end
 

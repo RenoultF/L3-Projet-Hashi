@@ -1,7 +1,0 @@
-#!/bin/bash
-
-gem fetch Hashiparmentier
-echo "#!/usr/bin/env ruby" > Hashi
-
-echo "ruby Hashiparmentier/lib/Hashiparmentier.rb'" >> Hashi
-chmod 777 Hashi

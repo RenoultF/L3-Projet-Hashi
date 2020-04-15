@@ -4,8 +4,8 @@
 # Version 0.1 : Date : 07/02/2020
 
 
-require "../Core/Jeu.rb"
-require "../Core/ConnectSqlite3.rb"
+require_relative "../Core/Jeu.rb"
+require_relative "../Core/ConnectSqlite3.rb"
 
 res = ""
 

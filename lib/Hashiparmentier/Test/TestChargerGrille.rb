@@ -1,4 +1,4 @@
-require "../Core/Grille.rb"
+require_relative "../Core/Grille.rb"
 
 grille = Grille.charger(nil, 15, 15, 1, 1)
 

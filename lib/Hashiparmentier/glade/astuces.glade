@@ -47,7 +47,8 @@
                     <property name="margin_bottom">15</property>
                     <property name="label" translatable="yes">ASTUCES</property>
                     <attributes>
-                      <attribute name="font-desc" value="Viner Hand ITC 20"/>
+                      <attribute name="font-desc" value="Sans 20"/>
+                      <attribute name="weight" value="ultrabold"/>
                     </attributes>
                   </object>
                   <packing>
@@ -66,7 +67,8 @@
                     <property name="margin_bottom">5</property>
                     <property name="label" translatable="yes">Techniques de démarrage</property>
                     <attributes>
-                      <attribute name="font-desc" value="Viner Hand ITC 18"/>
+                      <attribute name="font-desc" value="Sans 18"/>
+                      <attribute name="weight" value="bold"/>
                     </attributes>
                   </object>
                   <packing>
@@ -102,7 +104,8 @@
                     <property name="margin_bottom">5</property>
                     <property name="label" translatable="yes">Techniques basiques</property>
                     <attributes>
-                      <attribute name="font-desc" value="Viner Hand ITC 18"/>
+                      <attribute name="font-desc" value="Sans 18"/>
+                      <attribute name="weight" value="bold"/>
                     </attributes>
                   </object>
                   <packing>
@@ -145,7 +148,8 @@
                     <property name="margin_bottom">5</property>
                     <property name="label" translatable="yes">Techniques d'isolement</property>
                     <attributes>
-                      <attribute name="font-desc" value="Viner Hand ITC 17"/>
+                      <attribute name="font-desc" value="Sans 18"/>
+                      <attribute name="weight" value="bold"/>
                     </attributes>
                   </object>
                   <packing>
@@ -186,7 +190,8 @@
                     <property name="margin_bottom">5</property>
                     <property name="label" translatable="yes">Techniques avancées</property>
                     <attributes>
-                      <attribute name="font-desc" value="Viner Hand ITC 18"/>
+                      <attribute name="font-desc" value="Sans 18"/>
+                      <attribute name="weight" value="bold"/>
                     </attributes>
                   </object>
                   <packing>
@@ -240,7 +245,8 @@
                     <property name="margin_bottom">5</property>
                     <property name="label" translatable="yes">Techniques de démarrage</property>
                     <attributes>
-                      <attribute name="font-desc" value="Viner Hand ITC 18"/>
+                      <attribute name="font-desc" value="Sans 18"/>
+                      <attribute name="weight" value="bold"/>
                     </attributes>
                   </object>
                   <packing>
@@ -298,7 +304,8 @@ de ses quatre voisins. Dans tous les cas, le nombre total de ponts est connecté
                     <property name="margin_bottom">5</property>
                     <property name="label" translatable="yes">Techniques basiques</property>
                     <attributes>
-                      <attribute name="font-desc" value="Viner Hand ITC 18"/>
+                      <attribute name="font-desc" value="Sans 18"/>
+                      <attribute name="weight" value="bold"/>
                     </attributes>
                   </object>
                   <packing>
@@ -745,7 +752,8 @@ un pont connecté aux îles A, B et C.</property>
                     <property name="margin_bottom">5</property>
                     <property name="label" translatable="yes">Techniques d'isolement</property>
                     <attributes>
-                      <attribute name="font-desc" value="Viner Hand ITC 17"/>
+                      <attribute name="font-desc" value="Sans 18"/>
+                      <attribute name="weight" value="bold"/>
                     </attributes>
                   </object>
                   <packing>
@@ -1062,7 +1070,7 @@ doit être connecté à l'îlot supérieur gauche, comme indiqué dans le diagra
                     <property name="margin_bottom">5</property>
                     <property name="label" translatable="yes">Techniques avancées</property>
                     <attributes>
-                      <attribute name="font-desc" value="Viner Hand ITC 18"/>
+                      <attribute name="font-desc" value="Sans 18"/>
                     </attributes>
                   </object>
                   <packing>
