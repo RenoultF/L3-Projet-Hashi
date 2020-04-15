@@ -32,7 +32,7 @@ class Sauvegarde < ActiveRecord::Base
   end
 
   ##
-  #Cette méthode permet de créer un sauvegarde pour un ensemble de grille
+  #Cette méthode permet de créer des sauvegarde pour un ensemble de grille
   #param::
   # * compte Le compte pour lequel on va créer les sauvegardes
   # * grilles Un tableau qui contient les grilles à sauvegarder
@@ -48,7 +48,7 @@ class Sauvegarde < ActiveRecord::Base
   private_class_method :new
 
   ##
-  #Cette méthode permet de creer une grille pour un compte
+  #Cette méthode permet de créer une grille pour un compte
   #param::
   # * compte Le compte auquel la sauvegarde est lié
   # * grille La grille auquel la sauvegarde est lié
@@ -56,11 +56,11 @@ class Sauvegarde < ActiveRecord::Base
   # * raiseException Si le compte possède déjà une sauvegarde de cette grille
   def Sauvegarde.creer(compte, grille)
 
-    begin
-      temp = Marshal.dump(grille).force_encoding("ISO-8859-1").encode("UTF-8")
-      Marshal.load(temp)
+    begin #Active record peut enregistrer du TEXT avec UTF-8 uniquement
+      temp = Marshal.dump(grille).force_encoding("ISO-8859-1").encode("UTF-8") #on force donc la chaine en UTF-8
+      Marshal.load(temp) #à condition que l'on puisse la recharger sans exception
     rescue
-      temp = YAML.dump(grille)
+      temp = YAML.dump(grille) #Sinon on enregistre avec YAML qui est plus lent
     end
     new(:compte => compte, :grille => temp, :taille => grille.tailleX(), :difficulte => grille.difficulte(), :meilleurScore => 0)
 
