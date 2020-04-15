@@ -98,19 +98,29 @@ class Menu < Gtk::Box
 		@tglDiff.style_context.add_provider(@@CSS_BUTTON_ACTIVE, Gtk::StyleProvider::PRIORITY_USER)
         # --- SIGNAUX ---
             # --- WINDOWS ---
-            @window.signal_connect('destroy') { |_widget| Gtk.main_quit }
+			@window.signal_connect('destroy') { |_widget| Gtk.main_quit }
 
             # --- BTN ---
             @btnQuitter.signal_connect('clicked') { |_widget| Gtk.main_quit }
-            @btnJouer.signal_connect('clicked') { |_widget| valide() }
+			@btnJouer.signal_connect('clicked') { |_widget| 
+				if(@@mode == 1)
+					valide()
+				else
+					liste = Sauvegarde.liste(Compte.recuperer_ou_creer(@pseudo.text()), 7, 0)
+					grille = liste[rand(2)].getGrille()
+					commencerPartie(grille,@pseudo.text())
+				end
+			}
             @btnAide.signal_connect('clicked') { |_widget| AfficherAide() }
             @btnRegles.signal_connect('clicked') { |_widget| AfficherRegles()  }
 		    @btnAstuces.signal_connect('clicked') { |_widget| AfficherAstuces() }
 
         @window.show()
         # Appel de la gestion des signaux
-        self.gestionTgl()
+		self.gestionTgl()
+		
 		Gtk.main()
+		
     end
 
     def gestionTgl()
@@ -263,7 +273,9 @@ class Menu < Gtk::Box
 	end
 
 	def commencerPartie(grille,nomCompte)
-		@fenetreScroll.hide
+		if(@@mode==1)
+			@fenetreScroll.hide
+		end
 		@jeu = FenetreJeuUI.new(@@mode, grille,nomCompte,@window,@fenetreScroll)
 		Gtk.main_quit
 	end

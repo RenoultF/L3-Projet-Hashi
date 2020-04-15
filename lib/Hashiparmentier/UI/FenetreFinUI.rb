@@ -1,13 +1,15 @@
 require 'gtk3'
 
 require_relative "../UI/Menu.rb"
+require_relative "../Core/Sauvegarde.rb"
+require_relative "../Core/Compte.rb"
 
 require_relative "../CSS/Style.rb"
 
 class FenetreFinUI
 
-    def initialize(grille,compte,window)
-
+    def initialize(mode,grille,compte,window)
+        @mode = mode
         @grille = grille
         window.destroy()
         @builderFin = Gtk::Builder.new
@@ -52,11 +54,40 @@ class FenetreFinUI
 
         @clickMapSuivante = @builderFin.get_object("button2")
         @clickMapSuivante.style_context.add_provider(@@CSS_BTN_JEU, Gtk::StyleProvider::PRIORITY_USER)
-        @clickMapSuivante.signal_connect('clicked'){
-            @grille.recommencer()
-            @grille.sauvegarder(compte)
-            puts "mode aventure MAJ"
-        }
+        if(@mode==2)
+            if(@grille.difficulte<2)
+                nvDifficulte = @grille.difficulte+1
+                nvtaille = @grille.tailleX
+            else
+                nvDifficulte = 0
+                case @grille.tailleX
+                when 7
+                    nvtaille = 10
+                when 10
+                    nvtaille = 15
+                when 15
+                    nvtaille = 20
+                end
+            end
+            if(nvtaille==20)
+                @clickMapSuivante.set_label("Terminé")
+                @clickMapSuivante.signal_connect('clicked'){
+                    @grille.recommencer()
+                    @grille.sauvegarder(compte)
+                    @windowFin.destroy()
+                    Gtk.main_quit
+                }
+            else
+                @clickMapSuivante.signal_connect('clicked'){
+                    @grille.recommencer()
+                    @grille.sauvegarder(compte)
+                    liste = Sauvegarde.liste(Compte.recuperer_ou_creer(compte.name), nvtaille, nvDifficulte)
+                    nvgrille = liste[rand(2)].getGrille()
+                    FenetreJeuUI.new(@mode, nvgrille,compte.name,@windowFin,nil)
+                    Gtk.main_quit
+                }
+            end
+        end
 
         @labelHsJoueur = @builderFin.get_object("valeurHS")
         @labelHsJoueur.set_label(@grille.getMeilleurScore(compte).to_s)

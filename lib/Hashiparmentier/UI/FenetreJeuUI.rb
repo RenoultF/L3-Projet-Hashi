@@ -38,7 +38,9 @@ class FenetreJeuUI
         # puts "Difficulté : #{@difficulte}";
 
         window.destroy()
-        window1.destroy()
+        if(@mode == 1)
+            window1.destroy()
+        end
         # CREATION FENETRE
         @builderJeu = Gtk::Builder.new
         @builderJeu.add_from_file("lib/Hashiparmentier/glade/jeu.glade")
@@ -117,7 +119,7 @@ class FenetreJeuUI
             @grille.sauvegarder(@compte)
             if(@grille.fini?() == true)
                 Thread.kill(@threadChrono)
-                fenetre_fin = FenetreFinUI.new(@grille,@compte,@window)
+                fenetre_fin = FenetreFinUI.new(@mode,@grille,@compte,@window)
                 #Gtk.main_quit 
             else
                 @labelIndice.set_label("Vous n'avez pas trouvé la solution ! \n Continuez ...")
@@ -163,7 +165,7 @@ class FenetreJeuUI
         #@threadChrono = Thread.new{@chronoGrille.lancerChrono()}
         #@threadJeu = Thread.new{@jeu.lanceToi()}
         @window.show_all()
-        #Gtk.main()
+        Gtk.main()
     end
 
     def modifScore(val)
