@@ -446,6 +446,7 @@
                     <property name="margin_right">130</property>
                     <property name="margin_bottom">25</property>
                     <property name="invisible_char">●</property>
+                    <property name="placeholder_text">Rentrez un pseudo d'au moins un caractère de long</property>
                     <property name="input_purpose">name</property>
                   </object>
                   <packing>
