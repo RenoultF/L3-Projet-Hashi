@@ -7,21 +7,21 @@ require 'gtk3'
 @@CSS_BG_MENU ||= Gtk::CssProvider.new
 @@CSS_BG_MENU.load(data: <<-CSS)
     * {
-        background-image: url("../glade/images/bg.jpg");
+        background-image: url("lib/Hashi/glade/images/bg.jpg");
     }
     CSS
 
 @@CSS_BG_JEU ||= Gtk::CssProvider.new
 @@CSS_BG_JEU.load(data: <<-CSS)
     * {
-        background-image: url("../glade/images/wJapStylePlusNet.jpg");
+        background-image: url("lib/Hashi/glade/images/wJapStylePlusNet.jpg");
     }
     CSS
 
 @@CSS_BG_JEU15 ||= Gtk::CssProvider.new
 @@CSS_BG_JEU15.load(data: <<-CSS)
     * {
-        background-image: url("../glade/images/wJapStylePlusNet15.jpg");
+        background-image: url("lib/Hashi/glade/images/wJapStylePlusNet15.jpg");
     }
     CSS
 
@@ -158,20 +158,27 @@ require 'gtk3'
 @@CSS_BG_SCORE1 ||= Gtk::CssProvider.new
 @@CSS_BG_SCORE1.load(data: <<-CSS)
     * {
-        background-image: url("../glade/images/1stars.png");
+        background-image: url("lib/Hashi/glade/images/1stars.png");
     }
     CSS
 
 @@CSS_BG_SCORE2 ||= Gtk::CssProvider.new
 @@CSS_BG_SCORE2.load(data: <<-CSS)
     * {
-        background-image: url("../glade/images/2stars.png");
+        background-image: url("lib/Hashi/glade/images/2stars.png");
     }
     CSS
 
 @@CSS_BG_SCORE3 ||= Gtk::CssProvider.new
 @@CSS_BG_SCORE3.load(data: <<-CSS)
     * {
-        background-image: url("../glade/images/3stars.png");
+        background-image: url("lib/Hashi/glade/images/3stars.png");
+    }
+    CSS
+
+@@CSS_FIN ||= Gtk::CssProvider.new
+@@CSS_FIN.load(data: <<-CSS)
+    * {
+        background-image: linear-gradient(#a40d0f, white);
     }
     CSS
