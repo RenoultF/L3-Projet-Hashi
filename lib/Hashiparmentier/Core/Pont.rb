@@ -108,7 +108,7 @@ class Pont < Case
   #Cette méthode permet de modifier la couleur que devrais prendre le pont s'il est modifié
   #ainsi que sa couleur courante si elle était la même que la couleur après modification
   #
-  #Utilisé par les hypothèses
+  #Utilisé par pour hypothèses
   #param::
   # * couleurPont La nouvelle couleur
   def redoCouleurPont(couleurPont)
