@@ -105,10 +105,10 @@ class Pont < Case
   #:doc:
 
   ##
-  #Cette méthode permet de modifier la couleur que devrais prendre le pont s'il est modifié
+  #Cette méthode permet de modifier la couleur que devrait prendre le pont s'il est modifié
   #ainsi que sa couleur courante si elle était la même que la couleur après modification
   #
-  #Utilisé par pour hypothèses
+  #Utilisée pour hypothèses
   #param::
   # * couleurPont La nouvelle couleur
   def redoCouleurPont(couleurPont)
@@ -119,7 +119,7 @@ class Pont < Case
   end
 
   ##
-  #Cette méthode permet de modifer la couleur que devrais prendre le pont s'il est modifié
+  #Cette méthode permet de modifier la couleur que devrait prendre le pont s'il est modifié
   #param::
   # * couleurPont La nouvelle couleur
   def undoCouleurPont(couleurPont)
@@ -194,7 +194,7 @@ class Pont < Case
       #print "Couleur Pont : ", @couleurPontCourante, @couleurPont, "\n"
       demarquer()
       if(@direction != NULLE)
-          #On modifie la valeur du pont si la direction donné est la bonne
+          #On modifie la valeur du pont si la direction donnée est la bonne
           if(@direction == direction)
               @valeur = (@valeur + valeur) % (MAX_LIGNE + 1)
               if(@valeur == 0)
