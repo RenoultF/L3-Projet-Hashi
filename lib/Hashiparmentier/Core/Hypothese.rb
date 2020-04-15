@@ -2,7 +2,7 @@
 
 
 ##
-#PAS UTILISE DANs LA VERSION FINALE
+#PAS UTILISE DANS LA VERSION FINALE
 # Auteur:: Brabant Mano
 # Version:: 0.1
 # Date:: 09/04/2020
@@ -10,11 +10,11 @@
 #Cette classe représente une hypothèse (une sauvegarde de la grille à un certain moment)
 class Hypothese
 
-  #@grille => La grille supposé()
+  #@grille => La grille supposée()
 
 
   ##
-  #Ce constructeur permet de créer une nouvelle hyoothèse
+  #Ce constructeur permet de créer une nouvelle hypothèse
   #param::
   # * grille La grille que l'on suppose
   def Hypothese.creer(grille)

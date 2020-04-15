@@ -25,16 +25,16 @@ class Ile < Case
   #Cette constante représente l'une des directions dans laquelle peut se trouver un voisin
   GAUCHE = 3
 
-  #Cette constante représente l'ensemble des directions dans laquelle peut se trouver un voisin
+  #Cette constante représente l'ensemble des directions dans lesquelles peut se trouver un voisin
   DIRECTIONS = [HAUT, DROITE, BAS, GAUCHE]
 
-  #@valeur => Le nombre de lien que doit possèder l'ile pour être valide
+  #@valeur => Le nombre de liens que doit possèder l'ile pour être valide
   attr_reader :valeur
 
   #@dernier => true si l'ile est la derniere ile séléctionnée
   attr_accessor :dernier
 
-  #@nbPont => Le nombre de pont que possède l'ile dans chaque direction [HAUT, DROITE, BAS, GAUCHE]
+  #@nbPont => Le nombre de pont que possède l'ile dans chaque directions [HAUT, DROITE, BAS, GAUCHE]
 
   include Comparable
   private_class_method :new
@@ -44,7 +44,7 @@ class Ile < Case
   #param::
   # * posX La position en abscisse
   # * posY La position en ordonnée
-  # * nbLien Le nombre de lien que doit possèder l'ile pour être valide
+  # * nbLien Le nombre de liens que doit possèder l'ile pour être valide
   # * grille La grille sur laquelle se trouve l'ile
   def Ile.creer(posX, posY, nbLien, grille)
     new(posX, posY, nbLien, grille)
@@ -62,23 +62,23 @@ class Ile < Case
   #:doc:
 
   ##
-  #Cette méthode permet de recupérer le nombre de lien nécéssaire pour être valide
+  #Cette méthode permet de recupérer le nombre de liens nécéssaires pour être valide
   #return::
-  # * Le nombre de lien nécéssaire pour être valide
+  # * Le nombre de liens nécéssaires pour être valide
   def getValeur()
       return @valeur
   end
 
   ##
-  #Cette méthode permet de recupérer le nombre de lien actuel
+  #Cette méthode permet de recupérer le nombre de liens actuels
   #return::
-  # * Le nombre de lien actuel
+  # * Le nombre de liens actuels
   def getNombrePont()
     return @nbPont[HAUT] + @nbPont[DROITE] + @nbPont[BAS] + @nbPont[GAUCHE]
   end
 
   ##
-  #Cette méthode permet de mettre à jour le nombre de pont entre cette ile et une autre (appelé dans Grille à chaque modification de pont)
+  #Cette méthode permet de mettre à jour le nombre de ponts entre cette ile et une autre (appelée dans Grille à chaque modification de pont)
   #param::
   # * ile L'autre ile
   def ajouteNombrePont(ile)
@@ -95,7 +95,7 @@ class Ile < Case
   end
 
   ##
-  #Cette méthode permet de mettre à jour le nombre de pont entre cette ile et une autre (appelé dans Grille à chaque modification de pont)
+  #Cette méthode permet de mettre à jour le nombre de ponts entre cette ile et une autre (appelée dans Grille à chaque modification de pont)
   #param::
   # * ile L'autre ile
   def retireNombrePont(ile)
@@ -118,9 +118,9 @@ class Ile < Case
   end
 
   ##
-  #Cette méthode permet de savoir si cette ile est la dernière ile séléctionné
+  #Cette méthode permet de savoir si cette ile est la dernière ile séléctionnée
   #return::
-  # * true Si l'ile est la dernière séléctionné
+  # * true Si l'ile est la dernière séléctionnée
   # * false Sinon
   def estDernierIle()
     return @dernier
@@ -129,9 +129,9 @@ class Ile < Case
 
 
   ##
-  #Cette méthode permet de savoir si l'ile est connécté à autant de pont que son objectif
+  #Cette méthode permet de savoir si l'ile est connéctée à autant de ponts que son objectif
   #return::
-  # * true Si l'ile est connécté à autant de pont que son objectif
+  # * true Si l'ile est connéctée à autant de ponts que son objectif
   # * false Sinon
   def estValide?()
     return getNombrePont() == getValeur()
@@ -139,17 +139,17 @@ class Ile < Case
 
 
   ##
-  #Cette méthode permet de savoir combien il reste de pont à connécter pour que l'ile soit valide
+  #Cette méthode permet de savoir combien il reste de ponts à connecter pour que l'ile soit valide
   #return::
-  # * Combien il reste de pont à connécter pour que l'ile soit valide
+  # * Combien il reste de ponts à connecter pour que l'ile soit valide
   def getCapaciteResiduelle()
     return getValeur() - getNombrePont()
   end
 
   ##
-  #Cette méthode permet de savoir le nombre de ponts qui peuvent être connecté à l'ile
+  #Cette méthode permet de savoir le nombre de ponts qui peuvent être connectés à l'ile
   #return::
-  # * Le nombre de ponts qui peuvent être connecté à l'ile
+  # * Le nombre de ponts qui peuvent être connectés à l'ile
   def getNombreCheminDisponible()
 
     ret = 0
@@ -176,9 +176,9 @@ class Ile < Case
   end
 
   ##
-  #Cette méthode permet de connaitre le nombre de directions dans laquelle on peut ajouter un pont
+  #Cette méthode permet de connaitre le nombre de directions dans lesquelles on peut ajouter un pont
   #return::
-  # * Le nombre de direction dans laquelle on peut ajouter un pont
+  # * Le nombre de directions dans laquelle on peut ajouter un pont
   def getNombreDirectionConstructible()
 
     ret = 0
@@ -194,9 +194,9 @@ class Ile < Case
   end
 
   ##
-  #Cette méthode permet de connaitre le nombre de direction dans laquelle un voisin est disponible
+  #Cette méthode permet de connaitre le nombre de directions dans lesquelles un voisin est disponible
   #return::
-  # * Le nombre de direction dans laquelle un voisin est disponible
+  # * Le nombre de directions dans lesquelles un voisin est disponible
   def getNombreDirectionDisponible()
 
     ret = 0
@@ -254,7 +254,7 @@ class Ile < Case
   end
 
   ##
-  #Cette méthode permet de savoir si l'ile a un voisin dans une direction
+  #Cette méthode permet de savoir si l'ile à un voisin dans une direction
   #param::
   # * direction La direction dans laquelle on cherche le voisin
   #return::
@@ -297,7 +297,7 @@ class Ile < Case
 
 
   ##
-  #Cette méthode permet de savoir si l'ile a un voisin disponible dans une direction (s'il n'a pas de pont qui les sépares)
+  #Cette méthode permet de savoir si l'ile a un voisin disponible dans une direction (s'il n'y a pas de ponts qui les séparent)
   #param::
   # * direction La direction dans laquelle on cherche le voisin
   #return::
