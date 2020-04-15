@@ -1,5 +1,11 @@
 require_relative '../CSS/Style.rb'
 
+##
+#
+# Auteur:: Adrien PITAULT
+# Version:: 0.1
+# 
+#Initialise la fenetre d'aide de la fenetre de jeu
 class AideJeuUI
 
     def initialize()
