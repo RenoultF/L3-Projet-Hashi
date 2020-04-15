@@ -16,6 +16,6 @@ Prérequis d'installation :
 
 Utilisation :
  - Téléchargez ou clonez le dépot
- - Double cliquez sur LauncherLinux.command ou LauncherWindows.exe
+ - Double cliquez ou lancez en ligne de commande sur LauncherLinux.command ou LauncherWindows.exe
  
  Licence : MIT
