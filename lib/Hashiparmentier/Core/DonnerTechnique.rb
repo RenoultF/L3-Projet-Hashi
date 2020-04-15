@@ -27,7 +27,7 @@ class DonnerTechnique < Aide
   #:doc:
 
   ##
-  #L'aide apporté ici est une phrase qui indique des informations sur une ile qui peut poser de façon évidente des ponts
+  #L'aide apportée ici est une phrase qui indique des informations sur une ile qui peut poser de façon évidente des ponts
   #
   #Par exemple une ile qui ne possède qu'un seul voisin
   def aider()

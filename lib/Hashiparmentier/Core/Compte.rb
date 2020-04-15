@@ -100,11 +100,11 @@ class Compte < ActiveRecord::Base
   end
 
   ##
-  #Cette méthode permet de récuperer un compte dans la base de données ou de lcréer s'il n'existe pas
+  #Cette méthode permet de récuperer un compte dans la base de données ou de le créer s'il n'existe pas
   #param::
   # * pseudo Le pseudo du compte
   #return::
-  # * Le compte récupéré ou crée
+  # * Le compte récupéré ou créé
   def Compte.recuperer_ou_creer(pseudo)
 
     compte = Compte.find_by(name: pseudo);

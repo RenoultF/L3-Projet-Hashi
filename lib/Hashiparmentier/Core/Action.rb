@@ -14,7 +14,7 @@ class Action
   #@ile2 => La deuxième ile
   attr_reader:ile2
 
-  #@ile1 => La méthode utilisé (createPont ou supprimePont)
+  #@methode => La méthode utilisé (createPont ou supprimePont)
   attr_reader:methode
 
   private_class_method :new
