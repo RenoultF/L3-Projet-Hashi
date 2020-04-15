@@ -14,6 +14,8 @@ class FenetreFinUI
         @builderFin.add_from_file("lib/Hashiparmentier/glade/Fin.glade")
 
         @windowFin = @builderFin.get_object("FenetreFin")
+        @windowFin.style_context.add_provider(@@CSS_FIN, Gtk::StyleProvider::PRIORITY_USER)
+        @windowFin.signal_connect('destroy') { |_widget| Gtk.main_quit }
         #(500*@grille.tailleX / 2)
         @imgEtoile = @builderFin.get_object("imgScore")
         if(@grille.score>500)
@@ -25,6 +27,7 @@ class FenetreFinUI
         end
         #fonctions
         @clickRetour = @builderFin.get_object("button1")
+        @clickRetour.style_context.add_provider(@@CSS_BTN_JEU, Gtk::StyleProvider::PRIORITY_USER)
         @clickRetour.signal_connect('clicked'){
             @grille.recommencer()
             @grille.sauvegarder(compte)
@@ -33,14 +36,17 @@ class FenetreFinUI
         }
 
         @clickQuitter = @builderFin.get_object("button3")
+        @clickQuitter.style_context.add_provider(@@CSS_BTN_JEU, Gtk::StyleProvider::PRIORITY_USER)
         @clickQuitter.signal_connect('clicked'){
             @grille.recommencer()
             @grille.sauvegarder(compte)
             @windowFin.destroy()
             Gtk.main_quit
         }
+        
 
         @clickMapSuivante = @builderFin.get_object("button2")
+        @clickMapSuivante.style_context.add_provider(@@CSS_BTN_JEU, Gtk::StyleProvider::PRIORITY_USER)
         @clickMapSuivante.signal_connect('clicked'){
             @grille.recommencer()
             @grille.sauvegarder(compte)
