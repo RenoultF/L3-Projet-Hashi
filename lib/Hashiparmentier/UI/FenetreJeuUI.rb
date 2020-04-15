@@ -44,7 +44,7 @@ class FenetreJeuUI
         # CREATION FENETRE
         @builderJeu = Gtk::Builder.new
         @builderJeu.add_from_file("lib/Hashiparmentier/glade/jeu.glade")
-        
+
         @window = @builderJeu.get_object("windowJeu")
         @window.signal_connect('destroy') {
             @grille.sauvegarder(@compte)
@@ -91,7 +91,7 @@ class FenetreJeuUI
         @btnRetour.signal_connect('clicked'){
             @grille.sauvegarder(@compte)
             Thread.kill(@threadChrono)
-            @window.destroy()
+            @window.hide()
             Gtk.main_quit
             Menu.new()
         }

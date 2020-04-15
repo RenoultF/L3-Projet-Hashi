@@ -98,7 +98,9 @@ class Menu < Gtk::Box
 		@tglDiff.style_context.add_provider(@@CSS_BUTTON_ACTIVE, Gtk::StyleProvider::PRIORITY_USER)
         # --- SIGNAUX ---
             # --- WINDOWS ---
-			@window.signal_connect('destroy') { |_widget| Gtk.main_quit }
+			@window.signal_connect('destroy') { |_widget| Gtk.main_quit
+			exit!
+		 }
 
             # --- BTN ---
             @btnQuitter.signal_connect('clicked') { |_widget| Gtk.main_quit }
@@ -310,7 +312,10 @@ class Menu < Gtk::Box
 		@fenetreScroll.add(boxScroll)
 		@fenetreScroll.set_window_position(Gtk::WindowPosition::CENTER)
 		@fenetreScroll.maximize
-		@fenetreScroll.signal_connect('destroy') {|_widget| Gtk.main_quit}
+		@fenetreScroll.signal_connect('destroy') {|_widget| 
+			Gtk.main_quit
+			exit!
+		}
 		@fenetreScroll.show_all
 
 		#Thread.new{@racine.choisirGrille(@pseudo.text(), @@taille, @@difficulte)}
