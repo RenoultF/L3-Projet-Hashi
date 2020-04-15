@@ -1,0 +1,17 @@
+#T 15 15
+#D 0
+4 = = = = 4 = 6 = = = = = 4 N
+H N N N N N N H N N N N N H N
+H N N N 1 - - 5 = = 3 - 2 H N
+H N N N N N N N N N N N | 2 N
+3 - - - - - - - 5 = 2 N 2 - 1
+N N N N N N N N H N N N N N N
+4 = = = = = = = 8 = = 5 = 3 N
+H N N N N N N N H N 1 | N | N
+H N N 2 = = 4 N H N | | N | N
+5 = 4 = 2 N H N H N | | N | N
+| 1 - - - - 5 = 7 - 2 | N 1 N
+| N N N N N N N H N N 3 = = 3
+3 = = = = = = = 5 - 4 - - 1 |
+N N N N N N N N N N H N N N |
+N 1 - - - - - - - - 5 = = = 3
