@@ -78,10 +78,10 @@ class MenuUI < Gtk::Box
   private def valide(nomCompte, taille, difficulte)
 
 
-    puts "Paramètres menu"
-    print "Nom Compte : ", nomCompte, "\n"
-    print "Taille grille : ", taille, "\n"
-    print "Difficulte grille : ", difficulte, "\n"
+    #puts "Paramètres menu"
+    #print "Nom Compte : ", nomCompte, "\n"
+    #print "Taille grille : ", taille, "\n"
+    #print "Difficulte grille : ", difficulte, "\n"
 
     afficheLabel("Creation du compte en cours")
 

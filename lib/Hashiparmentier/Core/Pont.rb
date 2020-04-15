@@ -191,7 +191,7 @@ class Pont < Case
 
 
   private def modifValeur(direction, valeur)
-      print "Couleur Pont : ", @couleurPontCourante, @couleurPont, "\n"
+      #print "Couleur Pont : ", @couleurPontCourante, @couleurPont, "\n"
       demarquer()
       if(@direction != NULLE)
           #On modifie la valeur du pont si la direction donné est la bonne
@@ -211,8 +211,8 @@ class Pont < Case
           @couleurPontCourante = @couleurPont
           ret = true
       end
-      puts "apres"
-      print "Couleur Pont : ", @couleurPontCourante, @couleurPont, "\n"
+      #puts "apres"
+      #print "Couleur Pont : ", @couleurPontCourante, @couleurPont, "\n"
       return ret
   end
 

@@ -37,7 +37,7 @@ class VerifierGrille < Aide
       for j in (0..@grille.tailleY - 1)
         cGrille = @grille.getCase(i, j)
         cSolution = @grille.getCaseSolution(i, j)
-        puts cGrille, cSolution
+        #puts cGrille, cSolution
         if(cGrille.estPont?())
           if(cGrille.direction != Pont::NULLE)
             if(cGrille.direction != cSolution.direction || cGrille.valeur > cSolution.valeur)

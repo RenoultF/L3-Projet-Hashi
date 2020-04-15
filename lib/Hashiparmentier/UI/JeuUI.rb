@@ -139,7 +139,7 @@ class JeuUI < Gtk::Box
   def finir()
 
     if(@grille.grille.fini?())
-      puts "Bravo vous avez gagné !!!"
+      #puts "Bravo vous avez gagné !!!"
       @grille.recommencer()
       @grille.sauvegarder(@compte)
       @racine.finirPartie(@grille.grille.tailleX, @grille.grille.difficulte)

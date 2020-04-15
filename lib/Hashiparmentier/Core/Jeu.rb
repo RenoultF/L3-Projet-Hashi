@@ -120,7 +120,7 @@ class Jeu
             when 9
                 @donnerTech.aider()
             else
-                puts "puts"
+                #puts "puts"
             end
         end
     end

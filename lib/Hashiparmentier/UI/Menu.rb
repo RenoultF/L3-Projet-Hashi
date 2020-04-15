@@ -123,11 +123,11 @@ class Menu < Gtk::Box
 				@tglAventure.active = false;
 				@tglMNormal.active = true;
 				@@mode = 1;
-				puts "Mode : Normal - #{@@mode}";
+				#puts "Mode : Normal - #{@@mode}";
 			else if !(@tglMNormal.active?) && !(@tglAventure.active?)
 				@tglMNormal.active = true;
 				@@mode = 1;
-				puts "Mode : Normal - #{@@mode}";
+				#puts "Mode : Normal - #{@@mode}";
 				end
 			end
 		}
@@ -138,11 +138,11 @@ class Menu < Gtk::Box
 				@tglMNormal.active = false;
 				@tglAventure.active = true;
 				@@mode = 2;
-				puts "Mode : Aventure - #{@@mode}";
+				#puts "Mode : Aventure - #{@@mode}";
 			else if !(@tglAventure.active?) && !(@tglMNormal.active?)
 				@tglAventure.active = true;
 				@@mode = 2;
-				puts "Mode : Aventure - #{@@mode}";
+				#puts "Mode : Aventure - #{@@mode}";
 				end
 			end
         }
@@ -155,11 +155,11 @@ class Menu < Gtk::Box
 				@tgl1515.active = false;
 				@tgl77.active = true;
 				@@taille = 7;
-				puts "Taille grille : 7*7 - #{@@taille}";
+				#puts "Taille grille : 7*7 - #{@@taille}";
 			else if !(@tgl77.active?) && !(@tgl1010.active?) && !(@tgl1515.active?)
 					@tgl77.active = true;
 					@@taille = 7;
-					puts "Taille grille : 7*7 - #{@@taille}";
+					#puts "Taille grille : 7*7 - #{@@taille}";
 				end
 			end
 		}
@@ -171,11 +171,11 @@ class Menu < Gtk::Box
 				@tgl1515.active = false;
 				@tgl1010.active = true;
 				@@taille = 10;
-				puts "Taille grille : 10*10 - #{@@taille}";
+				#puts "Taille grille : 10*10 - #{@@taille}";
 			else if !(@tgl1010.active?) && !(@tgl77.active?) && !(@tgl1515.active?)
 					@tgl1010.active = true;
 					@@taille = 10;
-					puts "Taille grille : 10*10 - #{@@taille}";
+					#puts "Taille grille : 10*10 - #{@@taille}";
 				end
 			end
 		}
@@ -187,11 +187,11 @@ class Menu < Gtk::Box
 				@tgl1010.active = false;
 				@tgl1515.active = true;
 				@@taille = 15;
-				puts "Taille grille : 15*15 - #{@@taille}";
+				#puts "Taille grille : 15*15 - #{@@taille}";
 			else if !(@tgl1515.active?) && !(@tgl77.active?) && !(@tgl1010.active?)
 					@tgl1515.active = true;
 					@@taille = 15;
-					puts "Taille grille : 15*15 - #{@@taille}";
+					#puts "Taille grille : 15*15 - #{@@taille}";
 				end
 			end
 		}
@@ -204,11 +204,11 @@ class Menu < Gtk::Box
 				@tglDiff.active = false;
 				@tglFacile.active = true;
 				@@difficulte = 0;
-				puts "Difficultée : Facile - #{@@difficulte}";
+				#puts "Difficultée : Facile - #{@@difficulte}";
 			else if !(@tglFacile.active?) && !(@tglNormal.active?) && !(@tglDiff.active?)
 					@tglFacile.active = true;
 					@@difficulte = 0;
-					puts "Difficultée : Facile - #{@@difficulte}";
+					#puts "Difficultée : Facile - #{@@difficulte}";
 				end
 			end
 		}
@@ -219,11 +219,11 @@ class Menu < Gtk::Box
 				@tglFacile.active = false;
 				@tglNormal.active = true;
 				@@difficulte = 1;
-				puts "Difficultée : Normale - #{@@difficulte}";
+				#puts "Difficultée : Normale - #{@@difficulte}";
 			else if !(@tglNormal.active?) && !(@tglFacile.active?) && !(@tglDiff.active?)
 					@tglNormal.active = true;
 					@@difficulte = 1;
-					puts "Difficultée : Normale - #{@@difficulte}";
+					#puts "Difficultée : Normale - #{@@difficulte}";
 				end
 			end
 		}
@@ -234,11 +234,11 @@ class Menu < Gtk::Box
 				@tglNormal.active = false;
 				@tglDiff.active = true;
 				@@difficulte = 2;
-				puts "Difficultée : Difficile - #{@@difficulte}";
+				#puts "Difficultée : Difficile - #{@@difficulte}";
 			else if !(@tglDiff.active?) && !(@tglFacile.active?) && !(@tglNormal.active?)
 					@tglDiff.active = true;
 					@@difficulte = 2;
-					puts "Difficultée : Difficile - #{@@difficulte}";
+					#puts "Difficultée : Difficile - #{@@difficulte}";
 				end
 			end
 		}
@@ -284,12 +284,6 @@ class Menu < Gtk::Box
 
 
 	private def valide()
-
-
-		puts "Paramètres menu"
-		print "Nom Compte : ", @pseudo.text(), "\n"
-		print "Taille grille : ", @@taille, "\n"
-		print "Difficulte grille : ", @@difficulte, "\n"
 
 		afficheLabel("Creation du compte en cours")
 

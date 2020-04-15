@@ -30,13 +30,13 @@ class FinUI < Gtk::Box
 
     add(Gtk::Label.new("Bravo vous avez gagné !!!"))
 
-    puts "OSCOUR !!! : " , taille.inspect, difficulte.inspect
+    #puts "OSCOUR !!! : " , taille.inspect, difficulte.inspect
 
     if(difficulte == 0)
 
       if(taille == 7)
 
-        puts "JEANNE !!!!!!"
+        #puts "JEANNE !!!!!!"
 
         add(Gtk::Image.new(:file => "lib/Hashiparmentier/Data/Pont Gaulois.jpg"))
 

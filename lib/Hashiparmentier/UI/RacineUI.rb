@@ -60,7 +60,7 @@ class RacineUI < Gtk::Box
   # * taille La taille des grilles à aller chercher
   # * difficulte La difficulté des grilles à aller chercher
   def choisirGrille(nomCompte, taille, difficulte)
-    puts "dans choisirGrille"
+    #puts "dans choisirGrille"
     @choix = ChoixGrilleScrollUI.new(ChoixGrilleUI.new(self))
     @choix.chargerGrille(nomCompte, taille, difficulte)
 

@@ -30,7 +30,7 @@ class FenetreJeuUI
         @mode = mode
         @pseudo = pseudo
         @scoreCourant = 500 * @grille.tailleX
-        puts "Pseudo : #{@pseudo}";
+        #puts "Pseudo : #{@pseudo}";
         @compte = Compte.recuperer(@pseudo)
 
         # puts "Mode : #{@mode}";
@@ -45,6 +45,7 @@ class FenetreJeuUI
         @window = @builderJeu.get_object("windowJeu")
         @window.signal_connect('destroy') { |_widget| 
             @grille.sauvegarder(@compte)
+            Thread.kill(@threadChrono)
             @window.destroy()
             Gtk.main_quit }
 

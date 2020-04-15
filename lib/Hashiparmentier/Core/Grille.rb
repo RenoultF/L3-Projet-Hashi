@@ -87,7 +87,7 @@ class Grille
 
     #:nodoc:
     def initialize(chaine)
-      puts "chaine", chaine
+      #puts "chaine", chaine
 
         i = -1
         j = -1
@@ -106,7 +106,7 @@ class Grille
             i += 1
             j = -1
             l.split(' ') do |c|
-              print c
+              #print c
               j += 1
               if(c =~ /[1-8]/)
                 @mat[i][j] = Ile.creer(i, j, c.ord() - '0'.ord(), self)
@@ -437,7 +437,7 @@ class Grille
           if(c.estPont?())
             if(c.couleurPont == c.couleurPontCourante)
               while(c.valeur != 0)
-                print "Valeur", c.valeur, c.direction, "\n"
+                #print "Valeur", c.valeur, c.direction, "\n"
                 chercherVoisins(c, c.direction)
               end
             end
@@ -727,7 +727,7 @@ class Grille
       @dernierIle = ile1
       if(!@dernierIle.eql?(nil))
         montrePont()
-        afficheToi()
+        #afficheToi()
         @dernierIle.dernier = true
       end
     end

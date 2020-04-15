@@ -265,7 +265,7 @@ class Ile < Case
     begin
       return getVoisin(direction).estIle?()
     rescue => e
-      puts e.message()
+      #puts e.message()
       return false
     end
 
@@ -306,7 +306,7 @@ class Ile < Case
       ile2 = self.getVoisin(direction)
       return @grille.routeDisponible?(self, ile2)
     rescue => e
-      puts e.message()
+      #puts e.message()
       return false
     end
 
