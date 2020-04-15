@@ -1,6 +1,6 @@
 Gem::Specification.new do |s|
   s.name        = 'Hashiparmentier'
-  s.version     = '0.2.0'
+  s.version     = '0.3.0'
   s.executables << 'Hashiparmentier'
   s.date        = '2020-04-14'
   s.summary     = 'test'
