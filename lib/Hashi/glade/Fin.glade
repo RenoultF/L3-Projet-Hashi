@@ -1,16 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <interface>
   <!-- interface-requires gtk+ 3.0 -->
+  <object class="GtkImage" id="image3">
+    <property name="visible">True</property>
+    <property name="can_focus">False</property>
+    <property name="stock">gtk-redo</property>
+  </object>
   <object class="GtkWindow" id="FenetreFin">
     <property name="can_focus">False</property>
-    <property name="type">popup</property>
     <property name="title" translatable="yes">HASHI - Résultat</property>
+    <property name="resizable">False</property>
     <property name="window_position">center</property>
     <property name="icon">images/icone.png</property>
     <child>
       <object class="GtkVBox" id="vbox1">
         <property name="visible">True</property>
         <property name="can_focus">False</property>
+        <property name="margin_left">15</property>
+        <property name="margin_right">15</property>
+        <property name="margin_top">15</property>
+        <property name="margin_bottom">15</property>
         <property name="homogeneous">True</property>
         <child>
           <object class="GtkImage" id="image1">
@@ -29,6 +38,9 @@
             <property name="visible">True</property>
             <property name="can_focus">False</property>
             <property name="label" translatable="yes">Resultat</property>
+            <attributes>
+              <attribute name="font-desc" value="Viner Hand ITC 18"/>
+            </attributes>
           </object>
           <packing>
             <property name="expand">True</property>
@@ -60,6 +72,9 @@
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
                     <property name="label" translatable="yes">HighScore Joueur</property>
+                    <attributes>
+                      <attribute name="font-desc" value="Viner Hand ITC 14"/>
+                    </attributes>
                   </object>
                   <packing>
                     <property name="expand">True</property>
@@ -95,6 +110,9 @@
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
                     <property name="label" translatable="yes">Score Joueur</property>
+                    <attributes>
+                      <attribute name="font-desc" value="Viner Hand ITC 14"/>
+                    </attributes>
                   </object>
                   <packing>
                     <property name="expand">True</property>
@@ -132,13 +150,16 @@
           <object class="GtkHBox" id="hbox1">
             <property name="visible">True</property>
             <property name="can_focus">False</property>
-            <property name="homogeneous">True</property>
+            <property name="margin_top">15</property>
             <child>
               <object class="GtkButton" id="button1">
-                <property name="label" translatable="yes">Retour</property>
+                <property name="label" translatable="yes">Retour menu</property>
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>
+                <property name="image">image2</property>
+                <property name="relief">none</property>
+                <property name="always_show_image">True</property>
               </object>
               <packing>
                 <property name="expand">True</property>
@@ -152,6 +173,9 @@
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>
+                <property name="image">image3</property>
+                <property name="relief">none</property>
+                <property name="always_show_image">True</property>
               </object>
               <packing>
                 <property name="expand">True</property>
@@ -165,6 +189,9 @@
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>
+                <property name="image">image4</property>
+                <property name="relief">none</property>
+                <property name="always_show_image">True</property>
               </object>
               <packing>
                 <property name="expand">True</property>
@@ -175,11 +202,21 @@
           </object>
           <packing>
             <property name="expand">True</property>
-            <property name="fill">True</property>
+            <property name="fill">False</property>
             <property name="position">4</property>
           </packing>
         </child>
       </object>
     </child>
+  </object>
+  <object class="GtkImage" id="image4">
+    <property name="visible">True</property>
+    <property name="can_focus">False</property>
+    <property name="stock">gtk-quit</property>
+  </object>
+  <object class="GtkImage" id="image2">
+    <property name="visible">True</property>
+    <property name="can_focus">False</property>
+    <property name="stock">gtk-undo</property>
   </object>
 </interface>

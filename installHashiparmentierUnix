@@ -1,0 +1,9 @@
+#!/bin/bash
+
+gem install Hashiparmentier
+
+touch Hashi
+echo "#!/usr/bin/env ruby" > Hashi
+
+echo "require 'Hashi'" >> Hashi
+chmod 777 Hashi
