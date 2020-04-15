@@ -76,8 +76,6 @@
     <property name="title" translatable="yes">HASHI - Jeu</property>
     <property name="resizable">False</property>
     <property name="window_position">center-always</property>
-    <property name="default_width">1170</property>
-    <property name="default_height">650</property>
     <property name="icon">images/icone.png</property>
     <child>
       <object class="GtkBox" id="box1">

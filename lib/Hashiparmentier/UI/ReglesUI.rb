@@ -6,15 +6,14 @@ class ReglesUI
         @builderRegles = Gtk::Builder.new
         @builderRegles.add_from_file("lib/Hashiparmentier/glade/regles.glade")
 
-        @window = @builderRegles.get_object("REGLES1")
+        @window = @builderRegles.get_object("windowRegles")
 
         @window.signal_connect('destroy') { |_widget| Gtk.main_quit }
-        # @window.style_context.add_provider(@@CSS_Regles, Gtk::StyleProvider::PRIORITY_USER)
+        @window.style_context.add_provider(@@CSS_REGLES, Gtk::StyleProvider::PRIORITY_USER)
 
-        @btnQuitter = @builderRegles.get_object("Terminer")
+        @btnQuitter = @builderRegles.get_object("btnQuitter")
         @btnQuitter.signal_connect('clicked') { |_widget| @window.destroy() }
-        # @btnQuitter.style_context.add_provider(@@CSS_BUTTON_ROSE, Gtk::StyleProvider::PRIORITY_USER)
-
+        @btnQuitter.style_context.add_provider(@@CSS_BTN_JEU, Gtk::StyleProvider::PRIORITY_USER)
 
         @window.show_all()
         Gtk.main()
