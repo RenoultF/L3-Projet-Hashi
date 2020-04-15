@@ -49,10 +49,10 @@ class FenetreJeuUI
             @grille.sauvegarder(@compte)
             Thread.kill(@threadChrono)
             @window.destroy()
-            Gtk.main_quit }
+            Gtk.main_quit}
 
         if (@grille.tailleX == 15)
-            @window.style_context.add_provider(@@CSS_BG_JEU15, Gtk::StyleProvider::PRIORITY_USER)
+            @window.style_context.add_provider(@@CSS_BG_JEU, Gtk::StyleProvider::PRIORITY_USER)
         else
             @window.style_context.add_provider(@@CSS_BG_JEU, Gtk::StyleProvider::PRIORITY_USER)
         end

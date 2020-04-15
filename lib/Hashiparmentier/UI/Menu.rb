@@ -276,6 +276,7 @@ class Menu < Gtk::Box
 		if(@@mode==1)
 			@fenetreScroll.hide
 		end
+		
 		@jeu = FenetreJeuUI.new(@@mode, grille,nomCompte,@window,@fenetreScroll)
 		Gtk.main_quit
 	end
