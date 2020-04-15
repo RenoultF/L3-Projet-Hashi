@@ -45,7 +45,7 @@ class Grille
 
 
     include Comparable
-
+    
     ##
     #Cette méthode permet de retourner toutes les grilles d'un dossier
     #param::
