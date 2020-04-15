@@ -38,7 +38,7 @@ class Compte < ActiveRecord::Base
     Sauvegarde.razAllSauvegarde()
     Compte.razAllCompte()
     default = new(COMPTE_DEFAULT)
-    grilles = Grille.chargerGrilles("../NouvellesGrilles")
+    grilles = Grille.chargerGrilles("lib/Hashiparmentier/NouvellesGrilles")
     Sauvegarde.creerAll(default, grilles)
 
   end

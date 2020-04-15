@@ -1,7 +1,7 @@
 #!/home/ordipass/.rvm/rubies/ruby-2.6.3/bin/ruby
 
-require "../UI/Fenetre.rb"
-require "../UI/Menu.rb"
+require_relative "../UI/Fenetre.rb"
+require_relative "../UI/Menu.rb"
 require 'gtk3'
 
 

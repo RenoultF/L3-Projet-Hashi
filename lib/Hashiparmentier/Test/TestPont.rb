@@ -6,7 +6,7 @@
 # Version 0.1 : Date : 07/02/2020
 
 
-require "../Core/Pont.rb"
+require_relative "../Core/Pont.rb"
 
 
 
