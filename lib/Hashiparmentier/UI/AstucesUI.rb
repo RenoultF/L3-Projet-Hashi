@@ -15,7 +15,7 @@ class AstucesUI
         @btnQuitter.signal_connect('clicked') { |_widget| @window.destroy() }
         @btnQuitter.style_context.add_provider(@@CSS_BUTTON_ROSE, Gtk::StyleProvider::PRIORITY_USER)
 
-
+        
         @window.show_all()
         Gtk.main()
     end

@@ -43,6 +43,11 @@ class FenetreJeuUI
         @builderJeu = Gtk::Builder.new
         @builderJeu.add_from_file("lib/Hashiparmentier/glade/jeu.glade")
         @window = @builderJeu.get_object("windowJeu")
+        @window.signal_connect('destroy') { |_widget| 
+            @grille.sauvegarder(@compte)
+            @window.destroy()
+            Gtk.main_quit }
+
         if (@grille.tailleX == 15)
             @window.style_context.add_provider(@@CSS_BG_JEU15, Gtk::StyleProvider::PRIORITY_USER)
         else
@@ -82,6 +87,7 @@ class FenetreJeuUI
             @grille.sauvegarder(@compte)
             Thread.kill(@threadChrono)
             @window.destroy()
+            Gtk.main_quit
             Menu.new()
         }
 
@@ -111,6 +117,7 @@ class FenetreJeuUI
             if(@grille.fini?() == true)
                 Thread.kill(@threadChrono)
                 fenetre_fin = FenetreFinUI.new(@grille,@compte,@window)
+                Gtk.main_quit 
             else
                 @labelIndice.set_label("Vous n'avez pas trouvé la solution ! \n Continuez ...")
             end

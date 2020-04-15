@@ -15,7 +15,11 @@ class FenetreFinUI
 
         @windowFin = @builderFin.get_object("FenetreFin")
         @windowFin.style_context.add_provider(@@CSS_FIN, Gtk::StyleProvider::PRIORITY_USER)
-        @windowFin.signal_connect('destroy') { |_widget| Gtk.main_quit }
+        @windowFin.signal_connect('destroy') { |_widget| 
+            @grille.recommencer()
+            @grille.sauvegarder(compte)
+            @windowFin.destroy()
+            Gtk.main_quit }
         
         @imgEtoile = @builderFin.get_object("imgScore")
         if(@grille.score>(500*@grille.tailleX * 0.7))
@@ -33,6 +37,7 @@ class FenetreFinUI
             @grille.sauvegarder(compte)
             @windowFin.destroy()
             Menu.new()
+            Gtk.main_quit
         }
 
         @clickQuitter = @builderFin.get_object("button3")

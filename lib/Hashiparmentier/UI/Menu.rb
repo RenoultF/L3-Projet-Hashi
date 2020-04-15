@@ -265,6 +265,7 @@ class Menu < Gtk::Box
 	def commencerPartie(grille,nomCompte)
 		@fenetreScroll.hide
 		@jeu = FenetreJeuUI.new(@@mode, grille,nomCompte,@window,@fenetreScroll)
+		Gtk.main_quit
 	end
 
 	def retourMenu()
@@ -294,7 +295,7 @@ class Menu < Gtk::Box
 
 		@window.hide()
 		@fenetreScroll = Gtk::Window.new()
-		@fenetreScroll.set_title("Scroll")
+		@fenetreScroll.set_title("Choix Grille")
 		boxScroll = Gtk::Box.new(:horizontal)
 		choix = ChoixGrilleScrollUI.new(ChoixGrilleUI.new(self))
 		choix.chargerGrille(@pseudo.text(),@@taille,@@difficulte)
