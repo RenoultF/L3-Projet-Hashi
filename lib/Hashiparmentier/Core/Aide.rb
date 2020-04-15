@@ -5,7 +5,7 @@
 # Version:: 0.1
 # Date:: 09/04/2020
 #
-#Cette classe represente les aides de notre grille
+#Cette classe représente les aides de notre grille
 class Aide
 
   #@grille => La grille sur laquelle on va donner des informations

@@ -34,7 +34,7 @@ class Grille
     #@matSolution => La matrice solution
     attr_reader :matSolution
 
-    #@mat => La matrice de cases
+    #@mat => La matrice de jeu
     attr_reader :mat
 
     #@score => Le score de la grille
@@ -250,7 +250,7 @@ class Grille
     end
 
     ##
-    #Cette méthode permet de recuperer une case de la grille solution
+    #Cette méthode permet de recupérer une case de la grille solution
     #param::
     # * i La position en abscisse
     # * j La position en ordonnée
@@ -271,7 +271,7 @@ class Grille
     end
 
     ##
-    #Cette méthode permet de valider la dernière hypothèse (prendre tous les ponts de la dernière couleur et la changer à l'avant dernière)
+    #Cette méthode permet de valider la dernière hypothèse (prendre tous les ponts de la dernière couleur et les changer à l'avant dernière)
     def valideHypothese()
       begin
         @couleurs.redo()
@@ -307,7 +307,7 @@ class Grille
 
 
     ##
-    #Méthode à appeler quand on appuie sur une ile
+    #Méthode à appeler quand on appuie sur un pont
     #param::
     # * pont Le pont sur lequel on a cliqué
     def clickOnPont(pont)
@@ -745,7 +745,7 @@ class Grille
     end
 
     ##
-    #Cette méthode permet de recuperer la dernière ile séléctionnée
+    #Cette méthode permet de recupérer la dernière ile séléctionnée
     #return::
     # * La dernière ile séléctionnée
     def getDernierIle()

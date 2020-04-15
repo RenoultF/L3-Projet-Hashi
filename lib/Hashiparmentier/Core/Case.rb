@@ -22,7 +22,7 @@ class Case
   private_class_method :new
 
   ##
-  #Ce constructeur permet de creer une nouvelle case
+  #Ce constructeur permet de créer une nouvelle case
   #param::
   # * posX La position en abscisse de la case
   # * posY La position en ordonnée de la case
